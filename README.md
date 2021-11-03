@@ -1,7 +1,5 @@
 # CME495
 GPS Frequency Reference Recovery with Long Term Holdover
-﻿# software-and-command
-Code and Documentation for USST’s first Canadian CubeSat Project: The RADSAT-SK Satellite 
 
 ## Table of Contents
 1. [Setting Up Your Repo](#Setting-Up-Your-Repo)
