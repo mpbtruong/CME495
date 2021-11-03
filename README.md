@@ -17,6 +17,6 @@ Code and Documentation for USST’s first Canadian CubeSat Project: The RADSAT-S
 ### Procedure
 1. Run ```git checkout -b "<branch name>"```
 2. Commit your files:
-    1. git add <files>
-    2. git commit -m "<commit message>"
-    3. git push origin <branch name>
+    1. ```git add <files>```
+    2. ```git commit -m "<commit message>"```
+    3. ```git push origin <branch name>```
