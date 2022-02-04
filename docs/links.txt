@@ -14,5 +14,8 @@ DE2-115 Manual
             - RTS (Request to Send) | CTS (Clear to Send)
             - https://www.brainboxes.com/faq/what-is-rts-cts-hardware-flow-control
         c) Clk speed -> 50 MHz
+            - 341 lab manual p.29-30
+        d) Platform Designer
+            - 
     4) Using the USB Interface
         https://www.intel.com/content/dam/altera-www/global/en_US/portal/dsn/42/doc-us-dsnbk-42-1404062209-de2-115-user-manual.pdf#page=63&zoom=100,72,514

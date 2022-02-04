@@ -1,0 +1,4 @@
+|monitor_fpga
+clk => ~NO_FANOUT~
+
+
