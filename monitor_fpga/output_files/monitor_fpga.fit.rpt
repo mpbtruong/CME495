@@ -1,5 +1,5 @@
 Fitter report for monitor_fpga
-Fri Feb  4 13:38:51 2022
+Fri Feb  4 14:35:26 2022
 Quartus Prime Version 20.1.1 Build 720 11/11/2020 SJ Standard Edition
 
 
@@ -59,7 +59,7 @@ https://fpgasoftware.intel.com/eula.
 +--------------------------------------------------------------------------------------+
 ; Fitter Summary                                                                       ;
 +------------------------------------+-------------------------------------------------+
-; Fitter Status                      ; Successful - Fri Feb  4 13:38:51 2022           ;
+; Fitter Status                      ; Successful - Fri Feb  4 14:35:26 2022           ;
 ; Quartus Prime Version              ; 20.1.1 Build 720 11/11/2020 SJ Standard Edition ;
 ; Revision Name                      ; monitor_fpga                                    ;
 ; Top-level Entity Name              ; monitor_fpga                                    ;
@@ -1351,6 +1351,7 @@ Info (169124): Fitter converted 5 user pins into dedicated programming pins
     Info (169125): Pin ~ALTERA_DATA0~ is reserved at location N7
     Info (169125): Pin ~ALTERA_nCEO~ is reserved at location P28
 Warning (15714): Some pins have incomplete I/O assignments. Refer to the I/O Assignment Warnings report for details
+Info (332104): Reading SDC File: 'uart/synthesis/submodules/altera_reset_controller.sdc'
 Info (332104): Reading SDC File: 'monitor_fpga.out.sdc'
 Info (332129): Detected timing requirements -- optimizing circuit to achieve only the specified requirements
 Info (332111): Found 1 clocks
@@ -1382,8 +1383,8 @@ Info (334004): Delay annotation completed successfully
 Info (11218): Fitter post-fit operations ending: elapsed time is 00:00:00
 Info (144001): Generated suppressed messages file /home/tdk302/engr-ece/Documents/CME495/project/CME495/monitor_fpga/output_files/monitor_fpga.fit.smsg
 Info: Quartus Prime Fitter was successful. 0 errors, 2 warnings
-    Info: Peak virtual memory: 1690 megabytes
-    Info: Processing ended: Fri Feb  4 13:38:52 2022
+    Info: Peak virtual memory: 1697 megabytes
+    Info: Processing ended: Fri Feb  4 14:35:27 2022
     Info: Elapsed time: 00:00:06
     Info: Total CPU time (on all processors): 00:00:09
 
