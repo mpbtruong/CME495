@@ -1,4 +1,6 @@
 |monitor_fpga
 clk => ~NO_FANOUT~
+reset => reset_flag.DATAIN
+reset_flag <= reset.DB_MAX_OUTPUT_PORT_TYPE
 
 

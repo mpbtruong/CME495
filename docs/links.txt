@@ -16,6 +16,11 @@ DE2-115 Manual
         c) Clk speed -> 50 MHz
             - 341 lab manual p.29-30
         d) Platform Designer
-            - 
+            - Interface Protocols/Serial/UART
+            - altera_avalon_uart
+                a) User Guide
+                    https://documentation.altera.com/#/link/sfo1400787952932/iga1401317331859
+                b) Release Notes
+                    https://documentation.altera.com/#/link/hco1421698042087/hco1421697689300
     4) Using the USB Interface
         https://www.intel.com/content/dam/altera-www/global/en_US/portal/dsn/42/doc-us-dsnbk-42-1404062209-de2-115-user-manual.pdf#page=63&zoom=100,72,514

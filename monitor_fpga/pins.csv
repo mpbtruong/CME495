@@ -5,3 +5,8 @@ To, Assignment Name, Value
 
 # clk50
 clk, location, PIN_Y2
+
+# key[3]
+reset, location, PIN_R24
+# LEDG[6]
+reset_flag, location, PIN_G22
