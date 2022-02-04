@@ -12,6 +12,7 @@ DE2-115 Manual
             https://www.intel.com/content/dam/altera-www/global/en_US/portal/dsn/42/doc-us-dsnbk-42-1404062209-de2-115-user-manual.pdf#page=56&zoom=100,72,654
         b) RTS/CTS Flow Control
             - RTS (Request to Send) | CTS (Clear to Send)
+            - https://www.brainboxes.com/faq/what-is-rts-cts-hardware-flow-control
         c) Clk speed -> 50 MHz
     4) Using the USB Interface
         https://www.intel.com/content/dam/altera-www/global/en_US/portal/dsn/42/doc-us-dsnbk-42-1404062209-de2-115-user-manual.pdf#page=63&zoom=100,72,514
