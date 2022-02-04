@@ -1,0 +1,4 @@
+
+DE2-115 Manual
+    https://www.intel.com/content/dam/altera-www/global/en_US/portal/dsn/42/doc-us-dsnbk-42-1404062209-de2-115-user-manual.pdf
+    
