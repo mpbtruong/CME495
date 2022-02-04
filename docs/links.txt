@@ -1,4 +1,17 @@
 
 DE2-115 Manual
-    https://www.intel.com/content/dam/altera-www/global/en_US/portal/dsn/42/doc-us-dsnbk-42-1404062209-de2-115-user-manual.pdf
-    
+    1) Top
+        https://www.intel.com/content/dam/altera-www/global/en_US/portal/dsn/42/doc-us-dsnbk-42-1404062209-de2-115-user-manual.pdf
+    2) Control Panel
+        a) Setup
+            https://www.intel.com/content/dam/altera-www/global/en_US/portal/dsn/42/doc-us-dsnbk-42-1404062209-de2-115-user-manual.pdf#page=15&zoom=100,72,208
+        b) RS232 (Baud Rate, etc. here)
+            https://www.intel.com/content/dam/altera-www/global/en_US/portal/dsn/42/doc-us-dsnbk-42-1404062209-de2-115-user-manual.pdf#page=24&zoom=100,72,756
+    3) RS232 Serial Port
+        a) Main Doc
+            https://www.intel.com/content/dam/altera-www/global/en_US/portal/dsn/42/doc-us-dsnbk-42-1404062209-de2-115-user-manual.pdf#page=56&zoom=100,72,654
+        b) RTS/CTS Flow Control
+            - RTS (Request to Send) | CTS (Clear to Send)
+        c) Clk speed -> 50 MHz
+    4) Using the USB Interface
+        https://www.intel.com/content/dam/altera-www/global/en_US/portal/dsn/42/doc-us-dsnbk-42-1404062209-de2-115-user-manual.pdf#page=63&zoom=100,72,514
