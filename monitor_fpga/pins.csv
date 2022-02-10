@@ -10,3 +10,9 @@ clk, location, PIN_Y2
 reset, location, PIN_R24
 # LEDG[6]
 reset_flag, location, PIN_G22
+
+# UART
+UART_RXD, location, PIN_G12
+UART_TXD, location, PIN_G9
+UART_CTS, location, PIN_G14
+UART_RTS, location, PIN_J13

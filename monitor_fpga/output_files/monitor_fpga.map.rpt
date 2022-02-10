@@ -1,6 +1,6 @@
 Analysis & Synthesis report for monitor_fpga
-Fri Feb  4 14:35:20 2022
-Quartus Prime Version 20.1.1 Build 720 11/11/2020 SJ Standard Edition
+Fri Feb 04 18:46:41 2022
+Quartus Prime Version 20.1.0 Build 711 06/05/2020 SJ Lite Edition
 
 
 ---------------------
@@ -40,24 +40,24 @@ https://fpgasoftware.intel.com/eula.
 
 
 
-+--------------------------------------------------------------------------------------+
-; Analysis & Synthesis Summary                                                         ;
-+------------------------------------+-------------------------------------------------+
-; Analysis & Synthesis Status        ; Successful - Fri Feb  4 14:35:20 2022           ;
-; Quartus Prime Version              ; 20.1.1 Build 720 11/11/2020 SJ Standard Edition ;
-; Revision Name                      ; monitor_fpga                                    ;
-; Top-level Entity Name              ; monitor_fpga                                    ;
-; Family                             ; Cyclone IV E                                    ;
-; Total logic elements               ; 0                                               ;
-;     Total combinational functions  ; 0                                               ;
-;     Dedicated logic registers      ; 0                                               ;
-; Total registers                    ; 0                                               ;
-; Total pins                         ; 3                                               ;
-; Total virtual pins                 ; 0                                               ;
-; Total memory bits                  ; 0                                               ;
-; Embedded Multiplier 9-bit elements ; 0                                               ;
-; Total PLLs                         ; 0                                               ;
-+------------------------------------+-------------------------------------------------+
++----------------------------------------------------------------------------------+
+; Analysis & Synthesis Summary                                                     ;
++------------------------------------+---------------------------------------------+
+; Analysis & Synthesis Status        ; Successful - Fri Feb 04 18:46:41 2022       ;
+; Quartus Prime Version              ; 20.1.0 Build 711 06/05/2020 SJ Lite Edition ;
+; Revision Name                      ; monitor_fpga                                ;
+; Top-level Entity Name              ; monitor_fpga                                ;
+; Family                             ; Cyclone IV E                                ;
+; Total logic elements               ; 0                                           ;
+;     Total combinational functions  ; 0                                           ;
+;     Dedicated logic registers      ; 0                                           ;
+; Total registers                    ; 0                                           ;
+; Total pins                         ; 3                                           ;
+; Total virtual pins                 ; 0                                           ;
+; Total memory bits                  ; 0                                           ;
+; Embedded Multiplier 9-bit elements ; 0                                           ;
+; Total PLLs                         ; 0                                           ;
++------------------------------------+---------------------------------------------+
 
 
 +------------------------------------------------------------------------------------------------------------+
@@ -151,8 +151,8 @@ https://fpgasoftware.intel.com/eula.
 +----------------------------+-------------+
 ; Processors                 ; Number      ;
 +----------------------------+-------------+
-; Number detected on machine ; 16          ;
-; Maximum allowed            ; 8           ;
+; Number detected on machine ; 8           ;
+; Maximum allowed            ; 4           ;
 ;                            ;             ;
 ; Average used               ; 1.00        ;
 ; Maximum used               ; 1           ;
@@ -162,14 +162,14 @@ https://fpgasoftware.intel.com/eula.
 +----------------------------+-------------+
 
 
-+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-; Analysis & Synthesis Source Files Read                                                                                                                                                                          ;
-+-----------------------------------------+-----------------+------------------------------+------------------------------------------------------------------------------------------------------------+---------+
-; File Name with User-Entered Path        ; Used in Netlist ; File Type                    ; File Name with Absolute Path                                                                               ; Library ;
-+-----------------------------------------+-----------------+------------------------------+------------------------------------------------------------------------------------------------------------+---------+
-; uart/synthesis/submodules/uart_uart_0.v ; yes             ; User Verilog HDL File        ; /home/tdk302/engr-ece/Documents/CME495/project/CME495/monitor_fpga/uart/synthesis/submodules/uart_uart_0.v ; uart    ;
-; monitor_fpga.sv                         ; yes             ; User SystemVerilog HDL File  ; /home/tdk302/engr-ece/Documents/CME495/project/CME495/monitor_fpga/monitor_fpga.sv                         ;         ;
-+-----------------------------------------+-----------------+------------------------------+------------------------------------------------------------------------------------------------------------+---------+
++--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Analysis & Synthesis Source Files Read                                                                                                                                                           ;
++-----------------------------------------+-----------------+------------------------------+---------------------------------------------------------------------------------------------+---------+
+; File Name with User-Entered Path        ; Used in Netlist ; File Type                    ; File Name with Absolute Path                                                                ; Library ;
++-----------------------------------------+-----------------+------------------------------+---------------------------------------------------------------------------------------------+---------+
+; uart/synthesis/submodules/uart_uart_0.v ; yes             ; User Verilog HDL File        ; C:/Users/Tyler/Documents/github/CME495/monitor_fpga/uart/synthesis/submodules/uart_uart_0.v ; uart    ;
+; monitor_fpga.sv                         ; yes             ; User SystemVerilog HDL File  ; C:/Users/Tyler/Documents/github/CME495/monitor_fpga/monitor_fpga.sv                         ;         ;
++-----------------------------------------+-----------------+------------------------------+---------------------------------------------------------------------------------------------+---------+
 
 
 +-----------------------------------------------------+
@@ -257,25 +257,26 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 +-------------------------------+
 Info: *******************************************************************
 Info: Running Quartus Prime Analysis & Synthesis
-    Info: Version 20.1.1 Build 720 11/11/2020 SJ Standard Edition
-    Info: Processing started: Fri Feb  4 14:35:16 2022
+    Info: Version 20.1.0 Build 711 06/05/2020 SJ Lite Edition
+    Info: Processing started: Fri Feb 04 18:46:31 2022
 Info: Command: quartus_map --read_settings_files=on --write_settings_files=off monitor_fpga -c monitor_fpga
+Info (125069): Default assignment values were changed in the current version of the Quartus Prime software -- changes to default assignments values are contained in file c:/intelfpga_lite/20.1/quartus/bin64/assignment_defaults.qdf
 Warning (18236): Number of processors has not been specified which may cause overloading on shared machines.  Set the global assignment NUM_PARALLEL_PROCESSORS in your QSF to an appropriate value for best performance.
-Info (20030): Parallel compilation is enabled and will use 8 of the 8 processors detected
+Info (20030): Parallel compilation is enabled and will use 4 of the 4 processors detected
 Info (12021): Found 1 design units, including 1 entities, in source file uart/synthesis/uart.v
-    Info (12023): Found entity 1: uart File: /home/tdk302/engr-ece/Documents/CME495/project/CME495/monitor_fpga/uart/synthesis/uart.v Line: 6
+    Info (12023): Found entity 1: uart File: C:/Users/Tyler/Documents/github/CME495/monitor_fpga/uart/synthesis/uart.v Line: 6
 Info (12021): Found 1 design units, including 1 entities, in source file uart/synthesis/submodules/altera_reset_controller.v
-    Info (12023): Found entity 1: altera_reset_controller File: /home/tdk302/engr-ece/Documents/CME495/project/CME495/monitor_fpga/uart/synthesis/submodules/altera_reset_controller.v Line: 42
+    Info (12023): Found entity 1: altera_reset_controller File: C:/Users/Tyler/Documents/github/CME495/monitor_fpga/uart/synthesis/submodules/altera_reset_controller.v Line: 42
 Info (12021): Found 1 design units, including 1 entities, in source file uart/synthesis/submodules/altera_reset_synchronizer.v
-    Info (12023): Found entity 1: altera_reset_synchronizer File: /home/tdk302/engr-ece/Documents/CME495/project/CME495/monitor_fpga/uart/synthesis/submodules/altera_reset_synchronizer.v Line: 24
+    Info (12023): Found entity 1: altera_reset_synchronizer File: C:/Users/Tyler/Documents/github/CME495/monitor_fpga/uart/synthesis/submodules/altera_reset_synchronizer.v Line: 24
 Info (12021): Found 5 design units, including 5 entities, in source file uart/synthesis/submodules/uart_uart_0.v
-    Info (12023): Found entity 1: uart_uart_0_tx File: /home/tdk302/engr-ece/Documents/CME495/project/CME495/monitor_fpga/uart/synthesis/submodules/uart_uart_0.v Line: 21
-    Info (12023): Found entity 2: uart_uart_0_rx_stimulus_source File: /home/tdk302/engr-ece/Documents/CME495/project/CME495/monitor_fpga/uart/synthesis/submodules/uart_uart_0.v Line: 194
-    Info (12023): Found entity 3: uart_uart_0_rx File: /home/tdk302/engr-ece/Documents/CME495/project/CME495/monitor_fpga/uart/synthesis/submodules/uart_uart_0.v Line: 288
-    Info (12023): Found entity 4: uart_uart_0_regs File: /home/tdk302/engr-ece/Documents/CME495/project/CME495/monitor_fpga/uart/synthesis/submodules/uart_uart_0.v Line: 547
-    Info (12023): Found entity 5: uart_uart_0 File: /home/tdk302/engr-ece/Documents/CME495/project/CME495/monitor_fpga/uart/synthesis/submodules/uart_uart_0.v Line: 793
+    Info (12023): Found entity 1: uart_uart_0_tx File: C:/Users/Tyler/Documents/github/CME495/monitor_fpga/uart/synthesis/submodules/uart_uart_0.v Line: 21
+    Info (12023): Found entity 2: uart_uart_0_rx_stimulus_source File: C:/Users/Tyler/Documents/github/CME495/monitor_fpga/uart/synthesis/submodules/uart_uart_0.v Line: 194
+    Info (12023): Found entity 3: uart_uart_0_rx File: C:/Users/Tyler/Documents/github/CME495/monitor_fpga/uart/synthesis/submodules/uart_uart_0.v Line: 288
+    Info (12023): Found entity 4: uart_uart_0_regs File: C:/Users/Tyler/Documents/github/CME495/monitor_fpga/uart/synthesis/submodules/uart_uart_0.v Line: 547
+    Info (12023): Found entity 5: uart_uart_0 File: C:/Users/Tyler/Documents/github/CME495/monitor_fpga/uart/synthesis/submodules/uart_uart_0.v Line: 793
 Info (12021): Found 1 design units, including 1 entities, in source file monitor_fpga.sv
-    Info (12023): Found entity 1: monitor_fpga File: /home/tdk302/engr-ece/Documents/CME495/project/CME495/monitor_fpga/monitor_fpga.sv Line: 1
+    Info (12023): Found entity 1: monitor_fpga File: C:/Users/Tyler/Documents/github/CME495/monitor_fpga/monitor_fpga.sv Line: 1
 Info (12127): Elaborating entity "monitor_fpga" for the top level hierarchy
 Warning (20013): Ignored 35 assignments for entity "altera_reset_controller" -- entity does not exist in design
 Warning (20013): Ignored 19 assignments for entity "uart" -- entity does not exist in design
@@ -283,14 +284,14 @@ Warning (20013): Ignored 24 assignments for entity "uart_uart_0" -- entity does 
 Info (16010): Generating hard_block partition "hard_block:auto_generated_inst"
     Info (16011): Adding 0 node(s), including 0 DDIO, 0 PLL, 0 transceiver and 0 LCELL
 Warning (21074): Design contains 1 input pin(s) that do not drive logic
-    Warning (15610): No output dependent on input pin "clk" File: /home/tdk302/engr-ece/Documents/CME495/project/CME495/monitor_fpga/monitor_fpga.sv Line: 2
+    Warning (15610): No output dependent on input pin "clk" File: C:/Users/Tyler/Documents/github/CME495/monitor_fpga/monitor_fpga.sv Line: 2
 Info (21057): Implemented 3 device resources after synthesis - the final resource count might be different
     Info (21058): Implemented 2 input pins
     Info (21059): Implemented 1 output pins
 Info: Quartus Prime Analysis & Synthesis was successful. 0 errors, 6 warnings
-    Info: Peak virtual memory: 630 megabytes
-    Info: Processing ended: Fri Feb  4 14:35:20 2022
-    Info: Elapsed time: 00:00:04
-    Info: Total CPU time (on all processors): 00:00:14
+    Info: Peak virtual memory: 4732 megabytes
+    Info: Processing ended: Fri Feb 04 18:46:41 2022
+    Info: Elapsed time: 00:00:10
+    Info: Total CPU time (on all processors): 00:00:23
 
 
