@@ -1,0 +1,44 @@
+
+DE2-115 Manual
+    1) Top
+        https://www.intel.com/content/dam/altera-www/global/en_US/portal/dsn/42/doc-us-dsnbk-42-1404062209-de2-115-user-manual.pdf
+    2) Control Panel
+        a) Setup
+            https://www.intel.com/content/dam/altera-www/global/en_US/portal/dsn/42/doc-us-dsnbk-42-1404062209-de2-115-user-manual.pdf#page=15&zoom=100,72,208
+        b) RS232 (Baud Rate, etc. here)
+            - https://www.intel.com/content/dam/altera-www/global/en_US/portal/dsn/42/doc-us-dsnbk-42-1404062209-de2-115-user-manual.pdf#page=24&zoom=100,72,756
+            - Config
+                Baud Rate: 115200
+                Parity: None
+                Data: 8 bits
+                Stop: 1 bit
+                Flow Control (CTS/TRS): On
+    2) Using the USB Interface
+        https://www.intel.com/content/dam/altera-www/global/en_US/portal/dsn/42/doc-us-dsnbk-42-1404062209-de2-115-user-manual.pdf#page=63&zoom=100,72,514
+
+RS232 Serial Port
+    1) Main Doc
+        - https://www.intel.com/content/dam/altera-www/global/en_US/portal/dsn/42/doc-us-dsnbk-42-1404062209-de2-115-user-manual.pdf#page=56&zoom=100,72,654
+        - UART RXD, TXD, CTS, and RTS defined
+    2) RTS/CTS Flow Control
+        - RTS (Request to Send) | CTS (Clear to Send)
+        - https://www.brainboxes.com/faq/what-is-rts-cts-hardware-flow-control
+    3) Clk speed -> 50 MHz
+        - 341 lab manual p.29-30
+    4) Platform Designer
+        - Interface Protocols/Serial/UART
+        - altera_avalon_uart
+            a) User Guide
+                https://documentation.altera.com/#/link/sfo1400787952932/iga1401317331859
+            b) Release Notes
+                https://documentation.altera.com/#/link/hco1421698042087/hco1421697689300
+        - Getting started
+            https://www.youtube.com/watch?v=d43Pqc_IZpg
+
+Python Serial UART
+    1) PySerial
+        a) Doc
+            https://pyserial.readthedocs.io/en/latest/
+    2) pip
+        a) https://pip.pypa.io/en/stable/installation/
+        b) python3 pip_install.py
