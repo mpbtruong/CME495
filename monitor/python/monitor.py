@@ -76,12 +76,12 @@ class Monitor():
 
         :return: ListPortInfo of serial port.
         """
-        try:
-            ports = self.list_ports()
-            for port in ports:
-                if (port.hwid == device_hwid): return port   
-        except Exception:
-            raise serial.SerialException("No ports found!")
+        ports = self.list_ports()
+        for port in ports:
+            if (port.hwid == device_hwid): return port   
+        # raise serial.SerialException("No ports found!")
+        print(f'Error: Serial port not found!')
+        exit(1)
 
     @staticmethod
     def list_ports():
