@@ -1,0 +1,41 @@
+{
+	"partitions" : [
+		{
+			"name" : "Top",
+			"pins" : [
+				{
+					"name" : "gpio_1",
+					"strict" : false
+				},
+				{
+					"name" : "gpio_2",
+					"strict" : false
+				},
+				{
+					"name" : "gpio_5",
+					"strict" : false
+				},
+				{
+					"name" : "reset_led",
+					"strict" : false
+				},
+				{
+					"name" : "uart_rxd",
+					"strict" : false
+				},
+				{
+					"name" : "uart_cts",
+					"strict" : false
+				},
+				{
+					"name" : "reset",
+					"strict" : false
+				},
+				{
+					"name" : "clk50",
+					"strict" : false
+				}
+			]
+		}
+	]
+}
