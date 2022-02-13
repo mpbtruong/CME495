@@ -28,7 +28,7 @@ class Monitor():
     # constants ################################################################
     BAUD_RATE = 115200
     DATA_BITS = serial.EIGHTBITS
-    PARITY = serial.PARITY_NONE
+    PARITY = serial.PARITY_EVEN # EVEN (0-bit -> even # of 1s)
     STOP_BITS = serial.STOPBITS_ONE
     FLOW_CONTROL_RTS_CTS = False
 
@@ -69,14 +69,16 @@ class Monitor():
         monitor = ''
         monitor += f'Monitor port=\'{self.port.description}\'\n'
         monitor += f'   baud={self.baudrate} | databits={self.datasize} parity={self.parity} stopbits={self.stopbits} | rts_cts={self.rtscts}\n'
+        monitor += f'   WARNING: ensure system OS device driver settings match\n'
         return monitor
     
     # methods ##################################################################
     def assign_port(self, device_hwid):
         """
-        Assign the serial port to the first available port. Raises an
-        exception otherwise.
+        Assign the serial port that has device_hwid. Raises an exception 
+        otherwise.
 
+        :param device_hwid: the desired serial device's hardware ID.
         :return: ListPortInfo of serial port.
         """
         ports = self.list_ports()
@@ -97,61 +99,74 @@ class Monitor():
         return ports
 
     # test cases ###############################################################
+    def test_loop_wrapper(test_func):
+        """
+        Returns a wrapper function that turns a test case into an infinite loop.
+        """
+        def loop_wrapper(*args, **kwargs):
+            print(f'Testing {test_func.__name__}')
+            try:
+                while True:
+                    test_func(*args, **kwargs)
+            except KeyboardInterrupt:
+                print(f'\nTest {test_func.__name__} stopped')
+        return loop_wrapper
+    @test_loop_wrapper
     def test_read_n_bytes(self, read_bytes:int=1):
         """
         Test receiving n bytes of data.
+
+        :param read_bytes: number of bytes to read at once.
         """
-        print(f'Test test_read_n_bytes read_bytes={read_bytes}')
-        try:
-            while True:
-                data = self.uart.read(size=read_bytes)
-                print(data)
-        except KeyboardInterrupt:
-            print('Test stopped')
-    
+        print(f'Reading {read_bytes} bytes')
+        data = self.uart.read(size=read_bytes)
+        print(data)
+    @test_loop_wrapper
     def test_write_byte(self, byte:bytes):
         """
         Test writing a byte.
+
+        :param byte: byte to write
         """
-        print(f'Testing test_write_byte byte={format(int.from_bytes(byte, "big"), "08b")}')
-        try:
-            while True:
-                self.uart.write(byte)
-        except KeyboardInterrupt:
-            print('Test stopped')
-    def test_write_read_byte(self, byte:bytes):
+        print(f'Writing byte {format(int.from_bytes(byte, "big"), "08b")}')
+        self.uart.write(byte)
+    @test_loop_wrapper
+    def test_write_read_byte(self, byte:bytes, 
+                                   delay:float=1, 
+                                   input_write_stall:bool=False):
         """
         Test writing and reading the same byte.
+
+        :param byte: byte to write
         """
-        print(f'Testing test_write_read_byte byte={format(int.from_bytes(byte, "big"), "08b")}')
-        try:
-            while True:
-                self.uart.write(byte)
-                data = self.uart.read(size=1)
-                print(data)
-        except KeyboardInterrupt:
-            print('Test stopped')
-    def test_write_byte_nums_0_to_255(self, delay:float=1):
+        print(f'Write byte {format(int.from_bytes(byte, "big"), "08b")}')
+        self.uart.write(byte)
+        data = self.uart.read(size=1)
+        print(data)
+    @test_loop_wrapper
+    def test_write_byte_nums_0_to_255(self, delay:float=1, 
+                                            input_write_stall:bool=False):
         """
         Test writing 0 to 255.
+
+        :param delay: if not input_write_stall, delay before writing next.
+        :param input_write_stall: if True, require keyboard return before 
+            writing next.
         """
-        print(f'Testing test_write_byte_nums_0_to_255')
-        try:
-            while True:
-                for i in range(1, 255+1):
-                    num = int.to_bytes(i, 1, "big")
-                    print(f'Writing {i:03} {format(i, "08b")} {num}')
-                    self.uart.write(num)
-                    sleep(delay)
-        except KeyboardInterrupt:
-            print('Test stopped')
+        for i in range(1, 255+1):
+            num = int.to_bytes(i, 1, "big")
+            print(f'Write {i:03} {format(i, "08b")} {num}')
+            if (input_write_stall): input(f'Press enter to write')
+            else: sleep(delay)
+            self.uart.write(num)
+
 # Main #########################################################################
 def main():
     monitor = Monitor()
     print(monitor)
     # monitor.test_read_n_bytes(1)
     # monitor.test_write_byte(b'\xFF')
-    # monitor.test_write_byte_nums_0_to_255()
+    monitor.test_write_byte_nums_0_to_255(delay=1, input_write_stall=True)
     # monitor.test_write_read_byte(b'\xAF')
 
 
