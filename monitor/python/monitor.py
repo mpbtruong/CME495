@@ -86,17 +86,24 @@ class Monitor():
             if (port.hwid == device_hwid): return port   
         raise serial.SerialException("No ports found!")
 
-    @staticmethod
-    def list_ports():
+    @classmethod
+    def list_ports(cls):
         """
         Gets a list of currently available serial ports.
 
         :return: List[ListPortInfo]
         """
         ports = serial_list_ports.comports()
-        # for port in ports:
-        #     print(f'{port.device} | {port.description} | {port.hwid}')
         return ports
+    @classmethod
+    def print_ports(cls):
+        """
+        Prints the list of currently available serial ports (ListPortInfo).
+        """
+        ports = cls.list_ports()
+        print(f'Available serial ports:')
+        for port in ports:
+            print(f'   - device {port.device} | description {port.description} | hwid {port.hwid}')
 
     # test cases ###############################################################
     def test_loop_wrapper(test_func):
