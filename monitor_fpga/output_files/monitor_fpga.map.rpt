@@ -1,5 +1,5 @@
 Analysis & Synthesis report for monitor_fpga
-Fri Feb 04 18:46:41 2022
+Sat Feb 12 13:46:55 2022
 Quartus Prime Version 20.1.0 Build 711 06/05/2020 SJ Lite Edition
 
 
@@ -43,7 +43,7 @@ https://fpgasoftware.intel.com/eula.
 +----------------------------------------------------------------------------------+
 ; Analysis & Synthesis Summary                                                     ;
 +------------------------------------+---------------------------------------------+
-; Analysis & Synthesis Status        ; Successful - Fri Feb 04 18:46:41 2022       ;
+; Analysis & Synthesis Status        ; Successful - Sat Feb 12 13:46:55 2022       ;
 ; Quartus Prime Version              ; 20.1.0 Build 711 06/05/2020 SJ Lite Edition ;
 ; Revision Name                      ; monitor_fpga                                ;
 ; Top-level Entity Name              ; monitor_fpga                                ;
@@ -52,7 +52,7 @@ https://fpgasoftware.intel.com/eula.
 ;     Total combinational functions  ; 0                                           ;
 ;     Dedicated logic registers      ; 0                                           ;
 ; Total registers                    ; 0                                           ;
-; Total pins                         ; 3                                           ;
+; Total pins                         ; 7                                           ;
 ; Total virtual pins                 ; 0                                           ;
 ; Total memory bits                  ; 0                                           ;
 ; Embedded Multiplier 9-bit elements ; 0                                           ;
@@ -192,14 +192,14 @@ https://fpgasoftware.intel.com/eula.
 ;     -- Dedicated logic registers            ; 0     ;
 ;     -- I/O registers                        ; 0     ;
 ;                                             ;       ;
-; I/O pins                                    ; 3     ;
+; I/O pins                                    ; 7     ;
 ;                                             ;       ;
 ; Embedded Multiplier 9-bit elements          ; 0     ;
 ;                                             ;       ;
 ; Maximum fan-out node                        ; clk   ;
 ; Maximum fan-out                             ; 1     ;
-; Total fan-out                               ; 4     ;
-; Average fan-out                             ; 0.67  ;
+; Total fan-out                               ; 8     ;
+; Average fan-out                             ; 0.57  ;
 +---------------------------------------------+-------+
 
 
@@ -208,7 +208,7 @@ https://fpgasoftware.intel.com/eula.
 +----------------------------+---------------------+---------------------------+-------------+--------------+---------+-----------+------+--------------+---------------------+--------------+--------------+
 ; Compilation Hierarchy Node ; Combinational ALUTs ; Dedicated Logic Registers ; Memory Bits ; DSP Elements ; DSP 9x9 ; DSP 18x18 ; Pins ; Virtual Pins ; Full Hierarchy Name ; Entity Name  ; Library Name ;
 +----------------------------+---------------------+---------------------------+-------------+--------------+---------+-----------+------+--------------+---------------------+--------------+--------------+
-; |monitor_fpga              ; 0 (0)               ; 0 (0)                     ; 0           ; 0            ; 0       ; 0         ; 3    ; 0            ; |monitor_fpga       ; monitor_fpga ; work         ;
+; |monitor_fpga              ; 0 (0)               ; 0 (0)                     ; 0           ; 0            ; 0       ; 0         ; 7    ; 0            ; |monitor_fpga       ; monitor_fpga ; work         ;
 +----------------------------+---------------------+---------------------------+-------------+--------------+---------+-----------+------+--------------+---------------------+--------------+--------------+
 Note: For table entries with two numbers listed, the numbers in parentheses indicate the number of resources of the given type used by the specific entity alone. The numbers listed outside of parentheses indicate the total resources of the given type used by the specific entity and all of its sub-entities in the hierarchy.
 
@@ -233,13 +233,14 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 +-----------------------+-----------------------------+
 ; Type                  ; Count                       ;
 +-----------------------+-----------------------------+
-; boundary_port         ; 3                           ;
-; cycloneiii_lcell_comb ; 1                           ;
-;     normal            ; 1                           ;
+; boundary_port         ; 7                           ;
+; cycloneiii_lcell_comb ; 2                           ;
+;     normal            ; 2                           ;
+;         0 data inputs ; 1                           ;
 ;         1 data inputs ; 1                           ;
 ;                       ;                             ;
 ; Max LUT depth         ; 1.00                        ;
-; Average LUT depth     ; 1.00                        ;
+; Average LUT depth     ; 0.67                        ;
 +-----------------------+-----------------------------+
 
 
@@ -258,9 +259,8 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 Info: *******************************************************************
 Info: Running Quartus Prime Analysis & Synthesis
     Info: Version 20.1.0 Build 711 06/05/2020 SJ Lite Edition
-    Info: Processing started: Fri Feb 04 18:46:31 2022
+    Info: Processing started: Sat Feb 12 13:46:45 2022
 Info: Command: quartus_map --read_settings_files=on --write_settings_files=off monitor_fpga -c monitor_fpga
-Info (125069): Default assignment values were changed in the current version of the Quartus Prime software -- changes to default assignments values are contained in file c:/intelfpga_lite/20.1/quartus/bin64/assignment_defaults.qdf
 Warning (18236): Number of processors has not been specified which may cause overloading on shared machines.  Set the global assignment NUM_PARALLEL_PROCESSORS in your QSF to an appropriate value for best performance.
 Info (20030): Parallel compilation is enabled and will use 4 of the 4 processors detected
 Info (12021): Found 1 design units, including 1 entities, in source file uart/synthesis/uart.v
@@ -278,19 +278,26 @@ Info (12021): Found 5 design units, including 5 entities, in source file uart/sy
 Info (12021): Found 1 design units, including 1 entities, in source file monitor_fpga.sv
     Info (12023): Found entity 1: monitor_fpga File: C:/Users/Tyler/Documents/github/CME495/monitor_fpga/monitor_fpga.sv Line: 1
 Info (12127): Elaborating entity "monitor_fpga" for the top level hierarchy
+Warning (10034): Output port "uart_txd" at monitor_fpga.sv(8) has no driver File: C:/Users/Tyler/Documents/github/CME495/monitor_fpga/monitor_fpga.sv Line: 8
+Warning (10034): Output port "uart_rts" at monitor_fpga.sv(11) has no driver File: C:/Users/Tyler/Documents/github/CME495/monitor_fpga/monitor_fpga.sv Line: 11
+Warning (13024): Output pins are stuck at VCC or GND
+    Warning (13410): Pin "uart_txd" is stuck at GND File: C:/Users/Tyler/Documents/github/CME495/monitor_fpga/monitor_fpga.sv Line: 8
+    Warning (13410): Pin "uart_rts" is stuck at GND File: C:/Users/Tyler/Documents/github/CME495/monitor_fpga/monitor_fpga.sv Line: 11
 Warning (20013): Ignored 35 assignments for entity "altera_reset_controller" -- entity does not exist in design
 Warning (20013): Ignored 19 assignments for entity "uart" -- entity does not exist in design
 Warning (20013): Ignored 24 assignments for entity "uart_uart_0" -- entity does not exist in design
 Info (16010): Generating hard_block partition "hard_block:auto_generated_inst"
     Info (16011): Adding 0 node(s), including 0 DDIO, 0 PLL, 0 transceiver and 0 LCELL
-Warning (21074): Design contains 1 input pin(s) that do not drive logic
+Warning (21074): Design contains 3 input pin(s) that do not drive logic
     Warning (15610): No output dependent on input pin "clk" File: C:/Users/Tyler/Documents/github/CME495/monitor_fpga/monitor_fpga.sv Line: 2
-Info (21057): Implemented 3 device resources after synthesis - the final resource count might be different
-    Info (21058): Implemented 2 input pins
-    Info (21059): Implemented 1 output pins
-Info: Quartus Prime Analysis & Synthesis was successful. 0 errors, 6 warnings
-    Info: Peak virtual memory: 4732 megabytes
-    Info: Processing ended: Fri Feb 04 18:46:41 2022
+    Warning (15610): No output dependent on input pin "uart_rxd" File: C:/Users/Tyler/Documents/github/CME495/monitor_fpga/monitor_fpga.sv Line: 7
+    Warning (15610): No output dependent on input pin "uart_cts" File: C:/Users/Tyler/Documents/github/CME495/monitor_fpga/monitor_fpga.sv Line: 9
+Info (21057): Implemented 7 device resources after synthesis - the final resource count might be different
+    Info (21058): Implemented 4 input pins
+    Info (21059): Implemented 3 output pins
+Info: Quartus Prime Analysis & Synthesis was successful. 0 errors, 13 warnings
+    Info: Peak virtual memory: 4734 megabytes
+    Info: Processing ended: Sat Feb 12 13:46:55 2022
     Info: Elapsed time: 00:00:10
     Info: Total CPU time (on all processors): 00:00:23
 

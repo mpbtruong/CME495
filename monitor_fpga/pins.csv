@@ -12,7 +12,7 @@ reset, location, PIN_R24
 reset_flag, location, PIN_G22
 
 # UART
-UART_RXD, location, PIN_G12
-UART_TXD, location, PIN_G9
-UART_CTS, location, PIN_G14
-UART_RTS, location, PIN_J13
+uart_rxd, location, PIN_G12
+uart_txd, location, PIN_G9
+uart_cts, location, PIN_G14
+uart_rts, location, PIN_J13
