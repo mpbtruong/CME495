@@ -4,7 +4,7 @@ JedecChain;
 	DefaultMfr(6E);
 
 	P ActionCode(Cfg)
-		Device PartName(EP4CE115F29) Path("C:/Users/Tyler/Documents/github/monitor/fpga/output_files/") File("monitor_top.sof") MfrSpec(OpMask(1));
+		Device PartName(EP4CE115F29) Path("C:/Users/Tyler/Documents/github/CME495/monitor/fpga/output_files/") File("monitor_top.sof") MfrSpec(OpMask(1));
 
 ChainEnd;
 

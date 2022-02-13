@@ -44,3 +44,7 @@ Python Serial UART
     2) pip
         a) https://pip.pypa.io/en/stable/installation/
         b) python3 pip_install.py
+
+UART Design
+    1) https://www.nandland.com/articles/what-is-a-uart-rs232-serial.html
+    2) https://www.nandland.com/vhdl/modules/module-uart-serial-port-rs232.html

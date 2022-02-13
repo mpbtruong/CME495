@@ -33,7 +33,7 @@ end
 // create the baud clk from the 50Mhz src clk
 reg baud;
 baud_generator baud_gen(
-    .clk50(clk50),
+    .clk(clk50),
     .reset(~reset),
     .baud(baud)
 );

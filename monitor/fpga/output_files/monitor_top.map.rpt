@@ -1,5 +1,5 @@
 Analysis & Synthesis report for monitor_top
-Sat Feb 12 23:38:54 2022
+Sun Feb 13 00:45:01 2022
 Quartus Prime Version 20.1.0 Build 711 06/05/2020 SJ Lite Edition
 
 
@@ -45,7 +45,7 @@ https://fpgasoftware.intel.com/eula.
 +----------------------------------------------------------------------------------+
 ; Analysis & Synthesis Summary                                                     ;
 +------------------------------------+---------------------------------------------+
-; Analysis & Synthesis Status        ; Successful - Sat Feb 12 23:38:53 2022       ;
+; Analysis & Synthesis Status        ; Successful - Sun Feb 13 00:45:01 2022       ;
 ; Quartus Prime Version              ; 20.1.0 Build 711 06/05/2020 SJ Lite Edition ;
 ; Revision Name                      ; monitor_top                                 ;
 ; Top-level Entity Name              ; monitor_top                                 ;
@@ -161,18 +161,19 @@ https://fpgasoftware.intel.com/eula.
 ;                            ;             ;
 ; Usage by Processor         ; % Time Used ;
 ;     Processor 1            ; 100.0%      ;
-;     Processors 2-4         ;   0.0%      ;
+;     Processor 2            ;   0.0%      ;
+;     Processors 3-4         ;   0.0%      ;
 +----------------------------+-------------+
 
 
-+------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-; Analysis & Synthesis Source Files Read                                                                                                                           ;
-+----------------------------------+-----------------+------------------------------+--------------------------------------------------------------------+---------+
-; File Name with User-Entered Path ; Used in Netlist ; File Type                    ; File Name with Absolute Path                                       ; Library ;
-+----------------------------------+-----------------+------------------------------+--------------------------------------------------------------------+---------+
-; src/monitor_top.sv               ; yes             ; User SystemVerilog HDL File  ; C:/Users/Tyler/Documents/github/monitor/fpga/src/monitor_top.sv    ;         ;
-; src/baud_generator.sv            ; yes             ; User SystemVerilog HDL File  ; C:/Users/Tyler/Documents/github/monitor/fpga/src/baud_generator.sv ;         ;
-+----------------------------------+-----------------+------------------------------+--------------------------------------------------------------------+---------+
++-------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Analysis & Synthesis Source Files Read                                                                                                                                  ;
++----------------------------------+-----------------+------------------------------+---------------------------------------------------------------------------+---------+
+; File Name with User-Entered Path ; Used in Netlist ; File Type                    ; File Name with Absolute Path                                              ; Library ;
++----------------------------------+-----------------+------------------------------+---------------------------------------------------------------------------+---------+
+; src/monitor_top.sv               ; yes             ; User SystemVerilog HDL File  ; C:/Users/Tyler/Documents/github/CME495/monitor/fpga/src/monitor_top.sv    ;         ;
+; src/baud_generator.sv            ; yes             ; User SystemVerilog HDL File  ; C:/Users/Tyler/Documents/github/CME495/monitor/fpga/src/baud_generator.sv ;         ;
++----------------------------------+-----------------+------------------------------+---------------------------------------------------------------------------+---------+
 
 
 +-----------------------------------------------------------+
@@ -244,11 +245,12 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 
 +----------------------------------------------------------------------+
 ; Parameter Settings for User Entity Instance: baud_generator:baud_gen ;
-+----------------+--------+--------------------------------------------+
-; Parameter Name ; Value  ; Type                                       ;
-+----------------+--------+--------------------------------------------+
-; BAUD_RATE      ; 115200 ; Signed Integer                             ;
-+----------------+--------+--------------------------------------------+
++----------------+----------+------------------------------------------+
+; Parameter Name ; Value    ; Type                                     ;
++----------------+----------+------------------------------------------+
+; CLK_FRQ        ; 50000000 ; Signed Integer                           ;
+; BAUD_RATE      ; 115200   ; Signed Integer                           ;
++----------------+----------+------------------------------------------+
 Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
 
 
@@ -280,7 +282,7 @@ Note: In order to hide this table in the UI and the text report file, please set
 +----------------+--------------+
 ; Partition Name ; Elapsed Time ;
 +----------------+--------------+
-; Top            ; 00:00:01     ;
+; Top            ; 00:00:00     ;
 +----------------+--------------+
 
 
@@ -290,24 +292,24 @@ Note: In order to hide this table in the UI and the text report file, please set
 Info: *******************************************************************
 Info: Running Quartus Prime Analysis & Synthesis
     Info: Version 20.1.0 Build 711 06/05/2020 SJ Lite Edition
-    Info: Processing started: Sat Feb 12 23:38:43 2022
+    Info: Processing started: Sun Feb 13 00:44:52 2022
 Info: Command: quartus_map --read_settings_files=on --write_settings_files=off monitor_top -c monitor_top
 Warning (18236): Number of processors has not been specified which may cause overloading on shared machines.  Set the global assignment NUM_PARALLEL_PROCESSORS in your QSF to an appropriate value for best performance.
 Info (20030): Parallel compilation is enabled and will use 4 of the 4 processors detected
 Info (12021): Found 1 design units, including 1 entities, in source file src/monitor_top.sv
-    Info (12023): Found entity 1: monitor_top File: C:/Users/Tyler/Documents/github/monitor/fpga/src/monitor_top.sv Line: 2
+    Info (12023): Found entity 1: monitor_top File: C:/Users/Tyler/Documents/github/CME495/monitor/fpga/src/monitor_top.sv Line: 2
 Info (12021): Found 1 design units, including 1 entities, in source file src/baud_generator.sv
-    Info (12023): Found entity 1: baud_generator File: C:/Users/Tyler/Documents/github/monitor/fpga/src/baud_generator.sv Line: 5
+    Info (12023): Found entity 1: baud_generator File: C:/Users/Tyler/Documents/github/CME495/monitor/fpga/src/baud_generator.sv Line: 5
 Info (12127): Elaborating entity "monitor_top" for the top level hierarchy
-Warning (10030): Net "uart_txd" at monitor_top.sv(7) has no driver or initial value, using a default initial value '0' File: C:/Users/Tyler/Documents/github/monitor/fpga/src/monitor_top.sv Line: 7
-Warning (10030): Net "uart_rts" at monitor_top.sv(8) has no driver or initial value, using a default initial value '0' File: C:/Users/Tyler/Documents/github/monitor/fpga/src/monitor_top.sv Line: 8
-Info (12128): Elaborating entity "baud_generator" for hierarchy "baud_generator:baud_gen" File: C:/Users/Tyler/Documents/github/monitor/fpga/src/monitor_top.sv Line: 39
-Warning (10230): Verilog HDL assignment warning at baud_generator.sv(31): truncated value with size 32 to match size of target (9) File: C:/Users/Tyler/Documents/github/monitor/fpga/src/baud_generator.sv Line: 31
+Warning (10030): Net "uart_txd" at monitor_top.sv(7) has no driver or initial value, using a default initial value '0' File: C:/Users/Tyler/Documents/github/CME495/monitor/fpga/src/monitor_top.sv Line: 7
+Warning (10030): Net "uart_rts" at monitor_top.sv(8) has no driver or initial value, using a default initial value '0' File: C:/Users/Tyler/Documents/github/CME495/monitor/fpga/src/monitor_top.sv Line: 8
+Info (12128): Elaborating entity "baud_generator" for hierarchy "baud_generator:baud_gen" File: C:/Users/Tyler/Documents/github/CME495/monitor/fpga/src/monitor_top.sv Line: 39
+Warning (10230): Verilog HDL assignment warning at baud_generator.sv(32): truncated value with size 32 to match size of target (9) File: C:/Users/Tyler/Documents/github/CME495/monitor/fpga/src/baud_generator.sv Line: 32
 Warning (13024): Output pins are stuck at VCC or GND
-    Warning (13410): Pin "uart_txd" is stuck at GND File: C:/Users/Tyler/Documents/github/monitor/fpga/src/monitor_top.sv Line: 7
-    Warning (13410): Pin "uart_rts" is stuck at GND File: C:/Users/Tyler/Documents/github/monitor/fpga/src/monitor_top.sv Line: 8
-    Warning (13410): Pin "gpio_3" is stuck at GND File: C:/Users/Tyler/Documents/github/monitor/fpga/src/monitor_top.sv Line: 12
-    Warning (13410): Pin "gpio_4" is stuck at GND File: C:/Users/Tyler/Documents/github/monitor/fpga/src/monitor_top.sv Line: 13
+    Warning (13410): Pin "uart_txd" is stuck at GND File: C:/Users/Tyler/Documents/github/CME495/monitor/fpga/src/monitor_top.sv Line: 7
+    Warning (13410): Pin "uart_rts" is stuck at GND File: C:/Users/Tyler/Documents/github/CME495/monitor/fpga/src/monitor_top.sv Line: 8
+    Warning (13410): Pin "gpio_3" is stuck at GND File: C:/Users/Tyler/Documents/github/CME495/monitor/fpga/src/monitor_top.sv Line: 12
+    Warning (13410): Pin "gpio_4" is stuck at GND File: C:/Users/Tyler/Documents/github/CME495/monitor/fpga/src/monitor_top.sv Line: 13
 Info (286030): Timing-Driven Synthesis is running
 Info (16010): Generating hard_block partition "hard_block:auto_generated_inst"
     Info (16011): Adding 0 node(s), including 0 DDIO, 0 PLL, 0 transceiver and 0 LCELL
@@ -316,9 +318,9 @@ Info (21057): Implemented 26 device resources after synthesis - the final resour
     Info (21059): Implemented 8 output pins
     Info (21061): Implemented 14 logic cells
 Info: Quartus Prime Analysis & Synthesis was successful. 0 errors, 9 warnings
-    Info: Peak virtual memory: 4761 megabytes
-    Info: Processing ended: Sat Feb 12 23:38:54 2022
-    Info: Elapsed time: 00:00:11
-    Info: Total CPU time (on all processors): 00:00:23
+    Info: Peak virtual memory: 4771 megabytes
+    Info: Processing ended: Sun Feb 13 00:45:01 2022
+    Info: Elapsed time: 00:00:09
+    Info: Total CPU time (on all processors): 00:00:24
 
 

@@ -1,0 +1,11 @@
+
+module uart_rx(
+
+);
+
+// receiver states /////////////////////////////////////////////////////////////
+// localparam RESET = 0;
+// localparam 
+
+
+endmodule
