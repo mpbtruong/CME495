@@ -16,6 +16,14 @@
 					"strict" : false
 				},
 				{
+					"name" : "gpio_6",
+					"strict" : false
+				},
+				{
+					"name" : "gpio_7",
+					"strict" : false
+				},
+				{
 					"name" : "reset_led",
 					"strict" : false
 				},
@@ -28,11 +36,11 @@
 					"strict" : false
 				},
 				{
-					"name" : "reset",
+					"name" : "clk50",
 					"strict" : false
 				},
 				{
-					"name" : "clk50",
+					"name" : "reset",
 					"strict" : false
 				}
 			]

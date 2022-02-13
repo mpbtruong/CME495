@@ -1,6 +1,7 @@
 |monitor_top
-clk50 => clk50.IN1
+clk50 => clk50.IN2
 reset => reset_led.DATAIN
+reset => _.IN1
 reset => _.IN1
 uart_rxd => gpio_1.DATAIN
 uart_cts => gpio_2.DATAIN
@@ -10,11 +11,13 @@ gpio_1 <= uart_rxd.DB_MAX_OUTPUT_PORT_TYPE
 gpio_2 <= uart_cts.DB_MAX_OUTPUT_PORT_TYPE
 gpio_3 <= <GND>
 gpio_4 <= <GND>
-gpio_5 <= baud_generator:baud_gen.baud
+gpio_5 <= baud_generator:baud_gen_rx.baud
+gpio_6 <= baud_generator:baud_gen_tx.baud
+gpio_7 <= clk50.DB_MAX_OUTPUT_PORT_TYPE
 reset_led <= reset.DB_MAX_OUTPUT_PORT_TYPE
 
 
-|monitor_top|baud_generator:baud_gen
+|monitor_top|baud_generator:baud_gen_tx
 clk => baud~reg0.CLK
 clk => ticks[0].CLK
 clk => ticks[1].CLK
@@ -29,6 +32,22 @@ reset => ticks.OUTPUTSELECT
 reset => ticks.OUTPUTSELECT
 reset => ticks.OUTPUTSELECT
 reset => ticks.OUTPUTSELECT
+reset => ticks.OUTPUTSELECT
+reset => ticks.OUTPUTSELECT
+reset => ticks.OUTPUTSELECT
+reset => ticks.OUTPUTSELECT
+reset => ticks.OUTPUTSELECT
+reset => baud.OUTPUTSELECT
+baud <= baud~reg0.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|monitor_top|baud_generator:baud_gen_rx
+clk => baud~reg0.CLK
+clk => ticks[0].CLK
+clk => ticks[1].CLK
+clk => ticks[2].CLK
+clk => ticks[3].CLK
+clk => ticks[4].CLK
 reset => ticks.OUTPUTSELECT
 reset => ticks.OUTPUTSELECT
 reset => ticks.OUTPUTSELECT
