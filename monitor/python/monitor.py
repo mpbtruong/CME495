@@ -39,13 +39,16 @@ class Monitor():
                        bytesize=DATA_BITS,
                        parity=PARITY,
                        stopbits=STOP_BITS,
-                       rtscts=FLOW_CONTROL_RTS_CTS
+                       rtscts=FLOW_CONTROL_RTS_CTS,
                        ):
         """
         Setup the UART serial port.
         """
         # uart config
-        self.port      = self.assign_port(device_hwid=self.USB_TO_SERIAL_HWID)
+        try: self.port = self.assign_port(device_hwid=self.USB_TO_SERIAL_HWID)
+        except serial.SerialException:
+            print(f'Error: Serial port not found!')
+            exit(1)
         self.baudrate  = baudrate
         self.datasize  = bytesize
         self.parity    = parity
@@ -79,9 +82,7 @@ class Monitor():
         ports = self.list_ports()
         for port in ports:
             if (port.hwid == device_hwid): return port   
-        # raise serial.SerialException("No ports found!")
-        print(f'Error: Serial port not found!')
-        exit(1)
+        raise serial.SerialException("No ports found!")
 
     @staticmethod
     def list_ports():
