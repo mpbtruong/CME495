@@ -63,17 +63,28 @@ class Monitor():
         return monitor
     
     # methods ##################################################################
-    def test_read(self):
+    def test_read_n_bytes(self, read_bytes:int=1):
         """
         Test receiving data.
         """
-        print(f'Testing reading data from FPGA')
+        print(f'Test test_read_n_bytes read_bytes={read_bytes}')
         try:
             while True:
-                data = self.uart.read(size=1)
+                data = self.uart.read(size=read_bytes)
                 print(data)
         except KeyboardInterrupt:
-            print('Testing stopped')
+            print('Test stopped')
+    
+    def test_write_byte(self, byte:bytes):
+        """
+        Test receiving data.
+        """
+        print(f'Testing test_write_byte byte={byte}')
+        try:
+            while True:
+                self.uart.write(byte)
+        except KeyboardInterrupt:
+            print('Test stopped')
 
     def assign_port(self):
         """
@@ -103,7 +114,8 @@ class Monitor():
 def main():
     monitor = Monitor()
     print(monitor)
-    monitor.test_read()
+    # monitor.test_read_n_bytes(1)
+    monitor.test_write_byte(b'\x63')
 
 
 if __name__ == '__main__':
