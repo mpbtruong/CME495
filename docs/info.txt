@@ -34,6 +34,8 @@ RS232 Serial Port
                 https://documentation.altera.com/#/link/hco1421698042087/hco1421697689300
         - Getting started
             https://www.youtube.com/watch?v=d43Pqc_IZpg
+    5) UART
+        http://cmosedu.com/jbaker/students/gerardo/Documents/UARTonFPGA.pdf
 
 Python Serial UART
     1) PySerial
