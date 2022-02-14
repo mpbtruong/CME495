@@ -1,12 +1,10 @@
 /**
  * State machine states for the uart.
  */
-`define STATE_RESET       3'b000
-`define STATE_IDLE        3'b001
-`define STATE_START_BIT   3'b010
-`define STATE_DATA_BITS   3'b011
-`define STATE_PARITY_BIT  3'b100
-`define STATE_STOP_BIT    3'b101
+`define STATE_IDLE        2'b00
+`define STATE_DATA_BITS   2'b01
+`define STATE_PARITY_BIT  2'b10
+`define STATE_STOP_BIT    2'b11
 
 /**
  * Uart config information.
