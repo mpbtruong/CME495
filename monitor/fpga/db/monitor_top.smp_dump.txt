@@ -1,9 +1,7 @@
 
 State Machine - |monitor_top|uart_rx:receiver|state
-Name state.101 state.100 state.011 state.010 state.001 state.000 
-state.000 0 0 0 0 0 0 
-state.001 0 0 0 0 1 1 
-state.010 0 0 0 1 0 1 
-state.011 0 0 1 0 0 1 
-state.100 0 1 0 0 0 1 
-state.101 1 0 0 0 0 1 
+Name state.11 state.10 state.01 state.00 
+state.00 0 0 0 0 
+state.01 0 0 1 1 
+state.10 0 1 0 1 
+state.11 1 0 0 1 

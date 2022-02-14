@@ -50,3 +50,5 @@ UART Design
     2) https://www.nandland.com/vhdl/modules/module-uart-serial-port-rs232.html
     3) https://github.com/kithminrw/verilog_fpga_uart
     4) https://github.com/hell03end/verilog-uart/tree/master/uart
+    5) Oversampling receiver
+        https://electronics.stackexchange.com/questions/207870/uart-receiver-sampling-rate
