@@ -33,6 +33,8 @@ class Monitor():
     FLOW_CONTROL_RTS_CTS = False
 
     USB_TO_SERIAL_HWID='USB VID:PID=067B:2303 SER= LOCATION=1-5'
+    USB_TO_SERIAL_VID=1659
+    USB_TO_SERIAL_PID=8963
 
     # constructor ##############################################################
     def __init__(self, baudrate=BAUD_RATE,
@@ -45,9 +47,11 @@ class Monitor():
         Setup the UART serial port.
         """
         # uart config
-        try: self.port = self.assign_port(device_hwid=self.USB_TO_SERIAL_HWID)
+        try: self.port = self.assign_port(device_vid=self.USB_TO_SERIAL_VID, 
+                                          device_pid=self.USB_TO_SERIAL_PID)
         except serial.SerialException:
             print(f'Error: Serial port not found!')
+            self.print_ports()
             exit(1)
         self.baudrate  = baudrate
         self.datasize  = bytesize
@@ -73,17 +77,18 @@ class Monitor():
         return monitor
     
     # methods ##################################################################
-    def assign_port(self, device_hwid):
+    def assign_port(self, device_vid:int, device_pid:int):
         """
         Assign the serial port that has device_hwid. Raises an exception 
         otherwise.
 
-        :param device_hwid: the desired serial device's hardware ID.
+        :param device_vid: the desired serial device's vendor ID.
+        :param device_pid: the desired serial device's product ID.
         :return: ListPortInfo of serial port.
         """
         ports = self.list_ports()
         for port in ports:
-            if (port.hwid == device_hwid): return port   
+            if ((port.vid == device_vid) and (port.pid == device_pid)): return port   
         raise serial.SerialException("No ports found!")
 
     @classmethod
