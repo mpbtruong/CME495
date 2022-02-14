@@ -36,15 +36,16 @@ module monitor_top(
 
 // declarations ////////////////////////////////////////////////////////////////
 // baud clks
-reg                     baud_tx;  // normal baud rate
-reg                     baud_rx;  // baud rate with oversampling
+reg                     baud_tx;   // normal baud rate
+reg                     baud_rx;   // baud rate with oversampling
 // rx
-reg[`NUM_DATA_BITS-1:0] rx_byte;  // data bits from an rx transaction
-reg                     rx_done;  // rx transaction is done
-reg                     rx_busy;  // rx is busy
-reg                     rx_error; // rx has error
+reg                     rx_enable; // allow transmission
+reg[`NUM_DATA_BITS-1:0] rx_byte;   // data bits from an rx transaction
+reg                     rx_done;   // rx transaction is done
+reg                     rx_busy;   // rx is busy
+reg                     rx_error;  // rx has error
 // tx
-reg[`NUM_DATA_BITS-1:0] tx_byte;  // data bits to transmit
+reg[`NUM_DATA_BITS-1:0] tx_byte;   // data bits to transmit
 // (tx in development)
 
 // I/O (LEDs, SW, etc.) ////////////////////////////////////////////////////////
@@ -55,6 +56,8 @@ always @(*) begin
     LEDG[7]   <= rx_done;
     LEDG[6]   <= rx_busy;
     LEDG[5]   <= rx_error;
+    rx_enable <= SW[17];
+    LEDR[17]  <= SW[17];
 end
 
 // gpio ////////////////////////////////////////////////////////////////////////
@@ -86,7 +89,7 @@ baud_gen_rx(
 // create the uart receiver
 uart_rx receiver(
     .baud(baud_rx),
-    .enable(~reset),
+    .enable(rx_enable),
     .rx(uart_rxd),
     .data(rx_byte),
     .done(rx_done),

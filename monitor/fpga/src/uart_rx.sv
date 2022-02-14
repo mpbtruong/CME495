@@ -80,7 +80,7 @@ task RESET();
     // helper signals
     sample_idx  <= 0;
     oversamples <= 0;
-    data_idx    <= 0;
+    data_idx    <= `NUM_DATA_BITS - 1;
     if (enable) state <= `STATE_IDLE;
 endtask
 task IDLE();
@@ -110,7 +110,7 @@ endtask
 task DATA_BITS();
     // read all the data bits
     if (data_idx == `NUM_DATA_BITS - 1) begin
-        data_idx <= 0;
+        data_idx <= `NUM_DATA_BITS - 1;
         // go to parity state and check if data is ok
         state <= `STATE_PARITY_BIT;
     end
@@ -121,6 +121,7 @@ task DATA_BITS();
             sample_idx <= 0;
             // assign the oversampled data bit
             data[data_idx] <= sample;
+            data_idx -= 1;
         end
         // continue sampling
         else begin

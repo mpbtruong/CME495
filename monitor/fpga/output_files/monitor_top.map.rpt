@@ -1,5 +1,5 @@
 Analysis & Synthesis report for monitor_top
-Sun Feb 13 22:14:11 2022
+Sun Feb 13 22:42:26 2022
 Quartus Prime Version 20.1.0 Build 711 06/05/2020 SJ Lite Edition
 
 
@@ -15,19 +15,18 @@ Quartus Prime Version 20.1.0 Build 711 06/05/2020 SJ Lite Edition
   7. Analysis & Synthesis Resource Utilization by Entity
   8. State Machine - |monitor_top|uart_rx:receiver|state
   9. Registers Removed During Synthesis
- 10. Removed Registers Triggering Further Register Optimizations
- 11. General Register Statistics
- 12. Multiplexer Restructuring Statistics (Restructuring Performed)
- 13. Parameter Settings for User Entity Instance: baud_generator:baud_gen_tx
- 14. Parameter Settings for User Entity Instance: baud_generator:baud_gen_rx
- 15. Parameter Settings for User Entity Instance: uart_rx:receiver|count_ones:decide_oversampling
- 16. Parameter Settings for User Entity Instance: uart_rx:receiver|count_ones:count_parity_ones
- 17. Port Connectivity Checks: "uart_rx:receiver|count_ones:count_parity_ones"
- 18. Port Connectivity Checks: "uart_rx:receiver|count_ones:decide_oversampling"
- 19. Post-Synthesis Netlist Statistics for Top Partition
- 20. Elapsed Time Per Partition
- 21. Analysis & Synthesis Messages
- 22. Analysis & Synthesis Suppressed Messages
+ 10. General Register Statistics
+ 11. Multiplexer Restructuring Statistics (Restructuring Performed)
+ 12. Parameter Settings for User Entity Instance: baud_generator:baud_gen_tx
+ 13. Parameter Settings for User Entity Instance: baud_generator:baud_gen_rx
+ 14. Parameter Settings for User Entity Instance: uart_rx:receiver|count_ones:decide_oversampling
+ 15. Parameter Settings for User Entity Instance: uart_rx:receiver|count_ones:count_parity_ones
+ 16. Port Connectivity Checks: "uart_rx:receiver|count_ones:count_parity_ones"
+ 17. Port Connectivity Checks: "uart_rx:receiver|count_ones:decide_oversampling"
+ 18. Post-Synthesis Netlist Statistics for Top Partition
+ 19. Elapsed Time Per Partition
+ 20. Analysis & Synthesis Messages
+ 21. Analysis & Synthesis Suppressed Messages
 
 
 
@@ -54,15 +53,15 @@ https://fpgasoftware.intel.com/eula.
 +----------------------------------------------------------------------------------+
 ; Analysis & Synthesis Summary                                                     ;
 +------------------------------------+---------------------------------------------+
-; Analysis & Synthesis Status        ; Successful - Sun Feb 13 22:14:11 2022       ;
+; Analysis & Synthesis Status        ; Successful - Sun Feb 13 22:42:26 2022       ;
 ; Quartus Prime Version              ; 20.1.0 Build 711 06/05/2020 SJ Lite Edition ;
 ; Revision Name                      ; monitor_top                                 ;
 ; Top-level Entity Name              ; monitor_top                                 ;
 ; Family                             ; Cyclone IV E                                ;
-; Total logic elements               ; 91                                          ;
-;     Total combinational functions  ; 91                                          ;
-;     Dedicated logic registers      ; 42                                          ;
-; Total registers                    ; 42                                          ;
+; Total logic elements               ; 146                                         ;
+;     Total combinational functions  ; 146                                         ;
+;     Dedicated logic registers      ; 54                                          ;
+; Total registers                    ; 54                                          ;
 ; Total pins                         ; 58                                          ;
 ; Total virtual pins                 ; 0                                           ;
 ; Total memory bits                  ; 0                                           ;
@@ -192,20 +191,20 @@ https://fpgasoftware.intel.com/eula.
 +---------------------------------------------+---------------------------------+
 ; Resource                                    ; Usage                           ;
 +---------------------------------------------+---------------------------------+
-; Estimated Total logic elements              ; 91                              ;
+; Estimated Total logic elements              ; 146                             ;
 ;                                             ;                                 ;
-; Total combinational functions               ; 91                              ;
+; Total combinational functions               ; 146                             ;
 ; Logic element usage by number of LUT inputs ;                                 ;
-;     -- 4 input functions                    ; 52                              ;
-;     -- 3 input functions                    ; 21                              ;
-;     -- <=2 input functions                  ; 18                              ;
+;     -- 4 input functions                    ; 101                             ;
+;     -- 3 input functions                    ; 16                              ;
+;     -- <=2 input functions                  ; 29                              ;
 ;                                             ;                                 ;
 ; Logic elements by mode                      ;                                 ;
-;     -- normal mode                          ; 79                              ;
+;     -- normal mode                          ; 134                             ;
 ;     -- arithmetic mode                      ; 12                              ;
 ;                                             ;                                 ;
-; Total registers                             ; 42                              ;
-;     -- Dedicated logic registers            ; 42                              ;
+; Total registers                             ; 54                              ;
+;     -- Dedicated logic registers            ; 54                              ;
 ;     -- I/O registers                        ; 0                               ;
 ;                                             ;                                 ;
 ; I/O pins                                    ; 58                              ;
@@ -213,9 +212,9 @@ https://fpgasoftware.intel.com/eula.
 ; Embedded Multiplier 9-bit elements          ; 0                               ;
 ;                                             ;                                 ;
 ; Maximum fan-out node                        ; baud_generator:baud_gen_rx|baud ;
-; Maximum fan-out                             ; 28                              ;
-; Total fan-out                               ; 496                             ;
-; Average fan-out                             ; 1.99                            ;
+; Maximum fan-out                             ; 40                              ;
+; Total fan-out                               ; 751                             ;
+; Average fan-out                             ; 2.38                            ;
 +---------------------------------------------+---------------------------------+
 
 
@@ -224,10 +223,11 @@ https://fpgasoftware.intel.com/eula.
 +----------------------------------------+---------------------+---------------------------+-------------+--------------+---------+-----------+------+--------------+--------------------------------------------------------------+----------------+--------------+
 ; Compilation Hierarchy Node             ; Combinational ALUTs ; Dedicated Logic Registers ; Memory Bits ; DSP Elements ; DSP 9x9 ; DSP 18x18 ; Pins ; Virtual Pins ; Full Hierarchy Name                                          ; Entity Name    ; Library Name ;
 +----------------------------------------+---------------------+---------------------------+-------------+--------------+---------+-----------+------+--------------+--------------------------------------------------------------+----------------+--------------+
-; |monitor_top                           ; 91 (0)              ; 42 (0)                    ; 0           ; 0            ; 0       ; 0         ; 58   ; 0            ; |monitor_top                                                 ; monitor_top    ; work         ;
+; |monitor_top                           ; 146 (0)             ; 54 (0)                    ; 0           ; 0            ; 0       ; 0         ; 58   ; 0            ; |monitor_top                                                 ; monitor_top    ; work         ;
 ;    |baud_generator:baud_gen_rx|        ; 8 (8)               ; 6 (6)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |monitor_top|baud_generator:baud_gen_rx                      ; baud_generator ; work         ;
-;    |baud_generator:baud_gen_tx|        ; 13 (13)             ; 10 (10)                   ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |monitor_top|baud_generator:baud_gen_tx                      ; baud_generator ; work         ;
-;    |uart_rx:receiver|                  ; 70 (65)             ; 26 (26)                   ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |monitor_top|uart_rx:receiver                                ; uart_rx        ; work         ;
+;    |baud_generator:baud_gen_tx|        ; 14 (14)             ; 10 (10)                   ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |monitor_top|baud_generator:baud_gen_tx                      ; baud_generator ; work         ;
+;    |uart_rx:receiver|                  ; 124 (117)           ; 38 (38)                   ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |monitor_top|uart_rx:receiver                                ; uart_rx        ; work         ;
+;       |count_ones:count_parity_ones|   ; 2 (2)               ; 0 (0)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |monitor_top|uart_rx:receiver|count_ones:count_parity_ones   ; count_ones     ; work         ;
 ;       |count_ones:decide_oversampling| ; 5 (5)               ; 0 (0)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |monitor_top|uart_rx:receiver|count_ones:decide_oversampling ; count_ones     ; work         ;
 +----------------------------------------+---------------------+---------------------------+-------------+--------------+---------+-----------+------+--------------+--------------------------------------------------------------+----------------+--------------+
 Note: For table entries with two numbers listed, the numbers in parentheses indicate the number of resources of the given type used by the specific entity alone. The numbers listed outside of parentheses indicate the total resources of the given type used by the specific entity and all of its sub-entities in the hierarchy.
@@ -248,33 +248,18 @@ Encoding Type:  One-Hot
 +-----------+-----------+-----------+-----------+-----------+-----------+-----------+
 
 
-+-----------------------------------------------------------------------------------+
-; Registers Removed During Synthesis                                                ;
-+----------------------------------------+------------------------------------------+
-; Register name                          ; Reason for Removal                       ;
-+----------------------------------------+------------------------------------------+
-; uart_rx:receiver|data_idx[1,2]         ; Merged with uart_rx:receiver|data_idx[0] ;
-; uart_rx:receiver|data_idx[0]           ; Stuck at GND due to stuck port data_in   ;
-; uart_rx:receiver|data[1..7]            ; Stuck at GND due to stuck port data_in   ;
-; uart_rx:receiver|oversamples[15]       ; Stuck at GND due to stuck port data_in   ;
-; uart_rx:receiver|state~8               ; Lost fanout                              ;
-; uart_rx:receiver|state~9               ; Lost fanout                              ;
-; uart_rx:receiver|state~10              ; Lost fanout                              ;
-; uart_rx:receiver|state.100             ; Stuck at GND due to stuck port data_in   ;
-; uart_rx:receiver|state.101             ; Stuck at GND due to stuck port data_in   ;
-; uart_rx:receiver|done                  ; Stuck at GND due to stuck port data_in   ;
-; Total Number of Removed Registers = 17 ;                                          ;
-+----------------------------------------+------------------------------------------+
-
-
-+--------------------------------------------------------------------------------------------------------------------+
-; Removed Registers Triggering Further Register Optimizations                                                        ;
-+------------------------------+---------------------------+---------------------------------------------------------+
-; Register name                ; Reason for Removal        ; Registers Removed due to This Register                  ;
-+------------------------------+---------------------------+---------------------------------------------------------+
-; uart_rx:receiver|data_idx[0] ; Stuck at GND              ; uart_rx:receiver|oversamples[15], uart_rx:receiver|done ;
-;                              ; due to stuck port data_in ;                                                         ;
-+------------------------------+---------------------------+---------------------------------------------------------+
++--------------------------------------------------------------------------------+
+; Registers Removed During Synthesis                                             ;
++---------------------------------------+----------------------------------------+
+; Register name                         ; Reason for Removal                     ;
++---------------------------------------+----------------------------------------+
+; uart_rx:receiver|oversamples[15]      ; Stuck at GND due to stuck port data_in ;
+; uart_rx:receiver|data[7]              ; Stuck at GND due to stuck port data_in ;
+; uart_rx:receiver|state~8              ; Lost fanout                            ;
+; uart_rx:receiver|state~9              ; Lost fanout                            ;
+; uart_rx:receiver|state~10             ; Lost fanout                            ;
+; Total Number of Removed Registers = 5 ;                                        ;
++---------------------------------------+----------------------------------------+
 
 
 +------------------------------------------------------+
@@ -282,12 +267,12 @@ Encoding Type:  One-Hot
 +----------------------------------------------+-------+
 ; Statistic                                    ; Value ;
 +----------------------------------------------+-------+
-; Total registers                              ; 42    ;
-; Number of registers using Synchronous Clear  ; 18    ;
-; Number of registers using Synchronous Load   ; 0     ;
+; Total registers                              ; 54    ;
+; Number of registers using Synchronous Clear  ; 17    ;
+; Number of registers using Synchronous Load   ; 7     ;
 ; Number of registers using Asynchronous Clear ; 0     ;
 ; Number of registers using Asynchronous Load  ; 0     ;
-; Number of registers using Clock Enable       ; 22    ;
+; Number of registers using Clock Enable       ; 29    ;
 ; Number of registers using Preset             ; 0     ;
 +----------------------------------------------+-------+
 
@@ -298,9 +283,10 @@ Encoding Type:  One-Hot
 ; Multiplexer Inputs ; Bus Width ; Baseline Area ; Area if Restructured ; Saving if Restructured ; Registered ; Example Multiplexer Output                       ;
 +--------------------+-----------+---------------+----------------------+------------------------+------------+--------------------------------------------------+
 ; 3:1                ; 5 bits    ; 10 LEs        ; 5 LEs                ; 5 LEs                  ; Yes        ; |monitor_top|baud_generator:baud_gen_rx|ticks[4] ;
-; 3:1                ; 9 bits    ; 18 LEs        ; 9 LEs                ; 9 LEs                  ; Yes        ; |monitor_top|baud_generator:baud_gen_tx|ticks[4] ;
-; 4:1                ; 4 bits    ; 8 LEs         ; 4 LEs                ; 4 LEs                  ; Yes        ; |monitor_top|uart_rx:receiver|sample_idx[3]      ;
-; 8:1                ; 2 bits    ; 10 LEs        ; 4 LEs                ; 6 LEs                  ; No         ; |monitor_top|uart_rx:receiver|state              ;
+; 3:1                ; 9 bits    ; 18 LEs        ; 9 LEs                ; 9 LEs                  ; Yes        ; |monitor_top|baud_generator:baud_gen_tx|ticks[7] ;
+; 5:1                ; 3 bits    ; 9 LEs         ; 3 LEs                ; 6 LEs                  ; Yes        ; |monitor_top|uart_rx:receiver|data_idx[0]        ;
+; 5:1                ; 4 bits    ; 12 LEs        ; 4 LEs                ; 8 LEs                  ; Yes        ; |monitor_top|uart_rx:receiver|sample_idx[2]      ;
+; 9:1                ; 2 bits    ; 12 LEs        ; 6 LEs                ; 6 LEs                  ; No         ; |monitor_top|uart_rx:receiver|state              ;
 +--------------------+-----------+---------------+----------------------+------------------------+------------+--------------------------------------------------+
 
 
@@ -370,22 +356,23 @@ Note: In order to hide this table in the UI and the text report file, please set
 ; Type                  ; Count                       ;
 +-----------------------+-----------------------------+
 ; boundary_port         ; 58                          ;
-; cycloneiii_ff         ; 42                          ;
+; cycloneiii_ff         ; 54                          ;
 ;     ENA               ; 22                          ;
-;     SCLR              ; 18                          ;
-;     plain             ; 2                           ;
-; cycloneiii_lcell_comb ; 93                          ;
+;     ENA SLD           ; 7                           ;
+;     SCLR              ; 17                          ;
+;     plain             ; 8                           ;
+; cycloneiii_lcell_comb ; 148                         ;
 ;     arith             ; 12                          ;
 ;         2 data inputs ; 12                          ;
-;     normal            ; 81                          ;
+;     normal            ; 136                         ;
 ;         0 data inputs ; 1                           ;
 ;         1 data inputs ; 3                           ;
-;         2 data inputs ; 4                           ;
-;         3 data inputs ; 21                          ;
-;         4 data inputs ; 52                          ;
+;         2 data inputs ; 15                          ;
+;         3 data inputs ; 16                          ;
+;         4 data inputs ; 101                         ;
 ;                       ;                             ;
-; Max LUT depth         ; 3.00                        ;
-; Average LUT depth     ; 2.35                        ;
+; Max LUT depth         ; 5.00                        ;
+; Average LUT depth     ; 2.87                        ;
 +-----------------------+-----------------------------+
 
 
@@ -394,7 +381,7 @@ Note: In order to hide this table in the UI and the text report file, please set
 +----------------+--------------+
 ; Partition Name ; Elapsed Time ;
 +----------------+--------------+
-; Top            ; 00:00:00     ;
+; Top            ; 00:00:01     ;
 +----------------+--------------+
 
 
@@ -404,7 +391,7 @@ Note: In order to hide this table in the UI and the text report file, please set
 Info: *******************************************************************
 Info: Running Quartus Prime Analysis & Synthesis
     Info: Version 20.1.0 Build 711 06/05/2020 SJ Lite Edition
-    Info: Processing started: Sun Feb 13 22:13:54 2022
+    Info: Processing started: Sun Feb 13 22:42:16 2022
 Info: Command: quartus_map --read_settings_files=on --write_settings_files=off monitor_top -c monitor_top
 Warning (18236): Number of processors has not been specified which may cause overloading on shared machines.  Set the global assignment NUM_PARALLEL_PROCESSORS in your QSF to an appropriate value for best performance.
 Info (20030): Parallel compilation is enabled and will use 4 of the 4 processors detected
@@ -417,21 +404,24 @@ Info (12021): Found 1 design units, including 1 entities, in source file src/cou
 Info (12021): Found 1 design units, including 1 entities, in source file src/baud_generator.sv
     Info (12023): Found entity 1: baud_generator File: C:/Users/Tyler/Documents/github/CME495/monitor/fpga/src/baud_generator.sv Line: 5
 Info (12127): Elaborating entity "monitor_top" for the top level hierarchy
-Warning (10036): Verilog HDL or VHDL warning at monitor_top.sv(47): object "tx_byte" assigned a value but never read File: C:/Users/Tyler/Documents/github/CME495/monitor/fpga/src/monitor_top.sv Line: 47
+Warning (10036): Verilog HDL or VHDL warning at monitor_top.sv(48): object "tx_byte" assigned a value but never read File: C:/Users/Tyler/Documents/github/CME495/monitor/fpga/src/monitor_top.sv Line: 48
 Warning (10030): Net "uart_txd" at monitor_top.sv(21) has no driver or initial value, using a default initial value '0' File: C:/Users/Tyler/Documents/github/CME495/monitor/fpga/src/monitor_top.sv Line: 21
 Warning (10030): Net "uart_rts" at monitor_top.sv(22) has no driver or initial value, using a default initial value '0' File: C:/Users/Tyler/Documents/github/CME495/monitor/fpga/src/monitor_top.sv Line: 22
-Warning (10034): Output port "LEDR[17..8]" at monitor_top.sv(33) has no driver File: C:/Users/Tyler/Documents/github/CME495/monitor/fpga/src/monitor_top.sv Line: 33
+Warning (10034): Output port "LEDR[16..8]" at monitor_top.sv(33) has no driver File: C:/Users/Tyler/Documents/github/CME495/monitor/fpga/src/monitor_top.sv Line: 33
 Warning (10034): Output port "LEDG[8]" at monitor_top.sv(35) has no driver File: C:/Users/Tyler/Documents/github/CME495/monitor/fpga/src/monitor_top.sv Line: 35
 Warning (10034): Output port "LEDG[4..1]" at monitor_top.sv(35) has no driver File: C:/Users/Tyler/Documents/github/CME495/monitor/fpga/src/monitor_top.sv Line: 35
-Info (12128): Elaborating entity "baud_generator" for hierarchy "baud_generator:baud_gen_tx" File: C:/Users/Tyler/Documents/github/CME495/monitor/fpga/src/monitor_top.sv Line: 78
+Info (12128): Elaborating entity "baud_generator" for hierarchy "baud_generator:baud_gen_tx" File: C:/Users/Tyler/Documents/github/CME495/monitor/fpga/src/monitor_top.sv Line: 81
 Warning (10230): Verilog HDL assignment warning at baud_generator.sv(32): truncated value with size 32 to match size of target (9) File: C:/Users/Tyler/Documents/github/CME495/monitor/fpga/src/baud_generator.sv Line: 32
-Info (12128): Elaborating entity "baud_generator" for hierarchy "baud_generator:baud_gen_rx" File: C:/Users/Tyler/Documents/github/CME495/monitor/fpga/src/monitor_top.sv Line: 84
+Info (12128): Elaborating entity "baud_generator" for hierarchy "baud_generator:baud_gen_rx" File: C:/Users/Tyler/Documents/github/CME495/monitor/fpga/src/monitor_top.sv Line: 87
 Warning (10230): Verilog HDL assignment warning at baud_generator.sv(32): truncated value with size 32 to match size of target (5) File: C:/Users/Tyler/Documents/github/CME495/monitor/fpga/src/baud_generator.sv Line: 32
-Info (12128): Elaborating entity "uart_rx" for hierarchy "uart_rx:receiver" File: C:/Users/Tyler/Documents/github/CME495/monitor/fpga/src/monitor_top.sv Line: 95
+Info (12128): Elaborating entity "uart_rx" for hierarchy "uart_rx:receiver" File: C:/Users/Tyler/Documents/github/CME495/monitor/fpga/src/monitor_top.sv Line: 98
+Warning (10230): Verilog HDL assignment warning at uart_rx.sv(83): truncated value with size 32 to match size of target (3) File: C:/Users/Tyler/Documents/github/CME495/monitor/fpga/src/uart_rx.sv Line: 83
 Warning (10230): Verilog HDL assignment warning at uart_rx.sv(107): truncated value with size 32 to match size of target (4) File: C:/Users/Tyler/Documents/github/CME495/monitor/fpga/src/uart_rx.sv Line: 107
-Warning (10230): Verilog HDL assignment warning at uart_rx.sv(128): truncated value with size 32 to match size of target (4) File: C:/Users/Tyler/Documents/github/CME495/monitor/fpga/src/uart_rx.sv Line: 128
-Warning (10230): Verilog HDL assignment warning at uart_rx.sv(147): truncated value with size 32 to match size of target (4) File: C:/Users/Tyler/Documents/github/CME495/monitor/fpga/src/uart_rx.sv Line: 147
-Warning (10230): Verilog HDL assignment warning at uart_rx.sv(168): truncated value with size 32 to match size of target (4) File: C:/Users/Tyler/Documents/github/CME495/monitor/fpga/src/uart_rx.sv Line: 168
+Warning (10230): Verilog HDL assignment warning at uart_rx.sv(113): truncated value with size 32 to match size of target (3) File: C:/Users/Tyler/Documents/github/CME495/monitor/fpga/src/uart_rx.sv Line: 113
+Warning (10230): Verilog HDL assignment warning at uart_rx.sv(124): truncated value with size 32 to match size of target (3) File: C:/Users/Tyler/Documents/github/CME495/monitor/fpga/src/uart_rx.sv Line: 124
+Warning (10230): Verilog HDL assignment warning at uart_rx.sv(129): truncated value with size 32 to match size of target (4) File: C:/Users/Tyler/Documents/github/CME495/monitor/fpga/src/uart_rx.sv Line: 129
+Warning (10230): Verilog HDL assignment warning at uart_rx.sv(148): truncated value with size 32 to match size of target (4) File: C:/Users/Tyler/Documents/github/CME495/monitor/fpga/src/uart_rx.sv Line: 148
+Warning (10230): Verilog HDL assignment warning at uart_rx.sv(169): truncated value with size 32 to match size of target (4) File: C:/Users/Tyler/Documents/github/CME495/monitor/fpga/src/uart_rx.sv Line: 169
 Info (12128): Elaborating entity "count_ones" for hierarchy "uart_rx:receiver|count_ones:decide_oversampling" File: C:/Users/Tyler/Documents/github/CME495/monitor/fpga/src/uart_rx.sv Line: 36
 Warning (10230): Verilog HDL assignment warning at count_ones.sv(15): truncated value with size 32 to match size of target (4) File: C:/Users/Tyler/Documents/github/CME495/monitor/fpga/src/count_ones.sv Line: 15
 Info (12128): Elaborating entity "count_ones" for hierarchy "uart_rx:receiver|count_ones:count_parity_ones" File: C:/Users/Tyler/Documents/github/CME495/monitor/fpga/src/uart_rx.sv Line: 42
@@ -442,12 +432,6 @@ Warning (13024): Output pins are stuck at VCC or GND
     Warning (13410): Pin "uart_rts" is stuck at GND File: C:/Users/Tyler/Documents/github/CME495/monitor/fpga/src/monitor_top.sv Line: 22
     Warning (13410): Pin "gpio_3" is stuck at GND File: C:/Users/Tyler/Documents/github/CME495/monitor/fpga/src/monitor_top.sv Line: 26
     Warning (13410): Pin "gpio_4" is stuck at GND File: C:/Users/Tyler/Documents/github/CME495/monitor/fpga/src/monitor_top.sv Line: 27
-    Warning (13410): Pin "LEDR[1]" is stuck at GND File: C:/Users/Tyler/Documents/github/CME495/monitor/fpga/src/monitor_top.sv Line: 33
-    Warning (13410): Pin "LEDR[2]" is stuck at GND File: C:/Users/Tyler/Documents/github/CME495/monitor/fpga/src/monitor_top.sv Line: 33
-    Warning (13410): Pin "LEDR[3]" is stuck at GND File: C:/Users/Tyler/Documents/github/CME495/monitor/fpga/src/monitor_top.sv Line: 33
-    Warning (13410): Pin "LEDR[4]" is stuck at GND File: C:/Users/Tyler/Documents/github/CME495/monitor/fpga/src/monitor_top.sv Line: 33
-    Warning (13410): Pin "LEDR[5]" is stuck at GND File: C:/Users/Tyler/Documents/github/CME495/monitor/fpga/src/monitor_top.sv Line: 33
-    Warning (13410): Pin "LEDR[6]" is stuck at GND File: C:/Users/Tyler/Documents/github/CME495/monitor/fpga/src/monitor_top.sv Line: 33
     Warning (13410): Pin "LEDR[7]" is stuck at GND File: C:/Users/Tyler/Documents/github/CME495/monitor/fpga/src/monitor_top.sv Line: 33
     Warning (13410): Pin "LEDR[8]" is stuck at GND File: C:/Users/Tyler/Documents/github/CME495/monitor/fpga/src/monitor_top.sv Line: 33
     Warning (13410): Pin "LEDR[9]" is stuck at GND File: C:/Users/Tyler/Documents/github/CME495/monitor/fpga/src/monitor_top.sv Line: 33
@@ -458,19 +442,17 @@ Warning (13024): Output pins are stuck at VCC or GND
     Warning (13410): Pin "LEDR[14]" is stuck at GND File: C:/Users/Tyler/Documents/github/CME495/monitor/fpga/src/monitor_top.sv Line: 33
     Warning (13410): Pin "LEDR[15]" is stuck at GND File: C:/Users/Tyler/Documents/github/CME495/monitor/fpga/src/monitor_top.sv Line: 33
     Warning (13410): Pin "LEDR[16]" is stuck at GND File: C:/Users/Tyler/Documents/github/CME495/monitor/fpga/src/monitor_top.sv Line: 33
-    Warning (13410): Pin "LEDR[17]" is stuck at GND File: C:/Users/Tyler/Documents/github/CME495/monitor/fpga/src/monitor_top.sv Line: 33
     Warning (13410): Pin "LEDG[1]" is stuck at GND File: C:/Users/Tyler/Documents/github/CME495/monitor/fpga/src/monitor_top.sv Line: 35
     Warning (13410): Pin "LEDG[2]" is stuck at GND File: C:/Users/Tyler/Documents/github/CME495/monitor/fpga/src/monitor_top.sv Line: 35
     Warning (13410): Pin "LEDG[3]" is stuck at GND File: C:/Users/Tyler/Documents/github/CME495/monitor/fpga/src/monitor_top.sv Line: 35
     Warning (13410): Pin "LEDG[4]" is stuck at GND File: C:/Users/Tyler/Documents/github/CME495/monitor/fpga/src/monitor_top.sv Line: 35
-    Warning (13410): Pin "LEDG[7]" is stuck at GND File: C:/Users/Tyler/Documents/github/CME495/monitor/fpga/src/monitor_top.sv Line: 35
     Warning (13410): Pin "LEDG[8]" is stuck at GND File: C:/Users/Tyler/Documents/github/CME495/monitor/fpga/src/monitor_top.sv Line: 35
 Info (286030): Timing-Driven Synthesis is running
 Info (17049): 3 registers lost all their fanouts during netlist optimizations.
 Info (144001): Generated suppressed messages file C:/Users/Tyler/Documents/github/CME495/monitor/fpga/output_files/monitor_top.map.smsg
 Info (16010): Generating hard_block partition "hard_block:auto_generated_inst"
     Info (16011): Adding 0 node(s), including 0 DDIO, 0 PLL, 0 transceiver and 0 LCELL
-Warning (21074): Design contains 18 input pin(s) that do not drive logic
+Warning (21074): Design contains 17 input pin(s) that do not drive logic
     Warning (15610): No output dependent on input pin "SW[0]" File: C:/Users/Tyler/Documents/github/CME495/monitor/fpga/src/monitor_top.sv Line: 32
     Warning (15610): No output dependent on input pin "SW[1]" File: C:/Users/Tyler/Documents/github/CME495/monitor/fpga/src/monitor_top.sv Line: 32
     Warning (15610): No output dependent on input pin "SW[2]" File: C:/Users/Tyler/Documents/github/CME495/monitor/fpga/src/monitor_top.sv Line: 32
@@ -488,15 +470,14 @@ Warning (21074): Design contains 18 input pin(s) that do not drive logic
     Warning (15610): No output dependent on input pin "SW[14]" File: C:/Users/Tyler/Documents/github/CME495/monitor/fpga/src/monitor_top.sv Line: 32
     Warning (15610): No output dependent on input pin "SW[15]" File: C:/Users/Tyler/Documents/github/CME495/monitor/fpga/src/monitor_top.sv Line: 32
     Warning (15610): No output dependent on input pin "SW[16]" File: C:/Users/Tyler/Documents/github/CME495/monitor/fpga/src/monitor_top.sv Line: 32
-    Warning (15610): No output dependent on input pin "SW[17]" File: C:/Users/Tyler/Documents/github/CME495/monitor/fpga/src/monitor_top.sv Line: 32
-Info (21057): Implemented 149 device resources after synthesis - the final resource count might be different
+Info (21057): Implemented 204 device resources after synthesis - the final resource count might be different
     Info (21058): Implemented 22 input pins
     Info (21059): Implemented 36 output pins
-    Info (21061): Implemented 91 logic cells
-Info: Quartus Prime Analysis & Synthesis was successful. 0 errors, 63 warnings
-    Info: Peak virtual memory: 4764 megabytes
-    Info: Processing ended: Sun Feb 13 22:14:11 2022
-    Info: Elapsed time: 00:00:17
+    Info (21061): Implemented 146 logic cells
+Info: Quartus Prime Analysis & Synthesis was successful. 0 errors, 57 warnings
+    Info: Peak virtual memory: 4754 megabytes
+    Info: Processing ended: Sun Feb 13 22:42:26 2022
+    Info: Elapsed time: 00:00:10
     Info: Total CPU time (on all processors): 00:00:23
 
 

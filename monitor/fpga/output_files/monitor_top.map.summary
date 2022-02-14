@@ -1,12 +1,12 @@
-Analysis & Synthesis Status : Successful - Sun Feb 13 22:14:11 2022
+Analysis & Synthesis Status : Successful - Sun Feb 13 22:42:26 2022
 Quartus Prime Version : 20.1.0 Build 711 06/05/2020 SJ Lite Edition
 Revision Name : monitor_top
 Top-level Entity Name : monitor_top
 Family : Cyclone IV E
-Total logic elements : 91
-    Total combinational functions : 91
-    Dedicated logic registers : 42
-Total registers : 42
+Total logic elements : 146
+    Total combinational functions : 146
+    Dedicated logic registers : 54
+Total registers : 54
 Total pins : 58
 Total virtual pins : 0
 Total memory bits : 0
