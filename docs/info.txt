@@ -48,3 +48,5 @@ Python Serial UART
 UART Design
     1) https://www.nandland.com/articles/what-is-a-uart-rs232-serial.html
     2) https://www.nandland.com/vhdl/modules/module-uart-serial-port-rs232.html
+    3) https://github.com/kithminrw/verilog_fpga_uart
+    4) https://github.com/hell03end/verilog-uart/tree/master/uart

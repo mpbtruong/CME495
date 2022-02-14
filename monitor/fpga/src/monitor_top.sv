@@ -2,7 +2,7 @@
 `include "uart_globals.svh"
 
 /**
- * Monitor control uart
+ * Monitor control uart.
  *
  * baud_rate = 115200 (112.5 khz)
  * bit_time = 1s / 115200 bits 
@@ -29,15 +29,35 @@ module monitor_top(
     output reg  gpio_6,  // baud rate tx (16 oversampling)
     output reg  gpio_7,  // clk50
     // I/O
-    output wire reset_led
+    input  reg[17:0] SW,
+    output reg[17:0] LEDR,
+    output reg[8:0]  LEDG
 );
 
-// I/O (LEDs, SW, etc.)
+// declarations ////////////////////////////////////////////////////////////////
+// baud clks
+reg                     baud_tx;  // normal baud rate
+reg                     baud_rx;  // baud rate with oversampling
+// rx
+reg[`NUM_DATA_BITS-1:0] rx_byte;  // data bits from an rx transaction
+reg                     rx_done;  // rx transaction is done
+reg                     rx_busy;  // rx is busy
+reg                     rx_error; // rx has error
+// tx
+reg[`NUM_DATA_BITS-1:0] tx_byte;  // data bits to transmit
+// (tx in development)
+
+// I/O (LEDs, SW, etc.) ////////////////////////////////////////////////////////
 always @(*) begin
-    reset_led <= ~reset;
+    LEDG[0]   <= ~reset;  // indicater for reset
+    tx_byte   <= SW[7:0]; // use switches as input for tx_byte
+    LEDR[7:0] <= rx_byte; // display the rx_byte 
+    LEDG[7]   <= rx_done;
+    LEDG[6]   <= rx_busy;
+    LEDG[5]   <= rx_error;
 end
 
-// gpio
+// gpio ////////////////////////////////////////////////////////////////////////
 always @(*) begin
     gpio_1  <= uart_rxd;
     gpio_2  <= uart_cts;
@@ -48,20 +68,30 @@ always @(*) begin
     gpio_7  <= clk50;
 end
 
+// instantiations //////////////////////////////////////////////////////////////
 // create the baud clks from the 50Mhz src clk
-reg baud_tx;
 baud_generator #(.CLK_FRQ(`CLK_FRQ), .BAUD_RATE(`BAUD_RATE_TX))
 baud_gen_tx(
     .clk(clk50),
     .reset(~reset),
     .baud(baud_tx)
 );
-reg baud_rx;
 baud_generator #(.CLK_FRQ(`CLK_FRQ), .BAUD_RATE(`BAUD_RATE_RX)) 
 baud_gen_rx(
     .clk(clk50),
     .reset(~reset),
     .baud(baud_rx)
+);
+
+// create the uart receiver
+uart_rx receiver(
+    .baud(baud_rx),
+    .enable(~reset),
+    .rx(uart_rxd),
+    .data(rx_byte),
+    .done(rx_done),
+    .busy(rx_busy),
+    .error(rx_error)
 );
 
 endmodule

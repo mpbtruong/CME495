@@ -24,7 +24,19 @@
 					"strict" : false
 				},
 				{
-					"name" : "reset_led",
+					"name" : "LEDR[0]",
+					"strict" : false
+				},
+				{
+					"name" : "LEDG[0]",
+					"strict" : false
+				},
+				{
+					"name" : "LEDG[5]",
+					"strict" : false
+				},
+				{
+					"name" : "LEDG[6]",
 					"strict" : false
 				},
 				{

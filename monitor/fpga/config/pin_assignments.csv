@@ -69,7 +69,7 @@ LEDR[15], Location, PIN_G15
 LEDR[16], Location, PIN_G16
 LEDR[17], Location, PIN_H15
 # LEDG[0:8]
-reset_led, Location, PIN_E21
+LEDG[0], Location, PIN_E21
 LEDG[1], Location, PIN_E22
 LEDG[2], Location, PIN_E25
 LEDG[3], Location, PIN_E24

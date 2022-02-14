@@ -1,12 +1,12 @@
 /**
  * State machine states for the uart.
  */
-`define STATE_START_BIT   3'b000
-`define STATE_DATA_BITS   3'b001
-`define STATE_PARITY_BIT  3'b010
-`define STATE_STOP_BIT    3'b011
-`define STATE_RESET       3'b100
+`define STATE_RESET       3'b000
 `define STATE_IDLE        3'b001
+`define STATE_START_BIT   3'b010
+`define STATE_DATA_BITS   3'b011
+`define STATE_PARITY_BIT  3'b100
+`define STATE_STOP_BIT    3'b101
 
 /**
  * Uart config information.
@@ -16,4 +16,9 @@
 `define BAUD_RATE_TX   115_200
 `define BAUD_RATE_RX   `BAUD_RATE_TX * `OVERSAMPLING
 `define NUM_DATA_BITS  8
+`define PARITY_BIT     1 // size of parity bit
+
+// select parity type
+`define PARITY_EVEN    0
+// `define PARITY_ODD     1
  
