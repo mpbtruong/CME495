@@ -165,7 +165,7 @@ class Monitor():
         :param input_write_stall: if True, require keyboard return before 
             writing next.
         """
-        for i in range(1, 255+1):
+        for i in range(0, 255+1):
             num = int.to_bytes(i, 1, "big")
             print(f'Write {i:03} {format(i, "08b")} {num}')
             if (input_write_stall): input(f'Press enter to write')
