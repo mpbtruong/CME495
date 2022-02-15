@@ -187,7 +187,7 @@ class Monitor():
         """
         for i in range(0, 255+1):
             num = int.to_bytes(i, 1, "big")
-            print(f'\nWrite {i:03} {format(i, "08b")} {num}')
+            print(f'\nWrite {i:03} {format(i, "08b")} {hex(i)}')
             if (input_write_stall): input(f'Press enter to write')
             else: sleep(delay)
             self.write_uart(num)
@@ -196,20 +196,23 @@ class Monitor():
         """
         Write a byte given stdin input.
 
+        stdin int    : 0-255
         stdin hex    : a9, ff, B3, etc.
         stdin binary : 10100101, etc
         """
         i_byte_str = input(f'\nEnter byte to write: ')
-        if (len(i_byte_str) == 8):
-            # binary
-            w_int  = int(i_byte_str, 2)
-            w_byte = int.to_bytes(w_int, 1, "big")
-        elif (len(i_byte_str) in (1,2)):
-            # binary
-            w_int  = int(i_byte_str, 16)
-            w_byte = int.to_bytes(w_int, 1, "big")
-        else: return
-        print(f'Writing {w_int} | {format(w_int, "08b")} | {w_byte}')
+        try:
+            if (len(i_byte_str) == 8):
+                # binary
+                w_int  = int(i_byte_str, 2)
+                w_byte = int.to_bytes(w_int, 1, "big")
+            elif (len(i_byte_str) in (1,2)):
+                # hex
+                w_int  = int(i_byte_str, 16)
+                w_byte = int.to_bytes(w_int, 1, "big")
+            else: return
+        except ValueError: return
+        print(f'Writing {w_int} | {format(w_int, "08b")} | {hex(w_int)}')
         self.write_uart(w_byte)
 
 

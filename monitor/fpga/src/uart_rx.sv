@@ -9,6 +9,7 @@ module uart_rx(
     output reg[$clog2(`STATES_NUM)-1:0]   state,
     // oversampling (1/2 oversampling to find start bit middle, then full oversampling)
     output reg[$clog2(`OVERSAMPLING)-1:0] oversample_idx, // counter for oversampling
+    output reg stop_extra_oversample, // flag so stop bit gets its full time
     // data bit buffer
     output reg[`NUM_DATA_BITS-1:0]  data_buffer,          // data buffer for state machine
     // data bit counter
@@ -27,15 +28,11 @@ module uart_rx(
 );
 
 // declarations ////////////////////////////////////////////////////////////////
-// // current state of the state machine
-// reg[$clog2(`STATES_NUM)-1:0]   state;
-// // oversampling (1/2 oversampling to find start bit middle, then full oversampling)
-// reg[$clog2(`OVERSAMPLING)-1:0] oversample_idx; // counter for oversampling
-// // data bit counter
-// reg[$clog2(`NUM_DATA_BITS):0]  data_idx;       // counter for current data bit
-// // parity valid checker
-// reg parity_valid; // 1 if parity is valid (signal valid in parity state)
-// reg[(`NUM_DATA_BITS+`NUM_PARITY_BIT)-1:0] data_and_parity_bits; // concatenation of signals
+
+
+// add debug regs back here later (TO-DO)
+
+
 
 // helper logic ////////////////////////////////////////////////////////////////
 // determine if parity is ok
@@ -79,9 +76,10 @@ task RESET();
     busy  <= 0;
     error <= 0;
     // initialize helper signals
-    oversample_idx <= 0;
-    data_buffer    <= 0;
-    data_idx       <= 0;
+    oversample_idx        <= 0;
+    data_buffer           <= 0;
+    data_idx              <= 0;
+    stop_extra_oversample <= 0;
 endtask
 task IDLE();
     error <= 0;
@@ -135,6 +133,7 @@ task PARITY_BIT();
         if (parity_valid) begin
             // parity valid
             state <= `STATE_STOP_BIT; 
+            stop_extra_oversample <= 1;
         end else begin
             // invalid parity
             state <= `STATE_IDLE;
@@ -146,23 +145,34 @@ task PARITY_BIT();
     end
 endtask
 task STOP_BIT();
-    // check if at middle of stop bit
-    if (oversample_idx == `OVERSAMPLING-1) begin
-        // at middle of stop bit
-        state <= `STATE_IDLE;
-        busy  <= 0;
-        // check if stop bit is valid (should be high)
-        if (rx) begin
-            // valid stop bit
-            done  <= 1;
-            data  <= data_buffer;
-        end else begin
-            // invalid stop bit
-            error <= 1;
+    // check if need to get to middle of stop bit
+    if (stop_extra_oversample) begin
+        // need to get to the start bit
+        if (oversample_idx == `OVERSAMPLING-1) begin
+            // around the middle now
+            stop_extra_oversample <= 0;
+            // give remaining half of oversampling for stop bit detection
+            oversample_idx <= (`OVERSAMPLING/2)-1;
+        end else begin 
+            // not at middle of stop bit yet
+            oversample_idx <= oversample_idx + 1;
         end
-    end else begin 
-        // not at middle of stop bit -> increment oversampling counter
-        oversample_idx <= oversample_idx + 1;
+    end else begin
+        // past the stop bit middle -> detect stop bit
+        if (rx) begin
+            // found the stop bit
+            data  <= data_buffer;
+            done  <= 1;
+            busy  <= 0;
+            state <= `STATE_IDLE;
+        end else if (!rx && oversample_idx == `OVERSAMPLING-1) begin
+            // end of oversampling without detecting stop bit
+            error <= 1;
+            state <= `STATE_IDLE;
+        end else begin
+            // have not detected stop bit yet
+            oversample_idx <= oversample_idx + 1;
+        end
     end
 endtask
 
