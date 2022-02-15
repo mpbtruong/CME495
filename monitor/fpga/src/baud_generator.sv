@@ -14,8 +14,9 @@ Ticks needed to divide the 50Mhz clk to the BAUD_RATE
 ticks = 50Mhz / BAUD_RATE
       = 50_000_000 / 115_200
       = 434
+      Note: divide this by 2 because only posedge is used
 */
-localparam BAUD_TICKS = CLK_FRQ / BAUD_RATE;
+localparam BAUD_TICKS = CLK_FRQ / (2 * BAUD_RATE);
 
 // generate the baud signal
 reg[$clog2(BAUD_TICKS)-1:0] ticks;
