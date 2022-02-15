@@ -29,7 +29,7 @@ GPS Frequency Reference Recovery with Long Term Holdover
 
 ### Repo Commits
 1. Pull from remote repo with ```git pull```
-2. Stage all changes with ```git add .``` or ```git add <file_1> <file_2> <file_n>```
+2. Stage all changes with ```git add .``` or some files with ```git add <file_1> <file_2> <file_n>```
 3. Check files were staged with ```git status```
 4. Commit with ```git commit -m "<commit message>"```
 5. Push to remote with ```git push```
