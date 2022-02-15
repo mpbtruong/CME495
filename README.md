@@ -38,7 +38,7 @@ GPS Frequency Reference Recovery with Long Term Holdover
 ### Merge Conflicts
 1. It is recommended to use an editor like VS Code. In the event of a merge conflict:
     1. Sometimes a merge conflict will happen on ```git pull```
-    2. A vim editor will appear, type ```i``` to enter insert mode and then type a message such as ```Merge fix```
+    2. A vim editor will appear, type ```i``` to enter insert mode and then type a message such as ```Merge fix``` where the        blue # lines are.
     3. Save and exit with ```esc -> :wq -> return```
     4. If git cannot resolve conflicts, a side-by-side view (VS Code) will appear. Manually merge the code files by                following the prompts.
     5. Push to remote with ```git push```
