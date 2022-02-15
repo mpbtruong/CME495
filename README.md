@@ -10,7 +10,7 @@ GPS Frequency Reference Recovery with Long Term Holdover
 
 ## Repo Setup
 1. Configure your git name and email.
-    a) ```git config --global user.name "<your name>"```
+    a. ```git config --global user.name "<your name>"```
     b) ```git config --global user.email "<your email>"```
 2. Add your ssh key to GitHub
     a) Run ```ssh-keygen``` and procede with defaults to generate an SSH key
