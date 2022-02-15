@@ -110,6 +110,26 @@ class Monitor():
         for port in ports:
             print(f'   - device {port.device} | description {port.description} | hwid {port.hwid}')
 
+    def flush_uart(self):
+        """
+        Flush the uart.
+        """
+        self.uart.flush()
+    def write_uart(self, data:bytes):
+        """
+        Write bytes to the uart.
+        """
+        self.uart.write(data)
+        self.flush_uart()
+    def read_uart(self, num_bytes:int)->bytes:
+        """
+        Read num_bytes from uart.
+
+        :param num_bytes: number of bytes to read.
+        """
+        data = self.uart.read(size=num_bytes)
+        return data
+
     # test cases ###############################################################
     def test_loop_wrapper(test_func):
         """
@@ -131,7 +151,7 @@ class Monitor():
         :param read_bytes: number of bytes to read at once.
         """
         print(f'Reading {read_bytes} bytes')
-        data = self.uart.read(size=read_bytes)
+        data = self.read_uart(num_bytes=read_bytes)
         print(data)
     @test_loop_wrapper
     def test_write_byte(self, byte:bytes):
@@ -141,7 +161,7 @@ class Monitor():
         :param byte: byte to write
         """
         print(f'Writing byte {format(int.from_bytes(byte, "big"), "08b")}')
-        self.uart.write(byte)
+        self.write_uart(byte)
     @test_loop_wrapper
     def test_write_read_byte(self, byte:bytes, 
                                    delay:float=1, 
@@ -152,8 +172,8 @@ class Monitor():
         :param byte: byte to write
         """
         print(f'Write byte {format(int.from_bytes(byte, "big"), "08b")}')
-        self.uart.write(byte)
-        data = self.uart.read(size=1)
+        self.write_uart(byte)
+        data = self.read_uart(num_bytes=1)
         print(data)
     @test_loop_wrapper
     def test_write_byte_nums_0_to_255(self, delay:float=1, 
@@ -167,10 +187,32 @@ class Monitor():
         """
         for i in range(0, 255+1):
             num = int.to_bytes(i, 1, "big")
-            print(f'Write {i:03} {format(i, "08b")} {num}')
+            print(f'\nWrite {i:03} {format(i, "08b")} {num}')
             if (input_write_stall): input(f'Press enter to write')
             else: sleep(delay)
-            self.uart.write(num)
+            self.write_uart(num)
+    @test_loop_wrapper
+    def test_write_byte_prompt(self):
+        """
+        Write a byte given stdin input.
+
+        stdin hex    : a9, ff, B3, etc.
+        stdin binary : 10100101, etc
+        """
+        i_byte_str = input(f'\nEnter byte to write: ')
+        if (len(i_byte_str) == 8):
+            # binary
+            w_int  = int(i_byte_str, 2)
+            w_byte = int.to_bytes(w_int, 1, "big")
+        elif (len(i_byte_str) in (1,2)):
+            # binary
+            w_int  = int(i_byte_str, 16)
+            w_byte = int.to_bytes(w_int, 1, "big")
+        else: return
+        print(f'Writing {w_int} | {format(w_int, "08b")} | {w_byte}')
+        self.write_uart(w_byte)
+
+
 
 # Main #########################################################################
 def main():
@@ -178,8 +220,9 @@ def main():
     print(monitor)
     # monitor.test_read_n_bytes(1)
     # monitor.test_write_byte(b'\xFF')
-    monitor.test_write_byte_nums_0_to_255(delay=1, input_write_stall=True)
+    # monitor.test_write_byte_nums_0_to_255(delay=1, input_write_stall=True)
     # monitor.test_write_read_byte(b'\xAF')
+    monitor.test_write_byte_prompt()
 
 
 if __name__ == '__main__':
