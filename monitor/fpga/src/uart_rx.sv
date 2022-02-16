@@ -63,7 +63,6 @@ always @(posedge baud) begin
             default : state <= `STATE_IDLE;
         endcase
     end
-    
 end
 
 // state tasks /////////////////////////////////////////////////////////////////
