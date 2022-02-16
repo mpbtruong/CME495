@@ -3,3 +3,7 @@ monitor/fpga/db/**
 monitor/fpga/incremental_db/**
 monitor/fpga/output_files/**
 monitor/fpga/simulation/**
+monitor/fpga/*.qpf
+monitor/fpga/*.qsf
+monitor/fpga/*.qsf.bak
+monitor/fpga/*.qws
