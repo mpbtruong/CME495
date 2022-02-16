@@ -1,4 +1,5 @@
-
-monitor/fpga
-!monitor/fpga/config
-!moniroe/fpga/src
+# ignore quartus compilation files
+monitor/fpga/db/**
+monitor/fpga/incremental_db/**
+monitor/fpga/output_files/**
+monitor/fpga/simulation/**
