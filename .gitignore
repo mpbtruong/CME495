@@ -7,3 +7,12 @@ monitor/fpga/*.qpf
 monitor/fpga/*.qsf
 monitor/fpga/*.qsf.bak
 monitor/fpga/*.qws
+
+hardware/spi_master/db/**
+hardware/spi_master/incremental_db/**
+hardware/spi_master/output_files/**
+hardware/spi_master/simulation/**
+hardware/spi_master/*.qpf
+hardware/spi_master/*.qsf
+hardware/spi_master/*.qsf.bak
+hardware/spi_master/*.qws
