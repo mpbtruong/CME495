@@ -7,6 +7,7 @@ GPS Frequency Reference Recovery with Long Term Holdover
     1. [Branching](#Branching)
     2. [Repo Commits](#Repo-Commits)
     3. [Merge Conflicts](#Merge-Conflicts)
+3. [Get Remote Repo Info](#Get-Remote-Repo-Info)
 
 ## Repo Setup
 1. Configure your git name and email.
@@ -42,3 +43,7 @@ GPS Frequency Reference Recovery with Long Term Holdover
     3. Save and exit with ```esc -> :wq -> return```
     4. If git cannot resolve conflicts, a side-by-side view (VS Code) will appear. Manually merge the code files by                following the prompts.
     5. Push to remote with ```git push```
+
+### Get Remote Repo Info
+1. ```git remote show origin```
+
