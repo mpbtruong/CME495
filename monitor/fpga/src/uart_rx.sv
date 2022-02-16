@@ -68,7 +68,7 @@ end
 // state tasks /////////////////////////////////////////////////////////////////
 task RESET();
     // start idling for start bit
-    state = `STATE_IDLE;
+    state <= `STATE_IDLE;
     // initialize output signals
     data  <= 0;
     done  <= 0;

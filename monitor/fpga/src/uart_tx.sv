@@ -1,9 +1,14 @@
 
 `include "uart_globals.svh"
+
 /**
  * Transmitter module for uart.
  */
 module uart_tx(
+    output reg                            data_reg, // clk data in at start of transmission
+    output reg[$clog2(`NUM_DATA_BITS):0]  data_idx, // counter for current data bit
+
+
     input  wire                     baud,   // baud clk
     input  wire                     enable, // enable rx read
     input  wire                     write,  // pulse signal to write when enabled
@@ -15,6 +20,12 @@ module uart_tx(
 );
 
 // declarations ////////////////////////////////////////////////////////////////
+
+
+// add debug regs back here later (TO-DO)
+
+
+
 // uart state machine //////////////////////////////////////////////////////////
 always @(posedge baud) begin
     // receiver should not be receiving data
@@ -35,13 +46,33 @@ end
 
 // state tasks /////////////////////////////////////////////////////////////////
 task RESET();
-
+    // start idling for start bit
+    state <= `STATE_IDLE;
+    // initialize output signals
+    tx    <= 1; // drive uart tx line high
+    done  <= 0;
+    busy  <= 0;
+    error <= 0;
+    // initialize helper signals
+    data_reg <= 0;
 endtask
 task IDLE();
-
+    // set idle values
+    done     <= 0;
+    error    <= 0;
+    data_reg <= 0;
+    // detect start of transmission
+    if (enable && write) begin
+        // starting transmission
+        state <= `STATE_DATA_BITS;
+        busy  <= 1;
+    end else begin
+        tx    <= 1; // drive uart tx line high
+        busy  <= 0;
+    end
 endtask
 task DATA_BITS();
-
+    
 endtask
 task PARITY_BIT();
 
