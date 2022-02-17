@@ -16,3 +16,6 @@ hardware/spi_master/*.qpf
 hardware/spi_master/*.qsf
 hardware/spi_master/*.qsf.bak
 hardware/spi_master/*.qws
+
+# ignore python stuff
+__pycache__
