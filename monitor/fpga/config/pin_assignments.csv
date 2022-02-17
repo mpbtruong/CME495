@@ -79,7 +79,7 @@ LEDG[6], Location, PIN_G22
 LEDG[7], Location, PIN_G21
 LEDG[8], Location, PIN_F17
 # KEY[0:3]
-reset,  Location, PIN_M23
+KEY[0], Location, PIN_M23
 KEY[1], Location, PIN_M21
 KEY[2], Location, PIN_N21
 KEY[3], Location, PIN_R24

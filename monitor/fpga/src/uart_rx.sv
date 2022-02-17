@@ -13,7 +13,7 @@ module uart_rx(
     // data bit buffer
     output reg[`NUM_DATA_BITS-1:0]  data_buffer,          // data buffer for state machine
     // data bit counter
-    output reg[$clog2(`NUM_DATA_BITS):0]  data_idx,       // counter for current data bit
+    output reg[$clog2(`NUM_DATA_BITS)-1:0]  data_idx,     // counter for current data bit
     // parity valid checker
     output reg parity_valid, // 1 if parity is valid (signal valid in parity state)
     output reg[(`NUM_DATA_BITS+`NUM_PARITY_BIT)-1:0] data_and_parity_bits, // concatenation of signals

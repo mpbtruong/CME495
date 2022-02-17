@@ -14,7 +14,8 @@
  * packet_time_10 = 86.81 
  */
 module monitor_top(
-    input wire clk50, reset,
+    input  wire clk50, 
+    // input  wire reset,
     // uart
     input  wire uart_rxd, // receiver
     input  wire uart_cts, // clear to send
@@ -30,34 +31,51 @@ module monitor_top(
     output reg  gpio_7,  // clk50
     // I/O
     input  reg[17:0] SW,
+    input  reg[3:0]  KEY,
     output reg[17:0] LEDR,
     output reg[8:0]  LEDG
 );
 
 // declarations ////////////////////////////////////////////////////////////////
+reg                     reset;     // sychronous
 // baud clks
 reg                     baud_tx;   // normal baud rate
 reg                     baud_rx;   // baud rate with oversampling
 // rx
-reg                     rx_enable; // allow transmission
+reg                     rx_enable; // allow receive transactions
 reg[`NUM_DATA_BITS-1:0] rx_byte;   // data bits from an rx transaction
 reg                     rx_done;   // rx transaction is done
 reg                     rx_busy;   // rx is busy
 reg                     rx_error;  // rx has error
 // tx
+reg                     tx_enable; // allow transmit transactions
+reg                     tx_write;  // start a transactions
 reg[`NUM_DATA_BITS-1:0] tx_byte;   // data bits to transmit
-// (tx in development)
+reg                     tx_done;   // tx transaction is done
+reg                     tx_busy;   // tx is busy
+reg                     tx_error;  // tx has error
 
 // I/O (LEDs, SW, etc.) ////////////////////////////////////////////////////////
 always @(*) begin
-    LEDG[0]   <= ~reset;  // indicater for reset
-    tx_byte   <= SW[7:0]; // use switches as input for tx_byte
+    // reset
+    reset     <= ~KEY[0];
+    LEDG[0]   <= ~KEY[0];  // indicater for reset
+    // rx
     LEDR[7:0] <= rx_byte; // display the rx_byte 
     LEDG[7]   <= rx_done;
     LEDG[6]   <= rx_busy;
     LEDG[5]   <= rx_error;
     rx_enable <= SW[17];
     LEDR[17]  <= SW[17];
+    // tx
+    tx_enable <= SW[15];
+    LEDR[15]  <= SW[15];
+    tx_write  <= ~KEY[2];
+    LEDG[4]   <= ~KEY[2];
+    tx_byte   <= SW[7:0]; // use switches as input for tx_byte
+    LEDG[3]   <= tx_done;
+    LEDG[2]   <= tx_busy;
+    LEDG[1]   <= tx_error;
 end
 
 // gpio ////////////////////////////////////////////////////////////////////////
@@ -76,13 +94,13 @@ end
 baud_generator #(.CLK_FRQ(`CLK_FRQ), .BAUD_RATE(`BAUD_RATE_TX))
 baud_gen_tx(
     .clk(clk50),
-    .reset(~reset),
+    .reset(reset),
     .baud(baud_tx)
 );
 baud_generator #(.CLK_FRQ(`CLK_FRQ), .BAUD_RATE(`BAUD_RATE_RX)) 
 baud_gen_rx(
     .clk(clk50),
-    .reset(~reset),
+    .reset(reset),
     .baud(baud_rx)
 );
 
@@ -95,6 +113,18 @@ uart_rx receiver(
     .done(rx_done),
     .busy(rx_busy),
     .error(rx_error)
+);
+
+// create the uart transmitter
+uart_tx transmitter(
+    .baud(baud_tx),
+    .enable(tx_enable),
+    .write(tx_write),
+    .data(tx_byte),
+    .tx(uart_txd),
+    .done(tx_done),
+    .busy(tx_busy),
+    .error(tx_error)
 );
 
 endmodule
