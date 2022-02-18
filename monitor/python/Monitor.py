@@ -246,26 +246,25 @@ class MonitorFPGA(Monitor):
     Builds on Monitor to implement an API for writing to and reading from
     the FPGA with the use of commands.
     """
-    # constants ################################################################
-    # command names
-    CMD_1  = 'test_read'
-    CMD_2  = 'test_write'
-    # command info
-    MAX_COMMANDS  = 128
-    BYTE_ENDIAN   = 'big'  # order to send bytes
-    CMD_BYTE_SIZE = 1      # size of command
-    WRITE_CMD     = 1      # MSB of command byte
-    READ_CMD      = 0      # MSB of command byte
-
-    # subclasses ###############################################################
+    # FPGA command class #######################################################
     class Command():
         """
         Represents a command used to communicate with the FPGA.
 
         Attributes:
-            cid :
+            cid       : command id in range [1, 128]
+            rw        : r or w if command is read or write
+            no_rbytes : number of bytes to read
+            no_wbytes : number of data bytes to write
+            name      : friendly name of the command
         """
         # constants ############################################################
+        # command info
+        MAX_COMMANDS  = 128
+        BYTE_ENDIAN   = 'big'  # order to send bytes
+        CMD_BYTE_SIZE = 1      # size of command
+        WRITE_CMD     = 1      # MSB of command byte
+        READ_CMD      = 0      # MSB of command byte
 
         # exceptions ###########################################################
         class CommandByteError(Exception):
@@ -277,30 +276,51 @@ class MonitorFPGA(Monitor):
         # constructor ##########################################################
         def __init__(self, cid:int, 
                            rw:Literal['r', 'w'],
-                           read_no_bytes:int,
-                           write_no_bytes:int,
+                           no_rbytes:int,
+                           no_wbytes:int,
                            name:str
                            ):
             """
-            Initializes a command
-            """
-            self.cid            = cid
-            self.rw             = rw
-            self.cbyte          = None
-            self.read_no_bytes  = read_no_bytes
-            self.write_no_bytes = write_no_bytes
-            self.name           = name
+            Initializes a command.
 
+            :raises:
+                CommandByteError: if (self.cid > self.MAX_COMMANDS)
+            """
+            self.cid        = cid
+            self.rw         = rw
+            self.cbyte      = self.cmd_byte()
+            self.no_rbytes  = no_rbytes
+            self.no_wbytes  = no_wbytes
+            self.name       = name
+        def __str__(self):
+            cmd = ''
+            cmd += f'Command {self.name} cid={self.cid:03} rw={self.rw} cbyte={self.cbyte}\n'
+            cmd += f'   no_rbytes={self.no_rbytes} no_wbytes={self.no_wbytes}\n'
+            return cmd
         # methods ##############################################################
         def cmd_byte(self)->bytes:
             """
             Returns the byte representation of the command.
+            
+            :raises:
+                CommandByteError: if (self.cid > self.MAX_COMMANDS)
             """
             if (self.cid > self.MAX_COMMANDS):
                 raise self.CommandByteError(f'cid={self.cid} MAX_COMMANDS={self.MAX_COMMANDS}')
-            # cbyte = int.to_bytes(self.cid, self.CMD_BYTE_SIZE, self.BY)
-            # return cbyte
+            rw_bit = 128 if (self.rw == 'r') else 0
+            rw_cid_byte = rw_bit | self.cid
+            cbyte = int.to_bytes(rw_cid_byte, self.CMD_BYTE_SIZE, self.BYTE_ENDIAN)
+            return cbyte
 
+    # constants ################################################################
+    # command names
+    CMD_1  = 'test_read'
+    CMD_2  = 'test_write'
+    # dictionary of commands
+    commands = {
+        CMD_1  : Command(cid=1, rw='r', no_rbytes=3, no_wbytes=0, name=CMD_1),
+        CMD_2  : Command(cid=2, rw='w', no_rbytes=0, no_wbytes=4, name=CMD_2),
+    }
     
 
     # constructor ##############################################################
@@ -314,13 +334,27 @@ class MonitorFPGA(Monitor):
         Monitor.__init__(self, monitor_config)
     
     # methods ##################################################################
-
+    def get_command(self, name:str)->Command:
+        """
+        Returns a FPGA command given its name.
+        """
+        return self.commands[name]
+    def print_commands(self):
+        """
+        Print string representations of the commands.
+        """
+        print(f'Commands:')
+        for cmd in self.commands.values():
+            print(f'  - {cmd}', end='')
+        print()
 
 
 # Main #########################################################################
 def main():
     monitor_fpga = MonitorFPGA(config=ConfigFPGA())
     print(monitor_fpga)
+    
+    monitor_fpga.print_commands()
 
     mtester = MonitorTest(monitor_fpga)
     # mtester.test_read_n_bytes(1)
