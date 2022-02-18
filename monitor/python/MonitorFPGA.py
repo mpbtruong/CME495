@@ -3,8 +3,6 @@ from Monitor import Monitor
 from MonitorConfigUART import ConfigFPGA
 from MonitorTest import MonitorFPGATest
 
-from typing import Literal
-
 
 # Globals ######################################################################
 
@@ -93,7 +91,7 @@ class MonitorFPGA(Monitor):
             :raises:
                 CommandRWError: if (rw != self.READ or rw != self.WRITE)
             """
-            if (rw != self.READ or rw != self.WRITE):
+            if (rw != self.READ and rw != self.WRITE):
                 raise self.CommandRWError(f'Set rw invalid rw={rw}')
             else:
                 self.rw = rw
@@ -115,12 +113,12 @@ class MonitorFPGA(Monitor):
 
     # constants ################################################################
     # command names
-    CMD_1  = 'test_read'
-    CMD_2  = 'test_write'
+    CMD_1  = 'test_rw_register'
+    CMD_2  = 'test_read_register'
     # dictionary of commands
     commands = {
-        CMD_1  : Command(cid=1, no_rbytes=3, no_wbytes=0, name=CMD_1, read_only=True),
-        CMD_2  : Command(cid=2, no_rbytes=4, no_wbytes=4, name=CMD_2),
+        CMD_1  : Command(cid=1, no_rbytes=3, no_wbytes=3, name=CMD_1),
+        CMD_2  : Command(cid=2, no_rbytes=5, no_wbytes=0, name=CMD_2, read_only=True),
     }
     commands_by_id = {cmd.cid:cmd for cmd in commands.values()}
     
@@ -194,6 +192,7 @@ def main():
 
     mtester = MonitorFPGATest(monitor)
 
+    # mtester.test_write_byte_uart_flow()
     mtester.test_execute_command()
 
 

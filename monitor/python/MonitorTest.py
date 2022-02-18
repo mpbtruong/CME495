@@ -181,6 +181,8 @@ class MonitorFPGATest(MonitorTest):
                 if (len(wbytes) != cmd.no_wbytes): return
                 cmd.wbytes = wbytes
         except ValueError: return
+        print('Executing command')
+        print(cmd)
         self.monitor.execute_command(cmd, rw, timeout=None)
         print(cmd)
 

@@ -5,6 +5,7 @@ from MonitorTest import MonitorTest
 import serial
 from serial.tools import list_ports as serial_list_ports
 
+from typing import List
 from time import time
 
 # Globals ######################################################################
@@ -169,12 +170,22 @@ class Monitor():
             return, or the time in seconds to block for.
         :return: True if write was successful.
         """
-        for wbyte in data:
+        for wbyte in self.bytes_to_bytelist(data):
             success = self.write_uart(wbyte, timeout=timeout, flow_control=True)
+            print(f'Wrote {type(wbyte)} {wbyte} success {success}')
             if (not success): return False
         return True
         
     # base I/O #################################################################
+    @staticmethod
+    def bytes_to_bytelist(data:bytes)->List[bytes]:
+        """
+        Converts a bytes string to a list of bytes.
+
+        :param data: b'\x00\x01'
+        :return: [b'\x00', b'\x01']
+        """
+        return [b'%c' % byte for byte in data]
     def flush_uart(self):
         """
         Flush the uart.
