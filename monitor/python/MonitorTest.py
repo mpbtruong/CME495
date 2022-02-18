@@ -162,15 +162,27 @@ class MonitorFPGATest(MonitorTest):
         """
         Tests executing FPGA commands.
 
-        stdin: command id (cid) to run.
+        stdin: 
+            - command id (cid) to run.
+            - rw status (r or w) to choose read or write.
+            - bytes in hex to write if rw = 'w'
         """
         try:
             cid = int(input(f'\nEnter command id to execute: '))
-            command = self.monitor.get_command_by_id(cid)
+            cmd = self.monitor.get_command_by_id(cid)
         except ValueError: return
         except KeyError: return
-        self.monitor.execute_command(command)
-        print(command)
+        print(cmd)
+        rw = input(f'Read or write (r/w): ')
+        if (rw not in ['r','w']): return
+        try:
+            if (rw == 'w'):
+                wbytes = bytes.fromhex(input(f'Enter {cmd.no_wbytes} byte(s) to write: '))
+                if (len(wbytes) != cmd.no_wbytes): return
+                cmd.wbytes = wbytes
+        except ValueError: return
+        self.monitor.execute_command(cmd, rw, timeout=None)
+        print(cmd)
 
 # Main #########################################################################
 def main():

@@ -5,6 +5,8 @@ from MonitorTest import MonitorTest
 import serial
 from serial.tools import list_ports as serial_list_ports
 
+from time import time
+
 # Globals ######################################################################
 
 
@@ -147,24 +149,28 @@ class Monitor():
         Reads the uart CTS (Clear to Send) status from the slave device.
         """
         return self.uart.getCTS()
-    def write_byte_uart_flow(self, data:bytes)->bool:
+    def write_byte_uart_flow(self, data:bytes, timeout:float=None)->bool:
         """
         Write a byte to the uart with flow control. Blocks until data is written.
 
         :param data: the byte to write
+        :param timeout: None to block forever, 0 to try to write and instantly
+            return, or the time in seconds to block for.
         :return: True if write was successful.
         """
-        return self.write_uart(data, timeout=None, flow_control=True)
-    def write_bytes_uart_flow(self, data:bytes)->bool:
+        return self.write_uart(data, timeout=timeout, flow_control=True)
+    def write_bytes_uart_flow(self, data:bytes, timeout:float=None)->bool:
         """
         Write a set of bytes to the uart with flow control one at a time. 
         Blocks until data is written.
 
         :param data: the bytes to write.
+        :param timeout: None to block forever, 0 to try to write and instantly
+            return, or the time in seconds to block for.
         :return: True if write was successful.
         """
         for wbyte in data:
-            success = self.write_uart(wbyte, timeout=None, flow_control=True)
+            success = self.write_uart(wbyte, timeout=timeout, flow_control=True)
             if (not success): return False
         return True
         
@@ -191,8 +197,12 @@ class Monitor():
         if (flow_control):
             # request to send data
             self.setRTS(True)
-            # wait until cleared to send data
-            while (not self.readCTS()): pass
+            # wait until cleared to send data or timeout
+            if (timeout): tstart = time()
+            while (not self.readCTS()):
+                if (timeout):
+                    dt = time() - tstart
+                    if (dt > timeout): return False
         # disable request to send
         if (flow_control): self.setRTS(False)
         # write to the uart
@@ -208,7 +218,7 @@ class Monitor():
         """
         if (not num_bytes): raise ValueError("num_bytes None or 0")
         # set timeout
-        # self.uart.timeout = timeout
+        self.uart.timeout = timeout
         # read data
         data = self.uart.read(size=num_bytes)
         print(data, type(data))
