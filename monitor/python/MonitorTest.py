@@ -1,4 +1,5 @@
 # Imports ######################################################################
+from distutils import command
 from time import sleep
 
 
@@ -6,6 +7,22 @@ from time import sleep
 
 
 # Library ######################################################################
+
+# test case loop wrapper #######################################################
+def test_loop_wrapper(test_func):
+    """
+    Returns a wrapper function that turns a test case into an infinite loop.
+    """
+    def loop_wrapper(*args, **kwargs):
+        print(f'Testing {test_func.__name__}')
+        try:
+            while True:
+                test_func(*args, **kwargs)
+        except KeyboardInterrupt:
+            print(f'\nTest {test_func.__name__} stopped')
+    return loop_wrapper
+
+# test classes #################################################################
 class MonitorTest():
     """
     Test class for the Monitor class.
@@ -15,21 +32,6 @@ class MonitorTest():
         Initialize the test class.
         """
         self.monitor = monitor
-
-    # methods ##################################################################
-    # test case loop wrapper ###################################################
-    def test_loop_wrapper(test_func):
-        """
-        Returns a wrapper function that turns a test case into an infinite loop.
-        """
-        def loop_wrapper(*args, **kwargs):
-            print(f'Testing {test_func.__name__}')
-            try:
-                while True:
-                    test_func(*args, **kwargs)
-            except KeyboardInterrupt:
-                print(f'\nTest {test_func.__name__} stopped')
-        return loop_wrapper
     
     # test cases ###############################################################
     @test_loop_wrapper
@@ -143,6 +145,32 @@ class MonitorTest():
         if (not self.monitor.write_byte_uart_flow(w_byte)): 
             print('Uart failed to write data')
 
+
+class MonitorFPGATest(MonitorTest):
+    """
+    Test class for the MonitorFPGA class.
+    """
+    def __init__(self, monitor):
+        """
+        Initialize the test class.
+        """
+        MonitorTest.__init__(self, monitor)
+    
+    # test cases ###############################################################
+    @test_loop_wrapper
+    def test_execute_command(self):
+        """
+        Tests executing FPGA commands.
+
+        stdin: command id (cid) to run.
+        """
+        try:
+            cid = int(input(f'\nEnter command id to execute: '))
+            command = self.monitor.get_command_by_id(cid)
+        except ValueError: return
+        except KeyError: return
+        self.monitor.execute_command(command)
+        print(command)
 
 # Main #########################################################################
 def main():
