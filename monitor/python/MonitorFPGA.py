@@ -55,9 +55,10 @@ class MonitorFPGA(Monitor):
 
         # constructor ##########################################################
         def __init__(self, cid:int, 
-                           no_rbytes:int,
-                           no_wbytes:int,
                            name:str,
+                           no_rwbytes:int=None,
+                           no_rbytes:int=None,
+                           no_wbytes:int=None,
                            read_only:bool=False,
                            ):
             """
@@ -70,8 +71,8 @@ class MonitorFPGA(Monitor):
             self.rw         = None
             self.read_only  = read_only
             self.cbyte      = self.cmd_cbyte()
-            self.no_rbytes  = no_rbytes
-            self.no_wbytes  = no_wbytes
+            self.no_rbytes  = no_rbytes if (no_rbytes is not None) else no_rwbytes
+            self.no_wbytes  = no_wbytes if (no_wbytes is not None) else no_rwbytes
             self.rbytes     = None
             self.wbytes     = None
             self.name       = name
@@ -80,7 +81,8 @@ class MonitorFPGA(Monitor):
             cmd += f'Command {self.cid:03} {self.name}\n'
             cmd += f'   rw={self.rw} cbyte={self.cbyte} read_only={self.read_only}\n'
             cmd += f'   no_rbytes={self.no_rbytes} rbytes={self.rbytes}\n'
-            cmd += f'   no_wbytes={self.no_wbytes} wbytes={self.wbytes}\n'
+            if (not self.read_only):
+                cmd += f'   no_wbytes={self.no_wbytes} wbytes={self.wbytes}\n'
             return cmd
         # methods ##############################################################
         def setRW(self, rw:str):
@@ -117,8 +119,8 @@ class MonitorFPGA(Monitor):
     CMD_2  = 'test_read_register'
     # dictionary of commands
     commands = {
-        CMD_1  : Command(cid=1, no_rbytes=3, no_wbytes=3, name=CMD_1),
-        CMD_2  : Command(cid=2, no_rbytes=5, no_wbytes=0, name=CMD_2, read_only=True),
+        CMD_1  : Command(cid=1, no_rwbytes=3, name=CMD_1),
+        CMD_2  : Command(cid=2, no_rwbytes=5, name=CMD_2, read_only=True),
     }
     commands_by_id = {cmd.cid:cmd for cmd in commands.values()}
     
