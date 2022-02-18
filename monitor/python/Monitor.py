@@ -1,11 +1,11 @@
 # Imports ######################################################################
 from MonitorConfigUART import *
-from MonitorException import *
 from MonitorTest import MonitorTest
 
 import serial
 from serial.tools import list_ports as serial_list_ports
 
+from typing import Literal
 
 # Globals ######################################################################
 
@@ -41,12 +41,29 @@ class Monitor():
     """
     # constants ################################################################
 
+    # exceptions ###############################################################
+    class PortAssignError(Exception):
+        """
+        Raised when assigning a UART port fails.
+        """
+        pass
+    class CreateUartError(Exception):
+        """
+        Raised when initializing the uart for communication fails.
+        """
+        pass
+    class DestroyUartError(Exception):
+        """
+        Raised when stopping the uart communication channel fails.
+        """
+        pass
 
     # constructor ##############################################################
     def __init__(self, config:ConfigUART):
         """
         Setup the UART serial port.
 
+        :param config: configuration for the uart.
         :raises:
             PortAssignError: if unable to find the serial device with
                 device_vid and device_pid.
@@ -187,7 +204,7 @@ class Monitor():
         print(data, type(data))
         return data
     
-    # orts ####################################################################
+    # ports ####################################################################
     def assign_port(self, device_vid:int, device_pid:int):
         """
         Assign the serial port that has device_vid and device_pid. Raises 
@@ -224,10 +241,85 @@ class Monitor():
                 print(f'   - device {port.device} | description {port.description} | hwid {port.hwid}')
         else: print('No serial ports found')
 
+class MonitorFPGA(Monitor):
+    """
+    Builds on Monitor to implement an API for writing to and reading from
+    the FPGA with the use of commands.
+    """
+    # constants ################################################################
+    # command names
+    CMD_1  = 'test_read'
+    CMD_2  = 'test_write'
+    # command info
+    MAX_COMMANDS  = 128
+    BYTE_ENDIAN   = 'big'  # order to send bytes
+    CMD_BYTE_SIZE = 1      # size of command
+    WRITE_CMD     = 1      # MSB of command byte
+    READ_CMD      = 0      # MSB of command byte
+
+    # subclasses ###############################################################
+    class Command():
+        """
+        Represents a command used to communicate with the FPGA.
+
+        Attributes:
+            cid :
+        """
+        # constants ############################################################
+
+        # exceptions ###########################################################
+        class CommandByteError(Exception):
+            """
+            Raised if cid is invalid.
+            """
+            pass
+
+        # constructor ##########################################################
+        def __init__(self, cid:int, 
+                           rw:Literal['r', 'w'],
+                           read_no_bytes:int,
+                           write_no_bytes:int,
+                           name:str
+                           ):
+            """
+            Initializes a command
+            """
+            self.cid            = cid
+            self.rw             = rw
+            self.cbyte          = None
+            self.read_no_bytes  = read_no_bytes
+            self.write_no_bytes = write_no_bytes
+            self.name           = name
+
+        # methods ##############################################################
+        def cmd_byte(self)->bytes:
+            """
+            Returns the byte representation of the command.
+            """
+            if (self.cid > self.MAX_COMMANDS):
+                raise self.CommandByteError(f'cid={self.cid} MAX_COMMANDS={self.MAX_COMMANDS}')
+            # cbyte = int.to_bytes(self.cid, self.CMD_BYTE_SIZE, self.BY)
+            # return cbyte
+
+    
+
+    # constructor ##############################################################
+    def __init__(self, config:ConfigFPGA=None):
+        """
+        Initializes the monitor.
+
+        :param config: configuration for the uart.
+        """
+        monitor_config = config if (config is None) else ConfigFPGA()
+        Monitor.__init__(self, monitor_config)
+    
+    # methods ##################################################################
+
+
 
 # Main #########################################################################
 def main():
-    monitor_fpga = Monitor(config=ConfigFPGA())
+    monitor_fpga = MonitorFPGA(config=ConfigFPGA())
     print(monitor_fpga)
 
     mtester = MonitorTest(monitor_fpga)
