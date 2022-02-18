@@ -172,25 +172,25 @@ class Monitor():
         """
         for wbyte in self.bytes_to_bytelist(data):
             success = self.write_uart(wbyte, timeout=timeout, flow_control=True)
-            print(f'Wrote {type(wbyte)} {wbyte} success {success}')
             if (not success): return False
         return True
         
     # base I/O #################################################################
-    @staticmethod
-    def bytes_to_bytelist(data:bytes)->List[bytes]:
-        """
-        Converts a bytes string to a list of bytes.
-
-        :param data: b'\x00\x01'
-        :return: [b'\x00', b'\x01']
-        """
-        return [b'%c' % byte for byte in data]
     def flush_uart(self):
         """
         Flush the uart.
         """
         self.uart.flush()
+    def flush_write_buffer_uart(self):
+        """
+        Flush the uart's write buffer.
+        """
+        self.uart.reset_output_buffer()
+    def flush_read_buffer_uart(self):
+        """
+        Flush the uart's read buffer.
+        """
+        self.uart.reset_input_buffer()
     def write_uart(self, data:bytes, timeout:float=None, flow_control=False)->bool:
         """
         Write bytes to the uart. If timeout is set, the write attempt
@@ -272,7 +272,16 @@ class Monitor():
                 print(f'   - device {port.device} | description {port.description} | hwid {port.hwid}')
         else: print('No serial ports found')
 
+    # utility methods ##########################################################
+    @staticmethod
+    def bytes_to_bytelist(data:bytes)->List[bytes]:
+        """
+        Converts a bytes string to a list of bytes.
 
+        :param data: b'\x00\x01'
+        :return: [b'\x00', b'\x01']
+        """
+        return [b'%c' % byte for byte in data]
 
 
 # Main #########################################################################

@@ -165,6 +165,8 @@ class MonitorFPGA(Monitor):
         elif (cmd.rw == cmd.WRITE):
             self.write_bytes_uart_flow(cmd.wbytes, timeout)
             print(f'Wrote data!')
+    
+    # utility helper methods ###################################################
     def get_command(self, name:str)->Command:
         """
         Returns a FPGA command given its name.
