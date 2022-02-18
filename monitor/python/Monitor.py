@@ -151,12 +151,24 @@ class Monitor():
         return self.uart.getCTS()
     def write_byte_uart_flow(self, data:bytes)->bool:
         """
-        Write a byte to the uart with flow control. Blocks until data written.
+        Write a byte to the uart with flow control. Blocks until data is written.
 
         :param data: the byte to write
         :return: True if write was successful.
         """
         return self.write_uart(data, timeout=None, flow_control=True)
+    def write_bytes_uart_flow(self, data:bytes)->bool:
+        """
+        Write a set of bytes to the uart with flow control one at a time. 
+        Blocks until data is written.
+
+        :param data: the bytes to write.
+        :return: True if write was successful.
+        """
+        for wbyte in data:
+            success = self.write_uart(wbyte, timeout=None, flow_control=True)
+            if (not success): return False
+        return True
         
     # base I/O #################################################################
     def flush_uart(self):
@@ -256,6 +268,8 @@ class MonitorFPGA(Monitor):
             rw        : r or w if command is read or write
             no_rbytes : number of bytes to read
             no_wbytes : number of data bytes to write
+            rbytes    : read bytes from executing the command
+            wbytes    : bytes to write to the FPGA
             name      : friendly name of the command
         """
         # constants ############################################################
@@ -263,8 +277,8 @@ class MonitorFPGA(Monitor):
         MAX_COMMANDS  = 128
         BYTE_ENDIAN   = 'big'  # order to send bytes
         CMD_BYTE_SIZE = 1      # size of command
-        WRITE_CMD     = 1      # MSB of command byte
-        READ_CMD      = 0      # MSB of command byte
+        WRITE_CMD     = 'w'    # representation for write command
+        READ_CMD      = 'r'    # representation for read command
 
         # exceptions ###########################################################
         class CommandByteError(Exception):
@@ -291,6 +305,8 @@ class MonitorFPGA(Monitor):
             self.cbyte      = self.cmd_byte()
             self.no_rbytes  = no_rbytes
             self.no_wbytes  = no_wbytes
+            self.rbytes     = None
+            self.wbytes     = None
             self.name       = name
         def __str__(self):
             cmd = ''
@@ -334,6 +350,21 @@ class MonitorFPGA(Monitor):
         Monitor.__init__(self, monitor_config)
     
     # methods ##################################################################
+    def execute_command(self, cmd:Command):
+        """
+        Executes an FPGA command. Onus is on the caller to ensure
+
+        :param cmd: the command to execute.
+        :pre-condition: cmd.wbytes holds data to write if write command
+        :post-condition: cmd.rbytes has read data from FPGA if read command.
+        """
+        # tell the FPGA what command
+        self.write_byte_uart_flow(cmd.cbyte)
+        # read or write data
+        if (cmd.rw == cmd.READ_CMD):
+            cmd.rbytes = self.read_uart(cmd.no_rbytes)
+        elif (cmd.rw == cmd.WRITE_CMD):
+            self.write_bytes_uart_flow(cmd.wbytes)
     def get_command(self, name:str)->Command:
         """
         Returns a FPGA command given its name.
