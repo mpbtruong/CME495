@@ -116,8 +116,33 @@ class MonitorTest():
         try: w_bytes = bytes.fromhex(i_byte_str)
         except ValueError: return
         print(f'Writing 0x{w_bytes.hex().upper()}')
-        if not self.monitor.write_uart(w_bytes): 
+        if (not self.monitor.write_uart(w_bytes)): 
             print('Uart failed to write data')
+    @test_loop_wrapper
+    def test_rts_cts(self):
+        """
+        Tests the state of the rts/cts flow control signals.
+
+        stdin: t (to request) or f (stop request) to send (RTS). 
+        """
+        print(f'\nRTS={self.monitor.readRTS()} CTS={self.monitor.readCTS()}')
+        request = input(f'Set RTS state (t/f): ')
+        if   (request == 't'): self.monitor.setRTS(True)
+        elif (request == 'f'): self.monitor.setRTS(False)
+        print(f'RTS={self.monitor.readRTS()} CTS={self.monitor.readCTS()}')
+    @test_loop_wrapper
+    def test_write_byte_uart_flow(self):
+        """
+        Tests writing a byte to the uart using flow control RTS/CTS.
+        """
+        i_byte_str = input(f'\nEnter byte to write (hex): ')
+        if (not i_byte_str and len(i_byte_str) != 2): return
+        try: w_byte = bytes.fromhex(i_byte_str)
+        except ValueError: return
+        print(f'Writing 0x{w_byte.hex().upper()}')
+        if (not self.monitor.write_byte_uart_flow(w_byte)): 
+            print('Uart failed to write data')
+
 
 # Main #########################################################################
 def main():

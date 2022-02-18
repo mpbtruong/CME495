@@ -69,6 +69,7 @@ class Monitor():
         if (self.uart):
             monitor += f'Monitor port=\'{self.port.description}\'\n'
             monitor += f'   baud={self.config.baudrate} | databits={self.config.datasize} parity={self.config.parity} stopbits={self.config.stopbits} | rts_cts={self.config.rtscts}\n'
+            monitor += f'   timeouts: write={self.config.write_timeout} read={self.config.read_timeout}\n'
             monitor += f'   WARNING: ensure system OS device driver settings match\n'
         else:
             monitor += f'Monitor uart not created'
@@ -94,6 +95,7 @@ class Monitor():
                                   timeout=self.config.read_timeout,
                                   write_timeout=self.config.write_timeout
                                   )
+        self.setRTS(False) # only reqest to send when want to write
     def close_uart(self):
         """
         Stop the communication channel with the serial device.
@@ -111,27 +113,64 @@ class Monitor():
         """
         return self.uart.is_open() if (self.uart is not None) else False
 
-    # I/O ######################################################################
+    # communication ############################################################
+    # flow control I/O #########################################################
+    def setRTS(self, request_to_send:bool):
+        """
+        Sets the uart RTS (Reqest to Send) signal to ask the slave device.
+
+        :param request_to_send: True to request to send data (logic 0).
+        """
+        self.uart.setRTS(request_to_send)
+    def readRTS(self)->bool:
+        """
+        Reads the uart RTS (Reqest to Send) status. Mostly just a debug tool.
+        """
+        return self.uart.rts
+    def readCTS(self)->bool:
+        """
+        Reads the uart CTS (Clear to Send) status from the slave device.
+        """
+        return self.uart.getCTS()
+    def write_byte_uart_flow(self, data:bytes)->bool:
+        """
+        Write a byte to the uart with flow control. Blocks until data written.
+
+        :param data: the byte to write
+        :return: True if write was successful.
+        """
+        return self.write_uart(data, timeout=None, flow_control=True)
+        
+    # base I/O #################################################################
     def flush_uart(self):
         """
         Flush the uart.
         """
         self.uart.flush()
-    def write_uart(self, data:bytes, timeout:float=None)->bool:
+    def write_uart(self, data:bytes, timeout:float=None, flow_control=False)->bool:
         """
         Write bytes to the uart. If timeout is set, the write attempt
         will only persist for timeout seconds.
-
+        
+        :param data: data to write to uart.
         :param timeout: None to block forever, 0 to try to write and instantly
             return, or the time in seconds to block for.
+        :param flow_control: True if using flow control.
         :return: True if write was successful.
         """
         if (not data): raise ValueError("data is empty byte string")
         # set timeout
         self.uart.write_timeout = timeout
+        if (flow_control):
+            # request to send data
+            self.setRTS(True)
+            # wait until cleared to send data
+            while (not self.readCTS()): pass
         # write to the uart
         bytes_written = self.uart.write(data)
         self.flush_uart()
+        # disable request to send
+        if (flow_control): self.setRTS(False)
         # success status
         return True if (bytes_written != 0) else False
     def read_uart(self, num_bytes:int, timeout:float=None)->bytes:
@@ -193,8 +232,10 @@ def main():
 
     mtester = MonitorTest(monitor_fpga)
     # mtester.test_read_n_bytes(1)
-    mtester.test_write_bytes_prompt()
+    # mtester.test_write_bytes_prompt()
     # mtester.test_write_byte_nums_0_to_255(delay=1, input_write_stall=True)
+    # mtester.test_rts_cts()
+    mtester.test_write_byte_uart_flow()
 
     # mtester.test_write_byte(b'\xFF')
     # mtester.test_write_read_byte(b'\xAF')

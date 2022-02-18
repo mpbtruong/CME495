@@ -18,9 +18,9 @@ module monitor_top(
     // input  wire reset,
     // uart
     input  wire uart_rxd, // receiver
-    input  wire uart_cts, // clear to send
     output wire uart_txd, // transmitter
-    output wire uart_rts, // request to send
+    input  wire uart_rts, // request to send (FPGA is slave)
+    output wire uart_cts, // clear to send (FPGA is slave)
     // gpio
     output reg  gpio_1,  // uart_rxd
     output reg  gpio_2,  // uart_cts
@@ -76,6 +76,8 @@ always @(*) begin
     LEDG[3]   <= tx_done;
     LEDG[2]   <= tx_busy;
     LEDG[1]   <= tx_error;
+    // flow control
+    uart_cts <= KEY[3];
 end
 
 // gpio ////////////////////////////////////////////////////////////////////////
