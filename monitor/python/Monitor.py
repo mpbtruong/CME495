@@ -166,11 +166,11 @@ class Monitor():
             self.setRTS(True)
             # wait until cleared to send data
             while (not self.readCTS()): pass
+        # disable request to send
+        if (flow_control): self.setRTS(False)
         # write to the uart
         bytes_written = self.uart.write(data)
         self.flush_uart()
-        # disable request to send
-        if (flow_control): self.setRTS(False)
         # success status
         return True if (bytes_written != 0) else False
     def read_uart(self, num_bytes:int, timeout:float=None)->bytes:
