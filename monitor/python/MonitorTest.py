@@ -186,6 +186,19 @@ class MonitorFPGATest(MonitorTest):
         self.monitor.execute_command(cmd, rw, timeout=None)
         print(cmd)
 
+class MonitorGPSReceiverTest(MonitorTest):
+    """
+    Test class for the MonitorGPSReceiver class.
+    """
+    def __init__(self, monitor):
+        """
+        Initialize the test class.
+        """
+        MonitorTest.__init__(self, monitor)
+    
+    # test cases ###############################################################
+
+
 # Main #########################################################################
 def main():
     pass

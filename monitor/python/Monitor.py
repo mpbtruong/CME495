@@ -6,7 +6,7 @@ import serial
 from serial.tools import list_ports as serial_list_ports
 
 from typing import List
-from time import time, sleep
+from time import time
 
 # Globals ######################################################################
 
@@ -56,6 +56,16 @@ class Monitor():
     class DestroyUartError(Exception):
         """
         Raised when stopping the uart communication channel fails.
+        """
+        pass
+    class ReadUartFail(Exception):
+        """
+        Raised when an attempt to read the uart does not result in expected data.
+        """
+        pass
+    class WriteUartFail(Exception):
+        """
+        Raised when an attempt to write to the uart fails.
         """
         pass
 
@@ -150,14 +160,16 @@ class Monitor():
         Reads the uart CTS (Clear to Send) status from the slave device.
         """
         return self.uart.getCTS()
-    def write_byte_uart_flow(self, data:bytes, timeout:float=None)->bool:
+    def write_byte_uart_flow(self, data:bytes, timeout:float=None):
         """
         Write a byte to the uart with flow control. Blocks until data is written.
 
         :param data: the byte to write
         :param timeout: None to block forever, 0 to try to write and instantly
             return, or the time in seconds to block for.
-        :return: True if write was successful.
+        :exceptions:
+            WriteUartFail: flow control timeout waiting for CTS from device.
+            WriteUartFail: data failed to write.
         """
         return self.write_uart(data, timeout=timeout, flow_control=True)
     def write_bytes_uart_flow(self, data:bytes, timeout:float=None)->bool:
@@ -168,12 +180,12 @@ class Monitor():
         :param data: the bytes to write.
         :param timeout: None to block forever, 0 to try to write and instantly
             return, or the time in seconds to block for.
-        :return: True if write was successful.
+        :exceptions:
+            WriteUartFail: flow control timeout waiting for CTS from device.
+            WriteUartFail: data failed to write.
         """
         for wbyte in self.bytes_to_bytelist(data):
-            success = self.write_uart(wbyte, timeout=timeout, flow_control=True)
-            if (not success): return False
-        return True
+            self.write_uart(wbyte, timeout=timeout, flow_control=True)
         
     # base I/O #################################################################
     def flush_uart(self):
@@ -191,7 +203,7 @@ class Monitor():
         Flush the uart's read buffer.
         """
         self.uart.reset_input_buffer()
-    def write_uart(self, data:bytes, timeout:float=None, flow_control=False)->bool:
+    def write_uart(self, data:bytes, timeout:float=None, flow_control=False):
         """
         Write bytes to the uart. If timeout is set, the write attempt
         will only persist for timeout seconds.
@@ -200,7 +212,9 @@ class Monitor():
         :param timeout: None to block forever, 0 to try to write and instantly
             return, or the time in seconds to block for.
         :param flow_control: True if using flow control.
-        :return: True if write was successful.
+        :exceptions:
+            WriteUartFail: flow control timeout waiting for CTS from device.
+            WriteUartFail: data failed to write.
         """
         if (not data): raise ValueError("data is empty byte string")
         # set timeout
@@ -213,29 +227,52 @@ class Monitor():
             while (not self.readCTS()):
                 if (timeout):
                     dt = time() - tstart
-                    if (dt > timeout): return False
+                    if (dt > timeout): raise self.WriteUartFail("Timed out before CTS low")
         # disable request to send
         if (flow_control): self.setRTS(False)
         # write to the uart
         bytes_written = self.uart.write(data)
         self.flush_uart()
         # success status
-        sleep(0.25)
-        return True if (bytes_written != 0) else False
+        if (bytes_written == 0): raise self.WriteUartFail("Failed to write bytes")
     def read_uart(self, num_bytes:int, timeout:float=None)->bytes:
         """
         Read num_bytes from uart, blocking until read.
 
         :param num_bytes: number of bytes to read.
+        :param timeout: None to block forever, 0 to try to read and instantly
+            return, or the time in seconds to block for.
+        :exceptions:
+            ValueError   : num_bytes None or 0
+            ReadUartFail : failed to read uart data
         """
         if (not num_bytes): raise ValueError("num_bytes None or 0")
         # set timeout
         self.uart.timeout = timeout
         # read data
         data = self.uart.read(size=num_bytes)
-        print(data, type(data))
+        # check if read failed
+        if (isinstance(data, str)): 
+            raise self.ReadUartFail("Data read fail, got string not bytes")
         return data
-    
+    def read_uart_until(self, pattern:bytes, timeout:float=None, size=None):
+        """
+        Read from the uart until a bytestring pattern is found.
+
+        :param pattern: a bytestring to read until (e.g. b'$abc').
+        :param timeout: None to block forever, 0 to try to read and instantly
+            return, or the time in seconds to block for.
+        :exceptions:
+            ReadUartFail : failed to read uart data
+        """
+        # set timeout
+        self.uart.timeout = timeout
+        # read data
+        data = self.uart.read_until(pattern, size)
+        # check if read failed
+        if (isinstance(data, str)): 
+            raise self.ReadUartFail("Data read fail, got string not bytes")
+        return data
     # ports ####################################################################
     def assign_port(self, device_vid:int, device_pid:int):
         """
@@ -270,7 +307,7 @@ class Monitor():
         if (ports):
             print(f'Available serial ports:')
             for port in ports:
-                print(f'   - device {port.device} | description {port.description} | hwid {port.hwid}')
+                print(f'   - device {port.device} | description {port.description} | hwid {port.hwid} | vid:pid={port.vid}:{port.pid}')
         else: print('No serial ports found')
 
     # utility methods ##########################################################

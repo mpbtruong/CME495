@@ -38,21 +38,12 @@ class ConfigFPGA(ConfigUART):
 class ConfigGPSReceiver(ConfigUART):
     """
     Configuration for U-blox GPS Receiver.
-        doc  -> 
-            https://www.u-blox.com/sites/default/files/products/documents/u-blox8-M8_ReceiverDescrProtSpec_UBX-13003221.pdf
-        uart ->
-            https://www.u-blox.com/sites/default/files/products/documents/u-blox8-M8_ReceiverDescrProtSpec_UBX-13003221.pdf#page=51&zoom=100,0,525
-        changing protocols ->
-            https://www.u-blox.com/sites/default/files/products/documents/u-blox8-M8_ReceiverDescrProtSpec_UBX-13003221.pdf#page=56&zoom=100,0,444
-        NMEA protocol ->
-            https://www.u-blox.com/sites/default/files/products/documents/u-blox8-M8_ReceiverDescrProtSpec_UBX-13003221.pdf#page=153&zoom=100,0,173
-        UART configuration ->
-            https://www.u-blox.com/sites/default/files/products/documents/u-blox8-M8_ReceiverDescrProtSpec_UBX-13003221.pdf#page=468&zoom=100,0,626
     """
     baudrate      = ConfigUART.BAUD_9600
     parity        = serial.PARITY_NONE
-    device_vid    = None
-    device_pid    = None
+    device_vid    = 5446
+    device_pid    = 425
+
 
 # Main #########################################################################
 def main():
