@@ -6,7 +6,7 @@ import serial
 from serial.tools import list_ports as serial_list_ports
 
 from typing import List
-from time import time
+from time import time, sleep
 
 # Globals ######################################################################
 
@@ -220,6 +220,7 @@ class Monitor():
         bytes_written = self.uart.write(data)
         self.flush_uart()
         # success status
+        sleep(0.25)
         return True if (bytes_written != 0) else False
     def read_uart(self, num_bytes:int, timeout:float=None)->bytes:
         """

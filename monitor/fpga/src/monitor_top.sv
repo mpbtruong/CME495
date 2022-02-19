@@ -14,6 +14,15 @@
  * packet_time_10 = 86.81 
  */
 module monitor_top(
+    output reg[$clog2(`MONITOR_STATES_NUM)-1:0] state, // monitor state machine state
+
+    output reg[`CMD_BITS-1:0]      cmd,       // command from controller
+    output reg                     cmd_rw,    // MSB bit of command read/write command
+    output reg[`CMD_BITS-2:0]      cmd_id,    // command id
+    output reg[`CMD_DATA_BITS-1:0] data_size, // number of bytes to read or write
+
+
+
     input  wire clk50, 
     // input  wire reset,
     // uart
@@ -65,11 +74,11 @@ always @(*) begin
     LEDG[7]   <= rx_done;
     LEDG[6]   <= rx_busy;
     LEDG[5]   <= rx_error;
-    rx_enable <= SW[17];
-    LEDR[17]  <= SW[17];
+    // rx_enable <= SW[17];
+    // LEDR[17]  <= SW[17];
     // tx
-    tx_enable <= SW[15];
-    LEDR[15]  <= SW[15];
+    // tx_enable <= SW[15];
+    // LEDR[15]  <= SW[15];
     tx_write  <= ~KEY[2];
     LEDG[4]   <= ~KEY[2];
     tx_byte   <= SW[7:0]; // use switches as input for tx_byte
@@ -77,32 +86,32 @@ always @(*) begin
     LEDG[2]   <= tx_busy;
     LEDG[1]   <= tx_error;
     // flow control
-    uart_cts <= KEY[3];
+    // uart_cts <= KEY[3];
 end
 
 // gpio ////////////////////////////////////////////////////////////////////////
-always @(*) begin
-    gpio_1  <= uart_rxd;
-    gpio_2  <= uart_cts;
-    gpio_3  <= uart_txd;
-    gpio_4  <= uart_rts;
-    gpio_5  <= baud_rx;
-    gpio_6  <= baud_tx;
-    gpio_7  <= clk50;
-end
+// always @(*) begin
+//     gpio_1  <= uart_rxd;
+//     gpio_2  <= uart_cts;
+//     gpio_3  <= uart_txd;
+//     gpio_4  <= uart_rts;
+//     gpio_5  <= baud_rx;
+//     gpio_6  <= baud_tx;
+//     gpio_7  <= clk50;
+// end
 
 // uart instantiations /////////////////////////////////////////////////////////
 // create the baud clks from the 50Mhz src clk
 baud_generator #(.CLK_FRQ(`CLK_FRQ), .BAUD_RATE(`BAUD_RATE_TX))
 baud_gen_tx(
     .clk(clk50),
-    .reset(reset),
+    .reset(0),
     .baud(baud_tx)
 );
 baud_generator #(.CLK_FRQ(`CLK_FRQ), .BAUD_RATE(`BAUD_RATE_RX)) 
 baud_gen_rx(
     .clk(clk50),
-    .reset(reset),
+    .reset(0),
     .baud(baud_rx)
 );
 
@@ -128,5 +137,90 @@ uart_tx transmitter(
     .busy(tx_busy),
     .error(tx_error)
 );
+
+// monitor declarations ////////////////////////////////////////////////////////
+
+
+// monitor helper logic ////////////////////////////////////////////////////////
+always @(*) begin
+    // assign uart control signals
+    rx_enable <= ~reset;
+    tx_enable <= ~reset;
+    // command signals
+    {cmd_rw, cmd_id} <= cmd; // split cmd into r/w and id.
+end
+
+// monitor command state machine logic /////////////////////////////////////////
+always @ (posedge baud_rx) begin
+    if (reset) begin
+        MONITOR_RESET();
+    end else begin
+        case (state) 
+            `MONITOR_STATE_IDLE       : MONITOR_STATE_IDLE();
+            `MONITOR_STATE_READ_CMD   : MONITOR_STATE_READ_CMD();
+            `MONITOR_STATE_DATA_BYTES : MONITOR_STATE_DATA_BYTES();
+            `MONITOR_STATE_WRITE      : MONITOR_STATE_WRITE();
+            `MONITOR_STATE_READ       : MONITOR_STATE_READ();
+            default : state <= `MONITOR_STATE_IDLE;
+        endcase
+    end
+end
+
+// monitor states //////////////////////////////////////////////////////////////
+task MONITOR_RESET();
+    // start idling for command
+    state <= `MONITOR_STATE_IDLE;
+    // tell controler not ready to receive
+    uart_cts <= 1;
+    // initialize helper signals
+    cmd       <= `NUM_CMDS-1;
+    data_size <= 0;
+endtask
+task MONITOR_STATE_IDLE();
+    // check if controller is requesting to start a command
+    if (!uart_rts && !rx_busy) begin
+        // requesting to send command and not busy
+        state    <= `MONITOR_STATE_READ_CMD; // proceed to read the command
+        uart_cts <= 0;                       // allow controller to send the command
+    end else begin
+        uart_cts <= 1;
+    end
+endtask
+task MONITOR_STATE_READ_CMD();
+    // check if the command has been sent
+    if (!rx_busy && rx_done) begin
+        // received the command
+        uart_cts <= 0;       // clear controller to send number of packet bytes
+        cmd      <= rx_byte; // read the command
+        state    <= `MONITOR_STATE_DATA_BYTES;
+    end else begin
+        // not done receiving command yet
+        uart_cts <= 1; 
+    end
+endtask
+task MONITOR_STATE_DATA_BYTES();
+    // check if the number of data bytes has been sent
+    if (!rx_busy && rx_done) begin
+        // received number of data bytes
+        data_size <= rx_byte; // read the command
+        // go to read or write state
+        if (cmd_rw) begin
+            state    <= `MONITOR_STATE_WRITE;
+            // uart_cts <= 0; // writing data so controller not clear to send
+        end else begin
+            state    <= `MONITOR_STATE_READ;
+            // uart_cts <= 1; // reading data so controller clear to send
+        end
+    end else begin
+        // not done receiving number of data bytes yet
+        // uart_cts <= 0; 
+    end
+endtask
+task MONITOR_STATE_WRITE();
+
+endtask
+task MONITOR_STATE_READ();
+
+endtask
 
 endmodule
