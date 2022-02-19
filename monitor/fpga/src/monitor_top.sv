@@ -91,7 +91,7 @@ always @(*) begin
     gpio_7  <= clk50;
 end
 
-// instantiations //////////////////////////////////////////////////////////////
+// uart instantiations /////////////////////////////////////////////////////////
 // create the baud clks from the 50Mhz src clk
 baud_generator #(.CLK_FRQ(`CLK_FRQ), .BAUD_RATE(`BAUD_RATE_TX))
 baud_gen_tx(
