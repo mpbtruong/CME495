@@ -197,6 +197,26 @@ class MonitorGPSReceiverTest(MonitorTest):
         MonitorTest.__init__(self, monitor)
     
     # test cases ###############################################################
+    @test_loop_wrapper
+    def test_readNMEAFrame(self):
+        """
+        Test reading NMEA protocol data from the receiver.
+        """
+        input(f'\nEnter to read NMEA frame')
+        packet = self.monitor.readNMEAFrame(timeout=2.0)
+        print(f'NMEA Frame: {packet}')
+    @test_loop_wrapper
+    def test_readNMEAFrameSelect(self):
+        """
+        Test reading NMEA protocol data from the receiver given a talker and 
+        sentence type.
+        """
+        talker = input(f'\nEnter talkerID to read NMEA frame (GP|GA|GB|GL|GN): ')
+        if (not talker): talker = None
+        sentence_type = input(f'Enter sentence type to read NMEA frame (e.g. GSA): ')
+        if (not sentence_type): sentence_type = None
+        packet = self.monitor.readNMEAFrameSelect(talker, sentence_type, timeout=2.0)
+        print(f'NMEA Frame: {packet}')
 
 
 # Main #########################################################################

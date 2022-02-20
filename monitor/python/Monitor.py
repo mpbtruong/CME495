@@ -273,6 +273,23 @@ class Monitor():
         if (isinstance(data, str)): 
             raise self.ReadUartFail("Data read fail, got string not bytes")
         return data
+    def read_uart_line(self, timeout:float=None):
+        """
+        Read from the uart until a newline is found.
+
+        :param timeout: None to block forever, 0 to try to read and instantly
+            return, or the time in seconds to block for.
+        :exceptions:
+            ReadUartFail : failed to read uart data
+        """
+        # set timeout
+        self.uart.timeout = timeout
+        # read data
+        data = self.uart.readline()
+        # check if read failed
+        if (isinstance(data, str)): 
+            raise self.ReadUartFail("Data read fail, got string not bytes")
+        return data
     # ports ####################################################################
     def assign_port(self, device_vid:int, device_pid:int):
         """
