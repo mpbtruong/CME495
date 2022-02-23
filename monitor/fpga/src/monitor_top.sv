@@ -16,10 +16,12 @@
 module monitor_top(
     output reg[$clog2(`MONITOR_STATES_NUM)-1:0] state, // monitor state machine state
 
-    output reg[8*`NUM_CMD_BYTES-1:0]      cmd,       // command from controller
-    output reg                            cmd_rw,    // MSB bit of command read/write command
-    output reg[8*`NUM_CMD_BYTES-2:0]      cmd_id,    // command id
-    output reg[8*`NUM_CMD_DATA_BYTES-1:0] data_size, // number of bytes to read or write
+    output reg[8*`NUM_CMD_BYTES-1:0]               cmd,          // command from controller
+    output reg                                     cmd_rw,       // MSB bit of command read/write command
+    output reg[8*`NUM_CMD_BYTES-2:0]               cmd_id,       // command id
+    output reg[8*`NUM_CMD_DATA_BYTES-1:0]          data_size,    // number of bytes to read or write
+    output reg[8*`MAX_CMD_PAYLOAD_BYTES-1:0]       cmd_data,     // command data
+    output reg[$clog2(`MAX_CMD_PAYLOAD_BYTES)-1:0] cmd_data_idx, // command data byte index
 
 
 
@@ -174,8 +176,10 @@ task MONITOR_RESET();
     // tell controler not ready to receive
     uart_cts <= 1;
     // initialize helper signals
-    cmd       <= 0;
-    data_size <= 0;
+    cmd          <= 0;
+    data_size    <= 0;
+    cmd_data     <= 0;
+    cmd_data_idx <= 0;
 endtask
 task MONITOR_STATE_IDLE();
     // check if controller is requesting to start a command
@@ -204,6 +208,8 @@ task MONITOR_STATE_DATA_BYTES();
     if (rx_done) begin
         // received number of data bytes
         data_size <= rx_byte; // read the command
+        cmd_data_idx <= 0; // reset byte index for command data
+        cmd_data     <= 0;
         // go to read or write state
         if (cmd_rw) begin
             state    <= `MONITOR_STATE_WRITE;
@@ -218,7 +224,17 @@ task MONITOR_STATE_DATA_BYTES();
     end
 endtask
 task MONITOR_STATE_WRITE();
-
+    // read all of bytes being written from the controller
+    if (rx_done) begin
+        // new byte done being read
+        cmd_data[8*cmd_data_idx +: 8] <= rx_byte; // read in the byte
+        cmd_data_idx <= cmd_data_idx + 1; // increment byte index
+        // check if done
+        if (cmd_data_idx == data_size-1) begin
+            // done reading write data
+            state <= `MONITOR_STATE_IDLE;
+        end
+    end
 endtask
 task MONITOR_STATE_READ();
 

@@ -172,7 +172,7 @@ class Monitor():
             WriteUartFail: data failed to write.
         """
         return self.write_uart(data, timeout=timeout, flow_control=True)
-    def write_bytes_uart_flow(self, data:bytes, timeout:float=None)->bool:
+    def write_bytes_uart_flow(self, data:bytes, timeout:float=None, big_endian:bool=True)->bool:
         """
         Write a set of bytes to the uart with flow control one at a time. 
         Blocks until data is written.
@@ -180,11 +180,17 @@ class Monitor():
         :param data: the bytes to write.
         :param timeout: None to block forever, 0 to try to write and instantly
             return, or the time in seconds to block for.
+        :param big_endian: data is sent in reverse if not big_endian.
+            e.g. if data = [\x00, \x01]
+                big_endian     : write in order \x00\x01
+                not big_endian : write in order \x01\x00
         :exceptions:
             WriteUartFail: flow control timeout waiting for CTS from device.
             WriteUartFail: data failed to write.
         """
-        for wbyte in self.bytes_to_bytelist(data):
+        wbytes = self.bytes_to_bytelist(data)
+        if (not big_endian): wbytes = wbytes[::-1] # reverse byte order
+        for wbyte in wbytes:
             self.write_uart(wbyte, timeout=timeout, flow_control=True)
         
     # base I/O #################################################################
