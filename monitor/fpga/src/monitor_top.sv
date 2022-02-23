@@ -16,10 +16,10 @@
 module monitor_top(
     output reg[$clog2(`MONITOR_STATES_NUM)-1:0] state, // monitor state machine state
 
-    output reg[8*`CMD_BYTES-1:0]      cmd,       // command from controller
-    output reg                     cmd_rw,    // MSB bit of command read/write command
-    output reg[8*`CMD_BYTES-2:0]      cmd_id,    // command id
-    output reg[8*`CMD_DATA_BYTES-1:0] data_size, // number of bytes to read or write
+    output reg[8*`NUM_CMD_BYTES-1:0]      cmd,       // command from controller
+    output reg                            cmd_rw,    // MSB bit of command read/write command
+    output reg[8*`NUM_CMD_BYTES-2:0]      cmd_id,    // command id
+    output reg[8*`NUM_CMD_DATA_BYTES-1:0] data_size, // number of bytes to read or write
 
 
 

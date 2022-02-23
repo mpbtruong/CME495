@@ -34,6 +34,7 @@
 /**
  * Controller command info
  */
- `define CMD_BYTES        1
- `define NUM_CMDS         2 ** (8*`CMD_BYTES-1) // 1 R/W bit
- `define CMD_DATA_BYTES   1
+ `define NUM_CMD_BYTES          1
+ `define NUM_CMDS               2 ** (8*`CMD_BYTES-1) // 1 R/W bit
+ `define NUM_CMD_DATA_BYTES     1
+ `define MAX_CMD_PAYLOAD_BYTES  4
