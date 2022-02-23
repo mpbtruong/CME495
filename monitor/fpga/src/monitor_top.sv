@@ -16,10 +16,10 @@
 module monitor_top(
     output reg[$clog2(`MONITOR_STATES_NUM)-1:0] state, // monitor state machine state
 
-    output reg[`CMD_BITS-1:0]      cmd,       // command from controller
+    output reg[8*`CMD_BYTES-1:0]      cmd,       // command from controller
     output reg                     cmd_rw,    // MSB bit of command read/write command
-    output reg[`CMD_BITS-2:0]      cmd_id,    // command id
-    output reg[`CMD_DATA_BITS-1:0] data_size, // number of bytes to read or write
+    output reg[8*`CMD_BYTES-2:0]      cmd_id,    // command id
+    output reg[8*`CMD_DATA_BYTES-1:0] data_size, // number of bytes to read or write
 
 
 
@@ -148,6 +148,7 @@ always @(*) begin
     tx_enable <= ~reset;
     // command signals
     {cmd_rw, cmd_id} <= cmd; // split cmd into r/w and id.
+    // uart_cts  <= rx_busy;
 end
 
 // monitor command state machine logic /////////////////////////////////////////
@@ -173,7 +174,7 @@ task MONITOR_RESET();
     // tell controler not ready to receive
     uart_cts <= 1;
     // initialize helper signals
-    cmd       <= `NUM_CMDS-1;
+    cmd       <= 0;
     data_size <= 0;
 endtask
 task MONITOR_STATE_IDLE();
@@ -188,19 +189,19 @@ task MONITOR_STATE_IDLE();
 endtask
 task MONITOR_STATE_READ_CMD();
     // check if the command has been sent
-    if (!rx_busy && rx_done) begin
+    if (rx_done) begin
         // received the command
-        uart_cts <= 0;       // clear controller to send number of packet bytes
+        // uart_cts <= 0;       // clear controller to send number of packet bytes
         cmd      <= rx_byte; // read the command
         state    <= `MONITOR_STATE_DATA_BYTES;
     end else begin
         // not done receiving command yet
-        uart_cts <= 1; 
+        // uart_cts <= 1; 
     end
 endtask
 task MONITOR_STATE_DATA_BYTES();
     // check if the number of data bytes has been sent
-    if (!rx_busy && rx_done) begin
+    if (rx_done) begin
         // received number of data bytes
         data_size <= rx_byte; // read the command
         // go to read or write state
@@ -213,7 +214,7 @@ task MONITOR_STATE_DATA_BYTES();
         end
     end else begin
         // not done receiving number of data bytes yet
-        // uart_cts <= 0; 
+        // uart_cts <= 1; 
     end
 endtask
 task MONITOR_STATE_WRITE();

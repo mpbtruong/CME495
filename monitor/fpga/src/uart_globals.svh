@@ -34,6 +34,6 @@
 /**
  * Controller command info
  */
- `define CMD_BITS         8
- `define NUM_CMDS         2 ** (`CMD_BITS-1) // 1 R/W bit
- `define CMD_DATA_BITS    8
+ `define CMD_BYTES        1
+ `define NUM_CMDS         2 ** (8*`CMD_BYTES-1) // 1 R/W bit
+ `define CMD_DATA_BYTES   1

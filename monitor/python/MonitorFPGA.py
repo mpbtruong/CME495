@@ -137,13 +137,15 @@ class MonitorFPGA(Monitor):
     CMD_0  = 'reg0_'
     CMD_1  = 'reg1_'
     CMD_2  = 'reg2_'
-    CMD_7  = 'reg3_'
+    CMD_7  = 'reg7_'
+    CMD_8  = 'reg8_'
     # dictionary of commands
     commands = {
         CMD_0  : Command(cid=0, no_rwbytes=0, name=CMD_0),
         CMD_1  : Command(cid=1, no_rwbytes=1, name=CMD_1),
         CMD_2  : Command(cid=2, no_rwbytes=2, name=CMD_2, read_only=True),
         CMD_7  : Command(cid=7, no_rwbytes=1, name=CMD_7),
+        CMD_8  : Command(cid=8, no_rwbytes=2, name=CMD_8),
     }
     commands_by_id = {cmd.cid:cmd for cmd in commands.values()}
     

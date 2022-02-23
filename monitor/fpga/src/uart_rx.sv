@@ -83,12 +83,14 @@ endtask
 task IDLE();
     error <= 0;
     done  <= 0;
+    oversample_idx <= 0;
+    busy           <= 0;
     // check for start bit 
     if (!rx) begin
         // detected a start bit 
         busy  <= 1;
         // check if at middle of start bit x
-        if (oversample_idx == (`OVERSAMPLING/2)-1) begin
+        if (oversample_idx == (`OVERSAMPLING/2)) begin
             // at middle of start bit
             state <= `STATE_DATA_BITS;
             oversample_idx <= 0; 
@@ -100,8 +102,8 @@ task IDLE();
         end
     end else begin
         // idling
-        oversample_idx <= 0;
-        busy           <= 0;
+        // oversample_idx <= 0;
+        // busy           <= 0;
     end
 endtask
 task DATA_BITS();
@@ -151,7 +153,7 @@ task STOP_BIT();
             // around the middle now
             stop_extra_oversample <= 0;
             // give remaining half of oversampling for stop bit detection
-            oversample_idx <= (`OVERSAMPLING/2)-1;
+            oversample_idx <= (`OVERSAMPLING/2)-2;
         end else begin 
             // not at middle of stop bit yet
             oversample_idx <= oversample_idx + 1;

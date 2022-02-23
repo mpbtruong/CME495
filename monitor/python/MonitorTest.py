@@ -118,8 +118,7 @@ class MonitorTest():
         try: w_bytes = bytes.fromhex(i_byte_str)
         except ValueError: return
         print(f'Writing 0x{w_bytes.hex().upper()}')
-        if (not self.monitor.write_uart(w_bytes)): 
-            print('Uart failed to write data')
+        self.monitor.write_uart(w_bytes)
     @test_loop_wrapper
     def test_rts_cts(self):
         """
@@ -142,8 +141,7 @@ class MonitorTest():
         try: w_byte = bytes.fromhex(i_byte_str)
         except ValueError: return
         print(f'Writing 0x{w_byte.hex().upper()}')
-        if (not self.monitor.write_byte_uart_flow(w_byte)): 
-            print('Uart failed to write data')
+        self.monitor.write_byte_uart_flow(w_byte)
 
 
 class MonitorFPGATest(MonitorTest):
