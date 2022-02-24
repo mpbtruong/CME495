@@ -7,8 +7,8 @@ GPS Frequency Reference Recovery with Long Term Holdover
     1. [Branching](#Branching)
     2. [Repo Commits](#Repo-Commits)
     3. [Merge Conflicts](#Merge-Conflicts)
-3. [Get Remote Repo Info](#Get-Remote-Repo-Info)
-4. [Installing Module Requirements](#Installing-Modules)
+    4. [Get Remote Repo Info](#Get-Remote-Repo-Info)
+3. [Installing Python Packages](#Installing-Python-Packages)
 
 ## Repo Setup
 1. Configure your git name and email.
@@ -48,7 +48,9 @@ GPS Frequency Reference Recovery with Long Term Holdover
 ### Get Remote Repo Info
 1. ```git remote show origin```
 
-### Installing Module Requirements
+## Project Setup
+
+### Installing Python Packages
 1. To install the module requirements for the Python Monitor & Control
     1. Go to the monitor/python/ folder
     2. Run ```pip install -r requirements.txt```
