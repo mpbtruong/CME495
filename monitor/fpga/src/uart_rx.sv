@@ -81,10 +81,10 @@ task RESET();
     stop_extra_oversample <= 0;
 endtask
 task IDLE();
-    error <= 0;
-    done  <= 0;
-    oversample_idx <= 0;
+    done           <= 0;
     busy           <= 0;
+    error          <= 0;
+    oversample_idx <= 0;
     // check for start bit 
     if (!rx) begin
         // detected a start bit 
@@ -100,10 +100,6 @@ task IDLE();
             // not at middle of start bit yet
             oversample_idx <= oversample_idx + 1;
         end
-    end else begin
-        // idling
-        // oversample_idx <= 0;
-        // busy           <= 0;
     end
 endtask
 task DATA_BITS();

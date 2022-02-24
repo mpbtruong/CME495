@@ -187,19 +187,15 @@ class MonitorFPGA(Monitor):
         self.flush_buffers_uart()
         # tell the FPGA what command
         self.write_byte_uart_flow(cmd.cbyte, timeout)
-        print(f'Wrote command {cmd.cbyte}!')
         # tell the FPGA how many bytes of data to R/W
         i_no_bytes = cmd.no_rbytes if (cmd.rw == cmd.READ) else cmd.no_wbytes
         no_bytes = cmd.rw_no_bytes(i_no_bytes)
         self.write_byte_uart_flow(no_bytes, timeout)
-        print(f'Wrote ({cmd.rw}) command data info {i_no_bytes} {no_bytes}!')
         # read or write data
         if (cmd.rw == cmd.READ):
             cmd.rbytes = self.read_uart(cmd.no_rbytes, timeout)[::-1]
-            print(f'Read data!')
         elif (cmd.rw == cmd.WRITE):
             self.write_bytes_uart_flow(cmd.wbytes, timeout, big_endian=False)
-            print(f'Wrote data!')
     
     # utility helper methods ###################################################
     def get_command(self, name:str)->Command:

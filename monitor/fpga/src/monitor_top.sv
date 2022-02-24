@@ -33,14 +33,6 @@ module monitor_top(
     output wire uart_txd, // transmitter
     input  wire uart_rts, // request to send (FPGA is slave)
     output wire uart_cts, // clear to send (FPGA is slave)
-    // gpio
-    output reg  gpio_1,  // uart_rxd
-    output reg  gpio_2,  // uart_cts
-    output reg  gpio_3,  // uart_txd
-    output reg  gpio_4,  // uart_rts
-    output reg  gpio_5,  // baud rate rx 115200 (112.5 khz)
-    output reg  gpio_6,  // baud rate tx (16 oversampling)
-    output reg  gpio_7,  // clk50
     // I/O
     input  reg[17:0] SW,
     input  reg[3:0]  KEY,
@@ -92,16 +84,6 @@ always @(*) begin
     // uart_cts <= KEY[3];
 end
 
-// gpio ////////////////////////////////////////////////////////////////////////
-// always @(*) begin
-//     gpio_1  <= uart_rxd;
-//     gpio_2  <= uart_cts;
-//     gpio_3  <= uart_txd;
-//     gpio_4  <= uart_rts;
-//     gpio_5  <= baud_rx;
-//     gpio_6  <= baud_tx;
-//     gpio_7  <= clk50;
-// end
 
 // uart instantiations /////////////////////////////////////////////////////////
 // create the baud clks from the 50Mhz src clk
@@ -151,7 +133,6 @@ always @(*) begin
     tx_enable <= ~reset;
     // command signals
     {cmd_rw, cmd_id} <= cmd; // split cmd into r/w and id.
-    // uart_cts  <= rx_busy;
 end
 
 // monitor command state machine logic /////////////////////////////////////////
@@ -200,32 +181,23 @@ task MONITOR_STATE_READ_CMD();
     // check if the command has been sent
     if (rx_done) begin
         // received the command
-        // uart_cts <= 0;       // clear controller to send number of packet bytes
         cmd      <= rx_byte; // read the command
         state    <= `MONITOR_STATE_DATA_BYTES;
-    end else begin
-        // not done receiving command yet
-        // uart_cts <= 1; 
     end
 endtask
 task MONITOR_STATE_DATA_BYTES();
     // check if the number of data bytes has been sent
     if (rx_done) begin
         // received number of data bytes
-        data_size <= rx_byte; // read the command
-        cmd_data_idx <= 0; // reset byte index for command data
+        data_size    <= rx_byte; // read the command
+        cmd_data_idx <= 0;       // reset byte index for command data
         // go to read or write state
         if (cmd_rw) begin
             state    <= `MONITOR_STATE_WRITE;
-            cmd_data     <= 0;
-            // uart_cts <= 0; // writing data so controller not clear to send
+            cmd_data <= 0;
         end else begin
             state    <= `MONITOR_STATE_READ;
-            // uart_cts <= 1; // reading data so controller clear to send
         end
-    end else begin
-        // not done receiving number of data bytes yet
-        // uart_cts <= 1; 
     end
 endtask
 task MONITOR_STATE_WRITE();
@@ -233,7 +205,7 @@ task MONITOR_STATE_WRITE();
     if (rx_done) begin
         // new byte done being read
         cmd_data[8*cmd_data_idx +: 8] <= rx_byte; // read in the byte
-        cmd_data_idx <= cmd_data_idx + 1; // increment byte index
+        cmd_data_idx <= cmd_data_idx + 1;         // increment byte index
         // check if done
         if (cmd_data_idx == data_size-1) begin
             // done reading write data
@@ -243,7 +215,9 @@ task MONITOR_STATE_WRITE();
 endtask
 task MONITOR_STATE_READ();
     // write all the register bytes to the controller
-    tx_byte <= cmd_data[8*cmd_data_idx +: 8]; // set the next byte to write
+    // set the next byte to write
+    tx_byte <= cmd_data[8*cmd_data_idx +: 8];
+    // check if done writing byte
     if (tx_done && cmd_tx_busy_prev) begin
         cmd_data_idx <= cmd_data_idx + 1; // increment byte index
         // check if done
@@ -252,10 +226,10 @@ task MONITOR_STATE_READ();
             state <= `MONITOR_STATE_IDLE;
             tx_write <= 0; // done writing data to controller
         end else begin
-            tx_write <= 1; // write the byte
+            tx_write <= 1; // write the next byte
         end
     end else begin
-        tx_write <= 1; // stop writing until on next byte
+        tx_write <= 1; // write first byte
     end
 endtask
 
