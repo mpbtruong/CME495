@@ -5,19 +5,6 @@
  * Receiver module for uart.
  */
 module uart_rx(
-    // current state of the state machine
-    output reg[$clog2(`STATES_NUM)-1:0]   state,
-    // oversampling (1/2 oversampling to find start bit middle, then full oversampling)
-    output reg[$clog2(`OVERSAMPLING)-1:0] oversample_idx, // counter for oversampling
-    output reg stop_extra_oversample, // flag so stop bit gets its full time
-    // data bit buffer
-    output reg[`NUM_DATA_BITS-1:0]  data_buffer,          // data buffer for state machine
-    // data bit counter
-    output reg[$clog2(`NUM_DATA_BITS)-1:0]  data_idx,     // counter for current data bit
-    // parity valid checker
-    output reg parity_valid, // 1 if parity is valid (signal valid in parity state)
-    output reg[(`NUM_DATA_BITS+`NUM_PARITY_BIT)-1:0] data_and_parity_bits, // concatenation of signals
-
     input  wire                     baud,   // baud clk
     input  wire                     enable, // enable rx read
     input  wire                     rx,     // rx line
@@ -28,10 +15,18 @@ module uart_rx(
 );
 
 // declarations ////////////////////////////////////////////////////////////////
-
-
-// add debug regs back here later (TO-DO)
-
+// current state of the state machine
+reg[$clog2(`STATES_NUM)-1:0]   state,
+// oversampling (1/2 oversampling to find start bit middle, then full oversampling)
+reg[$clog2(`OVERSAMPLING)-1:0]            oversample_idx,        // counter for oversampling
+reg                                       stop_extra_oversample, // flag so stop bit gets its full time
+// data bit buffer
+reg[`NUM_DATA_BITS-1:0]                   data_buffer,           // data buffer for state machine
+// data bit counter
+reg[$clog2(`NUM_DATA_BITS)-1:0]           data_idx,              // counter for current data bit
+// parity valid checker
+reg                                       parity_valid,          // 1 if parity is valid
+reg[(`NUM_DATA_BITS+`NUM_PARITY_BIT)-1:0] data_and_parity_bits,  // concatenation of signals
 
 
 // helper logic ////////////////////////////////////////////////////////////////

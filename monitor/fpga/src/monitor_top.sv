@@ -14,18 +14,6 @@
  * packet_time_10 = 86.81 
  */
 module monitor_top(
-    output reg[$clog2(`MONITOR_STATES_NUM)-1:0] state, // monitor state machine state
-
-    output reg[8*`NUM_CMD_BYTES-1:0]               cmd,              // command from controller
-    output reg                                     cmd_rw,           // MSB bit of command read/write command
-    output reg[8*`NUM_CMD_BYTES-2:0]               cmd_id,           // command id
-    output reg[8*`NUM_CMD_DATA_BYTES-1:0]          data_size,        // number of bytes to read or write
-    output reg[8*`MAX_CMD_PAYLOAD_BYTES-1:0]       cmd_data,         // command data
-    output reg[$clog2(`MAX_CMD_PAYLOAD_BYTES)-1:0] cmd_data_idx,     // command data byte index
-    output reg                                     cmd_tx_busy_prev, // delayed tx_busy
-
-
-
     input  wire clk50, 
     // input  wire reset,
     // uart
@@ -33,6 +21,12 @@ module monitor_top(
     output wire uart_txd, // transmitter
     input  wire uart_rts, // request to send (FPGA is slave)
     output wire uart_cts, // clear to send (FPGA is slave)
+    // registers
+    output reg[`REG0_BITS-1:0]   reg0, //
+    output reg[`REG1_BITS-1:0]   reg1, //
+    output reg[`REG2_BITS-1:0]   reg2, //
+    output reg[`REG3_BITS-1:0]   reg3, //
+    output reg[`REG4_BITS-1:0]   reg4, //
     // I/O
     input  reg[17:0] SW,
     input  reg[3:0]  KEY,
@@ -45,13 +39,13 @@ reg                     reset;     // sychronous
 // baud clks
 reg                     baud_tx;   // normal baud rate
 reg                     baud_rx;   // baud rate with oversampling
-// rx
+// rx (uart receiver)
 reg                     rx_enable; // allow receive transactions
 reg[`NUM_DATA_BITS-1:0] rx_byte;   // data bits from an rx transaction
 reg                     rx_done;   // rx transaction is done
 reg                     rx_busy;   // rx is busy
 reg                     rx_error;  // rx has error
-// tx
+// tx (uart transmitter)
 reg                     tx_enable; // allow transmit transactions
 reg                     tx_write;  // start a transactions
 reg[`NUM_DATA_BITS-1:0] tx_byte;   // data bits to transmit
@@ -60,11 +54,15 @@ reg                     tx_busy;   // tx is busy
 reg                     tx_error;  // tx has error
 // registers
 reg                     reg_write; // high if a reg should be written to
-reg[`REG0_BITS-1:0]     reg0;      //
-reg[`REG1_BITS-1:0]     reg1;      //
-reg[`REG2_BITS-1:0]     reg2;      //
-reg[`REG3_BITS-1:0]     reg3;      //
-reg[`REG4_BITS-1:0]     reg4;      //
+// monitor state machine
+reg[$clog2(`MONITOR_STATES_NUM)-1:0]    state,            // state machine state
+reg[8*`NUM_CMD_BYTES-1:0]               cmd,              // command from controller
+reg                                     cmd_rw,           // MSB bit of command read/write command
+reg[8*`NUM_CMD_BYTES-2:0]               cmd_id,           // command id
+reg[8*`NUM_CMD_DATA_BYTES-1:0]          data_size,        // number of bytes to read or write
+reg[8*`MAX_CMD_PAYLOAD_BYTES-1:0]       cmd_data,         // command data
+reg[$clog2(`MAX_CMD_PAYLOAD_BYTES)-1:0] cmd_data_idx,     // command data byte index
+reg                                     cmd_tx_busy_prev, // delayed tx_busy
 
 // I/O (LEDs, SW, etc.) ////////////////////////////////////////////////////////
 always @(*) begin
@@ -76,19 +74,10 @@ always @(*) begin
     LEDG[7]   <= rx_done;
     LEDG[6]   <= rx_busy;
     LEDG[5]   <= rx_error;
-    // rx_enable <= SW[17];
-    // LEDR[17]  <= SW[17];
     // tx
-    // tx_enable <= SW[15];
-    // LEDR[15]  <= SW[15];
-    // tx_write  <= ~KEY[2];
-    // LEDG[4]   <= ~KEY[2];
-    // tx_byte   <= SW[7:0]; // use switches as input for tx_byte
     LEDG[3]   <= tx_done;
     LEDG[2]   <= tx_busy;
     LEDG[1]   <= tx_error;
-    // flow control
-    // uart_cts <= KEY[3];
 end
 
 
@@ -140,7 +129,7 @@ always @(*) begin
 end
 
 always @(posedge baud_rx) begin
-    // clk in previous tx_busy status because of baud_rx/baud_tx timing issue
+    // clk in previous tx_busy status
     cmd_tx_busy_prev <= tx_busy;
 end
 

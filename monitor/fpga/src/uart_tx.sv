@@ -5,11 +5,6 @@
  * Transmitter module for uart.
  */
 module uart_tx(
-    output reg[$clog2(`STATES_NUM)-1:0]    state,    // current state of the state machine
-    output reg[`NUM_DATA_BITS-1:0]         data_reg, // clk data in at start of transmission
-    output reg[$clog2(`NUM_DATA_BITS)-1:0] data_idx, // counter for current data bit
-
-
     input  wire                     baud,   // baud clk
     input  wire                     enable, // enable rx read
     input  wire                     write,  // pulse signal to write when enabled
@@ -21,10 +16,9 @@ module uart_tx(
 );
 
 // declarations ////////////////////////////////////////////////////////////////
-
-
-// add debug regs back here later (TO-DO)
-
+reg[$clog2(`STATES_NUM)-1:0]    state,    // current state of the state machine
+reg[`NUM_DATA_BITS-1:0]         data_reg, // clk data in at start of transmission
+reg[$clog2(`NUM_DATA_BITS)-1:0] data_idx, // counter for current data bit
 
 
 // uart state machine //////////////////////////////////////////////////////////
