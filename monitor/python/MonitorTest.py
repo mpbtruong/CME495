@@ -177,10 +177,10 @@ class MonitorFPGATest(MonitorTest):
             if (rw == 'w'):
                 wbytes = bytes.fromhex(input(f'Enter {cmd.no_wbytes} byte(s) to write: '))
                 if (len(wbytes) != cmd.no_wbytes): return
-                cmd.wbytes = wbytes
+            else: wbytes = None
         except ValueError: return
         print('Executing command')
-        self.monitor.execute_command(cmd, rw, timeout=None)
+        self.monitor.execute_command(cmd, rw, wbytes, timeout=None)
         print(cmd)
 
 class MonitorGPSReceiverTest(MonitorTest):

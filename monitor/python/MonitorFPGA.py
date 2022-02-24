@@ -41,7 +41,7 @@ class MonitorFPGA(Monitor):
         # exceptions ###########################################################
         class CommandByteError(Exception):
             """
-            Raised if cid is invalid.
+            Raised if a byte variable is in an invalid state.
             """
             pass
         class CommandRWError(Exception):
@@ -87,6 +87,19 @@ class MonitorFPGA(Monitor):
                 cmd += f'   no_wbytes={self.no_wbytes} wbytes={self.wbytes}\n'
             return cmd
         # methods ##############################################################
+        def setWriteBytes(self, write_bytes:bytes):
+            """
+            Set wbytes.
+
+            :exceptions:
+                CommandByteError: write_bytes is None
+                CommandByteError: len(write_bytes) != self.no_wbytes
+            """
+            if (not write_bytes):
+                raise self.CommandByteError("write_bytes is None")
+            if (len(write_bytes) != self.no_wbytes):
+                raise self.CommandByteError("write_bytes lenght != no_wbytes.")
+            self.wbytes = write_bytes
         def setRW(self, rw:str):
             """
             Sets the command to write or read.
@@ -161,28 +174,26 @@ class MonitorFPGA(Monitor):
         Monitor.__init__(self, ConfigFPGA)
     
     # methods ##################################################################
-    def execute_command(self, cmd:Command, rw:str, timeout:float=None):
+    def execute_command(self, cmd:Command, rw:str, write_bytes:bytes=None, timeout:float=None):
         """
-        Executes an FPGA command. Onus is on the caller to ensure the command
-        is in a valid state to be executed.
+        Executes an FPGA command.
 
         :param cmd: the command to execute.
         :param rw: Command.READ or Command.WRITE
+        :param write_bytes: bytes to write if rw == Command.WRITE
         :param timeout: None to block forever, 0 to try to R/W for and instantly
             return, or the time in seconds to block for.
-        :pre-conditions: 
-            cmd.rw     : set to r for read or w for write
-            cmd.wbytes : holds data to write if write command.
         :post-conditions: 
             cmd.rbytes : has read data from FPGA if read command.
         """
-        # check state
-        if (cmd.read_only and rw == cmd.WRITE):
-            raise self.ExecuteCommandError('Tried to write a read only command')
-        if (rw == cmd.WRITE and cmd.no_wbytes != len(cmd.wbytes)):
-            raise self.ExecuteCommandError('Length of wbytes != no_wbytes')
         # set command to read or write
         cmd.setRW(rw)
+        if (cmd.rw == cmd.WRITE): cmd.setWriteBytes(write_bytes)
+        # check state
+        if (cmd.read_only and cmd.rw == cmd.WRITE):
+            raise self.ExecuteCommandError('Tried to write a read only command')
+        if (cmd.rw == cmd.WRITE and cmd.no_wbytes != len(cmd.wbytes)):
+            raise self.ExecuteCommandError('Length of wbytes != no_wbytes')
         # flush r/w buffers
         self.flush_buffers_uart()
         # tell the FPGA what command
