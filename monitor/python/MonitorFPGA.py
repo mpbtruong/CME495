@@ -193,7 +193,7 @@ class MonitorFPGA(Monitor):
         print(f'Wrote ({cmd.rw}) command data info {i_no_bytes} {no_bytes}!')
         # read or write data
         if (cmd.rw == cmd.READ):
-            cmd.rbytes = self.read_uart(cmd.no_rbytes, timeout)
+            cmd.rbytes = self.read_uart(cmd.no_rbytes, timeout)[::-1]
             print(f'Read data!')
         elif (cmd.rw == cmd.WRITE):
             self.write_bytes_uart_flow(cmd.wbytes, timeout, big_endian=False)

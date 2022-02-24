@@ -22,6 +22,7 @@ module monitor_top(
     output reg[8*`NUM_CMD_DATA_BYTES-1:0]          data_size,    // number of bytes to read or write
     output reg[8*`MAX_CMD_PAYLOAD_BYTES-1:0]       cmd_data,     // command data
     output reg[$clog2(`MAX_CMD_PAYLOAD_BYTES)-1:0] cmd_data_idx, // command data byte index
+    output reg                                     cmd_tx_busy_prev,
 
 
 
@@ -81,9 +82,9 @@ always @(*) begin
     // tx
     // tx_enable <= SW[15];
     // LEDR[15]  <= SW[15];
-    tx_write  <= ~KEY[2];
-    LEDG[4]   <= ~KEY[2];
-    tx_byte   <= SW[7:0]; // use switches as input for tx_byte
+    // tx_write  <= ~KEY[2];
+    // LEDG[4]   <= ~KEY[2];
+    // tx_byte   <= SW[7:0]; // use switches as input for tx_byte
     LEDG[3]   <= tx_done;
     LEDG[2]   <= tx_busy;
     LEDG[1]   <= tx_error;
@@ -167,12 +168,16 @@ always @ (posedge baud_rx) begin
             default : state <= `MONITOR_STATE_IDLE;
         endcase
     end
+    cmd_tx_busy_prev <= tx_busy;
 end
 
 // monitor states //////////////////////////////////////////////////////////////
 task MONITOR_RESET();
     // start idling for command
     state <= `MONITOR_STATE_IDLE;
+    // initialize uart_tx inputs
+    tx_write <= 0;
+    tx_byte  <= 0;
     // tell controler not ready to receive
     uart_cts <= 1;
     // initialize helper signals
@@ -209,10 +214,10 @@ task MONITOR_STATE_DATA_BYTES();
         // received number of data bytes
         data_size <= rx_byte; // read the command
         cmd_data_idx <= 0; // reset byte index for command data
-        cmd_data     <= 0;
         // go to read or write state
         if (cmd_rw) begin
             state    <= `MONITOR_STATE_WRITE;
+            cmd_data     <= 0;
             // uart_cts <= 0; // writing data so controller not clear to send
         end else begin
             state    <= `MONITOR_STATE_READ;
@@ -237,7 +242,21 @@ task MONITOR_STATE_WRITE();
     end
 endtask
 task MONITOR_STATE_READ();
-
+    // write all the register bytes to the controller
+    tx_byte <= cmd_data[8*cmd_data_idx +: 8]; // set the next byte to write
+    if (tx_done && cmd_tx_busy_prev) begin
+        cmd_data_idx <= cmd_data_idx + 1; // increment byte index
+        // check if done
+        if (cmd_data_idx == data_size-1) begin
+            // done reading write data
+            state <= `MONITOR_STATE_IDLE;
+            tx_write <= 0; // done writing data to controller
+        end else begin
+            tx_write <= 1; // write the byte
+        end
+    end else begin
+        tx_write <= 1; // stop writing until on next byte
+    end
 endtask
 
 endmodule

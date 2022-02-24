@@ -29,7 +29,7 @@
  `define MONITOR_STATE_READ_CMD   3'b001 // 1 -> 2
  `define MONITOR_STATE_DATA_BYTES 3'b010 // 2 -> branch to 3 | 4
  `define MONITOR_STATE_WRITE      3'b011 // 3 -> 0
- `define MONITOR_STATE_READ       3'b101 // 4 -> 0
+ `define MONITOR_STATE_READ       3'b100 // 4 -> 0
 
 /**
  * Controller command info

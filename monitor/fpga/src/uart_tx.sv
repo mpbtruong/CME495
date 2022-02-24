@@ -73,7 +73,7 @@ task IDLE();
     end else begin
         busy     <= 0;
         tx       <= 1; // drive uart tx line high
-        data_reg <= 0; // clear transmitted data buffer
+        // data_reg <= 0; // clear transmitted data buffer
     end
 endtask
 task DATA_BITS();
