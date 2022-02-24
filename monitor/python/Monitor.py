@@ -209,6 +209,12 @@ class Monitor():
         Flush the uart's read buffer.
         """
         self.uart.reset_input_buffer()
+    def flush_buffers_uart(self):
+        """
+        Flushes the uart's read and write buffers.
+        """
+        self.flush_read_buffer_uart()
+        self.flush_write_buffer_uart()
     def write_uart(self, data:bytes, timeout:float=None, flow_control=False):
         """
         Write bytes to the uart. If timeout is set, the write attempt

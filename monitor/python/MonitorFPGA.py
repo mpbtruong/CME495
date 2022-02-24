@@ -183,6 +183,8 @@ class MonitorFPGA(Monitor):
             raise self.ExecuteCommandError('Length of wbytes != no_wbytes')
         # set command to read or write
         cmd.setRW(rw)
+        # flush r/w buffers
+        self.flush_buffers_uart()
         # tell the FPGA what command
         self.write_byte_uart_flow(cmd.cbyte, timeout)
         print(f'Wrote command {cmd.cbyte}!')
