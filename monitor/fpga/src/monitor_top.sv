@@ -55,14 +55,14 @@ reg                     tx_error;  // tx has error
 // registers
 reg                     reg_write; // high if a reg should be written to
 // monitor state machine
-reg[$clog2(`MONITOR_STATES_NUM)-1:0]    state,            // state machine state
-reg[8*`NUM_CMD_BYTES-1:0]               cmd,              // command from controller
-reg                                     cmd_rw,           // MSB bit of command read/write command
-reg[8*`NUM_CMD_BYTES-2:0]               cmd_id,           // command id
-reg[8*`NUM_CMD_DATA_BYTES-1:0]          data_size,        // number of bytes to read or write
-reg[8*`MAX_CMD_PAYLOAD_BYTES-1:0]       cmd_data,         // command data
-reg[$clog2(`MAX_CMD_PAYLOAD_BYTES)-1:0] cmd_data_idx,     // command data byte index
-reg                                     cmd_tx_busy_prev, // delayed tx_busy
+reg[$clog2(`MONITOR_STATES_NUM)-1:0]    state;            // state machine state
+reg[8*`NUM_CMD_BYTES-1:0]               cmd;              // command from controller
+reg                                     cmd_rw;           // MSB bit of command read/write command
+reg[8*`NUM_CMD_BYTES-2:0]               cmd_id;           // command id
+reg[8*`NUM_CMD_DATA_BYTES-1:0]          data_size;        // number of bytes to read or write
+reg[8*`MAX_CMD_PAYLOAD_BYTES-1:0]       cmd_data;         // command data
+reg[$clog2(`MAX_CMD_PAYLOAD_BYTES)-1:0] cmd_data_idx;     // command data byte index
+reg                                     cmd_tx_busy_prev; // delayed tx_busy
 
 // I/O (LEDs, SW, etc.) ////////////////////////////////////////////////////////
 always @(*) begin
