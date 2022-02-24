@@ -32,9 +32,33 @@
  `define MONITOR_STATE_READ       3'b100 // 4 -> 0
 
 /**
- * Controller command info
+ * Controller command info.
  */
  `define NUM_CMD_BYTES          1
  `define NUM_CMDS               2 ** (8*`CMD_BYTES-1) // 1 R/W bit
  `define NUM_CMD_DATA_BYTES     1
  `define MAX_CMD_PAYLOAD_BYTES  4
+
+/**
+ * Register info.
+ */
+ // register 0
+ `define REG0        0
+ `define REG0_BITS   4
+ `define REG0_RESET  8'h0F
+ // register 1
+ `define REG1        1
+ `define REG1_BITS   8
+ `define REG1_RESET  8'hFF
+ // register 2
+ `define REG2        2
+ `define REG2_BITS   16
+ `define REG2_RESET  16'hf1_f2
+ // register 3
+ `define REG3        3
+ `define REG3_BITS   24
+ `define REG3_RESET  24'h06_07_08
+ // register 4
+ `define REG4        4
+ `define REG4_BITS   32
+ `define REG4_RESET  32'hAA_BB_CC_DD

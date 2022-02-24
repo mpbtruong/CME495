@@ -2,7 +2,7 @@
 `include "uart_globals.svh"
 
 /**
- * Monitor control uart.
+ * Top level monitor/controller using receiver and transmitter uart modules.
  *
  * baud_rate = 115200 (112.5 khz)
  * bit_time = 1s / 115200 bits 
@@ -16,13 +16,13 @@
 module monitor_top(
     output reg[$clog2(`MONITOR_STATES_NUM)-1:0] state, // monitor state machine state
 
-    output reg[8*`NUM_CMD_BYTES-1:0]               cmd,          // command from controller
-    output reg                                     cmd_rw,       // MSB bit of command read/write command
-    output reg[8*`NUM_CMD_BYTES-2:0]               cmd_id,       // command id
-    output reg[8*`NUM_CMD_DATA_BYTES-1:0]          data_size,    // number of bytes to read or write
-    output reg[8*`MAX_CMD_PAYLOAD_BYTES-1:0]       cmd_data,     // command data
-    output reg[$clog2(`MAX_CMD_PAYLOAD_BYTES)-1:0] cmd_data_idx, // command data byte index
-    output reg                                     cmd_tx_busy_prev,
+    output reg[8*`NUM_CMD_BYTES-1:0]               cmd,              // command from controller
+    output reg                                     cmd_rw,           // MSB bit of command read/write command
+    output reg[8*`NUM_CMD_BYTES-2:0]               cmd_id,           // command id
+    output reg[8*`NUM_CMD_DATA_BYTES-1:0]          data_size,        // number of bytes to read or write
+    output reg[8*`MAX_CMD_PAYLOAD_BYTES-1:0]       cmd_data,         // command data
+    output reg[$clog2(`MAX_CMD_PAYLOAD_BYTES)-1:0] cmd_data_idx,     // command data byte index
+    output reg                                     cmd_tx_busy_prev, // delayed tx_busy
 
 
 
@@ -58,6 +58,13 @@ reg[`NUM_DATA_BITS-1:0] tx_byte;   // data bits to transmit
 reg                     tx_done;   // tx transaction is done
 reg                     tx_busy;   // tx is busy
 reg                     tx_error;  // tx has error
+// registers
+reg                     reg_write; // high if a reg should be written to
+reg[`REG0_BITS-1:0]     reg0;      //
+reg[`REG1_BITS-1:0]     reg1;      //
+reg[`REG2_BITS-1:0]     reg2;      //
+reg[`REG3_BITS-1:0]     reg3;      //
+reg[`REG4_BITS-1:0]     reg4;      //
 
 // I/O (LEDs, SW, etc.) ////////////////////////////////////////////////////////
 always @(*) begin
@@ -85,7 +92,7 @@ always @(*) begin
 end
 
 
-// uart instantiations /////////////////////////////////////////////////////////
+// uart  ///////////////////////////////////////////////////////////////////////
 // create the baud clks from the 50Mhz src clk
 baud_generator #(.CLK_FRQ(`CLK_FRQ), .BAUD_RATE(`BAUD_RATE_TX))
 baud_gen_tx(
@@ -110,7 +117,6 @@ uart_rx receiver(
     .busy(rx_busy),
     .error(rx_error)
 );
-
 // create the uart transmitter
 uart_tx transmitter(
     .baud(baud_tx),
@@ -123,9 +129,7 @@ uart_tx transmitter(
     .error(tx_error)
 );
 
-// monitor declarations ////////////////////////////////////////////////////////
-
-
+// monitor /////////////////////////////////////////////////////////////////////
 // monitor helper logic ////////////////////////////////////////////////////////
 always @(*) begin
     // assign uart control signals
@@ -135,7 +139,12 @@ always @(*) begin
     {cmd_rw, cmd_id} <= cmd; // split cmd into r/w and id.
 end
 
-// monitor command state machine logic /////////////////////////////////////////
+always @(posedge baud_rx) begin
+    // clk in previous tx_busy status because of baud_rx/baud_tx timing issue
+    cmd_tx_busy_prev <= tx_busy;
+end
+
+// monitor state machine ///////////////////////////////////////////////////////
 always @ (posedge baud_rx) begin
     if (reset) begin
         MONITOR_RESET();
@@ -149,7 +158,6 @@ always @ (posedge baud_rx) begin
             default : state <= `MONITOR_STATE_IDLE;
         endcase
     end
-    cmd_tx_busy_prev <= tx_busy;
 end
 
 // monitor states //////////////////////////////////////////////////////////////
@@ -166,8 +174,10 @@ task MONITOR_RESET();
     data_size    <= 0;
     cmd_data     <= 0;
     cmd_data_idx <= 0;
+    reg_write    <= 0; // disable reg write
 endtask
 task MONITOR_STATE_IDLE();
+    reg_write    <= 0; // disable reg write
     // check if controller is requesting to start a command
     if (!uart_rts && !rx_busy) begin
         // requesting to send command and not busy
@@ -194,9 +204,19 @@ task MONITOR_STATE_DATA_BYTES();
         // go to read or write state
         if (cmd_rw) begin
             state    <= `MONITOR_STATE_WRITE;
+            // clear command data buffer for new data
             cmd_data <= 0;
         end else begin
             state    <= `MONITOR_STATE_READ;
+            // set cmd_data to the right reg for reading
+            case (cmd_id)
+                `REG0 : cmd_data <= reg0;
+                `REG1 : cmd_data <= reg1;
+                `REG2 : cmd_data <= reg2;
+                `REG3 : cmd_data <= reg3;
+                `REG4 : cmd_data <= reg4;
+                default: cmd_data <= 0;
+            endcase
         end
     end
 endtask
@@ -209,7 +229,8 @@ task MONITOR_STATE_WRITE();
         // check if done
         if (cmd_data_idx == data_size-1) begin
             // done reading write data
-            state <= `MONITOR_STATE_IDLE;
+            state     <= `MONITOR_STATE_IDLE;
+            reg_write <= 1; // enable reg write
         end
     end
 endtask
@@ -232,5 +253,54 @@ task MONITOR_STATE_READ();
         tx_write <= 1; // write first byte
     end
 endtask
+
+// registers ///////////////////////////////////////////////////////////////////
+// instances ///////////////////////////////////////////////////////////////////
+// register 0
+register #(.DATA_BITS(`REG0_BITS), .RESET_VALUE(`REG0_RESET)) 
+inst_reg0(
+    .clk(baud_rx),
+    .reset(reset),
+    .write(reg_write && (cmd_id == `REG0)),
+    .data_in(cmd_data),
+    .data(reg0)
+);
+// register 1
+register #(.DATA_BITS(`REG1_BITS), .RESET_VALUE(`REG1_RESET)) 
+inst_reg1(
+    .clk(baud_rx),
+    .reset(reset),
+    .write(reg_write && (cmd_id == `REG1)),
+    .data_in(cmd_data),
+    .data(reg1)
+);
+// register 2
+register #(.DATA_BITS(`REG2_BITS), .RESET_VALUE(`REG2_RESET)) 
+inst_reg2(
+    .clk(baud_rx),
+    .reset(reset),
+    .write(reg_write && (cmd_id == `REG2)),
+    .data_in(cmd_data),
+    .data(reg2)
+);
+// register 3
+register #(.DATA_BITS(`REG3_BITS), .RESET_VALUE(`REG3_RESET)) 
+inst_reg3(
+    .clk(baud_rx),
+    .reset(reset),
+    .write(reg_write && (cmd_id == `REG3)),
+    .data_in(cmd_data),
+    .data(reg3)
+);
+// register 4
+register #(.DATA_BITS(`REG4_BITS), .RESET_VALUE(`REG4_RESET)) 
+inst_reg4(
+    .clk(baud_rx),
+    .reset(reset),
+    .write(reg_write && (cmd_id == `REG4)),
+    .data_in(cmd_data),
+    .data(reg4)
+);
+
 
 endmodule

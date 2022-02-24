@@ -133,7 +133,7 @@ class MonitorFPGA(Monitor):
             return int.to_bytes(aint, no_bytes, self.BYTE_ENDIAN)
 
     # constants ################################################################
-    # command names
+    # command names (reg<i>_<reg_name>)
     CMD_0  = 'reg0_'
     CMD_1  = 'reg1_'
     CMD_2  = 'reg2_'
@@ -141,7 +141,7 @@ class MonitorFPGA(Monitor):
     CMD_4  = 'reg4_'
     # dictionary of commands
     commands = {
-        CMD_0  : Command(cid=0, no_rwbytes=0, name=CMD_0),
+        CMD_0  : Command(cid=0, no_rwbytes=1, name=CMD_0),
         CMD_1  : Command(cid=1, no_rwbytes=1, name=CMD_1),
         CMD_2  : Command(cid=2, no_rwbytes=2, name=CMD_2),
         CMD_3  : Command(cid=3, no_rwbytes=3, name=CMD_3),
