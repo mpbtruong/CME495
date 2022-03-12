@@ -1,4 +1,5 @@
 # Imports ######################################################################
+from re import T
 from PyQt5.QtCore import QObject, pyqtSlot
 
 # Globals ######################################################################
@@ -17,6 +18,7 @@ class Controller(QObject):
         Press the Connect Button in the Connection Frame
         """
         # TODO
+        self._model.connectStatus = True
         print("Connected!")
     
     @pyqtSlot(bool)
@@ -25,6 +27,7 @@ class Controller(QObject):
         Press the Disconnect Button in the Connection Frame
         """
         # TODO
+        self._model.connectStatus = False
         print("Disconnected!")
 
     @pyqtSlot(int)

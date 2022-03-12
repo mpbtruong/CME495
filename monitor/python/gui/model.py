@@ -12,3 +12,5 @@ class Model(QObject):
         super().__init__()
 
         # TODO: set model default values
+        self.connectStatus = False
+        

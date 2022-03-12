@@ -64,6 +64,7 @@ class MonitorGPSReceiver(Monitor):
     # sentence types (not exhaustive)
     GSA = 'GSA' # GPS DOP and active satellites
     GGA = 'GGA' # Global Positioning System Fix Data
+    # TODO Check what sentence types we want to display on GUI
 
     # exceptions ###############################################################
     class ReadNMEAFrameError(Exception):

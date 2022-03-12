@@ -83,11 +83,10 @@ class Monitor():
         self.config = config
         # uart port
         self.port = None
-        self.assign_port(device_vid=self.config.device_vid, 
-                         device_pid=self.config.device_pid)
         # serial uart instance
         self.uart:serial.Serial = None
-        self.create_uart()
+        # connect to a port for uart communication
+        self.connect_uart()
 
     def __str__(self)->str:
         """
@@ -105,6 +104,14 @@ class Monitor():
     
     # methods ##################################################################
     # initialization ###########################################################
+    def connect_uart(self):
+        """
+        Connects to a port for uart communication
+        """
+        self.assign_port(device_vid=self.config.device_vid, 
+                    device_pid=self.config.device_pid)
+        self.create_uart()
+
     def create_uart(self):
         """
         Initializes the uart for communication.
