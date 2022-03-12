@@ -1,17 +1,14 @@
 # Imports ######################################################################
-from PyQt5 import QtCore, QtGui, QtWidgets
+from PyQt5.QtCore import QObject, pyqtSignal
 
 # Globals ######################################################################
 
 
 # Library ######################################################################
-class Controller():
+class Model(QObject):
+    # TODO: Add model variables (buttons?)
+
     def __init__(self):
-        pass
+        super().__init__()
 
-# Main #########################################################################
-def main():
-    pass
-
-if __name__ == '__main__':
-    main()
+        # TODO: set model default values
