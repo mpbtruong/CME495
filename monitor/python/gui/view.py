@@ -1,15 +1,26 @@
 # Imports ######################################################################
-from re import S
-import sys
+import sys, time
+from threading import Thread
 
 from PyQt5.QtWidgets import QMainWindow
-from PyQt5.QtCore import QObject, pyqtSlot
+from PyQt5.QtCore import pyqtSignal, pyqtSlot, QObject, QThread
 
 from .MainWindow import Ui_MainWindow
 
 # Globals ######################################################################
 
 # Library ######################################################################
+
+class GPSThread(QThread):
+    log = pyqtSignal(str)
+    def __init__(self, parent=None):
+        super(GPSThread, self).__init__(parent)
+
+    def run(self):
+        while(1):
+            time.sleep(1)
+            self.log.emit('HelloWorld!')
+
 class View(QMainWindow, Ui_MainWindow):
     def __init__(self, model, controller):
         super().__init__()
@@ -17,22 +28,35 @@ class View(QMainWindow, Ui_MainWindow):
         self._model = model
         self._controller = controller
 
+        self.commandList = ["Read Reg1", "Write Reg1", "Read Reg2", "Write Reg2"]
+
         # self._ui = Ui_MainWindow()
         # self._ui.setupUi(self)
         self.setupUi(self)
+        self.setupGPSLogging()
 
         # connect widgets to controller
         # self.ConnectButton.clicked.connect(self._controller.pressConnectButton)
         # self.DisconnectButton.clicked.connect(self._controller.pressDisconnectButton)
         self.ConnectButton.clicked.connect(self.pressConnectButton)
         self.DisconnectButton.clicked.connect(self.pressDisconnectButton)
+        self.CommandButton.clicked.connect(self.sendCommand)
 
-
-        # TODO: listen for model event signals to update
+        self.CommandComboBox.addItems(self.commandList)
 
     def setupUI(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
-        MainWindow.resize(490, 663)
+        MainWindow.resize(630, 990)
+
+    def setupGPSLogging(self):
+        self.worker = GPSThread()
+        self.worker.log.connect(self.toLog)
+        self.worker.started.connect(lambda: self.toLog('Starting GPS Logging...'))
+        self.worker.finished.connect(lambda: self.toLog('Stopping GPS Logging...'))
+        self.worker.start()
+
+    def toLog(self, txt):
+        self.GPSTextLog.appendPlainText(txt)
 
     @pyqtSlot(bool)
     def pressConnectButton(self):
@@ -54,11 +78,14 @@ class View(QMainWindow, Ui_MainWindow):
         print("Disconnected!")
         self.FPGATextLog.appendPlainText("Disconnected!")
 
-    @pyqtSlot(int)
-    def sendCommand(self, commandNum):
+    @pyqtSlot(bool)
+    def sendCommand(self):
         """
         Send a command to the FPGA
         """
-        # TODDO
-        print("Sent: " + commandNum)
+        # TODO
+        commandVal = self.CommandTextInput.toPlainText()
+        command = self.CommandComboBox.currentText()
+        print("Sent: " + commandVal + command)
+        self.FPGATextLog.appendPlainText("Sent: " + commandVal + command)
         
