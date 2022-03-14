@@ -124,4 +124,3 @@ class View(QMainWindow, Ui_MainWindow):
             
         print("Sent: " + commandVal + command)
         # self.FPGATextLog.appendPlainText("Sent: " + commandVal + command)
-        
