@@ -27,7 +27,8 @@ class View(QMainWindow, Ui_MainWindow):
 
         self.monitor = monitor
 
-        self.commandList = ["Read Reg0", "Write Reg0", "Read Reg1", "Write Reg1", "Read Reg2", "Write Reg2"]
+        self.commandList = ["Read Reg0", "Write Reg0", "Read Reg1", 
+            "Write Reg1", "Read Reg2", "Write Reg2"]
 
         # self._ui = Ui_MainWindow()
         # self._ui.setupUi(self)
@@ -86,20 +87,39 @@ class View(QMainWindow, Ui_MainWindow):
         """
         Send a command to the FPGA
         """
-        # TODO
         commandVal = self.CommandTextInput.toPlainText()
         command = self.CommandComboBox.currentText()
-
+        
+        # TODO replace read/write REG to abstracted (user-friendly) commands
+        # so that user cannot directly read/write the registers
+        # Read REG0
         if (command == "Read Reg0"):
             self.FPGATextLog.appendPlainText("Sent: " + command)
             cmd = self.monitor.get_command_by_id(0)
             self.monitor.execute_command(cmd, self.monitor.Command.READ)
             self.FPGATextLog.appendPlainText(str(cmd))
-            
+
+        # Write REG0
         elif (command == "Write Reg0"):
             self.FPGATextLog.appendPlainText("Sent: " + commandVal + command)
             cmd = self.monitor.get_command_by_id(0)
-            self.monitor.execute_command(cmd, self.monitor.Command.WRITE, commandVal.encode('utf-8'))
+            self.monitor.execute_command(cmd, self.monitor.Command.WRITE, 
+                commandVal.encode('utf-8'))
+            self.FPGATextLog.appendPlainText(str(cmd))
+
+        # Read REG1
+        elif (command == "Read Reg1"):
+            self.FPGATextLog.appendPlainText("Sent: " + command)
+            cmd = self.monitor.get_command_by_id(1)
+            self.monitor.execute_command(cmd, self.monitor.Command.READ)
+            self.FPGATextLog.appendPlainText(str(cmd))
+
+        # Write REG1
+        elif (command == "Write Reg1"):
+            self.FPGATextLog.appendPlainText("Sent: " + commandVal + command)
+            cmd = self.monitor.get_command_by_id(1)
+            self.monitor.execute_command(cmd, self.monitor.Command.WRITE,
+                commandVal.encode('utf-8'))
             self.FPGATextLog.appendPlainText(str(cmd))
             
         print("Sent: " + commandVal + command)
