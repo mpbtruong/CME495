@@ -5,7 +5,7 @@ from threading import Thread
 from PyQt5.QtWidgets import QMainWindow
 from PyQt5.QtCore import pyqtSignal, pyqtSlot, QObject, QThread
 
-from .MainWindow import Ui_MainWindow
+from MainWindow import Ui_MainWindow
 
 # Globals ######################################################################
 
@@ -22,13 +22,12 @@ class GPSThread(QThread):
             self.log.emit('HelloWorld!')
 
 class View(QMainWindow, Ui_MainWindow):
-    def __init__(self, model, controller):
+    def __init__(self, monitor):
         super().__init__()
 
-        self._model = model
-        self._controller = controller
+        self.monitor = monitor
 
-        self.commandList = ["Read Reg1", "Write Reg1", "Read Reg2", "Write Reg2"]
+        self.commandList = ["Read Reg0", "Write Reg0", "Read Reg1", "Write Reg1", "Read Reg2", "Write Reg2"]
 
         # self._ui = Ui_MainWindow()
         # self._ui.setupUi(self)
@@ -49,13 +48,19 @@ class View(QMainWindow, Ui_MainWindow):
         MainWindow.resize(630, 990)
 
     def setupGPSLogging(self):
+        """
+        Set up a thread for displaying GPS logging data
+        """
         self.worker = GPSThread()
-        self.worker.log.connect(self.toLog)
-        self.worker.started.connect(lambda: self.toLog('Starting GPS Logging...'))
-        self.worker.finished.connect(lambda: self.toLog('Stopping GPS Logging...'))
+        self.worker.log.connect(self.toGPSLog)
+        self.worker.started.connect(lambda: self.toGPSLog('Starting GPS Logging...'))
+        self.worker.finished.connect(lambda: self.toGPSLog('Stopping GPS Logging...'))
         self.worker.start()
 
-    def toLog(self, txt):
+    def toGPSLog(self, txt):
+        """
+        Display a message on the GPS plain text widget.
+        """
         self.GPSTextLog.appendPlainText(txt)
 
     @pyqtSlot(bool)
@@ -64,7 +69,6 @@ class View(QMainWindow, Ui_MainWindow):
         Press the Connect Button in the Connection Frame
         """
         # TODO
-        self._model.connectStatus = True
         print("Connected!")
         self.FPGATextLog.appendPlainText("Connected!")
     
@@ -74,7 +78,6 @@ class View(QMainWindow, Ui_MainWindow):
         Press the Disconnect Button in the Connection Frame
         """
         # TODO
-        self._model.connectStatus = False
         print("Disconnected!")
         self.FPGATextLog.appendPlainText("Disconnected!")
 
@@ -86,6 +89,19 @@ class View(QMainWindow, Ui_MainWindow):
         # TODO
         commandVal = self.CommandTextInput.toPlainText()
         command = self.CommandComboBox.currentText()
+
+        if (command == "Read Reg0"):
+            self.FPGATextLog.appendPlainText("Sent: " + command)
+            cmd = self.monitor.get_command_by_id(0)
+            self.monitor.execute_command(cmd, self.monitor.Command.READ)
+            self.FPGATextLog.appendPlainText(str(cmd))
+            
+        elif (command == "Write Reg0"):
+            self.FPGATextLog.appendPlainText("Sent: " + commandVal + command)
+            cmd = self.monitor.get_command_by_id(0)
+            self.monitor.execute_command(cmd, self.monitor.Command.WRITE, commandVal.encode('utf-8'))
+            self.FPGATextLog.appendPlainText(str(cmd))
+            
         print("Sent: " + commandVal + command)
-        self.FPGATextLog.appendPlainText("Sent: " + commandVal + command)
+        # self.FPGATextLog.appendPlainText("Sent: " + commandVal + command)
         

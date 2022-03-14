@@ -5,9 +5,9 @@ import sys
 
 from PyQt5.QtWidgets import QApplication
 
-from gui.controller import Controller
-from gui.model import Model
-from gui.view import View
+from MonitorFPGA import MonitorFPGA
+from MonitorConfigUART import *
+from view import View
 
 
 # Globals ######################################################################
@@ -33,10 +33,10 @@ def main():
     Main entrance point to the monitor/controller.
     """
     try:
+        FPGAMonitor = MonitorFPGA()
+        print(FPGAMonitor)
         app = QApplication(sys.argv)
-        model = Model()
-        controller = Controller(model)
-        view = View(model, controller)
+        view = View(FPGAMonitor)
         # setup the client GUI
         view.show()
         rc = app.exec_()
