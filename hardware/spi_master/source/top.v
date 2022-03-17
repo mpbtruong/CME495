@@ -31,6 +31,11 @@ module top(
 	output reg signed [15:0] int,
 	output reg signed [15:0] pid_out,
 	output reg signed [31:0] phase_accum,
+	output reg [19:0] ref_clk_shft,
+	output reg [19:0] pps_shft,
+	output wire [18:0] ref_posedge,
+	output reg [19:0] ref_posedge_hold,
+	output wire [18:0] pps_posedge,
 	output wire locked,
 	output reg recov_pps
 );
@@ -83,19 +88,22 @@ always @ (posedge CLOCK_50)
 	else if(count == 16'd550) SPI_byte = DAC_val[7:0];
 
 
-// ************************************* DPPL Phase Detector ************************************* //
-// 9E23
-// Phase Accumulator
-always @ (posedge ref_clk)
-	if(clk_reset) clk_count = 32'b1;
+// ************************************* DPPL Phase Detector ************************************* /
+
+always @ (posedge clk_200)
+	begin
+		ref_clk_shft = {ref_clk_shft[18:0],ref_clk};
+		pps_shft = {pps_shft[18:0], RECV_pps};
+	end
+
+always @ (posedge clk_200)
+	if(pps_posedge[0]) clk_count = 32'd2;
 	else clk_count = clk_count + 32'b1;
 
-always @ (posedge ref_clk)
-	if(clk_count == 10_000_000) recov_pps = 1'b1;
-	else recov_pps = 1'b0;
-
+always @ (posedge clk_200)
+	if(pps_posedge[0]) ref_posedge_hold = ref_posedge;
 // Asynchronus to Synchronus Reset Logic
-always @ (posedge ref_clk)
+always @ (posedge clk_200)
 	begin
 		flag_last = flag;
 		flag = RECV_pps;
@@ -103,73 +111,90 @@ always @ (posedge ref_clk)
 		else clk_reset = 1'b0;
 	end
 
-// Phase Error Calculation
-always @ (posedge RECV_pps)
-	phase_err <= 10_000_000 - clk_count;
+always @ *
+		case(ref_posedge_hold)
+		19'b000_0000_0000_0000_0000: phase_err = -9;
+		19'b000_0000_0000_0000_0001: phase_err = -8;
+		19'b000_0000_0000_0000_0010: phase_err = -7;
+		19'b000_0000_0000_0000_0100: phase_err = -6;
+		19'b000_0000_0000_0000_1000: phase_err = -5;
+		19'b000_0000_0000_0001_0000: phase_err = -4;
+		19'b000_0000_0000_0010_0000: phase_err = -3;
+		19'b000_0000_0000_0100_0000: phase_err = -2;
+		19'b000_0000_0000_1000_0000: phase_err = -1;
+		19'b000_0000_0001_0000_0000: phase_err = 0;
+		19'b000_0000_0010_0000_0000: phase_err = 1;
+		19'b000_0000_0100_0000_0000: phase_err = 2;
+		19'b000_0000_1000_0000_0000: phase_err = 3;
+		19'b000_0001_0000_0000_0000: phase_err = 4;
+		19'b000_0010_0000_0000_0000: phase_err = 5;
+		19'b000_0100_0000_0000_0000: phase_err = 6;
+		19'b000_1000_0000_0000_0000: phase_err = 7;
+		19'b001_0000_0000_0000_0000: phase_err = 8;
+		19'b010_0000_0000_0000_0000: phase_err = 9;
+		19'b100_0000_0000_0000_0000: phase_err = 0;
+		endcase
+	
+assign ref_posedge[0] = ~ref_clk_shft[0] && ref_clk_shft[1];
+assign pps_posedge[0] = ~pps_shft[0] && pps_shft[1];
 
-always @ (posedge RECV_pps)
-	if(clk_count > 10_000_000) phase_dir = 1'b0;
-	else phase_dir = 1'b1;
+assign ref_posedge[1] = ~ref_clk_shft[1] && ref_clk_shft[2];
+assign pps_posedge[1] = ~pps_shft[1] && pps_shft[2];
 
-reg ref_clk_in, ref_clk_out;
-reg pps_clk_in, pps_clk_out;
+assign ref_posedge[2] = ~ref_clk_shft[2] && ref_clk_shft[3];
+assign pps_posedge[2] = ~pps_shft[2] && pps_shft[3];
 
-wire ref_posedge, pps_posedge;
+assign ref_posedge[3] = ~ref_clk_shft[3] && ref_clk_shft[4];
+assign pps_posedge[3] = ~pps_shft[3] && pps_shft[4];
 
-always @ (posedge clk_200)
-	begin
-		ref_clk_in = ref_clk;
-		pps_clk_in = RECV_pps;
-	end
+assign ref_posedge[4] = ~ref_clk_shft[4] && ref_clk_shft[5];
+assign pps_posedge[4] = ~pps_shft[4] && pps_shft[5];
 
-always @ (posedge clk_200)
-	begin
-		ref_clk_out = ref_clk_in;
-		pps_clk_out = pps_clk_in;
-	end
+assign ref_posedge[5] = ~ref_clk_shft[5] && ref_clk_shft[6];
+assign pps_posedge[5] = ~pps_shft[5] && pps_shft[6];
 
-assign ref_posedge = (~ref_clk_out && ref_clk_in);
-assign pps_posedge = (~pps_clk_out && pps_clk_in);
+assign ref_posedge[6] = ~ref_clk_shft[6] && ref_clk_shft[7];
+assign pps_posedge[6] = ~pps_shft[6] && pps_shft[7];
 
-assign locked = ref_posedge && pps_posedge;
+assign ref_posedge[7] = ~ref_clk_shft[7] && ref_clk_shft[8];
+assign pps_posedge[7] = ~pps_shft[7] && pps_shft[8];
+
+assign ref_posedge[8] = ~ref_clk_shft[8] && ref_clk_shft[9];
+assign pps_posedge[8] = ~pps_shft[8] && pps_shft[9];
+
+assign ref_posedge[9] = ~ref_clk_shft[9] && ref_clk_shft[10];
+assign pps_posedge[9] = ~pps_shft[9] && pps_shft[10];
+
+assign ref_posedge[10] = ~ref_clk_shft[10] && ref_clk_shft[11];
+assign pps_posedge[10] = ~pps_shft[10] && pps_shft[11];
+
+assign ref_posedge[11] = ~ref_clk_shft[11] && ref_clk_shft[12];
+assign pps_posedge[11] = ~pps_shft[11] && pps_shft[12];
+
+assign ref_posedge[12] = ~ref_clk_shft[12] && ref_clk_shft[13];
+assign pps_posedge[12] = ~pps_shft[12] && pps_shft[13];
+
+assign ref_posedge[13] = ~ref_clk_shft[13] && ref_clk_shft[14];
+assign pps_posedge[13] = ~pps_shft[13] && pps_shft[14];
+
+assign ref_posedge[14] = ~ref_clk_shft[14] && ref_clk_shft[15];
+assign pps_posedge[14] = ~pps_shft[14] && pps_shft[15];
+
+assign ref_posedge[15] = ~ref_clk_shft[15] && ref_clk_shft[16];
+assign pps_posedge[15] = ~pps_shft[15] && pps_shft[16];
+
+assign ref_posedge[16] = ~ref_clk_shft[16] && ref_clk_shft[17];
+assign pps_posedge[16] = ~pps_shft[16] && pps_shft[17];
+
+assign ref_posedge[17] = ~ref_clk_shft[17] && ref_clk_shft[18];
+assign pps_posedge[17] = ~pps_shft[17] && pps_shft[18];
+
+assign ref_posedge[18] = ~ref_clk_shft[18] && ref_clk_shft[19];
+assign pps_posedge[18] = ~pps_shft[18] && pps_shft[19];
+
 
 
 // ************************************* DPPL PID/Filter ************************************* //
-
-parameter pid_p = 32'd1;
-parameter pid_i = 32'd1;
-reg int_rdy;
-reg signed [31:0] pd_shift[9:0];
-
-always @ (posedge ref_clk)
-	if(clk_reset) 
-		begin
-			pd_shift[9] <= pd_shift[8];
-			pd_shift[8] <= pd_shift[7];
-			pd_shift[7] <= pd_shift[6];
-			pd_shift[6] <= pd_shift[5];
-			pd_shift[5] <= pd_shift[4];
-			pd_shift[4] <= pd_shift[3];
-			pd_shift[3] <= pd_shift[2];
-			pd_shift[2] <= pd_shift[1];
-			pd_shift[1] <= pd_shift[0];
-			if(phase_err > 100 || phase_err < -100 && !locked) pd_shift[0] <= 0;
-			else pd_shift[0] <= phase_err;
-			int <= pd_shift[9] + pd_shift[8] + pd_shift[7] + pd_shift[6] + pd_shift[5] + pd_shift[4] + pd_shift[3] + pd_shift[2] + pd_shift[1] + pd_shift[0];
-			int_rdy <= 1'b1;
-		end
-	else int_rdy = 1'b0;
-
-always @ (posedge ref_clk)
-	if(int_rdy) pid_out = pid_p * phase_err + pid_i * int;
-
-//always @ (posedge ref_clk)
-//	if(int_rdy) data_rdy = 1'b1;
-//	else data_rdy = 1'b0;
-
-always @ (posedge ref_clk)
-	if(!KEY[0]) phase_accum = 0;
-	else if(int_rdy) phase_accum = phase_accum + pd_shift[0];
 
 SPI_Master_With_Single_CS u1(
 	.i_Rst_L(reset),
