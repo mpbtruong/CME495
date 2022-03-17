@@ -64,14 +64,16 @@ always @ *
 
 reg tx_start;
 // ************************************* DAC SPI Control ************************************* //
-always @ (posedge CLOCK_50)
-	if(data_rdy) tx_start = 1'b1;
-	else if(count >=1400) tx_start = 1'b0;
+//always @ (posedge CLOCK_50)
+//	if(data_rdy) tx_start = 1'b1;
+//	else if(count >=1400) tx_start = 1'b0;
 
+//always @ (posedge CLOCK_50)
+//	if(data_rdy) count = 16'b0;
+//	else if(tx_start) count = count + 1'b1;
 always @ (posedge CLOCK_50)
-	if(data_rdy) count = 16'b0;
-	else if(tx_start) count = count + 1'b1;
-		
+	count = count + 1'b1;
+
 always @ (posedge CLOCK_50)
 	if(count == 16'd0 || count == 16'd550) valid = 1;
 	else valid = 0;
@@ -130,6 +132,8 @@ assign ref_posedge = (~ref_clk_out && ref_clk_in);
 assign pps_posedge = (~pps_clk_out && pps_clk_in);
 
 assign locked = ref_posedge && pps_posedge;
+
+
 // ************************************* DPPL PID/Filter ************************************* //
 
 parameter pid_p = 32'd1;
@@ -159,21 +163,20 @@ always @ (posedge ref_clk)
 always @ (posedge ref_clk)
 	if(int_rdy) pid_out = pid_p * phase_err + pid_i * int;
 
-always @ (posedge ref_clk)
-	if(int_rdy) data_rdy = 1'b1;
-	else data_rdy = 1'b0;
+//always @ (posedge ref_clk)
+//	if(int_rdy) data_rdy = 1'b1;
+//	else data_rdy = 1'b0;
 
 always @ (posedge ref_clk)
 	if(!KEY[0]) phase_accum = 0;
 	else if(int_rdy) phase_accum = phase_accum + pd_shift[0];
 
-always @ (posedge clk
 SPI_Master_With_Single_CS u1(
 	.i_Rst_L(reset),
 	.i_Clk(CLOCK_50),
 	.i_TX_Count(2),
 	.i_TX_Byte(SPI_byte),
-	.i_TX_DV(data_rdy),
+	.i_TX_DV(valid),
 	.o_TX_Ready(TX_Ready),
 	.o_SPI_Clk(DAC_clk),
 	.o_SPI_MOSI(DAC_data),
