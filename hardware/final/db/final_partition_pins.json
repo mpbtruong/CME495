@@ -192,6 +192,10 @@
 					"strict" : false
 				},
 				{
+					"name" : "tx_start",
+					"strict" : false
+				},
+				{
 					"name" : "ref_clk_shft[0]",
 					"strict" : false
 				},
@@ -497,6 +501,22 @@
 				},
 				{
 					"name" : "phase_err[15]",
+					"strict" : false
+				},
+				{
+					"name" : "dac_rdy[0]",
+					"strict" : false
+				},
+				{
+					"name" : "dac_rdy[1]",
+					"strict" : false
+				},
+				{
+					"name" : "dac_rdy[2]",
+					"strict" : false
+				},
+				{
+					"name" : "dac_rdy[3]",
 					"strict" : false
 				},
 				{
