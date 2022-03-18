@@ -62,6 +62,7 @@ class MonitorFPGA(Monitor):
                            no_rbytes:int=None,
                            no_wbytes:int=None,
                            read_only:bool=False,
+                           data_type:int=int,
                            ):
             """
             Initializes a command.
@@ -78,6 +79,7 @@ class MonitorFPGA(Monitor):
             self.rbytes     = None
             self.wbytes     = None
             self.name       = name
+            self.data_type  = data_type
         def __str__(self):
             cmd = ''
             cmd += f'Command {self.cid:03} {self.name}\n'
@@ -145,20 +147,32 @@ class MonitorFPGA(Monitor):
             """
             return int.to_bytes(aint, no_bytes, self.BYTE_ENDIAN)
 
+        def get_read_data(self):
+            """
+            TODO
+            """
+            if not cmd.rbytes == None:
+                data = int.from_bytes(cmd.rbytes, self.BYTE_ENDIAN, signed=True)
+            else:
+                data = 0
+            return data
+
     # constants ################################################################
     # command names (reg<i>_<reg_name>)
-    CMD_0  = 'reg0_'
-    CMD_1  = 'reg1_'
-    CMD_2  = 'reg2_'
-    CMD_3  = 'reg3_'
-    CMD_4  = 'reg4_'
+    CMD_0   = 'reg0_'
+    CMD_1   = 'reg1_'
+    CMD_2   = 'reg2_'
+    CMD_3   = 'reg3_'
+    CMD_4   = 'reg4_'
+    CMD_127 = 'reg127_phase_error'
     # dictionary of commands
     commands = {
-        CMD_0  : Command(cid=0, no_rwbytes=1, name=CMD_0),
-        CMD_1  : Command(cid=1, no_rwbytes=1, name=CMD_1),
-        CMD_2  : Command(cid=2, no_rwbytes=2, name=CMD_2),
-        CMD_3  : Command(cid=3, no_rwbytes=3, name=CMD_3),
-        CMD_4  : Command(cid=4, no_rwbytes=4, name=CMD_4),
+        CMD_0    : Command(cid=0, no_rwbytes=1, name=CMD_0),
+        CMD_1    : Command(cid=1, no_rwbytes=1, name=CMD_1),
+        CMD_2    : Command(cid=2, no_rwbytes=2, name=CMD_2),
+        CMD_3    : Command(cid=3, no_rwbytes=3, name=CMD_3),
+        CMD_4    : Command(cid=4, no_rwbytes=4, name=CMD_4),
+        CMD_127  : Command(cid=127, no_rwbytes=2, name=CMD_127, read_only=True, data_type=int)
         # CMD_x  : Command(cid=x, no_rwbytes=2, name=CMD_x, read_only=True),
     }
     commands_by_id = {cmd.cid:cmd for cmd in commands.values()}
