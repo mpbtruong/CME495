@@ -104,13 +104,22 @@ class Monitor():
     
     # methods ##################################################################
     # initialization ###########################################################
+    def is_connected(self):
+        """
+        Returns True if uart is connected, False otherwise
+        """
+        return self.uart is not None
+
     def connect_uart(self):
         """
         Connects to a port for uart communication
         """
-        self.assign_port(device_vid=self.config.device_vid, 
-                    device_pid=self.config.device_pid)
-        self.create_uart()
+        try:
+            self.assign_port(device_vid=self.config.device_vid, 
+                        device_pid=self.config.device_pid)
+            self.create_uart()
+        except:
+            print("could not connect")
 
     def create_uart(self):
         """

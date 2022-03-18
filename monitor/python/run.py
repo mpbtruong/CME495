@@ -6,6 +6,7 @@ import sys
 from PyQt5.QtWidgets import QApplication
 
 from MonitorFPGA import MonitorFPGA
+from MonitorGPSReceiver import MonitorGPSReceiver
 from MonitorConfigUART import *
 from view import View
 
@@ -34,9 +35,11 @@ def main():
     """
     try:
         FPGAMonitor = MonitorFPGA()
+        GPSMonitor = MonitorGPSReceiver()
         print(FPGAMonitor)
+        print(GPSMonitor)
         app = QApplication(sys.argv)
-        view = View(FPGAMonitor)
+        view = View(FPGAMonitor, GPSMonitor)
         # setup the client GUI
         view.show()
         rc = app.exec_()
