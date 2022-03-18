@@ -428,199 +428,199 @@
 					"strict" : false
 				},
 				{
-					"name" : "clk_count[0]",
+					"name" : "phase_err[0]",
 					"strict" : false
 				},
 				{
-					"name" : "clk_count[1]",
+					"name" : "phase_err[1]",
 					"strict" : false
 				},
 				{
-					"name" : "clk_count[2]",
+					"name" : "phase_err[2]",
 					"strict" : false
 				},
 				{
-					"name" : "clk_count[3]",
+					"name" : "phase_err[3]",
 					"strict" : false
 				},
 				{
-					"name" : "clk_count[4]",
+					"name" : "phase_err[4]",
 					"strict" : false
 				},
 				{
-					"name" : "clk_count[5]",
+					"name" : "phase_err[5]",
 					"strict" : false
 				},
 				{
-					"name" : "clk_count[6]",
+					"name" : "phase_err[6]",
 					"strict" : false
 				},
 				{
-					"name" : "clk_count[7]",
+					"name" : "phase_err[7]",
 					"strict" : false
 				},
 				{
-					"name" : "clk_count[8]",
+					"name" : "phase_err[8]",
 					"strict" : false
 				},
 				{
-					"name" : "clk_count[9]",
+					"name" : "phase_err[9]",
 					"strict" : false
 				},
 				{
-					"name" : "clk_count[10]",
+					"name" : "phase_err[10]",
 					"strict" : false
 				},
 				{
-					"name" : "clk_count[11]",
+					"name" : "phase_err[11]",
 					"strict" : false
 				},
 				{
-					"name" : "clk_count[12]",
+					"name" : "phase_err[12]",
 					"strict" : false
 				},
 				{
-					"name" : "clk_count[13]",
+					"name" : "phase_err[13]",
 					"strict" : false
 				},
 				{
-					"name" : "clk_count[14]",
+					"name" : "phase_err[14]",
 					"strict" : false
 				},
 				{
-					"name" : "clk_count[15]",
+					"name" : "phase_err[15]",
 					"strict" : false
 				},
 				{
-					"name" : "clk_count[16]",
+					"name" : "pid_out[0]",
 					"strict" : false
 				},
 				{
-					"name" : "clk_count[17]",
+					"name" : "pid_out[1]",
 					"strict" : false
 				},
 				{
-					"name" : "clk_count[18]",
+					"name" : "pid_out[2]",
 					"strict" : false
 				},
 				{
-					"name" : "clk_count[19]",
+					"name" : "pid_out[3]",
 					"strict" : false
 				},
 				{
-					"name" : "clk_count[20]",
+					"name" : "pid_out[4]",
 					"strict" : false
 				},
 				{
-					"name" : "clk_count[21]",
+					"name" : "pid_out[5]",
 					"strict" : false
 				},
 				{
-					"name" : "clk_count[22]",
+					"name" : "pid_out[6]",
 					"strict" : false
 				},
 				{
-					"name" : "clk_count[23]",
+					"name" : "pid_out[7]",
 					"strict" : false
 				},
 				{
-					"name" : "clk_count[24]",
+					"name" : "pid_out[8]",
 					"strict" : false
 				},
 				{
-					"name" : "clk_count[25]",
+					"name" : "pid_out[9]",
 					"strict" : false
 				},
 				{
-					"name" : "clk_count[26]",
+					"name" : "pid_out[10]",
 					"strict" : false
 				},
 				{
-					"name" : "clk_count[27]",
+					"name" : "pid_out[11]",
 					"strict" : false
 				},
 				{
-					"name" : "clk_count[28]",
+					"name" : "pid_out[12]",
 					"strict" : false
 				},
 				{
-					"name" : "clk_count[29]",
+					"name" : "pid_out[13]",
 					"strict" : false
 				},
 				{
-					"name" : "clk_count[30]",
+					"name" : "pid_out[14]",
 					"strict" : false
 				},
 				{
-					"name" : "clk_count[31]",
+					"name" : "pid_out[15]",
+					"strict" : false
+				},
+				{
+					"name" : "int[0]",
+					"strict" : false
+				},
+				{
+					"name" : "int[1]",
+					"strict" : false
+				},
+				{
+					"name" : "int[2]",
+					"strict" : false
+				},
+				{
+					"name" : "int[3]",
+					"strict" : false
+				},
+				{
+					"name" : "int[4]",
+					"strict" : false
+				},
+				{
+					"name" : "int[5]",
+					"strict" : false
+				},
+				{
+					"name" : "int[6]",
+					"strict" : false
+				},
+				{
+					"name" : "int[7]",
+					"strict" : false
+				},
+				{
+					"name" : "int[8]",
+					"strict" : false
+				},
+				{
+					"name" : "int[9]",
+					"strict" : false
+				},
+				{
+					"name" : "int[10]",
+					"strict" : false
+				},
+				{
+					"name" : "int[11]",
+					"strict" : false
+				},
+				{
+					"name" : "int[12]",
+					"strict" : false
+				},
+				{
+					"name" : "int[13]",
+					"strict" : false
+				},
+				{
+					"name" : "int[14]",
+					"strict" : false
+				},
+				{
+					"name" : "int[15]",
 					"strict" : false
 				},
 				{
 					"name" : "RECV_pps",
-					"strict" : false
-				},
-				{
-					"name" : "SW[0]",
-					"strict" : false
-				},
-				{
-					"name" : "SW[1]",
-					"strict" : false
-				},
-				{
-					"name" : "SW[2]",
-					"strict" : false
-				},
-				{
-					"name" : "SW[3]",
-					"strict" : false
-				},
-				{
-					"name" : "SW[4]",
-					"strict" : false
-				},
-				{
-					"name" : "SW[5]",
-					"strict" : false
-				},
-				{
-					"name" : "SW[6]",
-					"strict" : false
-				},
-				{
-					"name" : "SW[7]",
-					"strict" : false
-				},
-				{
-					"name" : "SW[8]",
-					"strict" : false
-				},
-				{
-					"name" : "SW[9]",
-					"strict" : false
-				},
-				{
-					"name" : "SW[10]",
-					"strict" : false
-				},
-				{
-					"name" : "SW[11]",
-					"strict" : false
-				},
-				{
-					"name" : "SW[12]",
-					"strict" : false
-				},
-				{
-					"name" : "SW[13]",
-					"strict" : false
-				},
-				{
-					"name" : "SW[14]",
-					"strict" : false
-				},
-				{
-					"name" : "SW[15]",
 					"strict" : false
 				},
 				{
