@@ -131,17 +131,14 @@ class View(QMainWindow, Ui_MainWindow):
 
     def plotGraph1(self, xval, yval):
         # TODO replace with plotGraph wrapper 
-        # print(xval)
-        # print(yval)
-        self.graph1XVals.append(xval)
-        # self.graph1YVals.append(yval)
-
-        # Get Phase Error plot data
-        # cmd = self.FPGAMonitor.get_command_by_id(127)
         cmd = self.FPGAMonitor.get_command(self.FPGAMonitor.CMD_127)
         self.executeCommand(cmd, self.FPGAMonitor.Command.READ)
         print(cmd)
         self.graph1YVals.append(cmd.get_read_data())
+        self.graph1XVals.append(xval)
+        if len(self.graph1XVals) > 100:
+            self.graph1XVals = self.graph1XVals[:100]
+            self.graph1YVals = self.graph1YVals[:100]
         self.Graph1Widget.plot(self.graph1XVals,  self.graph1YVals)
 
     def plotGraph2(self, xval, yval):
@@ -150,6 +147,9 @@ class View(QMainWindow, Ui_MainWindow):
         # print(yval)
         self.graph2XVals.append(xval)
         self.graph2YVals.append(yval)
+        if len(self.graph2XVals) > 100:
+            self.graph2XVals = self.graph2XVals[:100]
+            self.graph2YVals = self.graph2YVals[:100]
         self.Graph2Widget.plot(self.graph2XVals,  self.graph2YVals)
 
     def plotGraph(self, graphWidget, xvals, yvals):
