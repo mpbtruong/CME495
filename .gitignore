@@ -17,5 +17,8 @@ hardware/spi_master/*.qsf
 hardware/spi_master/*.qsf.bak
 hardware/spi_master/*.qws
 
+hardware/PPL_v1/db/**
+hardware/PPL_v1/incremental_db/**
+
 # ignore python stuff
 __pycache__

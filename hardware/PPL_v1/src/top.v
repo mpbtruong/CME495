@@ -34,11 +34,20 @@ module top(
 	output reg [18:0] ref_posedge_hold,
 	output wire pps_posedge,
 	output reg [31:0] clk_count,
-	output reg signed [15:0] phase_err
+	output reg signed [15:0] phase_err,
+	
+	output reg signed [15:0] pid_out,
+	output reg signed [31:0] phase_accum,
+	output reg signed [15:0] int,
+	
+	output reg debug_clk
 );
 
 reg ref_clk;
 reg reset;
+initial DAC_val = 16'h9E23;
+(* noprune *) reg [15:0] phase [0:99];
+
 // ************************************* Design Setup ************************************* //
 always @ *
 	begin
@@ -51,7 +60,6 @@ always @ *
 		RECV_rst_n = 1'b1;
 		LEDR[0] = RECV_pps;
 		LEDR[5:1] = 4'b1001;
-		DAC_val = SW[15:0];
 		reset = SW[17];
 		ref_clk = SMA_CLKIN;
 		clk_200 = wclk_200;
@@ -103,14 +111,85 @@ assign ref_posedge[17] = ref_clk_shft[17] && ~ref_clk_shft[18];
 assign ref_posedge[18] = ref_clk_shft[18] && ~ref_clk_shft[19];
 
 
+always@*
+	debug_clk <= clk_200;
+
+reg data_rdy;
 always @ (posedge clk_200)
-	if(RECV_pps && !pps_shft[0]) ref_posedge_hold = ref_posedge;
+	 if(pps_posedge) ref_posedge_hold = ref_posedge;
+
+always @ (posedge clk_200)
+	if(pps_posedge) data_rdy = 1'b1;
+	else data_rdy = 1'b0;
+
+always @ (posedge clk_200)
+		case(ref_posedge_hold)
+		19'b000_0000_0000_0000_0000: phase_err = 1;
+		19'b000_0000_0000_0000_0001: phase_err = 0;
+		19'b000_0000_0000_0000_0010: phase_err = -1;
+		19'b000_0000_0000_0000_0100: phase_err = -2;
+		19'b000_0000_0000_0000_1000: phase_err = -3;
+		19'b000_0000_0000_0001_0000: phase_err = -4;
+		19'b000_0000_0000_0010_0000: phase_err = -5;
+		19'b000_0000_0000_0100_0000: phase_err = -6;
+		19'b000_0000_0000_1000_0000: phase_err = -7;
+		19'b000_0000_0001_0000_0000: phase_err = -8;
+		19'b000_0000_0010_0000_0000: phase_err = -9;
+		19'b000_0000_0100_0000_0000: phase_err = 10;
+		19'b000_0000_1000_0000_0000: phase_err = 9;
+		19'b000_0001_0000_0000_0000: phase_err = 8;
+		19'b000_0010_0000_0000_0000: phase_err = 7;
+		19'b000_0100_0000_0000_0000: phase_err = 6;
+		19'b000_1000_0000_0000_0000: phase_err = 5;
+		19'b001_0000_0000_0000_0000: phase_err = 4;
+		19'b010_0000_0000_0000_0000: phase_err = 3;
+		19'b100_0000_0000_0000_0000: phase_err = 2;
+		endcase
+
+reg int_rdy;
+parameter pid_p = 32'd1;
+parameter pid_i = 32'd1;
+reg signed [31:0] pd_shift[7:0];
+
+always @ (posedge clk_200)
+	if(data_rdy)
+		begin
+			pd_shift[7] <= pd_shift[6];
+			pd_shift[6] <= pd_shift[5];
+			pd_shift[5] <= pd_shift[4];
+			pd_shift[4] <= pd_shift[3];
+			pd_shift[3] <= pd_shift[2];
+			pd_shift[2] <= pd_shift[1];
+			pd_shift[1] <= pd_shift[0];
+			if(phase_err > 100 || phase_err < -100) pd_shift[0] <= 0;
+			else pd_shift[0] <= phase_err;
+			int <= pd_shift[7] + pd_shift[6] + pd_shift[5] + pd_shift[4] + pd_shift[3] + pd_shift[2] + pd_shift[1] + pd_shift[0];
+			int_rdy <= 1'b1;
+		end
+	else int_rdy = 1'b0;
 	
+reg pid_rdy;
+always @ (posedge clk_200)
+	if(int_rdy) 
+	begin
+		pid_out <= pid_p * phase_err + {int[15],int[15],int[15],int[15],int[15:4]};
+		pid_rdy <=1'b1;
+	end
+	else pid_rdy <= 1'b0;
 
 always @ (posedge clk_200)
-	if(pps_posedge) clk_count = 32'd2;
-	else clk_count = clk_count + 32'b1;
-
+	if(pid_rdy) DAC_val = DAC_val + pid_out;
+	
+integer i;
+always@(posedge clk_200) begin
+    if(pid_rdy) begin
+       for(i = 99; i > 0; i=i-1) begin
+          phase[i] <= phase[i-1];
+       end
+       phase[0] <= pid_out;
+    end
+end
+	
 PPL_200MHz p1(
 	.inclk0(CLOCK_50),
 	.c0(wclk_200)
