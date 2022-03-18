@@ -139,7 +139,7 @@ class View(QMainWindow, Ui_MainWindow):
         # Get Phase Error plot data
         # cmd = self.FPGAMonitor.get_command_by_id(127)
         cmd = self.FPGAMonitor.get_command(self.FPGAMonitor.CMD_127)
-        self.executeCommand(cmd, 1)
+        self.executeCommand(cmd, self.FPGAMonitor.Command.READ)
         print(cmd)
         self.graph1YVals.append(cmd.get_read_data())
         self.Graph1Widget.plot(self.graph1XVals,  self.graph1YVals)
@@ -166,10 +166,7 @@ class View(QMainWindow, Ui_MainWindow):
 
     def executeCommand(self, cmd, cmdType=1, data=None):
         self.cmdLock.acquire()
-        if (cmdType):
-            self.FPGAMonitor.execute_command(cmd, self.FPGAMonitor.Command.READ)
-        else:
-            self.FPGAMonitor.execute_command(cmd, self.FPGAMonitor.Command.WRITE, data)
+        self.FPGAMonitor.execute_command(cmd, cmdType, data)
         self.cmdLock.release()
 
     @pyqtSlot(bool)
@@ -212,7 +209,7 @@ class View(QMainWindow, Ui_MainWindow):
             self.FPGATextLog.appendPlainText("Sent: " + command)
             cmd = self.FPGAMonitor.get_command_by_id(0)
             # self.FPGAMonitor.execute_command(cmd, self.FPGAMonitor.Command.READ)
-            self.executeCommand(cmd, 1)
+            self.executeCommand(cmd, self.FPGAMonitor.Command.READ)
             self.FPGATextLog.appendPlainText(str(cmd))
 
         # Write REG0
@@ -221,7 +218,7 @@ class View(QMainWindow, Ui_MainWindow):
             cmd = self.FPGAMonitor.get_command_by_id(0)
             # self.FPGAMonitor.execute_command(cmd, self.FPGAMonitor.Command.WRITE, 
             #     commandVal.encode('utf-8'))
-            self.execute_command(cmd, 0, commandVal.encode('utf-8'))
+            self.execute_command(cmd, self.FPGAMonitor.Command.WRITE, commandVal.encode('utf-8'))
             self.FPGATextLog.appendPlainText(str(cmd))
 
         # # Read REG1
