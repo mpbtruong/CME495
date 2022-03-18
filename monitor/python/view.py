@@ -128,18 +128,33 @@ class View(QMainWindow, Ui_MainWindow):
         self.Graph2worker.start()
 
     def plotGraph1(self, xval, yval):
-        print(xval)
-        print(yval)
+        # TODO replace with plotGraph wrapper 
+        # print(xval)
+        # print(yval)
         self.graph1XVals.append(xval)
-        self.graph1YVals.append(yval)
+        # self.graph1YVals.append(yval)
+
+        # Get Phase Error plot data
+        # cmd = self.FPGAMonitor.get_command_by_id(127)
+        cmd = self.FPGAMonitor.get_command(self.FPGAMonitor.CMD_127)
+        self.FPGAMonitor.execute_command(cmd, self.FPGAMonitor.Command.READ)
+        print(cmd)
+        self.graph1YVals.append(cmd.get_read_data())
         self.Graph1Widget.plot(self.graph1XVals,  self.graph1YVals)
 
     def plotGraph2(self, xval, yval):
-        print(xval)
-        print(yval)
+        # TODO replace with plotGraph wrapper 
+        # print(xval)
+        # print(yval)
         self.graph2XVals.append(xval)
         self.graph2YVals.append(yval)
         self.Graph2Widget.plot(self.graph2XVals,  self.graph2YVals)
+
+    def plotGraph(self, graphWidget, xvals, yvals):
+        """
+        Plots a graph widget with the list of values from xvals and yvals
+        """
+        graphWidget.plot(xvals, yvals)
 
     def toGPSLog(self, txt):
         """
