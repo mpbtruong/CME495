@@ -1,0 +1,16 @@
+Fitter Status : Successful - Thu Mar 17 20:14:51 2022
+Quartus Prime Version : 21.1.0 Build 842 10/21/2021 SJ Lite Edition
+Revision Name : PPL_v1
+Top-level Entity Name : top
+Family : Cyclone IV E
+Device : EP4CE115F29C7
+Timing Models : Final
+Total logic elements : 1,909 / 114,480 ( 2 % )
+    Total combinational functions : 902 / 114,480 ( < 1 % )
+    Dedicated logic registers : 1,676 / 114,480 ( 1 % )
+Total registers : 1676
+Total pins : 214 / 529 ( 40 % )
+Total virtual pins : 0
+Total memory bits : 48,640 / 3,981,312 ( 1 % )
+Embedded Multiplier 9-bit elements : 0 / 532 ( 0 % )
+Total PLLs : 1 / 4 ( 25 % )

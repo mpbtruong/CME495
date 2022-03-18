@@ -1,0 +1,84 @@
+module top(
+	// FPGA I/O
+	input wire CLOCK_50,
+	input wire [17:0] SW,
+	input wire [5:0] KEY,
+	output reg [17:0] LEDR,
+	output reg [7:0] LEDG,
+
+	// PCB I/O
+	input wire RECV_tx_sdo,
+	input wire RECV_pps,
+	input wire SMA_CLKIN,
+	output wire DAC_CS_n,
+	output wire DAC_clk,
+	output wire DAC_data,
+	output reg RECV_rx_sdi,
+	output reg RECV_sck,
+	output reg RECV_scl,
+	output reg RECV_sda,
+	output reg RECV_int,
+	output reg RECV_rst_n,
+
+	// Design I/0
+	output reg clk_200,
+	
+	output reg [15:0] DAC_val,
+	output reg [15:0] count,
+	output reg [7:0] SPI_byte,
+	output reg valid
+	w
+);
+
+reg ref_clk;
+reg reset;
+// ************************************* Design Setup ************************************* //
+always @ *
+	begin
+		RECV_rx_sdi = 1'b0;
+		RECV_sck = 1'b0;
+		RECV_scl = 1'b0;
+		RECV_sck = 1'b0;
+		RECV_sda = 1'b0;
+		RECV_int = 1'b0;
+		RECV_rst_n = 1'b1;
+		LEDR[0] = RECV_pps;
+		DAC_val = SW[15:0];
+		reset = SW[17];
+		ref_clk = SMA_CLKIN;
+		clk_200 = wclk_200;
+	end
+	
+// ************************************* DAC SPI Control ************************************* //
+always @ (posedge CLOCK_50)
+	count = count + 1'b1;
+
+always @ (posedge CLOCK_50)
+	if(count == 16'd0 || count == 16'd550) valid = 1;
+	else valid = 0;
+
+always @ (posedge CLOCK_50)
+	if(count == 16'd0) SPI_byte = DAC_val[15:8];
+	else if(count == 16'd550) SPI_byte = DAC_val[7:0];
+
+// ************************************* DPPL Phase Detector ************************************* //
+//always @ (posedge clk_200)
+//	begin
+//		ref_clk_shft = {ref_clk_shft[18:0],ref_clk};
+//		pps_shft = {pps_shft[18:0], RECV_pps};
+//	end
+//
+//always @ (posedge clk_200)
+//	if(pps_posedge[0]) clk_count = 32'd2;
+//	else clk_count = clk_count + 32'b1;
+//
+//always @ (posedge clk_200)
+//	if(pps_posedge[0]) ref_posedge_hold = ref_posedge;
+//	
+
+PPL_200MHz p1(
+	.inclk0(CLOCK_50),
+	.c0(wclk_200)
+);
+
+endmodule

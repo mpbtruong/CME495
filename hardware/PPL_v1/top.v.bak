@@ -1,0 +1,32 @@
+module top(
+	// FPGA I/O
+	input wire CLOCK_50,
+	input wire [17:0] SW,
+	input wire [5:0] KEY,
+	output reg [17:0] LEDR,
+	output reg [7:0] LEDG,
+
+	// PCB I/O
+	input wire RECV_tx_sdo,
+	input wire RECV_pps,
+	input wire SMA_CLKIN,
+	output wire DAC_CS_n,
+	output wire DAC_clk,
+	output wire DAC_data,
+	output reg RECV_rx_sdi,
+	output reg RECV_sck,
+	output reg RECV_scl,
+	output reg RECV_sda,
+	output reg RECV_int,
+	output reg RECV_rst_n,
+
+	// Design I/0
+	output reg clk_200,
+);
+
+PPL_200 p1(
+	.inclk0(CLOCK_50),
+	.c0(clk_200)
+);
+
+endmodule();

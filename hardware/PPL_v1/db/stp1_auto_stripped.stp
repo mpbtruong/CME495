@@ -1,0 +1,692 @@
+<session jtag_chain="USB-Blaster [1-4]" jtag_device="@1: 10CL120(Y|Z)/EP3C120/.. (0x020F70DD)" sof_file="../output_files/PPL_v1.sof">
+  <display_tree gui_logging_enabled="0">
+    <display_branch instance="auto_signaltap_0" log="USE_GLOBAL_TEMP" signal_set="USE_GLOBAL_TEMP" trigger="USE_GLOBAL_TEMP"/>
+  </display_tree>
+  <instance enabled="true" entity_name="sld_signaltap" is_auto_node="yes" is_expanded="true" name="auto_signaltap_0" source_file="sld_signaltap.vhd">
+    <node_ip_info instance_id="0" mfg_id="110" node_id="0" version="6"/>
+    <signal_set global_temp="1" is_expanded="true" name="signal_set: 2022/03/17 19:40:43  #0">
+      <clock name="clk_200" polarity="posedge" tap_mode="classic"/>
+      <config pipeline_level="0" ram_type="AUTO" reserved_data_nodes="0" reserved_storage_qualifier_nodes="0" reserved_trigger_nodes="0" sample_depth="512" trigger_in_enable="no" trigger_out_enable="no"/>
+      <top_entity/>
+      <signal_vec>
+        <trigger_input_vec>
+          <wire name="DAC_val[0]" tap_mode="classic"/>
+          <wire name="DAC_val[10]" tap_mode="classic"/>
+          <wire name="DAC_val[11]" tap_mode="classic"/>
+          <wire name="DAC_val[12]" tap_mode="classic"/>
+          <wire name="DAC_val[13]" tap_mode="classic"/>
+          <wire name="DAC_val[14]" tap_mode="classic"/>
+          <wire name="DAC_val[15]" tap_mode="classic"/>
+          <wire name="DAC_val[1]" tap_mode="classic"/>
+          <wire name="DAC_val[2]" tap_mode="classic"/>
+          <wire name="DAC_val[3]" tap_mode="classic"/>
+          <wire name="DAC_val[4]" tap_mode="classic"/>
+          <wire name="DAC_val[5]" tap_mode="classic"/>
+          <wire name="DAC_val[6]" tap_mode="classic"/>
+          <wire name="DAC_val[7]" tap_mode="classic"/>
+          <wire name="DAC_val[8]" tap_mode="classic"/>
+          <wire name="DAC_val[9]" tap_mode="classic"/>
+          <wire name="RECV_pps" tap_mode="classic"/>
+          <wire name="SMA_CLKIN" tap_mode="classic"/>
+          <wire name="count[0]" tap_mode="classic"/>
+          <wire name="count[10]" tap_mode="classic"/>
+          <wire name="count[11]" tap_mode="classic"/>
+          <wire name="count[12]" tap_mode="classic"/>
+          <wire name="count[13]" tap_mode="classic"/>
+          <wire name="count[14]" tap_mode="classic"/>
+          <wire name="count[15]" tap_mode="classic"/>
+          <wire name="count[1]" tap_mode="classic"/>
+          <wire name="count[2]" tap_mode="classic"/>
+          <wire name="count[3]" tap_mode="classic"/>
+          <wire name="count[4]" tap_mode="classic"/>
+          <wire name="count[5]" tap_mode="classic"/>
+          <wire name="count[6]" tap_mode="classic"/>
+          <wire name="count[7]" tap_mode="classic"/>
+          <wire name="count[8]" tap_mode="classic"/>
+          <wire name="count[9]" tap_mode="classic"/>
+          <wire name="pps_posedge" tap_mode="classic"/>
+          <wire name="pps_shft[0]" tap_mode="classic"/>
+          <wire name="pps_shft[1]" tap_mode="classic"/>
+          <wire name="ref_clk_shft[0]" tap_mode="classic"/>
+          <wire name="ref_clk_shft[10]" tap_mode="classic"/>
+          <wire name="ref_clk_shft[11]" tap_mode="classic"/>
+          <wire name="ref_clk_shft[12]" tap_mode="classic"/>
+          <wire name="ref_clk_shft[13]" tap_mode="classic"/>
+          <wire name="ref_clk_shft[14]" tap_mode="classic"/>
+          <wire name="ref_clk_shft[15]" tap_mode="classic"/>
+          <wire name="ref_clk_shft[16]" tap_mode="classic"/>
+          <wire name="ref_clk_shft[17]" tap_mode="classic"/>
+          <wire name="ref_clk_shft[18]" tap_mode="classic"/>
+          <wire name="ref_clk_shft[19]" tap_mode="classic"/>
+          <wire name="ref_clk_shft[1]" tap_mode="classic"/>
+          <wire name="ref_clk_shft[2]" tap_mode="classic"/>
+          <wire name="ref_clk_shft[3]" tap_mode="classic"/>
+          <wire name="ref_clk_shft[4]" tap_mode="classic"/>
+          <wire name="ref_clk_shft[5]" tap_mode="classic"/>
+          <wire name="ref_clk_shft[6]" tap_mode="classic"/>
+          <wire name="ref_clk_shft[7]" tap_mode="classic"/>
+          <wire name="ref_clk_shft[8]" tap_mode="classic"/>
+          <wire name="ref_clk_shft[9]" tap_mode="classic"/>
+          <wire name="ref_posedge[0]" tap_mode="classic"/>
+          <wire name="ref_posedge[10]" tap_mode="classic"/>
+          <wire name="ref_posedge[11]" tap_mode="classic"/>
+          <wire name="ref_posedge[12]" tap_mode="classic"/>
+          <wire name="ref_posedge[13]" tap_mode="classic"/>
+          <wire name="ref_posedge[14]" tap_mode="classic"/>
+          <wire name="ref_posedge[15]" tap_mode="classic"/>
+          <wire name="ref_posedge[16]" tap_mode="classic"/>
+          <wire name="ref_posedge[17]" tap_mode="classic"/>
+          <wire name="ref_posedge[18]" tap_mode="classic"/>
+          <wire name="ref_posedge[1]" tap_mode="classic"/>
+          <wire name="ref_posedge[2]" tap_mode="classic"/>
+          <wire name="ref_posedge[3]" tap_mode="classic"/>
+          <wire name="ref_posedge[4]" tap_mode="classic"/>
+          <wire name="ref_posedge[5]" tap_mode="classic"/>
+          <wire name="ref_posedge[6]" tap_mode="classic"/>
+          <wire name="ref_posedge[7]" tap_mode="classic"/>
+          <wire name="ref_posedge[8]" tap_mode="classic"/>
+          <wire name="ref_posedge[9]" tap_mode="classic"/>
+          <wire name="ref_posedge_hold[0]" tap_mode="classic"/>
+          <wire name="ref_posedge_hold[10]" tap_mode="classic"/>
+          <wire name="ref_posedge_hold[11]" tap_mode="classic"/>
+          <wire name="ref_posedge_hold[12]" tap_mode="classic"/>
+          <wire name="ref_posedge_hold[13]" tap_mode="classic"/>
+          <wire name="ref_posedge_hold[14]" tap_mode="classic"/>
+          <wire name="ref_posedge_hold[15]" tap_mode="classic"/>
+          <wire name="ref_posedge_hold[16]" tap_mode="classic"/>
+          <wire name="ref_posedge_hold[17]" tap_mode="classic"/>
+          <wire name="ref_posedge_hold[18]" tap_mode="classic"/>
+          <wire name="ref_posedge_hold[1]" tap_mode="classic"/>
+          <wire name="ref_posedge_hold[2]" tap_mode="classic"/>
+          <wire name="ref_posedge_hold[3]" tap_mode="classic"/>
+          <wire name="ref_posedge_hold[4]" tap_mode="classic"/>
+          <wire name="ref_posedge_hold[5]" tap_mode="classic"/>
+          <wire name="ref_posedge_hold[6]" tap_mode="classic"/>
+          <wire name="ref_posedge_hold[7]" tap_mode="classic"/>
+          <wire name="ref_posedge_hold[8]" tap_mode="classic"/>
+          <wire name="ref_posedge_hold[9]" tap_mode="classic"/>
+        </trigger_input_vec>
+        <data_input_vec>
+          <wire name="DAC_val[0]" tap_mode="classic"/>
+          <wire name="DAC_val[10]" tap_mode="classic"/>
+          <wire name="DAC_val[11]" tap_mode="classic"/>
+          <wire name="DAC_val[12]" tap_mode="classic"/>
+          <wire name="DAC_val[13]" tap_mode="classic"/>
+          <wire name="DAC_val[14]" tap_mode="classic"/>
+          <wire name="DAC_val[15]" tap_mode="classic"/>
+          <wire name="DAC_val[1]" tap_mode="classic"/>
+          <wire name="DAC_val[2]" tap_mode="classic"/>
+          <wire name="DAC_val[3]" tap_mode="classic"/>
+          <wire name="DAC_val[4]" tap_mode="classic"/>
+          <wire name="DAC_val[5]" tap_mode="classic"/>
+          <wire name="DAC_val[6]" tap_mode="classic"/>
+          <wire name="DAC_val[7]" tap_mode="classic"/>
+          <wire name="DAC_val[8]" tap_mode="classic"/>
+          <wire name="DAC_val[9]" tap_mode="classic"/>
+          <wire name="RECV_pps" tap_mode="classic"/>
+          <wire name="SMA_CLKIN" tap_mode="classic"/>
+          <wire name="count[0]" tap_mode="classic"/>
+          <wire name="count[10]" tap_mode="classic"/>
+          <wire name="count[11]" tap_mode="classic"/>
+          <wire name="count[12]" tap_mode="classic"/>
+          <wire name="count[13]" tap_mode="classic"/>
+          <wire name="count[14]" tap_mode="classic"/>
+          <wire name="count[15]" tap_mode="classic"/>
+          <wire name="count[1]" tap_mode="classic"/>
+          <wire name="count[2]" tap_mode="classic"/>
+          <wire name="count[3]" tap_mode="classic"/>
+          <wire name="count[4]" tap_mode="classic"/>
+          <wire name="count[5]" tap_mode="classic"/>
+          <wire name="count[6]" tap_mode="classic"/>
+          <wire name="count[7]" tap_mode="classic"/>
+          <wire name="count[8]" tap_mode="classic"/>
+          <wire name="count[9]" tap_mode="classic"/>
+          <wire name="pps_posedge" tap_mode="classic"/>
+          <wire name="pps_shft[0]" tap_mode="classic"/>
+          <wire name="pps_shft[1]" tap_mode="classic"/>
+          <wire name="ref_clk_shft[0]" tap_mode="classic"/>
+          <wire name="ref_clk_shft[10]" tap_mode="classic"/>
+          <wire name="ref_clk_shft[11]" tap_mode="classic"/>
+          <wire name="ref_clk_shft[12]" tap_mode="classic"/>
+          <wire name="ref_clk_shft[13]" tap_mode="classic"/>
+          <wire name="ref_clk_shft[14]" tap_mode="classic"/>
+          <wire name="ref_clk_shft[15]" tap_mode="classic"/>
+          <wire name="ref_clk_shft[16]" tap_mode="classic"/>
+          <wire name="ref_clk_shft[17]" tap_mode="classic"/>
+          <wire name="ref_clk_shft[18]" tap_mode="classic"/>
+          <wire name="ref_clk_shft[19]" tap_mode="classic"/>
+          <wire name="ref_clk_shft[1]" tap_mode="classic"/>
+          <wire name="ref_clk_shft[2]" tap_mode="classic"/>
+          <wire name="ref_clk_shft[3]" tap_mode="classic"/>
+          <wire name="ref_clk_shft[4]" tap_mode="classic"/>
+          <wire name="ref_clk_shft[5]" tap_mode="classic"/>
+          <wire name="ref_clk_shft[6]" tap_mode="classic"/>
+          <wire name="ref_clk_shft[7]" tap_mode="classic"/>
+          <wire name="ref_clk_shft[8]" tap_mode="classic"/>
+          <wire name="ref_clk_shft[9]" tap_mode="classic"/>
+          <wire name="ref_posedge[0]" tap_mode="classic"/>
+          <wire name="ref_posedge[10]" tap_mode="classic"/>
+          <wire name="ref_posedge[11]" tap_mode="classic"/>
+          <wire name="ref_posedge[12]" tap_mode="classic"/>
+          <wire name="ref_posedge[13]" tap_mode="classic"/>
+          <wire name="ref_posedge[14]" tap_mode="classic"/>
+          <wire name="ref_posedge[15]" tap_mode="classic"/>
+          <wire name="ref_posedge[16]" tap_mode="classic"/>
+          <wire name="ref_posedge[17]" tap_mode="classic"/>
+          <wire name="ref_posedge[18]" tap_mode="classic"/>
+          <wire name="ref_posedge[1]" tap_mode="classic"/>
+          <wire name="ref_posedge[2]" tap_mode="classic"/>
+          <wire name="ref_posedge[3]" tap_mode="classic"/>
+          <wire name="ref_posedge[4]" tap_mode="classic"/>
+          <wire name="ref_posedge[5]" tap_mode="classic"/>
+          <wire name="ref_posedge[6]" tap_mode="classic"/>
+          <wire name="ref_posedge[7]" tap_mode="classic"/>
+          <wire name="ref_posedge[8]" tap_mode="classic"/>
+          <wire name="ref_posedge[9]" tap_mode="classic"/>
+          <wire name="ref_posedge_hold[0]" tap_mode="classic"/>
+          <wire name="ref_posedge_hold[10]" tap_mode="classic"/>
+          <wire name="ref_posedge_hold[11]" tap_mode="classic"/>
+          <wire name="ref_posedge_hold[12]" tap_mode="classic"/>
+          <wire name="ref_posedge_hold[13]" tap_mode="classic"/>
+          <wire name="ref_posedge_hold[14]" tap_mode="classic"/>
+          <wire name="ref_posedge_hold[15]" tap_mode="classic"/>
+          <wire name="ref_posedge_hold[16]" tap_mode="classic"/>
+          <wire name="ref_posedge_hold[17]" tap_mode="classic"/>
+          <wire name="ref_posedge_hold[18]" tap_mode="classic"/>
+          <wire name="ref_posedge_hold[1]" tap_mode="classic"/>
+          <wire name="ref_posedge_hold[2]" tap_mode="classic"/>
+          <wire name="ref_posedge_hold[3]" tap_mode="classic"/>
+          <wire name="ref_posedge_hold[4]" tap_mode="classic"/>
+          <wire name="ref_posedge_hold[5]" tap_mode="classic"/>
+          <wire name="ref_posedge_hold[6]" tap_mode="classic"/>
+          <wire name="ref_posedge_hold[7]" tap_mode="classic"/>
+          <wire name="ref_posedge_hold[8]" tap_mode="classic"/>
+          <wire name="ref_posedge_hold[9]" tap_mode="classic"/>
+        </data_input_vec>
+        <storage_qualifier_input_vec>
+          <wire name="DAC_val[0]" tap_mode="classic"/>
+          <wire name="DAC_val[10]" tap_mode="classic"/>
+          <wire name="DAC_val[11]" tap_mode="classic"/>
+          <wire name="DAC_val[12]" tap_mode="classic"/>
+          <wire name="DAC_val[13]" tap_mode="classic"/>
+          <wire name="DAC_val[14]" tap_mode="classic"/>
+          <wire name="DAC_val[15]" tap_mode="classic"/>
+          <wire name="DAC_val[1]" tap_mode="classic"/>
+          <wire name="DAC_val[2]" tap_mode="classic"/>
+          <wire name="DAC_val[3]" tap_mode="classic"/>
+          <wire name="DAC_val[4]" tap_mode="classic"/>
+          <wire name="DAC_val[5]" tap_mode="classic"/>
+          <wire name="DAC_val[6]" tap_mode="classic"/>
+          <wire name="DAC_val[7]" tap_mode="classic"/>
+          <wire name="DAC_val[8]" tap_mode="classic"/>
+          <wire name="DAC_val[9]" tap_mode="classic"/>
+          <wire name="RECV_pps" tap_mode="classic"/>
+          <wire name="SMA_CLKIN" tap_mode="classic"/>
+          <wire name="count[0]" tap_mode="classic"/>
+          <wire name="count[10]" tap_mode="classic"/>
+          <wire name="count[11]" tap_mode="classic"/>
+          <wire name="count[12]" tap_mode="classic"/>
+          <wire name="count[13]" tap_mode="classic"/>
+          <wire name="count[14]" tap_mode="classic"/>
+          <wire name="count[15]" tap_mode="classic"/>
+          <wire name="count[1]" tap_mode="classic"/>
+          <wire name="count[2]" tap_mode="classic"/>
+          <wire name="count[3]" tap_mode="classic"/>
+          <wire name="count[4]" tap_mode="classic"/>
+          <wire name="count[5]" tap_mode="classic"/>
+          <wire name="count[6]" tap_mode="classic"/>
+          <wire name="count[7]" tap_mode="classic"/>
+          <wire name="count[8]" tap_mode="classic"/>
+          <wire name="count[9]" tap_mode="classic"/>
+          <wire name="pps_posedge" tap_mode="classic"/>
+          <wire name="pps_shft[0]" tap_mode="classic"/>
+          <wire name="pps_shft[1]" tap_mode="classic"/>
+          <wire name="ref_clk_shft[0]" tap_mode="classic"/>
+          <wire name="ref_clk_shft[10]" tap_mode="classic"/>
+          <wire name="ref_clk_shft[11]" tap_mode="classic"/>
+          <wire name="ref_clk_shft[12]" tap_mode="classic"/>
+          <wire name="ref_clk_shft[13]" tap_mode="classic"/>
+          <wire name="ref_clk_shft[14]" tap_mode="classic"/>
+          <wire name="ref_clk_shft[15]" tap_mode="classic"/>
+          <wire name="ref_clk_shft[16]" tap_mode="classic"/>
+          <wire name="ref_clk_shft[17]" tap_mode="classic"/>
+          <wire name="ref_clk_shft[18]" tap_mode="classic"/>
+          <wire name="ref_clk_shft[19]" tap_mode="classic"/>
+          <wire name="ref_clk_shft[1]" tap_mode="classic"/>
+          <wire name="ref_clk_shft[2]" tap_mode="classic"/>
+          <wire name="ref_clk_shft[3]" tap_mode="classic"/>
+          <wire name="ref_clk_shft[4]" tap_mode="classic"/>
+          <wire name="ref_clk_shft[5]" tap_mode="classic"/>
+          <wire name="ref_clk_shft[6]" tap_mode="classic"/>
+          <wire name="ref_clk_shft[7]" tap_mode="classic"/>
+          <wire name="ref_clk_shft[8]" tap_mode="classic"/>
+          <wire name="ref_clk_shft[9]" tap_mode="classic"/>
+          <wire name="ref_posedge[0]" tap_mode="classic"/>
+          <wire name="ref_posedge[10]" tap_mode="classic"/>
+          <wire name="ref_posedge[11]" tap_mode="classic"/>
+          <wire name="ref_posedge[12]" tap_mode="classic"/>
+          <wire name="ref_posedge[13]" tap_mode="classic"/>
+          <wire name="ref_posedge[14]" tap_mode="classic"/>
+          <wire name="ref_posedge[15]" tap_mode="classic"/>
+          <wire name="ref_posedge[16]" tap_mode="classic"/>
+          <wire name="ref_posedge[17]" tap_mode="classic"/>
+          <wire name="ref_posedge[18]" tap_mode="classic"/>
+          <wire name="ref_posedge[1]" tap_mode="classic"/>
+          <wire name="ref_posedge[2]" tap_mode="classic"/>
+          <wire name="ref_posedge[3]" tap_mode="classic"/>
+          <wire name="ref_posedge[4]" tap_mode="classic"/>
+          <wire name="ref_posedge[5]" tap_mode="classic"/>
+          <wire name="ref_posedge[6]" tap_mode="classic"/>
+          <wire name="ref_posedge[7]" tap_mode="classic"/>
+          <wire name="ref_posedge[8]" tap_mode="classic"/>
+          <wire name="ref_posedge[9]" tap_mode="classic"/>
+          <wire name="ref_posedge_hold[0]" tap_mode="classic"/>
+          <wire name="ref_posedge_hold[10]" tap_mode="classic"/>
+          <wire name="ref_posedge_hold[11]" tap_mode="classic"/>
+          <wire name="ref_posedge_hold[12]" tap_mode="classic"/>
+          <wire name="ref_posedge_hold[13]" tap_mode="classic"/>
+          <wire name="ref_posedge_hold[14]" tap_mode="classic"/>
+          <wire name="ref_posedge_hold[15]" tap_mode="classic"/>
+          <wire name="ref_posedge_hold[16]" tap_mode="classic"/>
+          <wire name="ref_posedge_hold[17]" tap_mode="classic"/>
+          <wire name="ref_posedge_hold[18]" tap_mode="classic"/>
+          <wire name="ref_posedge_hold[1]" tap_mode="classic"/>
+          <wire name="ref_posedge_hold[2]" tap_mode="classic"/>
+          <wire name="ref_posedge_hold[3]" tap_mode="classic"/>
+          <wire name="ref_posedge_hold[4]" tap_mode="classic"/>
+          <wire name="ref_posedge_hold[5]" tap_mode="classic"/>
+          <wire name="ref_posedge_hold[6]" tap_mode="classic"/>
+          <wire name="ref_posedge_hold[7]" tap_mode="classic"/>
+          <wire name="ref_posedge_hold[8]" tap_mode="classic"/>
+          <wire name="ref_posedge_hold[9]" tap_mode="classic"/>
+        </storage_qualifier_input_vec>
+      </signal_vec>
+      <presentation>
+        <unified_setup_data_view>
+          <node is_selected="false" level-0="alt_or" name="DAC_val[15..0]" order="msb_to_lsb" type="output pin">
+            <node data_index="6" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="true" name="DAC_val[15]" storage_index="6" tap_mode="classic" trigger_index="6" type="unknown"/>
+            <node data_index="5" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="true" name="DAC_val[14]" storage_index="5" tap_mode="classic" trigger_index="5" type="unknown"/>
+            <node data_index="4" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="true" name="DAC_val[13]" storage_index="4" tap_mode="classic" trigger_index="4" type="unknown"/>
+            <node data_index="3" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="true" name="DAC_val[12]" storage_index="3" tap_mode="classic" trigger_index="3" type="unknown"/>
+            <node data_index="2" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="true" name="DAC_val[11]" storage_index="2" tap_mode="classic" trigger_index="2" type="unknown"/>
+            <node data_index="1" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="true" name="DAC_val[10]" storage_index="1" tap_mode="classic" trigger_index="1" type="unknown"/>
+            <node data_index="15" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="true" name="DAC_val[9]" storage_index="15" tap_mode="classic" trigger_index="15" type="unknown"/>
+            <node data_index="14" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="true" name="DAC_val[8]" storage_index="14" tap_mode="classic" trigger_index="14" type="unknown"/>
+            <node data_index="13" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="true" name="DAC_val[7]" storage_index="13" tap_mode="classic" trigger_index="13" type="unknown"/>
+            <node data_index="12" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="true" name="DAC_val[6]" storage_index="12" tap_mode="classic" trigger_index="12" type="unknown"/>
+            <node data_index="11" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="true" name="DAC_val[5]" storage_index="11" tap_mode="classic" trigger_index="11" type="unknown"/>
+            <node data_index="10" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="true" name="DAC_val[4]" storage_index="10" tap_mode="classic" trigger_index="10" type="unknown"/>
+            <node data_index="9" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="true" name="DAC_val[3]" storage_index="9" tap_mode="classic" trigger_index="9" type="unknown"/>
+            <node data_index="8" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="true" name="DAC_val[2]" storage_index="8" tap_mode="classic" trigger_index="8" type="unknown"/>
+            <node data_index="7" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="true" name="DAC_val[1]" storage_index="7" tap_mode="classic" trigger_index="7" type="unknown"/>
+            <node data_index="0" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="true" name="DAC_val[0]" storage_index="0" tap_mode="classic" trigger_index="0" type="unknown"/>
+          </node>
+          <node data_index="16" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="true" level-0="rising edge" name="RECV_pps" storage_index="16" tap_mode="classic" trigger_index="16" type="unknown"/>
+          <node data_index="17" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="true" name="SMA_CLKIN" storage_index="17" tap_mode="classic" trigger_index="17" type="unknown"/>
+          <node is_selected="false" level-0="alt_or" name="count[15..0]" order="msb_to_lsb" radix="unsigned_dec" state="collapse" type="output pin">
+            <node data_index="24" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="true" name="count[15]" storage_index="24" tap_mode="classic" trigger_index="24" type="unknown"/>
+            <node data_index="23" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="true" name="count[14]" storage_index="23" tap_mode="classic" trigger_index="23" type="unknown"/>
+            <node data_index="22" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="true" name="count[13]" storage_index="22" tap_mode="classic" trigger_index="22" type="unknown"/>
+            <node data_index="21" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="true" name="count[12]" storage_index="21" tap_mode="classic" trigger_index="21" type="unknown"/>
+            <node data_index="20" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="true" name="count[11]" storage_index="20" tap_mode="classic" trigger_index="20" type="unknown"/>
+            <node data_index="19" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="true" name="count[10]" storage_index="19" tap_mode="classic" trigger_index="19" type="unknown"/>
+            <node data_index="33" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="true" name="count[9]" storage_index="33" tap_mode="classic" trigger_index="33" type="unknown"/>
+            <node data_index="32" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="true" name="count[8]" storage_index="32" tap_mode="classic" trigger_index="32" type="unknown"/>
+            <node data_index="31" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="true" name="count[7]" storage_index="31" tap_mode="classic" trigger_index="31" type="unknown"/>
+            <node data_index="30" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="true" name="count[6]" storage_index="30" tap_mode="classic" trigger_index="30" type="unknown"/>
+            <node data_index="29" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="true" name="count[5]" storage_index="29" tap_mode="classic" trigger_index="29" type="unknown"/>
+            <node data_index="28" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="true" name="count[4]" storage_index="28" tap_mode="classic" trigger_index="28" type="unknown"/>
+            <node data_index="27" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="true" name="count[3]" storage_index="27" tap_mode="classic" trigger_index="27" type="unknown"/>
+            <node data_index="26" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="true" name="count[2]" storage_index="26" tap_mode="classic" trigger_index="26" type="unknown"/>
+            <node data_index="25" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="true" name="count[1]" storage_index="25" tap_mode="classic" trigger_index="25" type="unknown"/>
+            <node data_index="18" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="true" name="count[0]" storage_index="18" tap_mode="classic" trigger_index="18" type="unknown"/>
+          </node>
+          <node is_selected="false" level-0="alt_or" name="ref_posedge_hold[18..0]" order="msb_to_lsb" radix="hex" state="expand" type="output pin">
+            <node data_index="85" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="true" level-0="dont_care" name="ref_posedge_hold[18]" storage_index="85" tap_mode="classic" trigger_index="85" type="unknown"/>
+            <node data_index="84" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="true" level-0="dont_care" name="ref_posedge_hold[17]" storage_index="84" tap_mode="classic" trigger_index="84" type="unknown"/>
+            <node data_index="83" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="true" name="ref_posedge_hold[16]" storage_index="83" tap_mode="classic" trigger_index="83" type="unknown"/>
+            <node data_index="82" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="true" name="ref_posedge_hold[15]" storage_index="82" tap_mode="classic" trigger_index="82" type="unknown"/>
+            <node data_index="81" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="true" name="ref_posedge_hold[14]" storage_index="81" tap_mode="classic" trigger_index="81" type="unknown"/>
+            <node data_index="80" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="true" name="ref_posedge_hold[13]" storage_index="80" tap_mode="classic" trigger_index="80" type="unknown"/>
+            <node data_index="79" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="true" name="ref_posedge_hold[12]" storage_index="79" tap_mode="classic" trigger_index="79" type="unknown"/>
+            <node data_index="78" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="true" name="ref_posedge_hold[11]" storage_index="78" tap_mode="classic" trigger_index="78" type="unknown"/>
+            <node data_index="77" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="true" name="ref_posedge_hold[10]" storage_index="77" tap_mode="classic" trigger_index="77" type="unknown"/>
+            <node data_index="94" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="true" name="ref_posedge_hold[9]" storage_index="94" tap_mode="classic" trigger_index="94" type="unknown"/>
+            <node data_index="93" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="true" name="ref_posedge_hold[8]" storage_index="93" tap_mode="classic" trigger_index="93" type="unknown"/>
+            <node data_index="92" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="true" name="ref_posedge_hold[7]" storage_index="92" tap_mode="classic" trigger_index="92" type="unknown"/>
+            <node data_index="91" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="true" name="ref_posedge_hold[6]" storage_index="91" tap_mode="classic" trigger_index="91" type="unknown"/>
+            <node data_index="90" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="true" name="ref_posedge_hold[5]" storage_index="90" tap_mode="classic" trigger_index="90" type="unknown"/>
+            <node data_index="89" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="true" name="ref_posedge_hold[4]" storage_index="89" tap_mode="classic" trigger_index="89" type="unknown"/>
+            <node data_index="88" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="true" name="ref_posedge_hold[3]" storage_index="88" tap_mode="classic" trigger_index="88" type="unknown"/>
+            <node data_index="87" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="true" name="ref_posedge_hold[2]" storage_index="87" tap_mode="classic" trigger_index="87" type="unknown"/>
+            <node data_index="86" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="true" name="ref_posedge_hold[1]" storage_index="86" tap_mode="classic" trigger_index="86" type="unknown"/>
+            <node data_index="76" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="true" name="ref_posedge_hold[0]" storage_index="76" tap_mode="classic" trigger_index="76" type="unknown"/>
+          </node>
+          <node is_selected="false" level-0="alt_or" name="ref_posedge[18..0]" order="msb_to_lsb" state="expand" type="output pin">
+            <node data_index="66" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="true" name="ref_posedge[18]" storage_index="66" tap_mode="classic" trigger_index="66" type="unknown"/>
+            <node data_index="65" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="true" name="ref_posedge[17]" storage_index="65" tap_mode="classic" trigger_index="65" type="unknown"/>
+            <node data_index="64" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="true" name="ref_posedge[16]" storage_index="64" tap_mode="classic" trigger_index="64" type="unknown"/>
+            <node data_index="63" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="true" name="ref_posedge[15]" storage_index="63" tap_mode="classic" trigger_index="63" type="unknown"/>
+            <node data_index="62" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="true" name="ref_posedge[14]" storage_index="62" tap_mode="classic" trigger_index="62" type="unknown"/>
+            <node data_index="61" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="true" name="ref_posedge[13]" storage_index="61" tap_mode="classic" trigger_index="61" type="unknown"/>
+            <node data_index="60" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="true" name="ref_posedge[12]" storage_index="60" tap_mode="classic" trigger_index="60" type="unknown"/>
+            <node data_index="59" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="true" name="ref_posedge[11]" storage_index="59" tap_mode="classic" trigger_index="59" type="unknown"/>
+            <node data_index="58" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="true" name="ref_posedge[10]" storage_index="58" tap_mode="classic" trigger_index="58" type="unknown"/>
+            <node data_index="75" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="true" name="ref_posedge[9]" storage_index="75" tap_mode="classic" trigger_index="75" type="unknown"/>
+            <node data_index="74" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="true" name="ref_posedge[8]" storage_index="74" tap_mode="classic" trigger_index="74" type="unknown"/>
+            <node data_index="73" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="true" name="ref_posedge[7]" storage_index="73" tap_mode="classic" trigger_index="73" type="unknown"/>
+            <node data_index="72" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="true" name="ref_posedge[6]" storage_index="72" tap_mode="classic" trigger_index="72" type="unknown"/>
+            <node data_index="71" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="true" name="ref_posedge[5]" storage_index="71" tap_mode="classic" trigger_index="71" type="unknown"/>
+            <node data_index="70" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="true" name="ref_posedge[4]" storage_index="70" tap_mode="classic" trigger_index="70" type="unknown"/>
+            <node data_index="69" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="true" name="ref_posedge[3]" storage_index="69" tap_mode="classic" trigger_index="69" type="unknown"/>
+            <node data_index="68" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="true" name="ref_posedge[2]" storage_index="68" tap_mode="classic" trigger_index="68" type="unknown"/>
+            <node data_index="67" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="true" name="ref_posedge[1]" storage_index="67" tap_mode="classic" trigger_index="67" type="unknown"/>
+            <node data_index="57" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="true" name="ref_posedge[0]" storage_index="57" tap_mode="classic" trigger_index="57" type="unknown"/>
+          </node>
+          <node is_selected="false" level-0="alt_or" name="ref_clk_shft[19..0]" order="msb_to_lsb" state="collapse" type="output pin">
+            <node data_index="47" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="true" name="ref_clk_shft[19]" storage_index="47" tap_mode="classic" trigger_index="47" type="unknown"/>
+            <node data_index="46" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="true" name="ref_clk_shft[18]" storage_index="46" tap_mode="classic" trigger_index="46" type="unknown"/>
+            <node data_index="45" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="true" name="ref_clk_shft[17]" storage_index="45" tap_mode="classic" trigger_index="45" type="unknown"/>
+            <node data_index="44" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="true" name="ref_clk_shft[16]" storage_index="44" tap_mode="classic" trigger_index="44" type="unknown"/>
+            <node data_index="43" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="true" name="ref_clk_shft[15]" storage_index="43" tap_mode="classic" trigger_index="43" type="unknown"/>
+            <node data_index="42" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="true" name="ref_clk_shft[14]" storage_index="42" tap_mode="classic" trigger_index="42" type="unknown"/>
+            <node data_index="41" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="true" name="ref_clk_shft[13]" storage_index="41" tap_mode="classic" trigger_index="41" type="unknown"/>
+            <node data_index="40" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="true" name="ref_clk_shft[12]" storage_index="40" tap_mode="classic" trigger_index="40" type="unknown"/>
+            <node data_index="39" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="true" name="ref_clk_shft[11]" storage_index="39" tap_mode="classic" trigger_index="39" type="unknown"/>
+            <node data_index="38" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="true" name="ref_clk_shft[10]" storage_index="38" tap_mode="classic" trigger_index="38" type="unknown"/>
+            <node data_index="56" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="true" name="ref_clk_shft[9]" storage_index="56" tap_mode="classic" trigger_index="56" type="unknown"/>
+            <node data_index="55" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="true" name="ref_clk_shft[8]" storage_index="55" tap_mode="classic" trigger_index="55" type="unknown"/>
+            <node data_index="54" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="true" name="ref_clk_shft[7]" storage_index="54" tap_mode="classic" trigger_index="54" type="unknown"/>
+            <node data_index="53" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="true" name="ref_clk_shft[6]" storage_index="53" tap_mode="classic" trigger_index="53" type="unknown"/>
+            <node data_index="52" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="true" name="ref_clk_shft[5]" storage_index="52" tap_mode="classic" trigger_index="52" type="unknown"/>
+            <node data_index="51" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="true" name="ref_clk_shft[4]" storage_index="51" tap_mode="classic" trigger_index="51" type="unknown"/>
+            <node data_index="50" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="true" name="ref_clk_shft[3]" storage_index="50" tap_mode="classic" trigger_index="50" type="unknown"/>
+            <node data_index="49" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="true" name="ref_clk_shft[2]" storage_index="49" tap_mode="classic" trigger_index="49" type="unknown"/>
+            <node data_index="48" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="true" name="ref_clk_shft[1]" storage_index="48" tap_mode="classic" trigger_index="48" type="unknown"/>
+            <node data_index="37" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="true" name="ref_clk_shft[0]" storage_index="37" tap_mode="classic" trigger_index="37" type="unknown"/>
+          </node>
+          <node is_selected="false" level-0="alt_or" name="pps_shft[1..0]" order="msb_to_lsb" state="collapse" type="output pin">
+            <node data_index="36" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="true" name="pps_shft[1]" storage_index="36" tap_mode="classic" trigger_index="36" type="unknown"/>
+            <node data_index="35" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="true" name="pps_shft[0]" storage_index="35" tap_mode="classic" trigger_index="35" type="unknown"/>
+          </node>
+          <node data_index="34" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="true" name="pps_posedge" storage_index="34" tap_mode="classic" trigger_index="34" type="unknown"/>
+        </unified_setup_data_view>
+        <data_view>
+          <bus is_selected="false" level-0="alt_or" name="DAC_val[15..0]" order="msb_to_lsb" type="output pin">
+            <net data_index="6" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="true" name="DAC_val[15]" storage_index="6" tap_mode="classic" trigger_index="6" type="unknown"/>
+            <net data_index="5" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="true" name="DAC_val[14]" storage_index="5" tap_mode="classic" trigger_index="5" type="unknown"/>
+            <net data_index="4" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="true" name="DAC_val[13]" storage_index="4" tap_mode="classic" trigger_index="4" type="unknown"/>
+            <net data_index="3" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="true" name="DAC_val[12]" storage_index="3" tap_mode="classic" trigger_index="3" type="unknown"/>
+            <net data_index="2" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="true" name="DAC_val[11]" storage_index="2" tap_mode="classic" trigger_index="2" type="unknown"/>
+            <net data_index="1" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="true" name="DAC_val[10]" storage_index="1" tap_mode="classic" trigger_index="1" type="unknown"/>
+            <net data_index="15" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="true" name="DAC_val[9]" storage_index="15" tap_mode="classic" trigger_index="15" type="unknown"/>
+            <net data_index="14" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="true" name="DAC_val[8]" storage_index="14" tap_mode="classic" trigger_index="14" type="unknown"/>
+            <net data_index="13" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="true" name="DAC_val[7]" storage_index="13" tap_mode="classic" trigger_index="13" type="unknown"/>
+            <net data_index="12" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="true" name="DAC_val[6]" storage_index="12" tap_mode="classic" trigger_index="12" type="unknown"/>
+            <net data_index="11" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="true" name="DAC_val[5]" storage_index="11" tap_mode="classic" trigger_index="11" type="unknown"/>
+            <net data_index="10" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="true" name="DAC_val[4]" storage_index="10" tap_mode="classic" trigger_index="10" type="unknown"/>
+            <net data_index="9" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="true" name="DAC_val[3]" storage_index="9" tap_mode="classic" trigger_index="9" type="unknown"/>
+            <net data_index="8" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="true" name="DAC_val[2]" storage_index="8" tap_mode="classic" trigger_index="8" type="unknown"/>
+            <net data_index="7" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="true" name="DAC_val[1]" storage_index="7" tap_mode="classic" trigger_index="7" type="unknown"/>
+            <net data_index="0" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="true" name="DAC_val[0]" storage_index="0" tap_mode="classic" trigger_index="0" type="unknown"/>
+          </bus>
+          <net data_index="16" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="true" level-0="rising edge" name="RECV_pps" storage_index="16" tap_mode="classic" trigger_index="16" type="unknown"/>
+          <net data_index="17" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="true" name="SMA_CLKIN" storage_index="17" tap_mode="classic" trigger_index="17" type="unknown"/>
+          <bus is_selected="false" level-0="alt_or" name="count[15..0]" order="msb_to_lsb" radix="unsigned_dec" state="collapse" type="output pin">
+            <net data_index="24" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="true" name="count[15]" storage_index="24" tap_mode="classic" trigger_index="24" type="unknown"/>
+            <net data_index="23" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="true" name="count[14]" storage_index="23" tap_mode="classic" trigger_index="23" type="unknown"/>
+            <net data_index="22" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="true" name="count[13]" storage_index="22" tap_mode="classic" trigger_index="22" type="unknown"/>
+            <net data_index="21" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="true" name="count[12]" storage_index="21" tap_mode="classic" trigger_index="21" type="unknown"/>
+            <net data_index="20" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="true" name="count[11]" storage_index="20" tap_mode="classic" trigger_index="20" type="unknown"/>
+            <net data_index="19" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="true" name="count[10]" storage_index="19" tap_mode="classic" trigger_index="19" type="unknown"/>
+            <net data_index="33" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="true" name="count[9]" storage_index="33" tap_mode="classic" trigger_index="33" type="unknown"/>
+            <net data_index="32" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="true" name="count[8]" storage_index="32" tap_mode="classic" trigger_index="32" type="unknown"/>
+            <net data_index="31" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="true" name="count[7]" storage_index="31" tap_mode="classic" trigger_index="31" type="unknown"/>
+            <net data_index="30" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="true" name="count[6]" storage_index="30" tap_mode="classic" trigger_index="30" type="unknown"/>
+            <net data_index="29" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="true" name="count[5]" storage_index="29" tap_mode="classic" trigger_index="29" type="unknown"/>
+            <net data_index="28" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="true" name="count[4]" storage_index="28" tap_mode="classic" trigger_index="28" type="unknown"/>
+            <net data_index="27" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="true" name="count[3]" storage_index="27" tap_mode="classic" trigger_index="27" type="unknown"/>
+            <net data_index="26" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="true" name="count[2]" storage_index="26" tap_mode="classic" trigger_index="26" type="unknown"/>
+            <net data_index="25" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="true" name="count[1]" storage_index="25" tap_mode="classic" trigger_index="25" type="unknown"/>
+            <net data_index="18" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="true" name="count[0]" storage_index="18" tap_mode="classic" trigger_index="18" type="unknown"/>
+          </bus>
+          <bus is_selected="false" level-0="alt_or" name="ref_posedge_hold[18..0]" order="msb_to_lsb" radix="hex" state="expand" type="output pin">
+            <net data_index="85" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="true" level-0="dont_care" name="ref_posedge_hold[18]" storage_index="85" tap_mode="classic" trigger_index="85" type="unknown"/>
+            <net data_index="84" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="true" level-0="dont_care" name="ref_posedge_hold[17]" storage_index="84" tap_mode="classic" trigger_index="84" type="unknown"/>
+            <net data_index="83" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="true" name="ref_posedge_hold[16]" storage_index="83" tap_mode="classic" trigger_index="83" type="unknown"/>
+            <net data_index="82" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="true" name="ref_posedge_hold[15]" storage_index="82" tap_mode="classic" trigger_index="82" type="unknown"/>
+            <net data_index="81" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="true" name="ref_posedge_hold[14]" storage_index="81" tap_mode="classic" trigger_index="81" type="unknown"/>
+            <net data_index="80" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="true" name="ref_posedge_hold[13]" storage_index="80" tap_mode="classic" trigger_index="80" type="unknown"/>
+            <net data_index="79" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="true" name="ref_posedge_hold[12]" storage_index="79" tap_mode="classic" trigger_index="79" type="unknown"/>
+            <net data_index="78" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="true" name="ref_posedge_hold[11]" storage_index="78" tap_mode="classic" trigger_index="78" type="unknown"/>
+            <net data_index="77" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="true" name="ref_posedge_hold[10]" storage_index="77" tap_mode="classic" trigger_index="77" type="unknown"/>
+            <net data_index="94" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="true" name="ref_posedge_hold[9]" storage_index="94" tap_mode="classic" trigger_index="94" type="unknown"/>
+            <net data_index="93" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="true" name="ref_posedge_hold[8]" storage_index="93" tap_mode="classic" trigger_index="93" type="unknown"/>
+            <net data_index="92" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="true" name="ref_posedge_hold[7]" storage_index="92" tap_mode="classic" trigger_index="92" type="unknown"/>
+            <net data_index="91" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="true" name="ref_posedge_hold[6]" storage_index="91" tap_mode="classic" trigger_index="91" type="unknown"/>
+            <net data_index="90" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="true" name="ref_posedge_hold[5]" storage_index="90" tap_mode="classic" trigger_index="90" type="unknown"/>
+            <net data_index="89" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="true" name="ref_posedge_hold[4]" storage_index="89" tap_mode="classic" trigger_index="89" type="unknown"/>
+            <net data_index="88" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="true" name="ref_posedge_hold[3]" storage_index="88" tap_mode="classic" trigger_index="88" type="unknown"/>
+            <net data_index="87" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="true" name="ref_posedge_hold[2]" storage_index="87" tap_mode="classic" trigger_index="87" type="unknown"/>
+            <net data_index="86" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="true" name="ref_posedge_hold[1]" storage_index="86" tap_mode="classic" trigger_index="86" type="unknown"/>
+            <net data_index="76" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="true" name="ref_posedge_hold[0]" storage_index="76" tap_mode="classic" trigger_index="76" type="unknown"/>
+          </bus>
+          <bus is_selected="false" level-0="alt_or" name="ref_posedge[18..0]" order="msb_to_lsb" state="expand" type="output pin">
+            <net data_index="66" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="true" name="ref_posedge[18]" storage_index="66" tap_mode="classic" trigger_index="66" type="unknown"/>
+            <net data_index="65" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="true" name="ref_posedge[17]" storage_index="65" tap_mode="classic" trigger_index="65" type="unknown"/>
+            <net data_index="64" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="true" name="ref_posedge[16]" storage_index="64" tap_mode="classic" trigger_index="64" type="unknown"/>
+            <net data_index="63" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="true" name="ref_posedge[15]" storage_index="63" tap_mode="classic" trigger_index="63" type="unknown"/>
+            <net data_index="62" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="true" name="ref_posedge[14]" storage_index="62" tap_mode="classic" trigger_index="62" type="unknown"/>
+            <net data_index="61" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="true" name="ref_posedge[13]" storage_index="61" tap_mode="classic" trigger_index="61" type="unknown"/>
+            <net data_index="60" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="true" name="ref_posedge[12]" storage_index="60" tap_mode="classic" trigger_index="60" type="unknown"/>
+            <net data_index="59" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="true" name="ref_posedge[11]" storage_index="59" tap_mode="classic" trigger_index="59" type="unknown"/>
+            <net data_index="58" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="true" name="ref_posedge[10]" storage_index="58" tap_mode="classic" trigger_index="58" type="unknown"/>
+            <net data_index="75" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="true" name="ref_posedge[9]" storage_index="75" tap_mode="classic" trigger_index="75" type="unknown"/>
+            <net data_index="74" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="true" name="ref_posedge[8]" storage_index="74" tap_mode="classic" trigger_index="74" type="unknown"/>
+            <net data_index="73" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="true" name="ref_posedge[7]" storage_index="73" tap_mode="classic" trigger_index="73" type="unknown"/>
+            <net data_index="72" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="true" name="ref_posedge[6]" storage_index="72" tap_mode="classic" trigger_index="72" type="unknown"/>
+            <net data_index="71" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="true" name="ref_posedge[5]" storage_index="71" tap_mode="classic" trigger_index="71" type="unknown"/>
+            <net data_index="70" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="true" name="ref_posedge[4]" storage_index="70" tap_mode="classic" trigger_index="70" type="unknown"/>
+            <net data_index="69" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="true" name="ref_posedge[3]" storage_index="69" tap_mode="classic" trigger_index="69" type="unknown"/>
+            <net data_index="68" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="true" name="ref_posedge[2]" storage_index="68" tap_mode="classic" trigger_index="68" type="unknown"/>
+            <net data_index="67" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="true" name="ref_posedge[1]" storage_index="67" tap_mode="classic" trigger_index="67" type="unknown"/>
+            <net data_index="57" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="true" name="ref_posedge[0]" storage_index="57" tap_mode="classic" trigger_index="57" type="unknown"/>
+          </bus>
+          <bus is_selected="false" level-0="alt_or" name="ref_clk_shft[19..0]" order="msb_to_lsb" state="collapse" type="output pin">
+            <net data_index="47" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="true" name="ref_clk_shft[19]" storage_index="47" tap_mode="classic" trigger_index="47" type="unknown"/>
+            <net data_index="46" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="true" name="ref_clk_shft[18]" storage_index="46" tap_mode="classic" trigger_index="46" type="unknown"/>
+            <net data_index="45" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="true" name="ref_clk_shft[17]" storage_index="45" tap_mode="classic" trigger_index="45" type="unknown"/>
+            <net data_index="44" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="true" name="ref_clk_shft[16]" storage_index="44" tap_mode="classic" trigger_index="44" type="unknown"/>
+            <net data_index="43" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="true" name="ref_clk_shft[15]" storage_index="43" tap_mode="classic" trigger_index="43" type="unknown"/>
+            <net data_index="42" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="true" name="ref_clk_shft[14]" storage_index="42" tap_mode="classic" trigger_index="42" type="unknown"/>
+            <net data_index="41" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="true" name="ref_clk_shft[13]" storage_index="41" tap_mode="classic" trigger_index="41" type="unknown"/>
+            <net data_index="40" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="true" name="ref_clk_shft[12]" storage_index="40" tap_mode="classic" trigger_index="40" type="unknown"/>
+            <net data_index="39" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="true" name="ref_clk_shft[11]" storage_index="39" tap_mode="classic" trigger_index="39" type="unknown"/>
+            <net data_index="38" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="true" name="ref_clk_shft[10]" storage_index="38" tap_mode="classic" trigger_index="38" type="unknown"/>
+            <net data_index="56" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="true" name="ref_clk_shft[9]" storage_index="56" tap_mode="classic" trigger_index="56" type="unknown"/>
+            <net data_index="55" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="true" name="ref_clk_shft[8]" storage_index="55" tap_mode="classic" trigger_index="55" type="unknown"/>
+            <net data_index="54" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="true" name="ref_clk_shft[7]" storage_index="54" tap_mode="classic" trigger_index="54" type="unknown"/>
+            <net data_index="53" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="true" name="ref_clk_shft[6]" storage_index="53" tap_mode="classic" trigger_index="53" type="unknown"/>
+            <net data_index="52" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="true" name="ref_clk_shft[5]" storage_index="52" tap_mode="classic" trigger_index="52" type="unknown"/>
+            <net data_index="51" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="true" name="ref_clk_shft[4]" storage_index="51" tap_mode="classic" trigger_index="51" type="unknown"/>
+            <net data_index="50" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="true" name="ref_clk_shft[3]" storage_index="50" tap_mode="classic" trigger_index="50" type="unknown"/>
+            <net data_index="49" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="true" name="ref_clk_shft[2]" storage_index="49" tap_mode="classic" trigger_index="49" type="unknown"/>
+            <net data_index="48" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="true" name="ref_clk_shft[1]" storage_index="48" tap_mode="classic" trigger_index="48" type="unknown"/>
+            <net data_index="37" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="true" name="ref_clk_shft[0]" storage_index="37" tap_mode="classic" trigger_index="37" type="unknown"/>
+          </bus>
+          <bus is_selected="false" level-0="alt_or" name="pps_shft[1..0]" order="msb_to_lsb" state="collapse" type="output pin">
+            <net data_index="36" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="true" name="pps_shft[1]" storage_index="36" tap_mode="classic" trigger_index="36" type="unknown"/>
+            <net data_index="35" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="true" name="pps_shft[0]" storage_index="35" tap_mode="classic" trigger_index="35" type="unknown"/>
+          </bus>
+          <net data_index="34" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="true" name="pps_posedge" storage_index="34" tap_mode="classic" trigger_index="34" type="unknown"/>
+        </data_view>
+        <setup_view>
+          <bus is_selected="false" level-0="alt_or" name="DAC_val[15..0]" order="msb_to_lsb" type="output pin">
+            <net data_index="6" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="true" name="DAC_val[15]" storage_index="6" tap_mode="classic" trigger_index="6" type="unknown"/>
+            <net data_index="5" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="true" name="DAC_val[14]" storage_index="5" tap_mode="classic" trigger_index="5" type="unknown"/>
+            <net data_index="4" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="true" name="DAC_val[13]" storage_index="4" tap_mode="classic" trigger_index="4" type="unknown"/>
+            <net data_index="3" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="true" name="DAC_val[12]" storage_index="3" tap_mode="classic" trigger_index="3" type="unknown"/>
+            <net data_index="2" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="true" name="DAC_val[11]" storage_index="2" tap_mode="classic" trigger_index="2" type="unknown"/>
+            <net data_index="1" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="true" name="DAC_val[10]" storage_index="1" tap_mode="classic" trigger_index="1" type="unknown"/>
+            <net data_index="15" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="true" name="DAC_val[9]" storage_index="15" tap_mode="classic" trigger_index="15" type="unknown"/>
+            <net data_index="14" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="true" name="DAC_val[8]" storage_index="14" tap_mode="classic" trigger_index="14" type="unknown"/>
+            <net data_index="13" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="true" name="DAC_val[7]" storage_index="13" tap_mode="classic" trigger_index="13" type="unknown"/>
+            <net data_index="12" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="true" name="DAC_val[6]" storage_index="12" tap_mode="classic" trigger_index="12" type="unknown"/>
+            <net data_index="11" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="true" name="DAC_val[5]" storage_index="11" tap_mode="classic" trigger_index="11" type="unknown"/>
+            <net data_index="10" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="true" name="DAC_val[4]" storage_index="10" tap_mode="classic" trigger_index="10" type="unknown"/>
+            <net data_index="9" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="true" name="DAC_val[3]" storage_index="9" tap_mode="classic" trigger_index="9" type="unknown"/>
+            <net data_index="8" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="true" name="DAC_val[2]" storage_index="8" tap_mode="classic" trigger_index="8" type="unknown"/>
+            <net data_index="7" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="true" name="DAC_val[1]" storage_index="7" tap_mode="classic" trigger_index="7" type="unknown"/>
+            <net data_index="0" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="true" name="DAC_val[0]" storage_index="0" tap_mode="classic" trigger_index="0" type="unknown"/>
+          </bus>
+          <net data_index="16" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="true" level-0="rising edge" name="RECV_pps" storage_index="16" tap_mode="classic" trigger_index="16" type="unknown"/>
+          <net data_index="17" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="true" name="SMA_CLKIN" storage_index="17" tap_mode="classic" trigger_index="17" type="unknown"/>
+          <bus is_selected="false" level-0="alt_or" name="count[15..0]" order="msb_to_lsb" radix="unsigned_dec" state="collapse" type="output pin">
+            <net data_index="24" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="true" name="count[15]" storage_index="24" tap_mode="classic" trigger_index="24" type="unknown"/>
+            <net data_index="23" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="true" name="count[14]" storage_index="23" tap_mode="classic" trigger_index="23" type="unknown"/>
+            <net data_index="22" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="true" name="count[13]" storage_index="22" tap_mode="classic" trigger_index="22" type="unknown"/>
+            <net data_index="21" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="true" name="count[12]" storage_index="21" tap_mode="classic" trigger_index="21" type="unknown"/>
+            <net data_index="20" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="true" name="count[11]" storage_index="20" tap_mode="classic" trigger_index="20" type="unknown"/>
+            <net data_index="19" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="true" name="count[10]" storage_index="19" tap_mode="classic" trigger_index="19" type="unknown"/>
+            <net data_index="33" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="true" name="count[9]" storage_index="33" tap_mode="classic" trigger_index="33" type="unknown"/>
+            <net data_index="32" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="true" name="count[8]" storage_index="32" tap_mode="classic" trigger_index="32" type="unknown"/>
+            <net data_index="31" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="true" name="count[7]" storage_index="31" tap_mode="classic" trigger_index="31" type="unknown"/>
+            <net data_index="30" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="true" name="count[6]" storage_index="30" tap_mode="classic" trigger_index="30" type="unknown"/>
+            <net data_index="29" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="true" name="count[5]" storage_index="29" tap_mode="classic" trigger_index="29" type="unknown"/>
+            <net data_index="28" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="true" name="count[4]" storage_index="28" tap_mode="classic" trigger_index="28" type="unknown"/>
+            <net data_index="27" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="true" name="count[3]" storage_index="27" tap_mode="classic" trigger_index="27" type="unknown"/>
+            <net data_index="26" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="true" name="count[2]" storage_index="26" tap_mode="classic" trigger_index="26" type="unknown"/>
+            <net data_index="25" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="true" name="count[1]" storage_index="25" tap_mode="classic" trigger_index="25" type="unknown"/>
+            <net data_index="18" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="true" name="count[0]" storage_index="18" tap_mode="classic" trigger_index="18" type="unknown"/>
+          </bus>
+          <bus is_selected="false" level-0="alt_or" name="ref_posedge_hold[18..0]" order="msb_to_lsb" radix="hex" state="expand" type="output pin">
+            <net data_index="85" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="true" level-0="dont_care" name="ref_posedge_hold[18]" storage_index="85" tap_mode="classic" trigger_index="85" type="unknown"/>
+            <net data_index="84" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="true" level-0="dont_care" name="ref_posedge_hold[17]" storage_index="84" tap_mode="classic" trigger_index="84" type="unknown"/>
+            <net data_index="83" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="true" name="ref_posedge_hold[16]" storage_index="83" tap_mode="classic" trigger_index="83" type="unknown"/>
+            <net data_index="82" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="true" name="ref_posedge_hold[15]" storage_index="82" tap_mode="classic" trigger_index="82" type="unknown"/>
+            <net data_index="81" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="true" name="ref_posedge_hold[14]" storage_index="81" tap_mode="classic" trigger_index="81" type="unknown"/>
+            <net data_index="80" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="true" name="ref_posedge_hold[13]" storage_index="80" tap_mode="classic" trigger_index="80" type="unknown"/>
+            <net data_index="79" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="true" name="ref_posedge_hold[12]" storage_index="79" tap_mode="classic" trigger_index="79" type="unknown"/>
+            <net data_index="78" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="true" name="ref_posedge_hold[11]" storage_index="78" tap_mode="classic" trigger_index="78" type="unknown"/>
+            <net data_index="77" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="true" name="ref_posedge_hold[10]" storage_index="77" tap_mode="classic" trigger_index="77" type="unknown"/>
+            <net data_index="94" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="true" name="ref_posedge_hold[9]" storage_index="94" tap_mode="classic" trigger_index="94" type="unknown"/>
+            <net data_index="93" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="true" name="ref_posedge_hold[8]" storage_index="93" tap_mode="classic" trigger_index="93" type="unknown"/>
+            <net data_index="92" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="true" name="ref_posedge_hold[7]" storage_index="92" tap_mode="classic" trigger_index="92" type="unknown"/>
+            <net data_index="91" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="true" name="ref_posedge_hold[6]" storage_index="91" tap_mode="classic" trigger_index="91" type="unknown"/>
+            <net data_index="90" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="true" name="ref_posedge_hold[5]" storage_index="90" tap_mode="classic" trigger_index="90" type="unknown"/>
+            <net data_index="89" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="true" name="ref_posedge_hold[4]" storage_index="89" tap_mode="classic" trigger_index="89" type="unknown"/>
+            <net data_index="88" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="true" name="ref_posedge_hold[3]" storage_index="88" tap_mode="classic" trigger_index="88" type="unknown"/>
+            <net data_index="87" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="true" name="ref_posedge_hold[2]" storage_index="87" tap_mode="classic" trigger_index="87" type="unknown"/>
+            <net data_index="86" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="true" name="ref_posedge_hold[1]" storage_index="86" tap_mode="classic" trigger_index="86" type="unknown"/>
+            <net data_index="76" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="true" name="ref_posedge_hold[0]" storage_index="76" tap_mode="classic" trigger_index="76" type="unknown"/>
+          </bus>
+          <bus is_selected="false" level-0="alt_or" name="ref_posedge[18..0]" order="msb_to_lsb" state="expand" type="output pin">
+            <net data_index="66" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="true" name="ref_posedge[18]" storage_index="66" tap_mode="classic" trigger_index="66" type="unknown"/>
+            <net data_index="65" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="true" name="ref_posedge[17]" storage_index="65" tap_mode="classic" trigger_index="65" type="unknown"/>
+            <net data_index="64" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="true" name="ref_posedge[16]" storage_index="64" tap_mode="classic" trigger_index="64" type="unknown"/>
+            <net data_index="63" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="true" name="ref_posedge[15]" storage_index="63" tap_mode="classic" trigger_index="63" type="unknown"/>
+            <net data_index="62" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="true" name="ref_posedge[14]" storage_index="62" tap_mode="classic" trigger_index="62" type="unknown"/>
+            <net data_index="61" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="true" name="ref_posedge[13]" storage_index="61" tap_mode="classic" trigger_index="61" type="unknown"/>
+            <net data_index="60" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="true" name="ref_posedge[12]" storage_index="60" tap_mode="classic" trigger_index="60" type="unknown"/>
+            <net data_index="59" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="true" name="ref_posedge[11]" storage_index="59" tap_mode="classic" trigger_index="59" type="unknown"/>
+            <net data_index="58" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="true" name="ref_posedge[10]" storage_index="58" tap_mode="classic" trigger_index="58" type="unknown"/>
+            <net data_index="75" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="true" name="ref_posedge[9]" storage_index="75" tap_mode="classic" trigger_index="75" type="unknown"/>
+            <net data_index="74" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="true" name="ref_posedge[8]" storage_index="74" tap_mode="classic" trigger_index="74" type="unknown"/>
+            <net data_index="73" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="true" name="ref_posedge[7]" storage_index="73" tap_mode="classic" trigger_index="73" type="unknown"/>
+            <net data_index="72" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="true" name="ref_posedge[6]" storage_index="72" tap_mode="classic" trigger_index="72" type="unknown"/>
+            <net data_index="71" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="true" name="ref_posedge[5]" storage_index="71" tap_mode="classic" trigger_index="71" type="unknown"/>
+            <net data_index="70" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="true" name="ref_posedge[4]" storage_index="70" tap_mode="classic" trigger_index="70" type="unknown"/>
+            <net data_index="69" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="true" name="ref_posedge[3]" storage_index="69" tap_mode="classic" trigger_index="69" type="unknown"/>
+            <net data_index="68" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="true" name="ref_posedge[2]" storage_index="68" tap_mode="classic" trigger_index="68" type="unknown"/>
+            <net data_index="67" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="true" name="ref_posedge[1]" storage_index="67" tap_mode="classic" trigger_index="67" type="unknown"/>
+            <net data_index="57" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="true" name="ref_posedge[0]" storage_index="57" tap_mode="classic" trigger_index="57" type="unknown"/>
+          </bus>
+          <bus is_selected="false" level-0="alt_or" name="ref_clk_shft[19..0]" order="msb_to_lsb" state="collapse" type="output pin">
+            <net data_index="47" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="true" name="ref_clk_shft[19]" storage_index="47" tap_mode="classic" trigger_index="47" type="unknown"/>
+            <net data_index="46" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="true" name="ref_clk_shft[18]" storage_index="46" tap_mode="classic" trigger_index="46" type="unknown"/>
+            <net data_index="45" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="true" name="ref_clk_shft[17]" storage_index="45" tap_mode="classic" trigger_index="45" type="unknown"/>
+            <net data_index="44" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="true" name="ref_clk_shft[16]" storage_index="44" tap_mode="classic" trigger_index="44" type="unknown"/>
+            <net data_index="43" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="true" name="ref_clk_shft[15]" storage_index="43" tap_mode="classic" trigger_index="43" type="unknown"/>
+            <net data_index="42" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="true" name="ref_clk_shft[14]" storage_index="42" tap_mode="classic" trigger_index="42" type="unknown"/>
+            <net data_index="41" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="true" name="ref_clk_shft[13]" storage_index="41" tap_mode="classic" trigger_index="41" type="unknown"/>
+            <net data_index="40" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="true" name="ref_clk_shft[12]" storage_index="40" tap_mode="classic" trigger_index="40" type="unknown"/>
+            <net data_index="39" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="true" name="ref_clk_shft[11]" storage_index="39" tap_mode="classic" trigger_index="39" type="unknown"/>
+            <net data_index="38" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="true" name="ref_clk_shft[10]" storage_index="38" tap_mode="classic" trigger_index="38" type="unknown"/>
+            <net data_index="56" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="true" name="ref_clk_shft[9]" storage_index="56" tap_mode="classic" trigger_index="56" type="unknown"/>
+            <net data_index="55" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="true" name="ref_clk_shft[8]" storage_index="55" tap_mode="classic" trigger_index="55" type="unknown"/>
+            <net data_index="54" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="true" name="ref_clk_shft[7]" storage_index="54" tap_mode="classic" trigger_index="54" type="unknown"/>
+            <net data_index="53" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="true" name="ref_clk_shft[6]" storage_index="53" tap_mode="classic" trigger_index="53" type="unknown"/>
+            <net data_index="52" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="true" name="ref_clk_shft[5]" storage_index="52" tap_mode="classic" trigger_index="52" type="unknown"/>
+            <net data_index="51" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="true" name="ref_clk_shft[4]" storage_index="51" tap_mode="classic" trigger_index="51" type="unknown"/>
+            <net data_index="50" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="true" name="ref_clk_shft[3]" storage_index="50" tap_mode="classic" trigger_index="50" type="unknown"/>
+            <net data_index="49" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="true" name="ref_clk_shft[2]" storage_index="49" tap_mode="classic" trigger_index="49" type="unknown"/>
+            <net data_index="48" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="true" name="ref_clk_shft[1]" storage_index="48" tap_mode="classic" trigger_index="48" type="unknown"/>
+            <net data_index="37" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="true" name="ref_clk_shft[0]" storage_index="37" tap_mode="classic" trigger_index="37" type="unknown"/>
+          </bus>
+          <bus is_selected="false" level-0="alt_or" name="pps_shft[1..0]" order="msb_to_lsb" state="collapse" type="output pin">
+            <net data_index="36" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="true" name="pps_shft[1]" storage_index="36" tap_mode="classic" trigger_index="36" type="unknown"/>
+            <net data_index="35" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="true" name="pps_shft[0]" storage_index="35" tap_mode="classic" trigger_index="35" type="unknown"/>
+          </bus>
+          <net data_index="34" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="true" name="pps_posedge" storage_index="34" tap_mode="classic" trigger_index="34" type="unknown"/>
+        </setup_view>
+        <trigger_in_editor/>
+        <trigger_out_editor/>
+      </presentation>
+      <trigger CRC="56DBFA68" attribute_mem_mode="false" gap_record="true" global_temp="1" is_expanded="true" name="trigger: 2022/03/17 20:33:26  #0" position="pre" power_up_trigger_mode="false" record_data_gap="true" segment_size="64" storage_mode="off" storage_qualifier_disabled="no" storage_qualifier_port_is_pin="true" storage_qualifier_port_name="auto_stp_external_storage_qualifier" storage_qualifier_port_tap_mode="classic" trigger_type="circular">
+        <power_up_trigger position="pre" storage_qualifier_disabled="no"/>
+        <events use_custom_flow_control="no">
+          <level enabled="yes" name="condition1" type="basic">'RECV_pps' == rising edge
+            <power_up enabled="yes">
+            </power_up>
+            <op_node/>
+          </level>
+        </events>
+        <storage_qualifier_events>
+          <transitional>11111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111
+            <pwr_up_transitional>11111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111</pwr_up_transitional>
+          </transitional>
+          <storage_qualifier_level type="basic">
+            <power_up>
+            </power_up>
+            <op_node/>
+          </storage_qualifier_level>
+          <storage_qualifier_level type="basic">
+            <power_up>
+            </power_up>
+            <op_node/>
+          </storage_qualifier_level>
+          <storage_qualifier_level type="basic">
+            <power_up>
+            </power_up>
+            <op_node/>
+          </storage_qualifier_level>
+        </storage_qualifier_events>
+      </trigger>
+    </signal_set>
+    <position_info>
+      <single attribute="active tab" value="0"/>
+      <single attribute="data horizontal scroll position" value="34"/>
+      <single attribute="data vertical scroll position" value="0"/>
+      <single attribute="setup horizontal scroll position" value="0"/>
+      <single attribute="setup vertical scroll position" value="0"/>
+      <single attribute="zoom level denominator" value="1"/>
+      <single attribute="zoom level numerator" value="4"/>
+      <single attribute="zoom offset denominator" value="1"/>
+      <single attribute="zoom offset numerator" value="32640"/>
+      <multi attribute="timebars" size="1" value="65"/>
+    </position_info>
+  </instance>
+  <mnemonics/>
+  <static_plugin_mnemonics/>
+  <global_info>
+    <single attribute="active instance" value="0"/>
+    <single attribute="config widget visible" value="1"/>
+    <single attribute="data log widget visible" value="1"/>
+    <single attribute="hierarchy widget visible" value="1"/>
+    <single attribute="instance widget visible" value="1"/>
+    <single attribute="jtag widget visible" value="1"/>
+    <single attribute="lock mode" value="0"/>
+    <multi attribute="frame size" size="2" value="2560,1376"/>
+    <multi attribute="jtag widget size" size="2" value="328,129"/>
+  </global_info>
+</session>
