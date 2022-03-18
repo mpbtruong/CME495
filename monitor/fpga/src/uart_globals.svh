@@ -62,3 +62,7 @@
  `define REG4        4
  `define REG4_BITS   32
  `define REG4_RESET  32'hAA_BB_CC_DD
+
+ // register 127 - phase error
+ `define REG127      127
+ `define REG127_BITS 16

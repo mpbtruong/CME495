@@ -21,12 +21,14 @@ module monitor_top(
     output wire uart_txd, // transmitter
     input  wire uart_rts, // request to send (FPGA is slave)
     output wire uart_cts, // clear to send (FPGA is slave)
-    // registers
+    // r/w registers
     output reg[`REG0_BITS-1:0]   reg0, //
     output reg[`REG1_BITS-1:0]   reg1, //
     output reg[`REG2_BITS-1:0]   reg2, //
     output reg[`REG3_BITS-1:0]   reg3, //
     output reg[`REG4_BITS-1:0]   reg4, //
+    // read only registers
+    input  reg[`REG0_BITS-1:0]   reg127,
     // I/O
     input  reg[17:0] SW,
     input  reg[3:0]  KEY,
@@ -199,11 +201,12 @@ task MONITOR_STATE_DATA_BYTES();
             state    <= `MONITOR_STATE_READ;
             // set cmd_data to the right reg for reading
             case (cmd_id)
-                `REG0 : cmd_data <= reg0;
-                `REG1 : cmd_data <= reg1;
-                `REG2 : cmd_data <= reg2;
-                `REG3 : cmd_data <= reg3;
-                `REG4 : cmd_data <= reg4;
+                `REG0   : cmd_data <= reg0;
+                `REG1   : cmd_data <= reg1;
+                `REG2   : cmd_data <= reg2;
+                `REG3   : cmd_data <= reg3;
+                `REG4   : cmd_data <= reg4;
+                `REG127 : cmd_data <= reg127;
                 default: cmd_data <= 0;
             endcase
         end
