@@ -1,9 +1,11 @@
 # Imports ######################################################################
+from audioop import add
 from Monitor import Monitor
 from MonitorConfigUART import ConfigGPSReceiver
 from MonitorTest import MonitorGPSReceiverTest
 
 from time import time
+from typing import List
 
 import pynmea2
 from pynmea2 import NMEASentence
@@ -57,13 +59,18 @@ class MonitorGPSReceiver(Monitor):
     TALKER_ID_GLONASS = 'GL' # Russian
     TALKER_ID_OTHER   = 'GN' # Any combination of GNSS
     TALKER_IDS = [
-        TALKER_ID_GPS, TALKER_ID_SBAS, TALKER_ID_GALILEO, TALKER_ID_BEIDOU, 
+        TALKER_ID_GPS, TALKER_ID_GALILEO, TALKER_ID_BEIDOU, 
         TALKER_ID_GLONASS, TALKER_ID_OTHER
     ]
 
     # sentence types (not exhaustive)
     GSA = 'GSA' # GPS DOP and active satellites
     GGA = 'GGA' # Global Positioning System Fix Data
+    GSV = 'GSV' # Satellites in view
+    GLL = 'GLL' # Geographic position, latitude and longitude (and time)
+    SENTENCE_TYPES = [
+        GSA, GGA, GSV, GLL
+    ]
     # TODO Check what sentence types we want to display on GUI
 
     # exceptions ###############################################################
@@ -88,6 +95,25 @@ class MonitorGPSReceiver(Monitor):
         Monitor.__init__(self, ConfigGPSReceiver)
 
     # methods ##################################################################
+    def readNMEAFramesSelect(self, talkers:List[str], sentence_types:List[str], 
+                                   timeout:float=None)->NMEASentence:
+        """
+        Similar to readNMEAFrameSelect but returns sentence if the read sentence's
+        address is in the addresses formed from talkers and sentence_types.
+
+        E.g. if talkers = [GP, GA] and sentence_types = [GSA]
+            then sentence is returned if the sentence address is in
+            [GPGSA, GAGSA]
+        """
+        addresses = self.formAddresses(talkers, sentence_types)
+        tstart = time()
+        while True:
+            if (timeout):
+                dt = time() - tstart
+                if (dt > timeout): raise self.ReadNMEAFrameError(f'Timed out looking for match from {addresses}')
+            sentence = self.readNMEAFrame()
+            if (self.checkNMEAFrameInAddresses(sentence, addresses)):
+                return sentence
     def readNMEAFrameSelect(self, talker:str=None, sentence_type:str=None, 
                                   timeout:float=None)->NMEASentence:
         """
@@ -140,6 +166,26 @@ class MonitorGPSReceiver(Monitor):
         """
         try: return pynmea2.parse(frame, check=self.USE_NMEA_CHECKSUM)
         except ValueError: raise self.ParseNMEAFrameError(f'Failed parsing NMEA frame {frame}')
+    
+    # helper methods ###########################################################
+    @staticmethod
+    def formAddresses(talkers:List[str], sentence_types:List[str])->List[str]:
+        """
+        Returns a list of each element in talkers concatenated with sentence_types.
+        """
+        addresses = []
+        for talker in talkers:
+            for sentence_type in sentence_types:
+                address = talker + sentence_type
+                addresses.append(address)
+        return addresses
+    @staticmethod
+    def checkNMEAFrameInAddresses(sentence:NMEASentence, addresses:List[str])->bool:
+        """
+        Checks if the sentence's address is in addresses.
+        """
+        address = sentence.talker + sentence.sentence_type
+        return address in addresses
     @staticmethod
     def checkNMEAFrameType(sentence:NMEASentence, 
                            talker:str=None, 
@@ -172,7 +218,8 @@ def main():
     mtester = MonitorGPSReceiverTest(monitor)
 
     # mtester.test_readNMEAFrame()
-    mtester.test_readNMEAFrameSelect()
+    # mtester.test_readNMEAFrameSelect()
+    mtester.test_readNMEAFramesSelect()
 
 if __name__ == '__main__':
     main()
