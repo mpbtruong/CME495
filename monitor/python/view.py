@@ -1,6 +1,6 @@
 # Imports ######################################################################
 import sys, time
-from threading import Thread
+from threading import Thread, Lock
 
 from PyQt5.QtWidgets import QMainWindow
 from PyQt5.QtCore import pyqtSignal, pyqtSlot, QObject, QThread
@@ -66,6 +66,8 @@ class GPSThread(QThread):
 class View(QMainWindow, Ui_MainWindow):
     def __init__(self, FPGAMonitor, GPSMonitor):
         super().__init__()
+        self.cmdLock = Lock()
+
         self.FPGAMonitor = FPGAMonitor
         self.GPSMonitor = GPSMonitor
         # self.FPGAConnected = self.FPGAMonitor.is_connected()
@@ -137,7 +139,7 @@ class View(QMainWindow, Ui_MainWindow):
         # Get Phase Error plot data
         # cmd = self.FPGAMonitor.get_command_by_id(127)
         cmd = self.FPGAMonitor.get_command(self.FPGAMonitor.CMD_127)
-        self.FPGAMonitor.execute_command(cmd, self.FPGAMonitor.Command.READ)
+        self.executeCommand(cmd, 1)
         print(cmd)
         self.graph1YVals.append(cmd.get_read_data())
         self.Graph1Widget.plot(self.graph1XVals,  self.graph1YVals)
@@ -161,6 +163,14 @@ class View(QMainWindow, Ui_MainWindow):
         Display a message on the GPS plain text widget.
         """
         self.GPSTextLog.appendPlainText(txt)
+
+    def executeCommand(self, cmd, cmdType=1, data=None):
+        self.cmdLock.acquire()
+        if (cmdType):
+            self.FPGAMonitor.execute_command(cmd, self.FPGAMonitor.Command.READ)
+        else:
+            self.FPGAMonitor.execute_command(cmd, self.FPGAMonitor.Command.WRITE, data)
+        self.cmdLock.release()
 
     @pyqtSlot(bool)
     def pressConnectButton(self):
@@ -201,31 +211,33 @@ class View(QMainWindow, Ui_MainWindow):
         if (command == "Read Reg0"):
             self.FPGATextLog.appendPlainText("Sent: " + command)
             cmd = self.FPGAMonitor.get_command_by_id(0)
-            self.FPGAMonitor.execute_command(cmd, self.FPGAMonitor.Command.READ)
+            # self.FPGAMonitor.execute_command(cmd, self.FPGAMonitor.Command.READ)
+            self.executeCommand(cmd, 1)
             self.FPGATextLog.appendPlainText(str(cmd))
 
         # Write REG0
         elif (command == "Write Reg0"):
             self.FPGATextLog.appendPlainText("Sent: " + commandVal + command)
             cmd = self.FPGAMonitor.get_command_by_id(0)
-            self.FPGAMonitor.execute_command(cmd, self.FPGAMonitor.Command.WRITE, 
-                commandVal.encode('utf-8'))
+            # self.FPGAMonitor.execute_command(cmd, self.FPGAMonitor.Command.WRITE, 
+            #     commandVal.encode('utf-8'))
+            self.execute_command(cmd, 0, commandVal.encode('utf-8'))
             self.FPGATextLog.appendPlainText(str(cmd))
 
-        # Read REG1
-        elif (command == "Read Reg1"):
-            self.FPGATextLog.appendPlainText("Sent: " + command)
-            cmd = self.FPGAMonitor.get_command_by_id(1)
-            self.FPGAMonitor.execute_command(cmd, self.FPGAMonitor.Command.READ)
-            self.FPGATextLog.appendPlainText(str(cmd))
+        # # Read REG1
+        # elif (command == "Read Reg1"):
+        #     self.FPGATextLog.appendPlainText("Sent: " + command)
+        #     cmd = self.FPGAMonitor.get_command_by_id(1)
+        #     self.FPGAMonitor.execute_command(cmd, self.FPGAMonitor.Command.READ)
+        #     self.FPGATextLog.appendPlainText(str(cmd))
 
-        # Write REG1
-        elif (command == "Write Reg1"):
-            self.FPGATextLog.appendPlainText("Sent: " + commandVal + command)
-            cmd = self.FPGAMonitor.get_command_by_id(1)
-            self.FPGAMonitor.execute_command(cmd, self.FPGAMonitor.Command.WRITE,
-                commandVal.encode('utf-8'))
-            self.FPGATextLog.appendPlainText(str(cmd))
+        # # Write REG1
+        # elif (command == "Write Reg1"):
+        #     self.FPGATextLog.appendPlainText("Sent: " + commandVal + command)
+        #     cmd = self.FPGAMonitor.get_command_by_id(1)
+        #     self.FPGAMonitor.execute_command(cmd, self.FPGAMonitor.Command.WRITE,
+        #         commandVal.encode('utf-8'))
+        #     self.FPGATextLog.appendPlainText(str(cmd))
             
         print("Sent: " + commandVal + command)
         # self.FPGATextLog.appendPlainText("Sent: " + commandVal + command)
