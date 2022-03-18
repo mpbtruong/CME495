@@ -136,7 +136,7 @@ class View(QMainWindow, Ui_MainWindow):
 
         # Get Phase Error plot data
         # cmd = self.FPGAMonitor.get_command_by_id(127)
-        cmd = self.FPGAMonitor.get_command(CMD_127)
+        cmd = self.FPGAMonitor.get_command(self.FPGAMonitor.CMD_127)
         self.FPGAMonitor.execute_command(cmd, self.FPGAMonitor.Command.READ)
         print(cmd)
         self.graph1YVals.append(cmd.get_read_data())
