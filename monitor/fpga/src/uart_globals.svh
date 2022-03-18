@@ -20,7 +20,7 @@
 // select parity type
 `define PARITY_EVEN    0
 // `define PARITY_ODD     1
- 
+
  /**
  * State machine for monitor command.
  */
@@ -63,6 +63,12 @@
  `define REG4_BITS   32
  `define REG4_RESET  32'hAA_BB_CC_DD
 
+ // register 125 - DAC out
+ `define REG125      125
+ `define REG125_BITS 16
+ // register 127 - PID out
+ `define REG126      126
+ `define REG126_BITS 16
  // register 127 - phase error
  `define REG127      127
  `define REG127_BITS 16

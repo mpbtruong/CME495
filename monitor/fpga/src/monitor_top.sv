@@ -5,17 +5,17 @@
  * Top level monitor/controller using receiver and transmitter uart modules.
  *
  * baud_rate = 115200 (112.5 khz)
- * bit_time = 1s / 115200 bits 
+ * bit_time = 1s / 115200 bits
  *          = 8.681us / bit
  * 1 start bit, 8 data bits, 1 even parity bit, 1 stop bit -> 11 bits
  * packet_time = 8.681us * 11
  *             = 95.5us
  *             = (8.681 + 69.448 + 8.681 + 8.681) us
- * packet_time_10 = 86.81 
+ * packet_time_10 = 86.81
  */
 module monitor_top(
-    input  wire clk50, 
-    // input  wire reset,
+    input  wire clk50,
+    input  wire reset,
     // uart
     input  wire uart_rxd, // receiver
     output wire uart_txd, // transmitter
@@ -28,16 +28,18 @@ module monitor_top(
     output reg[`REG3_BITS-1:0]   reg3, //
     output reg[`REG4_BITS-1:0]   reg4, //
     // read only registers
-    input  reg[`REG0_BITS-1:0]   reg127,
+    input  wire[`REG125_BITS-1:0]   reg125,
+    input  wire[`REG126_BITS-1:0]   reg126,
+    input  wire[`REG127_BITS-1:0]   reg127
     // I/O
-    input  reg[17:0] SW,
-    input  reg[3:0]  KEY,
-    output reg[17:0] LEDR,
-    output reg[8:0]  LEDG
+    // input  reg[17:0] SW,
+    // input  reg[3:0]  KEY,
+    // output reg[17:0] LEDR,
+    // output reg[8:0]  LEDG
 );
 
 // declarations ////////////////////////////////////////////////////////////////
-reg                     reset;     // sychronous
+//reg                     reset;     // sychronous
 // baud clks
 reg                     baud_tx;   // normal baud rate
 reg                     baud_rx;   // baud rate with oversampling
@@ -67,20 +69,20 @@ reg[$clog2(`MAX_CMD_PAYLOAD_BYTES)-1:0] cmd_data_idx;     // command data byte i
 reg                                     cmd_tx_busy_prev; // delayed tx_busy
 
 // I/O (LEDs, SW, etc.) ////////////////////////////////////////////////////////
-always @(*) begin
-    // reset
-    reset     <= ~KEY[0];
-    LEDG[0]   <= ~KEY[0];  // indicater for reset
-    // rx
-    LEDR[7:0] <= rx_byte; // display the rx_byte 
-    LEDG[7]   <= rx_done;
-    LEDG[6]   <= rx_busy;
-    LEDG[5]   <= rx_error;
-    // tx
-    LEDG[3]   <= tx_done;
-    LEDG[2]   <= tx_busy;
-    LEDG[1]   <= tx_error;
-end
+//always @(*) begin
+//    // reset
+//    reset     <= ~KEY[0];
+//    LEDG[0]   <= ~KEY[0];  // indicater for reset
+//    // rx
+//    LEDR[7:0] <= rx_byte; // display the rx_byte
+//    LEDG[7]   <= rx_done;
+//    LEDG[6]   <= rx_busy;
+//    LEDG[5]   <= rx_error;
+//    // tx
+//    LEDG[3]   <= tx_done;
+//    LEDG[2]   <= tx_busy;
+//    LEDG[1]   <= tx_error;
+//end
 
 
 // uart  ///////////////////////////////////////////////////////////////////////
@@ -91,7 +93,7 @@ baud_gen_tx(
     .reset(0),
     .baud(baud_tx)
 );
-baud_generator #(.CLK_FRQ(`CLK_FRQ), .BAUD_RATE(`BAUD_RATE_RX)) 
+baud_generator #(.CLK_FRQ(`CLK_FRQ), .BAUD_RATE(`BAUD_RATE_RX))
 baud_gen_rx(
     .clk(clk50),
     .reset(0),
@@ -140,7 +142,7 @@ always @ (posedge baud_rx) begin
     if (reset) begin
         MONITOR_RESET();
     end else begin
-        case (state) 
+        case (state)
             `MONITOR_STATE_IDLE       : MONITOR_STATE_IDLE();
             `MONITOR_STATE_READ_CMD   : MONITOR_STATE_READ_CMD();
             `MONITOR_STATE_DATA_BYTES : MONITOR_STATE_DATA_BYTES();
@@ -206,6 +208,8 @@ task MONITOR_STATE_DATA_BYTES();
                 `REG2   : cmd_data <= reg2;
                 `REG3   : cmd_data <= reg3;
                 `REG4   : cmd_data <= reg4;
+                `REG125 : cmd_data <= reg125;
+                `REG126 : cmd_data <= reg126;
                 `REG127 : cmd_data <= reg127;
                 default: cmd_data <= 0;
             endcase
@@ -249,7 +253,7 @@ endtask
 // registers ///////////////////////////////////////////////////////////////////
 // instances ///////////////////////////////////////////////////////////////////
 // register 0
-register #(.DATA_BITS(`REG0_BITS), .RESET_VALUE(`REG0_RESET)) 
+register #(.DATA_BITS(`REG0_BITS), .RESET_VALUE(`REG0_RESET))
 inst_reg0(
     .clk(baud_rx),
     .reset(reset),
@@ -258,7 +262,7 @@ inst_reg0(
     .data(reg0)
 );
 // register 1
-register #(.DATA_BITS(`REG1_BITS), .RESET_VALUE(`REG1_RESET)) 
+register #(.DATA_BITS(`REG1_BITS), .RESET_VALUE(`REG1_RESET))
 inst_reg1(
     .clk(baud_rx),
     .reset(reset),
@@ -267,7 +271,7 @@ inst_reg1(
     .data(reg1)
 );
 // register 2
-register #(.DATA_BITS(`REG2_BITS), .RESET_VALUE(`REG2_RESET)) 
+register #(.DATA_BITS(`REG2_BITS), .RESET_VALUE(`REG2_RESET))
 inst_reg2(
     .clk(baud_rx),
     .reset(reset),
@@ -276,7 +280,7 @@ inst_reg2(
     .data(reg2)
 );
 // register 3
-register #(.DATA_BITS(`REG3_BITS), .RESET_VALUE(`REG3_RESET)) 
+register #(.DATA_BITS(`REG3_BITS), .RESET_VALUE(`REG3_RESET))
 inst_reg3(
     .clk(baud_rx),
     .reset(reset),
@@ -285,7 +289,7 @@ inst_reg3(
     .data(reg3)
 );
 // register 4
-register #(.DATA_BITS(`REG4_BITS), .RESET_VALUE(`REG4_RESET)) 
+register #(.DATA_BITS(`REG4_BITS), .RESET_VALUE(`REG4_RESET))
 inst_reg4(
     .clk(baud_rx),
     .reset(reset),
