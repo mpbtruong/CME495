@@ -14,18 +14,18 @@ class GraphThread(QThread):
     signal = pyqtSignal(int, int)
     def __init__(self, parent=None):
         super(GraphThread, self).__init__(parent)
-        self.xval = 1
-        self.yval = 1
+        self.xval = 0
+        self.yval = 0
     
     def run(self):
         while(1):
             time.sleep(1)
             print("Graph")
-            self.xval = self.xval + 1
-            self.yval = self.yval + 1
             # self.GraphWidget.plot(xval, yval)
             # self.signal.emit([self.xval, self.yval])
             self.signal.emit(self.xval, self.yval)
+            self.xval = self.xval + 1
+            self.yval = self.yval + 1
 
 class GPSThread(QThread):
     log = pyqtSignal(str)
@@ -88,7 +88,16 @@ class View(QMainWindow, Ui_MainWindow):
 
         self.CommandComboBox.addItems(self.commandList)
 
+        self.graph1XVals = []
+        self.graph1YVals = []
+        # for i in range(3600):
+        #     self.graph1XVals.append(i)
+        #     self.graph1YVals.append(i)
         self.setupGraph1()
+
+        self.graph2XVals = []
+        self.graph2YVals = []
+        self.setupGraph2()
 
     def setupUI(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
@@ -111,13 +120,26 @@ class View(QMainWindow, Ui_MainWindow):
         self.Graph1worker.finished.connect(lambda: print("End Graph1"))
         self.Graph1worker.start()
 
-    # @pyqtSlot(list)
+    def setupGraph2(self):
+        self.Graph2worker = GraphThread()
+        self.Graph2worker.signal.connect(self.plotGraph2)
+        self.Graph2worker.started.connect(lambda: print("Start Graph2"))
+        self.Graph2worker.finished.connect(lambda: print("End Graph2"))
+        self.Graph2worker.start()
+
     def plotGraph1(self, xval, yval):
-        # if xval:
-            # self.Graph1Widget.plot(valList[0], valList[1])
         print(xval)
         print(yval)
-        self.Graph1Widget.plot([xval], [yval])
+        self.graph1XVals.append(xval)
+        self.graph1YVals.append(yval)
+        self.Graph1Widget.plot(self.graph1XVals,  self.graph1YVals)
+
+    def plotGraph2(self, xval, yval):
+        print(xval)
+        print(yval)
+        self.graph2XVals.append(xval)
+        self.graph2YVals.append(yval)
+        self.Graph2Widget.plot(self.graph2XVals,  self.graph2YVals)
 
     def toGPSLog(self, txt):
         """
