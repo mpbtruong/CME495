@@ -66,7 +66,7 @@
  // register 125 - DAC out
  `define REG125      125
  `define REG125_BITS 16
- // register 127 - PID out
+ // register 126 - PID out
  `define REG126      126
  `define REG126_BITS 16
  // register 127 - phase error
