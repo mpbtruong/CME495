@@ -10,6 +10,22 @@ from MainWindow import Ui_MainWindow
 # Globals ######################################################################
 
 # Library ######################################################################
+class GraphThread(QThread):
+    signal = pyqtSignal(int, int)
+    def __init__(self, parent=None):
+        super(GraphThread, self).__init__(parent)
+        self.xval = 1
+        self.yval = 1
+    
+    def run(self):
+        while(1):
+            time.sleep(1)
+            print("Graph")
+            self.xval = self.xval + 1
+            self.yval = self.yval + 1
+            # self.GraphWidget.plot(xval, yval)
+            # self.signal.emit([self.xval, self.yval])
+            self.signal.emit(self.xval, self.yval)
 
 class GPSThread(QThread):
     log = pyqtSignal(str)
@@ -20,9 +36,12 @@ class GPSThread(QThread):
     def run(self):
         timeout = 1
         counter = 0
+
+        # Attempt to connect to GPS if not connected
         while not self.GPSMonitor.is_connected():
             time.sleep(timeout)
             print("Attemping to Connect to GPS...")
+            self.log.emit("Attemping to Connect to GPS...")
             self.GPSMonitor.connect_uart()
             counter += 1
             if (counter == 5):
@@ -69,6 +88,8 @@ class View(QMainWindow, Ui_MainWindow):
 
         self.CommandComboBox.addItems(self.commandList)
 
+        self.setupGraph1()
+
     def setupUI(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
         MainWindow.resize(630, 990)
@@ -84,7 +105,19 @@ class View(QMainWindow, Ui_MainWindow):
         self.worker.start()
 
     def setupGraph1(self):
-        pass
+        self.Graph1worker = GraphThread()
+        self.Graph1worker.signal.connect(self.plotGraph1)
+        self.Graph1worker.started.connect(lambda: print("Start Graph1"))
+        self.Graph1worker.finished.connect(lambda: print("End Graph1"))
+        self.Graph1worker.start()
+
+    # @pyqtSlot(list)
+    def plotGraph1(self, xval, yval):
+        # if xval:
+            # self.Graph1Widget.plot(valList[0], valList[1])
+        print(xval)
+        print(yval)
+        self.Graph1Widget.plot([xval], [yval])
 
     def toGPSLog(self, txt):
         """

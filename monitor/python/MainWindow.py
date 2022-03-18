@@ -31,9 +31,9 @@ class Ui_MainWindow(object):
         self.Graph1Widget.setObjectName('Graph1')
         self.Graph1Widget.setGeometry(QtCore.QRect(10, 30, 620, 251))
         self.Graph1Widget.setBackground('w')
-        time = [1,2,3,4,5,6,7,8,9,10]
-        voltage = [30,32,34,32,33,31,29,32,35,45]
-        self.Graph1Widget.plot(time, voltage)
+        # time = [1,2,3,4,5,6,7,8,9,10]
+        # voltage = [30,32,34,32,33,31,29,32,35,45]
+        # self.Graph1Widget.plot(time, voltage)
 
         self.Graph2Frame = QtWidgets.QFrame(self.centralwidget)
         self.Graph2Frame.setGeometry(QtCore.QRect(0, 690, 620, 291))
