@@ -2,6 +2,7 @@
 import sys, time
 from threading import Thread, Lock
 
+import pyqtgraph as pg
 from PyQt5.QtWidgets import QMainWindow
 from PyQt5.QtCore import pyqtSignal, pyqtSlot, QObject, QThread
 
@@ -102,6 +103,10 @@ class View(QMainWindow, Ui_MainWindow):
         self.graph3YVals = []
         self.setupGraph3()
 
+        self.graph4XVals = []
+        self.graph4YVals = []
+        self.setupGraph4()
+
     def setupUI(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
         MainWindow.resize(630, 990)
@@ -137,6 +142,13 @@ class View(QMainWindow, Ui_MainWindow):
         self.Graph3worker.finished.connect(lambda: print("End Graph3"))
         self.Graph3worker.start()
 
+    def setupGraph4(self):
+        self.Graph4worker = GraphThread()
+        self.Graph4worker.signal.connect(self.plotGraph4)
+        self.Graph4worker.started.connect(lambda: print("Start Graph4"))
+        self.Graph4worker.finished.connect(lambda: print("End Graph4"))
+        self.Graph4worker.start()
+
     def plotGraph1(self, xval, yval):
         # TODO replace with plotGraph wrapper 
         if self.FPGAMonitor.is_connected():
@@ -148,18 +160,10 @@ class View(QMainWindow, Ui_MainWindow):
             if len(self.graph1XVals) > 100:
                 self.graph1XVals = self.graph1XVals[:100]
                 self.graph1YVals = self.graph1YVals[:100]
-            self.Graph1Widget.plot(self.graph1XVals,  self.graph1YVals)
+            self.Graph1Widget.plot(self.graph1XVals,  self.graph1YVals, pen=pg.mkPen('b', width=5))
 
     def plotGraph2(self, xval, yval):
         # TODO replace with plotGraph wrapper 
-        # print(xval)
-        # print(yval)
-        # self.graph2XVals.append(xval)
-        # self.graph2YVals.append(yval)
-        # if len(self.graph2XVals) > 100:
-        #     self.graph2XVals = self.graph2XVals[:100]
-        #     self.graph2YVals = self.graph2YVals[:100]
-        # self.Graph2Widget.plot(self.graph2XVals,  self.graph2YVals)
         if self.FPGAMonitor.is_connected():
             cmd = self.FPGAMonitor.get_command(self.FPGAMonitor.CMD_125)
             self.executeCommand(cmd, self.FPGAMonitor.Command.READ)
@@ -169,7 +173,7 @@ class View(QMainWindow, Ui_MainWindow):
             if len(self.graph2XVals) > 100:
                 self.graph2XVals = self.graph2XVals[:100]
                 self.graph2YVals = self.graph2YVals[:100]
-            self.Graph2Widget.plot(self.graph2XVals,  self.graph2YVals)
+            self.Graph2Widget.plot(self.graph2XVals,  self.graph2YVals, pen=pg.mkPen('b', width=5))
 
     def plotGraph3(self, xval, yval):
         # TODO replace with plotGraph wrapper 
@@ -182,7 +186,20 @@ class View(QMainWindow, Ui_MainWindow):
             if len(self.graph3XVals) > 100:
                 self.graph3XVals = self.graph3XVals[:100]
                 self.graph3YVals = self.graph3YVals[:100]
-            self.Graph3Widget.plot(self.graph3XVals,  self.graph3YVals)
+            self.Graph3Widget.plot(self.graph3XVals,  self.graph3YVals, pen=pg.mkPen('b', width=5))
+
+    def plotGraph4(self, xval, yval):
+        # TODO replace with plotGraph wrapper 
+        if self.FPGAMonitor.is_connected():
+            cmd = self.FPGAMonitor.get_command(self.FPGAMonitor.CMD_124)
+            self.executeCommand(cmd, self.FPGAMonitor.Command.READ)
+            print(cmd)
+            self.graph4YVals.append(cmd.get_read_data())
+            self.graph4XVals.append(xval)
+            if len(self.graph3XVals) > 100:
+                self.graph4XVals = self.graph4XVals[:100]
+                self.graph4YVals = self.graph4YVals[:100]
+            self.Graph4Widget.plot(self.graph4XVals,  self.graph4YVals, pen=pg.mkPen('b', width=5))
 
     def plotGraph(self, cmd, graphWidget, xval, yval):
         """
