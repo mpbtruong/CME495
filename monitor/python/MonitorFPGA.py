@@ -176,7 +176,7 @@ class MonitorFPGA(Monitor):
 
     # constants ################################################################
     # command names (reg<i>_<reg_name>)
-    CMD_0   = 'reg0_'
+    CMD_0   = 'reg0_n_reset'
     CMD_1   = 'reg1_'
     CMD_2   = 'reg2_'
     CMD_3   = 'reg3_'
@@ -185,6 +185,9 @@ class MonitorFPGA(Monitor):
     CMD_125 = 'reg125_dac_out'
     CMD_126 = 'reg126_pid_out'
     CMD_127 = 'reg127_phase_error'
+    # special command values
+    CMD_0_RESET_HIGH = 0
+    CMD_0_RESET_LOW  = 1
     # dictionary of commands
     commands = {
         CMD_0    : Command(cid=0, no_rwbytes=1, name=CMD_0),
