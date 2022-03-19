@@ -28,7 +28,7 @@ class Ui_MainWindow(object):
         self.Graph1Label.setGeometry(QtCore.QRect(10, 10, 47, 13))
         self.Graph1Label.setObjectName("Graph1Label")
         self.Graph1Widget = PlotWidget(self.Graph1Frame)
-        self.Graph1Widget.setObjectName('Graph1')
+        self.Graph1Widget.setObjectName('PhASE ERROR vs TIME')
         self.Graph1Widget.setGeometry(QtCore.QRect(10, 30, 620, 251))
         self.Graph1Widget.setBackground('w')
         # time = [1,2,3,4,5,6,7,8,9,10]
@@ -44,7 +44,7 @@ class Ui_MainWindow(object):
         self.Graph2Label.setGeometry(QtCore.QRect(10, 10, 47, 13))
         self.Graph2Label.setObjectName("Graph2Label")
         self.Graph2Widget = PlotWidget(self.Graph2Frame)
-        self.Graph2Widget.setObjectName('Graph2')
+        self.Graph2Widget.setObjectName('DAC OUT vs TIME')
         self.Graph2Widget.setGeometry(QtCore.QRect(10, 30, 620, 251))
         self.Graph2Widget.setBackground('w')
 
@@ -57,7 +57,7 @@ class Ui_MainWindow(object):
         self.Graph3Label.setGeometry(QtCore.QRect(10, 10, 47, 13))
         self.Graph3Label.setObjectName("Graph3Label")
         self.Graph3Widget = PlotWidget(self.Graph3Frame)
-        self.Graph3Widget.setObjectName('Graph3')
+        self.Graph3Widget.setObjectName('PID OUT vs TIME')
         self.Graph3Widget.setGeometry(QtCore.QRect(10, 30, 620, 251))
         self.Graph3Widget.setBackground('w')
 

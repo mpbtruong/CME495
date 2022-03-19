@@ -184,11 +184,21 @@ class View(QMainWindow, Ui_MainWindow):
                 self.graph3YVals = self.graph3YVals[:100]
             self.Graph3Widget.plot(self.graph3XVals,  self.graph3YVals)
 
-    def plotGraph(self, graphWidget, xvals, yvals):
+    def plotGraph(self, cmd, graphWidget, xval, yval):
         """
         Plots a graph widget with the list of values from xvals and yvals
         """
-        graphWidget.plot(xvals, yvals)
+        # if self.FPGAMonitor.is_connected():
+        #     cmd = self.FPGAMonitor.get_command(self.FPGAMonitor.CMD_126)
+        #     self.executeCommand(cmd, self.FPGAMonitor.Command.READ)
+        #     print(cmd)
+        #     graphWidget.yVals.append(cmd.get_read_data())
+        #     graphWidget.xVals.append(xval)
+        #     if len(self.graph3XVals) > 100:
+        #         self.graph3XVals = self.graph3XVals[:100]
+        #         self.graph3YVals = self.graph3YVals[:100]
+        #     self.Graph3Widget.plot(self.graph3XVals,  self.graph3YVals)
+        pass
 
     def toGPSLog(self, txt):
         """
