@@ -73,8 +73,7 @@ class View(QMainWindow, Ui_MainWindow):
         # self.FPGAConnected = self.FPGAMonitor.is_connected()
         # self.GPSConnected = self.GPSMonitor.is_connected()
 
-        self.commandList = ["Read Reg0", "Write Reg0", "Read Reg1", 
-            "Write Reg1", "Read Reg2", "Write Reg2"]
+        self.commandList = ["Read Reg0", "Write Reg0"]
 
         # self._ui = Ui_MainWindow()
         # self._ui.setupUi(self)
@@ -112,7 +111,9 @@ class View(QMainWindow, Ui_MainWindow):
         """
         Reset
         """
-        print("Reset!")
+        cmd = self.FPGAMonitor.get_command(self.FPGAMonitor.REG0)
+        self.executeCommand(cmd, self.FPGAMonitor.Command.WRITE, self.FPGAMonitor.CMD_0_RESET_HIGH)
+        self.executeCommand(cmd, self.FPGAMonitor.Command.WRITE, self.FPGAMonitor.CMD_0_RESET_LOW)
 
     def setupUI(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
