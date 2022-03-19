@@ -249,7 +249,6 @@ class View(QMainWindow, Ui_MainWindow):
             self.cmdLock.acquire()
             self.FPGAMonitor.execute_command(cmd, cmdType, data)
             self.cmdLock.release()
-            self.FPGATextLog.appendPlainText(str(cmd))
         else:
             print("Not Connected")
 
@@ -303,7 +302,7 @@ class View(QMainWindow, Ui_MainWindow):
             # self.FPGAMonitor.execute_command(cmd, self.FPGAMonitor.Command.WRITE, 
             #     commandVal.encode('utf-8'))
             self.execute_command(cmd, self.FPGAMonitor.Command.WRITE, commandVal.encode('utf-8'))
-        self.FPGATextLog.appendPlainText("Sent: " + str(cmd))
+            self.FPGATextLog.appendPlainText("Sent: " + str(cmd))
         # # Read REG1
         # elif (command == "Read Reg1"):
         #     self.FPGATextLog.appendPlainText("Sent: " + command)
