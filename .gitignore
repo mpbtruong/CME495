@@ -17,6 +17,15 @@ hardware/spi_master/*.qsf
 hardware/spi_master/*.qsf.bak
 hardware/spi_master/*.qws
 
+hardware/final/db/**
+hardware/final/incremental_db/**
+hardware/final/output_files/**
+hardware/final/simulation/**
+hardware/final/*.qpf
+hardware/final/*.qsf
+hardware/final/*.qsf.bak
+hardware/final/*.qws
+
 hardware/PPL_v1/db/**
 hardware/PPL_v1/incremental_db/**
 
