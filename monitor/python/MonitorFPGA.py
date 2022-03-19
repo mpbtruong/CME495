@@ -65,7 +65,7 @@ class MonitorFPGA(Monitor):
                            no_rbytes:int=None,
                            no_wbytes:int=None,
                            read_only:bool=False,
-                           data_type:int=int,
+                           data_type:int=UNSIGNED_INT,
                            ):
             """
             Initializes a command.
@@ -85,7 +85,7 @@ class MonitorFPGA(Monitor):
             self.data_type  = data_type
         def __str__(self):
             cmd = ''
-            cmd += f'Command {self.cid:03} {self.name}\n'
+            cmd += f'Command {self.cid:03} {self.name} data_type={self.data_type}\n'
             cmd += f'   rw={self.rw} cbyte={self.cbyte} read_only={self.read_only}\n'
             cmd += f'   no_rbytes={self.no_rbytes} rbytes={self.rbytes} ({self.get_read_data()})\n'
             if (not self.read_only):
@@ -190,7 +190,7 @@ class MonitorFPGA(Monitor):
     CMD_0_RESET_LOW  = b'\x01'
     # dictionary of commands
     commands = {
-        CMD_0    : Command(cid=0, no_rwbytes=1, name=CMD_0),
+        CMD_0    : Command(cid=0, no_rwbytes=1, name=CMD_0, data_type=Command.UNSIGNED_INT),
         CMD_1    : Command(cid=1, no_rwbytes=1, name=CMD_1),
         CMD_2    : Command(cid=2, no_rwbytes=2, name=CMD_2),
         CMD_3    : Command(cid=3, no_rwbytes=3, name=CMD_3),

@@ -111,7 +111,7 @@ class View(QMainWindow, Ui_MainWindow):
         """
         Reset
         """
-        cmd = self.FPGAMonitor.get_command(self.FPGAMonitor.REG0)
+        cmd = self.FPGAMonitor.get_command(self.FPGAMonitor.CMD_0)
         self.executeCommand(cmd, self.FPGAMonitor.Command.WRITE, self.FPGAMonitor.CMD_0_RESET_HIGH)
         self.executeCommand(cmd, self.FPGAMonitor.Command.WRITE, self.FPGAMonitor.CMD_0_RESET_LOW)
 
@@ -234,10 +234,7 @@ class View(QMainWindow, Ui_MainWindow):
 
     def executeCommand(self, cmd, cmdType, data=None):
         if self.FPGAMonitor.is_connected():
-            if (cmdType == self.FPGAMonitor.Command.WRITE):
-                self.FPGATextLog.appendPlainText("Sent: " + data + str(cmd))
-            else:
-                self.FPGATextLog.appendPlainText("Sent: " + str(cmd))
+            self.FPGATextLog.appendPlainText("Sent: " + str(cmd))
             self.cmdLock.acquire()
             self.FPGAMonitor.execute_command(cmd, cmdType, data)
             self.cmdLock.release()
