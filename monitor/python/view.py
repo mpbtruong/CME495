@@ -115,6 +115,9 @@ class View(QMainWindow, Ui_MainWindow):
         self.worker.start()
 
     def setupGraph1(self):
+        """
+        Setup Graph 1 used for phase error vs time.
+        """
         self.Graph1worker = GraphThread()
         self.Graph1worker.signal.connect(self.plotGraph1)
         self.Graph1worker.started.connect(lambda: print("Start Graph1"))
@@ -122,6 +125,9 @@ class View(QMainWindow, Ui_MainWindow):
         self.Graph1worker.start()
 
     def setupGraph2(self):
+        """
+        Setup Graph 2 used for DAC (bits) vs time.
+        """
         self.Graph2worker = GraphThread()
         self.Graph2worker.signal.connect(self.plotGraph2)
         self.Graph2worker.started.connect(lambda: print("Start Graph2"))
@@ -129,6 +135,9 @@ class View(QMainWindow, Ui_MainWindow):
         self.Graph2worker.start()
 
     def plotGraph1(self, xval, yval):
+        """
+        Setup Graph 3 used for PID out (bits) vs time.
+        """
         # TODO replace with plotGraph wrapper 
         if self.FPGAMonitor.is_connected():
             cmd = self.FPGAMonitor.get_command(self.FPGAMonitor.CMD_127)

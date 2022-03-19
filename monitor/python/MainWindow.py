@@ -19,7 +19,17 @@ class Ui_MainWindow(object):
         self.centralwidget = QtWidgets.QWidget(MainWindow)
         self.centralwidget.setObjectName("centralwidget")
 
-        self.Graph1Frame = QtWidgets.QFrame(self.centralwidget)
+        self.scrollArea = QtWidgets.QScrollArea(self.centralwidget)
+        self.scrollArea.setGeometry(QtCore.QRect(0, 0, 1260, 990))
+        self.scrollArea.setWidgetResizable(True)
+        self.scrollArea.setObjectName("ScrollArea")
+        self.scrollArea.setVerticalScrollBarPolicy(QtCore.Qt.ScrollBarAlwaysOn)
+        self.scrollAreaWidgetContents = QtWidgets.QWidget()
+        self.scrollAreaWidgetContents.setGeometry(QtCore.QRect(0, 0, 1250, 980))
+        self.scrollAreaWidgetContents.setObjectName("ScrollAreaWidgetContents")
+
+
+        self.Graph1Frame = QtWidgets.QFrame(self.scrollAreaWidgetContents)
         self.Graph1Frame.setGeometry(QtCore.QRect(0, 410, 1200, 291))
         self.Graph1Frame.setFrameShape(QtWidgets.QFrame.StyledPanel)
         self.Graph1Frame.setFrameShadow(QtWidgets.QFrame.Raised)
@@ -35,7 +45,7 @@ class Ui_MainWindow(object):
         # voltage = [30,32,34,32,33,31,29,32,35,45]
         # self.Graph1Widget.plot(time, voltage)
 
-        self.Graph2Frame = QtWidgets.QFrame(self.centralwidget)
+        self.Graph2Frame = QtWidgets.QFrame(self.scrollAreaWidgetContents)
         self.Graph2Frame.setGeometry(QtCore.QRect(0, 690, 1200, 291))
         self.Graph2Frame.setFrameShape(QtWidgets.QFrame.StyledPanel)
         self.Graph2Frame.setFrameShadow(QtWidgets.QFrame.Raised)
@@ -48,20 +58,20 @@ class Ui_MainWindow(object):
         self.Graph2Widget.setGeometry(QtCore.QRect(10, 30, 1200, 251))
         self.Graph2Widget.setBackground('w')
 
-        # self.Graph3Frame = QtWidgets.QFrame(self.centralwidget)
-        # self.Graph3Frame.setGeometry(QtCore.QRect(630, 410, 620, 291))
-        # self.Graph3Frame.setFrameShape(QtWidgets.QFrame.StyledPanel)
-        # self.Graph3Frame.setFrameShadow(QtWidgets.QFrame.Raised)
-        # self.Graph3Frame.setObjectName("Graph3Frame")
-        # self.Graph3Label = QtWidgets.QLabel(self.Graph3Frame)
-        # self.Graph3Label.setGeometry(QtCore.QRect(10, 10, 47, 13))
-        # self.Graph3Label.setObjectName("Graph3Label")
-        # self.Graph3Widget = PlotWidget(self.Graph3Frame)
-        # self.Graph3Widget.setObjectName('Graph3')
-        # self.Graph3Widget.setGeometry(QtCore.QRect(10, 30, 620, 251))
-        # self.Graph3Widget.setBackground('w')
+        self.Graph3Frame = QtWidgets.QFrame(self.scrollAreaWidgetContents)
+        self.Graph3Frame.setGeometry(QtCore.QRect(0, 991, 620, 291))
+        self.Graph3Frame.setFrameShape(QtWidgets.QFrame.StyledPanel)
+        self.Graph3Frame.setFrameShadow(QtWidgets.QFrame.Raised)
+        self.Graph3Frame.setObjectName("Graph3Frame")
+        self.Graph3Label = QtWidgets.QLabel(self.Graph3Frame)
+        self.Graph3Label.setGeometry(QtCore.QRect(10, 10, 47, 13))
+        self.Graph3Label.setObjectName("Graph3Label")
+        self.Graph3Widget = PlotWidget(self.Graph3Frame)
+        self.Graph3Widget.setObjectName('Graph3')
+        self.Graph3Widget.setGeometry(QtCore.QRect(10, 30, 1200, 251))
+        self.Graph3Widget.setBackground('w')
 
-        # self.Graph4Frame = QtWidgets.QFrame(self.centralwidget)
+        # self.Graph4Frame = QtWidgets.QFrame(self.scrollAreaWidgetContents)
         # self.Graph4Frame.setGeometry(QtCore.QRect(630, 690, 620, 291))
         # self.Graph4Frame.setFrameShape(QtWidgets.QFrame.StyledPanel)
         # self.Graph4Frame.setFrameShadow(QtWidgets.QFrame.Raised)
@@ -74,7 +84,7 @@ class Ui_MainWindow(object):
         # self.Graph4Widget.setGeometry(QtCore.QRect(10, 30, 620, 251))
         # self.Graph4Widget.setBackground('w')
         
-        self.GPSFrame = QtWidgets.QFrame(self.centralwidget)
+        self.GPSFrame = QtWidgets.QFrame(self.scrollAreaWidgetContents)
         self.GPSFrame.setGeometry(QtCore.QRect(0, 130, 600, 291))
         self.GPSFrame.setFrameShape(QtWidgets.QFrame.StyledPanel)
         self.GPSFrame.setFrameShadow(QtWidgets.QFrame.Raised)
@@ -87,7 +97,7 @@ class Ui_MainWindow(object):
         self.GPSLabel.setGeometry(QtCore.QRect(10, 10, 47, 13))
         self.GPSLabel.setObjectName("GPSLabel")
 
-        self.FPGAFrame = QtWidgets.QFrame(self.centralwidget)
+        self.FPGAFrame = QtWidgets.QFrame(self.scrollAreaWidgetContents)
         self.FPGAFrame.setGeometry(QtCore.QRect(610, 130, 600, 291))
         self.FPGAFrame.setFrameShape(QtWidgets.QFrame.StyledPanel)
         self.FPGAFrame.setFrameShadow(QtWidgets.QFrame.Raised)
@@ -100,7 +110,7 @@ class Ui_MainWindow(object):
         self.FPGALabel.setGeometry(QtCore.QRect(10, 10, 47, 13))
         self.FPGALabel.setObjectName("FPGALabel")
 
-        self.ConnectFrame = QtWidgets.QFrame(self.centralwidget)
+        self.ConnectFrame = QtWidgets.QFrame(self.scrollAreaWidgetContents)
         self.ConnectFrame.setGeometry(QtCore.QRect(500, 20, 101, 91))
         self.ConnectFrame.setFrameShape(QtWidgets.QFrame.StyledPanel)
         self.ConnectFrame.setFrameShadow(QtWidgets.QFrame.Raised)
@@ -115,7 +125,7 @@ class Ui_MainWindow(object):
         self.DisconnectButton.setGeometry(QtCore.QRect(10, 60, 75, 23))
         self.DisconnectButton.setObjectName("DisconnectButton")
 
-        self.CommandFrame = QtWidgets.QFrame(self.centralwidget)
+        self.CommandFrame = QtWidgets.QFrame(self.scrollAreaWidgetContents)
         self.CommandFrame.setGeometry(QtCore.QRect(10, 19, 500, 91))
         self.CommandFrame.setFrameShape(QtWidgets.QFrame.StyledPanel)
         self.CommandFrame.setFrameShadow(QtWidgets.QFrame.Raised)
@@ -136,6 +146,7 @@ class Ui_MainWindow(object):
         self.CommandButton.setGeometry(QtCore.QRect(310, 30, 75, 31))
         self.CommandButton.setObjectName("CommandButton")
 
+        self.scrollArea.setWidget(self.scrollAreaWidgetContents)
         MainWindow.setCentralWidget(self.centralwidget)
         self.menubar = QtWidgets.QMenuBar(MainWindow)
         self.menubar.setGeometry(QtCore.QRect(0, 0, 640, 21))
@@ -148,12 +159,43 @@ class Ui_MainWindow(object):
         self.retranslateUi(MainWindow)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
 
+        # Add widgets to scrollable area
+        # self.horizontalLayout = QtWidgets.QHBoxLayout()
+        # self.horizontalLayout.setObjectName("horizontalLayout")
+        # self.vbox = QtWidgets.QVBoxLayout()
+        # self.vbox.addWidget(self.scrollArea)
+        # self.centralwidget.setLayout(self.vbox)
+        # self.scrollArea = QtWidgets.QScrollArea(self.centralwidget)
+        # self.scrollArea.setGeometry(QtCore.QRect(0, 0, 1131, 951))
+        # self.scrollArea.setVerticalScrollBarPolicy(QtCore.Qt.ScrollBarAsNeeded)
+        # self.scrollArea.setHorizontalScrollBarPolicy(QtCore.Qt.ScrollBarAsNeeded)
+        # self.scrollArea.setWidgetResizable(True)
+        # self.scrollArea.setObjectName("scrollArea")
+        # self.scrollArea.setEnabled(True)
+        # self.setCentralWidget(self.scrollArea)
+        # self.horizontalLayout.addWidget(self.scrollArea)
+        # self.centralwidget.setLayout(self.horizontalLayout)
+        # MainWindow.setCentralWidget(self.centralwidget)
+
+        # formLayout = QtGui.QFormLayout()
+
+        # groupBox = QtWidgets.QGroupBox()
+        # groupBox.setLayout(formLayout)
+
+        # scroll = QtWidgets.QScrollArea()
+        # scroll.setWidget(groupBox)
+        # scroll.setWidgetResizable(True)
+
+        # layout = QtWidgets.QVBoxLayout(self)
+        # layout.addWidget(scroll)
+
+
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
         MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow"))
         self.Graph1Label.setText(_translate("MainWindow", "Graph1"))
         self.Graph2Label.setText(_translate("MainWindow", "Graph2"))
-        # self.Graph3Label.setText(_translate("MainWindow", "Graph3"))
+        self.Graph3Label.setText(_translate("MainWindow", "Graph3"))
         # self.Graph4Label.setText(_translate("MainWindow", "Graph4"))
         self.GPSLabel.setText(_translate("MainWindow", "GPS"))
         self.FPGALabel.setText(_translate("MainWindow", "FPGA"))
