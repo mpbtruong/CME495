@@ -186,8 +186,8 @@ class MonitorFPGA(Monitor):
     CMD_126 = 'reg126_pid_out'
     CMD_127 = 'reg127_phase_error'
     # special command values
-    CMD_0_RESET_HIGH = 0
-    CMD_0_RESET_LOW  = 1
+    CMD_0_RESET_HIGH = b'\x00'
+    CMD_0_RESET_LOW  = b'\x01'
     # dictionary of commands
     commands = {
         CMD_0    : Command(cid=0, no_rwbytes=1, name=CMD_0),
