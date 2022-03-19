@@ -9,7 +9,7 @@
 
 
 from PyQt5 import QtCore, QtGui, QtWidgets
-from pyqtgraph import PlotWidget, plot
+from pyqtgraph import PlotWidget, plot, graphicsItems
 
 
 class Ui_MainWindow(object):
@@ -20,7 +20,7 @@ class Ui_MainWindow(object):
         self.centralwidget.setObjectName("centralwidget")
 
         self.Graph1Frame = QtWidgets.QFrame(self.centralwidget)
-        self.Graph1Frame.setGeometry(QtCore.QRect(0, 410, 1200, 291))
+        self.Graph1Frame.setGeometry(QtCore.QRect(0, 410, 620, 291))
         self.Graph1Frame.setFrameShape(QtWidgets.QFrame.StyledPanel)
         self.Graph1Frame.setFrameShadow(QtWidgets.QFrame.Raised)
         self.Graph1Frame.setObjectName("Graph1Frame")
@@ -29,14 +29,14 @@ class Ui_MainWindow(object):
         self.Graph1Label.setObjectName("Graph1Label")
         self.Graph1Widget = PlotWidget(self.Graph1Frame)
         self.Graph1Widget.setObjectName('Graph1')
-        self.Graph1Widget.setGeometry(QtCore.QRect(10, 30, 1200, 251))
+        self.Graph1Widget.setGeometry(QtCore.QRect(10, 30, 620, 251))
         self.Graph1Widget.setBackground('w')
         # time = [1,2,3,4,5,6,7,8,9,10]
         # voltage = [30,32,34,32,33,31,29,32,35,45]
         # self.Graph1Widget.plot(time, voltage)
 
         self.Graph2Frame = QtWidgets.QFrame(self.centralwidget)
-        self.Graph2Frame.setGeometry(QtCore.QRect(0, 690, 1200, 291))
+        self.Graph2Frame.setGeometry(QtCore.QRect(0, 690, 620, 291))
         self.Graph2Frame.setFrameShape(QtWidgets.QFrame.StyledPanel)
         self.Graph2Frame.setFrameShadow(QtWidgets.QFrame.Raised)
         self.Graph2Frame.setObjectName("Graph2Frame")
@@ -45,34 +45,34 @@ class Ui_MainWindow(object):
         self.Graph2Label.setObjectName("Graph2Label")
         self.Graph2Widget = PlotWidget(self.Graph2Frame)
         self.Graph2Widget.setObjectName('Graph2')
-        self.Graph2Widget.setGeometry(QtCore.QRect(10, 30, 1200, 251))
+        self.Graph2Widget.setGeometry(QtCore.QRect(10, 30, 620, 251))
         self.Graph2Widget.setBackground('w')
 
-        # self.Graph3Frame = QtWidgets.QFrame(self.centralwidget)
-        # self.Graph3Frame.setGeometry(QtCore.QRect(630, 410, 620, 291))
-        # self.Graph3Frame.setFrameShape(QtWidgets.QFrame.StyledPanel)
-        # self.Graph3Frame.setFrameShadow(QtWidgets.QFrame.Raised)
-        # self.Graph3Frame.setObjectName("Graph3Frame")
-        # self.Graph3Label = QtWidgets.QLabel(self.Graph3Frame)
-        # self.Graph3Label.setGeometry(QtCore.QRect(10, 10, 47, 13))
-        # self.Graph3Label.setObjectName("Graph3Label")
-        # self.Graph3Widget = PlotWidget(self.Graph3Frame)
-        # self.Graph3Widget.setObjectName('Graph3')
-        # self.Graph3Widget.setGeometry(QtCore.QRect(10, 30, 620, 251))
-        # self.Graph3Widget.setBackground('w')
+        self.Graph3Frame = QtWidgets.QFrame(self.centralwidget)
+        self.Graph3Frame.setGeometry(QtCore.QRect(630, 410, 620, 291))
+        self.Graph3Frame.setFrameShape(QtWidgets.QFrame.StyledPanel)
+        self.Graph3Frame.setFrameShadow(QtWidgets.QFrame.Raised)
+        self.Graph3Frame.setObjectName("Graph3Frame")
+        self.Graph3Label = QtWidgets.QLabel(self.Graph3Frame)
+        self.Graph3Label.setGeometry(QtCore.QRect(10, 10, 47, 13))
+        self.Graph3Label.setObjectName("Graph3Label")
+        self.Graph3Widget = PlotWidget(self.Graph3Frame)
+        self.Graph3Widget.setObjectName('Graph3')
+        self.Graph3Widget.setGeometry(QtCore.QRect(10, 30, 620, 251))
+        self.Graph3Widget.setBackground('w')
 
-        # self.Graph4Frame = QtWidgets.QFrame(self.centralwidget)
-        # self.Graph4Frame.setGeometry(QtCore.QRect(630, 690, 620, 291))
-        # self.Graph4Frame.setFrameShape(QtWidgets.QFrame.StyledPanel)
-        # self.Graph4Frame.setFrameShadow(QtWidgets.QFrame.Raised)
-        # self.Graph4Frame.setObjectName("Graph4Frame")
-        # self.Graph4Label = QtWidgets.QLabel(self.Graph4Frame)
-        # self.Graph4Label.setGeometry(QtCore.QRect(10, 10, 47, 13))
-        # self.Graph4Label.setObjectName("Graph4Label")
-        # self.Graph4Widget = PlotWidget(self.Graph4Frame)
-        # self.Graph4Widget.setObjectName('Graph4')
-        # self.Graph4Widget.setGeometry(QtCore.QRect(10, 30, 620, 251))
-        # self.Graph4Widget.setBackground('w')
+        self.Graph4Frame = QtWidgets.QFrame(self.centralwidget)
+        self.Graph4Frame.setGeometry(QtCore.QRect(630, 690, 620, 291))
+        self.Graph4Frame.setFrameShape(QtWidgets.QFrame.StyledPanel)
+        self.Graph4Frame.setFrameShadow(QtWidgets.QFrame.Raised)
+        self.Graph4Frame.setObjectName("Graph4Frame")
+        self.Graph4Label = QtWidgets.QLabel(self.Graph4Frame)
+        self.Graph4Label.setGeometry(QtCore.QRect(10, 10, 47, 13))
+        self.Graph4Label.setObjectName("Graph4Label")
+        self.Graph4Widget = PlotWidget(self.Graph4Frame)
+        self.Graph4Widget.setObjectName('Graph4')
+        self.Graph4Widget.setGeometry(QtCore.QRect(10, 30, 620, 251))
+        self.Graph4Widget.setBackground('w')
         
         self.GPSFrame = QtWidgets.QFrame(self.centralwidget)
         self.GPSFrame.setGeometry(QtCore.QRect(0, 130, 600, 291))

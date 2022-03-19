@@ -89,16 +89,18 @@ class View(QMainWindow, Ui_MainWindow):
 
         self.CommandComboBox.addItems(self.commandList)
 
+        # TODO make a Graph class
         self.graph1XVals = []
         self.graph1YVals = []
-        # for i in range(3600):
-        #     self.graph1XVals.append(i)
-        #     self.graph1YVals.append(i)
         self.setupGraph1()
 
         self.graph2XVals = []
         self.graph2YVals = []
         self.setupGraph2()
+        
+        self.graph3XVals = []
+        self.graph3YVals = []
+        self.setupGraph3()
 
     def setupUI(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
@@ -128,6 +130,13 @@ class View(QMainWindow, Ui_MainWindow):
         self.Graph2worker.finished.connect(lambda: print("End Graph2"))
         self.Graph2worker.start()
 
+    def setupGraph3(self):
+        self.Graph3worker = GraphThread()
+        self.Graph3worker.signal.connect(self.plotGraph3)
+        self.Graph3worker.started.connect(lambda: print("Start Graph3"))
+        self.Graph3worker.finished.connect(lambda: print("End Graph3"))
+        self.Graph3worker.start()
+
     def plotGraph1(self, xval, yval):
         # TODO replace with plotGraph wrapper 
         if self.FPGAMonitor.is_connected():
@@ -145,12 +154,35 @@ class View(QMainWindow, Ui_MainWindow):
         # TODO replace with plotGraph wrapper 
         # print(xval)
         # print(yval)
-        self.graph2XVals.append(xval)
-        self.graph2YVals.append(yval)
-        if len(self.graph2XVals) > 100:
-            self.graph2XVals = self.graph2XVals[:100]
-            self.graph2YVals = self.graph2YVals[:100]
-        self.Graph2Widget.plot(self.graph2XVals,  self.graph2YVals)
+        # self.graph2XVals.append(xval)
+        # self.graph2YVals.append(yval)
+        # if len(self.graph2XVals) > 100:
+        #     self.graph2XVals = self.graph2XVals[:100]
+        #     self.graph2YVals = self.graph2YVals[:100]
+        # self.Graph2Widget.plot(self.graph2XVals,  self.graph2YVals)
+        if self.FPGAMonitor.is_connected():
+            cmd = self.FPGAMonitor.get_command(self.FPGAMonitor.CMD_125)
+            self.executeCommand(cmd, self.FPGAMonitor.Command.READ)
+            print(cmd)
+            self.graph2YVals.append(cmd.get_read_data())
+            self.graph2XVals.append(xval)
+            if len(self.graph2XVals) > 100:
+                self.graph2XVals = self.graph2XVals[:100]
+                self.graph2YVals = self.graph2YVals[:100]
+            self.Graph2Widget.plot(self.graph2XVals,  self.graph2YVals)
+
+    def plotGraph3(self, xval, yval):
+        # TODO replace with plotGraph wrapper 
+        if self.FPGAMonitor.is_connected():
+            cmd = self.FPGAMonitor.get_command(self.FPGAMonitor.CMD_126)
+            self.executeCommand(cmd, self.FPGAMonitor.Command.READ)
+            print(cmd)
+            self.graph3YVals.append(cmd.get_read_data())
+            self.graph3XVals.append(xval)
+            if len(self.graph3XVals) > 100:
+                self.graph3XVals = self.graph3XVals[:100]
+                self.graph3YVals = self.graph3YVals[:100]
+            self.Graph3Widget.plot(self.graph3XVals,  self.graph3YVals)
 
     def plotGraph(self, graphWidget, xvals, yvals):
         """
