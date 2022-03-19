@@ -114,12 +114,12 @@ class Monitor():
         """
         Connects to a port for uart communication
         """
-        # try:
-        self.assign_port(device_vid=self.config.device_vid, 
-                    device_pid=self.config.device_pid)
-        self.create_uart()
-        # except:
-        #     print("could not connect")
+        try:
+            self.assign_port(device_vid=self.config.device_vid, 
+                        device_pid=self.config.device_pid)
+            self.create_uart()
+        except self.PortAssignError:
+            print("could not connect")
 
     def create_uart(self):
         """

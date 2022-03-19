@@ -43,7 +43,7 @@ class GPSThread(QThread):
             self.log.emit("Attemping to Connect to GPS...")
             self.GPSMonitor.connect_uart()
             counter += 1
-            if (counter == 5):
+            if (counter == 5) and (not timeout >= 120):
                 counter = 0
                 timeout += 5
 
@@ -164,10 +164,18 @@ class View(QMainWindow, Ui_MainWindow):
         """
         self.GPSTextLog.appendPlainText(txt)
 
-    def executeCommand(self, cmd, cmdType=1, data=None):
-        self.cmdLock.acquire()
-        self.FPGAMonitor.execute_command(cmd, cmdType, data)
-        self.cmdLock.release()
+    def executeCommand(self, cmd, cmdType, data=None):
+        if self.FPGAMonitor.is_connected():
+            if (cmdType == self.FPGAMonitor.WRITE):
+                self.FPGATextLog.appendPlainText("Sent: " + commandVal + command)
+            else:
+                self.FPGATextLog.appendPlainText("Sent: " + command)
+            self.cmdLock.acquire()
+            self.FPGAMonitor.execute_command(cmd, cmdType, data)
+            self.cmdLock.release()
+            self.FPGATextLog.appendPlainText(str(cmd))
+        else:
+            print("Not Connected")
 
     @pyqtSlot(bool)
     def pressConnectButton(self):
@@ -176,11 +184,14 @@ class View(QMainWindow, Ui_MainWindow):
         """
         if not self.FPGAMonitor.is_connected():
             self.FPGAMonitor.connect_uart()
-            print("Connected!")
-            self.FPGATextLog.appendPlainText("Connected!")
+            if self.FPGAMonitor.is_connected():
+                print("Connected!")
+                self.FPGATextLog.appendPlainText("Connected to FPGA!")
+            else:
+                self.FPGATextLog.appendPlainText("Failed to connect to FPGA!")
         else:
             print("Already connected")
-            self.FPGATextLog.appendPlainText("Already connected to FPGA")
+            self.FPGATextLog.appendPlainText("Already connected to FPGA!")
     
     @pyqtSlot(bool)
     def pressDisconnectButton(self):
@@ -206,20 +217,16 @@ class View(QMainWindow, Ui_MainWindow):
         # so that user cannot directly read/write the registers
         # Read REG0
         if (command == "Read Reg0"):
-            self.FPGATextLog.appendPlainText("Sent: " + command)
             cmd = self.FPGAMonitor.get_command_by_id(0)
             # self.FPGAMonitor.execute_command(cmd, self.FPGAMonitor.Command.READ)
             self.executeCommand(cmd, self.FPGAMonitor.Command.READ)
-            self.FPGATextLog.appendPlainText(str(cmd))
 
         # Write REG0
         elif (command == "Write Reg0"):
-            self.FPGATextLog.appendPlainText("Sent: " + commandVal + command)
             cmd = self.FPGAMonitor.get_command_by_id(0)
             # self.FPGAMonitor.execute_command(cmd, self.FPGAMonitor.Command.WRITE, 
             #     commandVal.encode('utf-8'))
             self.execute_command(cmd, self.FPGAMonitor.Command.WRITE, commandVal.encode('utf-8'))
-            self.FPGATextLog.appendPlainText(str(cmd))
 
         # # Read REG1
         # elif (command == "Read Reg1"):
