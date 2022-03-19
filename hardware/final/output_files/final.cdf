@@ -1,10 +1,10 @@
-/* Quartus Prime Version 20.1.1 Build 720 11/11/2020 SJ Standard Edition */
+/* Quartus Prime Version 21.1.0 Build 842 10/21/2021 SJ Lite Edition */
 JedecChain;
 	FileRevision(JESD32A);
 	DefaultMfr(6E);
 
 	P ActionCode(Cfg)
-		Device PartName(EP4CE115F29) Path("/home/tjw740/engr-ece/Documents/CME_495/Quartus/CME495/hardware/final/output_files/") File("final.sof") MfrSpec(OpMask(1));
+		Device PartName(EP4CE115F29) Path("/home/tim/Documents/CME495/CME495/hardware/final/output_files/") File("final.sof") MfrSpec(OpMask(1));
 
 ChainEnd;
 

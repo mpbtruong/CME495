@@ -440,6 +440,262 @@
 					"strict" : false
 				},
 				{
+					"name" : "clk_count[0]",
+					"strict" : false
+				},
+				{
+					"name" : "clk_count[1]",
+					"strict" : false
+				},
+				{
+					"name" : "clk_count[2]",
+					"strict" : false
+				},
+				{
+					"name" : "clk_count[3]",
+					"strict" : false
+				},
+				{
+					"name" : "clk_count[4]",
+					"strict" : false
+				},
+				{
+					"name" : "clk_count[5]",
+					"strict" : false
+				},
+				{
+					"name" : "clk_count[6]",
+					"strict" : false
+				},
+				{
+					"name" : "clk_count[7]",
+					"strict" : false
+				},
+				{
+					"name" : "clk_count[8]",
+					"strict" : false
+				},
+				{
+					"name" : "clk_count[9]",
+					"strict" : false
+				},
+				{
+					"name" : "clk_count[10]",
+					"strict" : false
+				},
+				{
+					"name" : "clk_count[11]",
+					"strict" : false
+				},
+				{
+					"name" : "clk_count[12]",
+					"strict" : false
+				},
+				{
+					"name" : "clk_count[13]",
+					"strict" : false
+				},
+				{
+					"name" : "clk_count[14]",
+					"strict" : false
+				},
+				{
+					"name" : "clk_count[15]",
+					"strict" : false
+				},
+				{
+					"name" : "clk_count[16]",
+					"strict" : false
+				},
+				{
+					"name" : "clk_count[17]",
+					"strict" : false
+				},
+				{
+					"name" : "clk_count[18]",
+					"strict" : false
+				},
+				{
+					"name" : "clk_count[19]",
+					"strict" : false
+				},
+				{
+					"name" : "clk_count[20]",
+					"strict" : false
+				},
+				{
+					"name" : "clk_count[21]",
+					"strict" : false
+				},
+				{
+					"name" : "clk_count[22]",
+					"strict" : false
+				},
+				{
+					"name" : "clk_count[23]",
+					"strict" : false
+				},
+				{
+					"name" : "clk_count[24]",
+					"strict" : false
+				},
+				{
+					"name" : "clk_count[25]",
+					"strict" : false
+				},
+				{
+					"name" : "clk_count[26]",
+					"strict" : false
+				},
+				{
+					"name" : "clk_count[27]",
+					"strict" : false
+				},
+				{
+					"name" : "clk_count[28]",
+					"strict" : false
+				},
+				{
+					"name" : "clk_count[29]",
+					"strict" : false
+				},
+				{
+					"name" : "clk_count[30]",
+					"strict" : false
+				},
+				{
+					"name" : "clk_count[31]",
+					"strict" : false
+				},
+				{
+					"name" : "clk_err[0]",
+					"strict" : false
+				},
+				{
+					"name" : "clk_err[1]",
+					"strict" : false
+				},
+				{
+					"name" : "clk_err[2]",
+					"strict" : false
+				},
+				{
+					"name" : "clk_err[3]",
+					"strict" : false
+				},
+				{
+					"name" : "clk_err[4]",
+					"strict" : false
+				},
+				{
+					"name" : "clk_err[5]",
+					"strict" : false
+				},
+				{
+					"name" : "clk_err[6]",
+					"strict" : false
+				},
+				{
+					"name" : "clk_err[7]",
+					"strict" : false
+				},
+				{
+					"name" : "clk_err[8]",
+					"strict" : false
+				},
+				{
+					"name" : "clk_err[9]",
+					"strict" : false
+				},
+				{
+					"name" : "clk_err[10]",
+					"strict" : false
+				},
+				{
+					"name" : "clk_err[11]",
+					"strict" : false
+				},
+				{
+					"name" : "clk_err[12]",
+					"strict" : false
+				},
+				{
+					"name" : "clk_err[13]",
+					"strict" : false
+				},
+				{
+					"name" : "clk_err[14]",
+					"strict" : false
+				},
+				{
+					"name" : "clk_err[15]",
+					"strict" : false
+				},
+				{
+					"name" : "clk_err[16]",
+					"strict" : false
+				},
+				{
+					"name" : "clk_err[17]",
+					"strict" : false
+				},
+				{
+					"name" : "clk_err[18]",
+					"strict" : false
+				},
+				{
+					"name" : "clk_err[19]",
+					"strict" : false
+				},
+				{
+					"name" : "clk_err[20]",
+					"strict" : false
+				},
+				{
+					"name" : "clk_err[21]",
+					"strict" : false
+				},
+				{
+					"name" : "clk_err[22]",
+					"strict" : false
+				},
+				{
+					"name" : "clk_err[23]",
+					"strict" : false
+				},
+				{
+					"name" : "clk_err[24]",
+					"strict" : false
+				},
+				{
+					"name" : "clk_err[25]",
+					"strict" : false
+				},
+				{
+					"name" : "clk_err[26]",
+					"strict" : false
+				},
+				{
+					"name" : "clk_err[27]",
+					"strict" : false
+				},
+				{
+					"name" : "clk_err[28]",
+					"strict" : false
+				},
+				{
+					"name" : "clk_err[29]",
+					"strict" : false
+				},
+				{
+					"name" : "clk_err[30]",
+					"strict" : false
+				},
+				{
+					"name" : "clk_err[31]",
+					"strict" : false
+				},
+				{
 					"name" : "phase_err[0]",
 					"strict" : false
 				},
@@ -517,6 +773,10 @@
 				},
 				{
 					"name" : "dac_rdy[3]",
+					"strict" : false
+				},
+				{
+					"name" : "locked",
 					"strict" : false
 				},
 				{
@@ -668,7 +928,15 @@
 					"strict" : false
 				},
 				{
+					"name" : "SW[16]",
+					"strict" : false
+				},
+				{
 					"name" : "UART_RXD",
+					"strict" : false
+				},
+				{
+					"name" : "SW[6]",
 					"strict" : false
 				},
 				{
