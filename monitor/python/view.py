@@ -20,7 +20,6 @@ class GraphThread(QThread):
     def run(self):
         while(1):
             time.sleep(1)
-            print("Graph")
             # self.GraphWidget.plot(xval, yval)
             # self.signal.emit([self.xval, self.yval])
             self.signal.emit(self.xval, self.yval)
@@ -131,15 +130,16 @@ class View(QMainWindow, Ui_MainWindow):
 
     def plotGraph1(self, xval, yval):
         # TODO replace with plotGraph wrapper 
-        cmd = self.FPGAMonitor.get_command(self.FPGAMonitor.CMD_127)
-        self.executeCommand(cmd, self.FPGAMonitor.Command.READ)
-        print(cmd)
-        self.graph1YVals.append(cmd.get_read_data())
-        self.graph1XVals.append(xval)
-        if len(self.graph1XVals) > 100:
-            self.graph1XVals = self.graph1XVals[:100]
-            self.graph1YVals = self.graph1YVals[:100]
-        self.Graph1Widget.plot(self.graph1XVals,  self.graph1YVals)
+        if self.FPGAMonitor.is_connected():
+            cmd = self.FPGAMonitor.get_command(self.FPGAMonitor.CMD_127)
+            self.executeCommand(cmd, self.FPGAMonitor.Command.READ)
+            print(cmd)
+            self.graph1YVals.append(cmd.get_read_data())
+            self.graph1XVals.append(xval)
+            if len(self.graph1XVals) > 100:
+                self.graph1XVals = self.graph1XVals[:100]
+                self.graph1YVals = self.graph1YVals[:100]
+            self.Graph1Widget.plot(self.graph1XVals,  self.graph1YVals)
 
     def plotGraph2(self, xval, yval):
         # TODO replace with plotGraph wrapper 
