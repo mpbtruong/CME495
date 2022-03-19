@@ -2,6 +2,7 @@
 import sys, time
 from threading import Thread, Lock
 
+import pyqtgraph as pg
 from PyQt5.QtWidgets import QMainWindow
 from PyQt5.QtCore import pyqtSignal, pyqtSlot, QObject, QThread
 
@@ -24,7 +25,7 @@ class GraphThread(QThread):
             # self.signal.emit([self.xval, self.yval])
             self.signal.emit(self.xval, self.yval)
             self.xval = self.xval + 1
-            self.yval = self.yval + 1
+            # self.yval = self.yval + 1
 
 class GPSThread(QThread):
     log = pyqtSignal(str)
@@ -58,7 +59,7 @@ class GPSThread(QThread):
             
             sentence = self.GPSMonitor.readNMEAFrame()
             # print(sentence)
-            self.log.emit(f'{sentence.talker} {sentence.sentence_type}: {sentence.data}')
+            self.log.emit(self.GPSMonitor.sentenceToStr(sentence))
 
             # Read GSA sentence
 
@@ -72,8 +73,7 @@ class View(QMainWindow, Ui_MainWindow):
         # self.FPGAConnected = self.FPGAMonitor.is_connected()
         # self.GPSConnected = self.GPSMonitor.is_connected()
 
-        self.commandList = ["Read Reg0", "Write Reg0", "Read Reg1", 
-            "Write Reg1", "Read Reg2", "Write Reg2"]
+        self.commandList = ["Read Reg0", "Write Reg0"]
 
         # self._ui = Ui_MainWindow()
         # self._ui.setupUi(self)
@@ -86,19 +86,46 @@ class View(QMainWindow, Ui_MainWindow):
         self.ConnectButton.clicked.connect(self.pressConnectButton)
         self.DisconnectButton.clicked.connect(self.pressDisconnectButton)
         self.CommandButton.clicked.connect(self.sendCommand)
+        self.ResetButton.clicked.connect(self.resetCommand)
 
         self.CommandComboBox.addItems(self.commandList)
 
+        # TODO make a Graph class
         self.graph1XVals = []
         self.graph1YVals = []
-        # for i in range(3600):
-        #     self.graph1XVals.append(i)
-        #     self.graph1YVals.append(i)
         self.setupGraph1()
 
         self.graph2XVals = []
         self.graph2YVals = []
         self.setupGraph2()
+        
+        self.graph3XVals = []
+        self.graph3YVals = []
+        self.setupGraph3()
+
+        self.graph4XVals = []
+        self.graph4YVals = []
+        self.setupGraph4()
+
+    def resetCommand(self):
+        """
+        Reset
+        """
+        cmd = self.FPGAMonitor.get_command(self.FPGAMonitor.CMD_0)
+        self.executeCommand(cmd, self.FPGAMonitor.Command.WRITE, self.FPGAMonitor.CMD_0_RESET_HIGH)
+        self.executeCommand(cmd, self.FPGAMonitor.Command.WRITE, self.FPGAMonitor.CMD_0_RESET_LOW)
+        self.graph1XVals = []
+        self.graph1YVals = []
+        self.graph2XVals = []
+        self.graph2YVals = []
+        self.graph3XVals = []
+        self.graph3YVals = []
+        self.graph4XVals = []
+        self.graph4YVals = []
+        self.Graph1Widget.plot(self.graph1XVals,  self.graph1YVals, pen=pg.mkPen('b', width=3))
+        self.Graph2Widget.plot(self.graph2XVals,  self.graph2YVals, pen=pg.mkPen('b', width=3))
+        self.Graph3Widget.plot(self.graph3XVals,  self.graph3YVals, pen=pg.mkPen('b', width=3))
+        self.Graph4Widget.plot(self.graph4XVals,  self.graph4YVals, pen=pg.mkPen('b', width=3))
 
     def setupUI(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
@@ -128,35 +155,88 @@ class View(QMainWindow, Ui_MainWindow):
         self.Graph2worker.finished.connect(lambda: print("End Graph2"))
         self.Graph2worker.start()
 
+    def setupGraph3(self):
+        self.Graph3worker = GraphThread()
+        self.Graph3worker.signal.connect(self.plotGraph3)
+        self.Graph3worker.started.connect(lambda: print("Start Graph3"))
+        self.Graph3worker.finished.connect(lambda: print("End Graph3"))
+        self.Graph3worker.start()
+
+    def setupGraph4(self):
+        self.Graph4worker = GraphThread()
+        self.Graph4worker.signal.connect(self.plotGraph4)
+        self.Graph4worker.started.connect(lambda: print("Start Graph4"))
+        self.Graph4worker.finished.connect(lambda: print("End Graph4"))
+        self.Graph4worker.start()
+
     def plotGraph1(self, xval, yval):
         # TODO replace with plotGraph wrapper 
         if self.FPGAMonitor.is_connected():
             cmd = self.FPGAMonitor.get_command(self.FPGAMonitor.CMD_127)
             self.executeCommand(cmd, self.FPGAMonitor.Command.READ)
             print(cmd)
+            if len(self.graph1XVals) > 100:
+                self.graph1XVals = self.graph1XVals[-100:]
+                self.graph1YVals = self.graph1YVals[-100:]
             self.graph1YVals.append(cmd.get_read_data())
             self.graph1XVals.append(xval)
-            if len(self.graph1XVals) > 100:
-                self.graph1XVals = self.graph1XVals[:100]
-                self.graph1YVals = self.graph1YVals[:100]
-            self.Graph1Widget.plot(self.graph1XVals,  self.graph1YVals)
+            self.Graph1Widget.plot(self.graph1XVals,  self.graph1YVals, pen=pg.mkPen('b', width=3))
 
     def plotGraph2(self, xval, yval):
         # TODO replace with plotGraph wrapper 
-        # print(xval)
-        # print(yval)
-        self.graph2XVals.append(xval)
-        self.graph2YVals.append(yval)
-        if len(self.graph2XVals) > 100:
-            self.graph2XVals = self.graph2XVals[:100]
-            self.graph2YVals = self.graph2YVals[:100]
-        self.Graph2Widget.plot(self.graph2XVals,  self.graph2YVals)
+        if self.FPGAMonitor.is_connected():
+            cmd = self.FPGAMonitor.get_command(self.FPGAMonitor.CMD_125)
+            self.executeCommand(cmd, self.FPGAMonitor.Command.READ)
+            print(cmd)
+            if len(self.graph2XVals) > 100:
+                self.graph2XVals = self.graph2XVals[-100:]
+                self.graph2YVals = self.graph2YVals[-100:]
+            self.graph2YVals.append(cmd.get_read_data())
+            self.graph2XVals.append(xval)
+            self.Graph2Widget.plot(self.graph2XVals,  self.graph2YVals, pen=pg.mkPen('b', width=3))
 
-    def plotGraph(self, graphWidget, xvals, yvals):
+    def plotGraph3(self, xval, yval):
+        # TODO replace with plotGraph wrapper 
+        if self.FPGAMonitor.is_connected():
+            cmd = self.FPGAMonitor.get_command(self.FPGAMonitor.CMD_126)
+            self.executeCommand(cmd, self.FPGAMonitor.Command.READ)
+            print(cmd)
+            if len(self.graph3XVals) > 100:
+                print("shifting!")
+                self.graph3XVals = self.graph3XVals[-100:]
+                self.graph3YVals = self.graph3YVals[-100:]
+            self.graph3YVals.append(cmd.get_read_data())
+            self.graph3XVals.append(xval)
+            self.Graph3Widget.plot(self.graph3XVals,  self.graph3YVals, pen=pg.mkPen('b', width=3))
+
+    def plotGraph4(self, xval, yval):
+        # TODO replace with plotGraph wrapper 
+        if self.FPGAMonitor.is_connected():
+            cmd = self.FPGAMonitor.get_command(self.FPGAMonitor.CMD_124)
+            self.executeCommand(cmd, self.FPGAMonitor.Command.READ)
+            print(cmd)
+            if len(self.graph3XVals) > 100:
+                self.graph4XVals = self.graph4XVals[-100:]
+                self.graph4YVals = self.graph4YVals[-100:]
+            self.graph4YVals.append(cmd.get_read_data())
+            self.graph4XVals.append(xval)
+            self.Graph4Widget.plot(self.graph4XVals,  self.graph4YVals, pen=pg.mkPen('b', width=3))
+
+    def plotGraph(self, cmd, graphWidget, xval, yval):
         """
         Plots a graph widget with the list of values from xvals and yvals
         """
-        graphWidget.plot(xvals, yvals)
+        # if self.FPGAMonitor.is_connected():
+        #     cmd = self.FPGAMonitor.get_command(self.FPGAMonitor.CMD_126)
+        #     self.executeCommand(cmd, self.FPGAMonitor.Command.READ)
+        #     print(cmd)
+        #     graphWidget.yVals.append(cmd.get_read_data())
+        #     graphWidget.xVals.append(xval)
+        #     if len(self.graph3XVals) > 100:
+        #         self.graph3XVals = self.graph3XVals[-100:]
+        #         self.graph3YVals = self.graph3YVals[-100:]
+        #     self.Graph3Widget.plot(self.graph3XVals,  self.graph3YVals)
+        pass
 
     def toGPSLog(self, txt):
         """
@@ -166,14 +246,9 @@ class View(QMainWindow, Ui_MainWindow):
 
     def executeCommand(self, cmd, cmdType, data=None):
         if self.FPGAMonitor.is_connected():
-            if (cmdType == self.FPGAMonitor.WRITE):
-                self.FPGATextLog.appendPlainText("Sent: " + commandVal + command)
-            else:
-                self.FPGATextLog.appendPlainText("Sent: " + command)
             self.cmdLock.acquire()
             self.FPGAMonitor.execute_command(cmd, cmdType, data)
             self.cmdLock.release()
-            self.FPGATextLog.appendPlainText(str(cmd))
         else:
             print("Not Connected")
 
@@ -227,7 +302,7 @@ class View(QMainWindow, Ui_MainWindow):
             # self.FPGAMonitor.execute_command(cmd, self.FPGAMonitor.Command.WRITE, 
             #     commandVal.encode('utf-8'))
             self.execute_command(cmd, self.FPGAMonitor.Command.WRITE, commandVal.encode('utf-8'))
-
+            self.FPGATextLog.appendPlainText("Sent: " + str(cmd))
         # # Read REG1
         # elif (command == "Read Reg1"):
         #     self.FPGATextLog.appendPlainText("Sent: " + command)

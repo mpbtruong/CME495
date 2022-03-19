@@ -29,6 +29,9 @@ class MonitorFPGA(Monitor):
             name      : friendly name of the command
         """
         # constants ############################################################
+        # data types
+        UNSIGNED_INT = 'unsigned_int'
+        SIGNED_INT   = 'signed_int'
         # command info
         MAX_COMMANDS  = 128
         BYTE_ENDIAN   = 'big'  # order to send bytes
@@ -62,7 +65,7 @@ class MonitorFPGA(Monitor):
                            no_rbytes:int=None,
                            no_wbytes:int=None,
                            read_only:bool=False,
-                           data_type:int=int,
+                           data_type:int=UNSIGNED_INT,
                            ):
             """
             Initializes a command.
@@ -82,11 +85,11 @@ class MonitorFPGA(Monitor):
             self.data_type  = data_type
         def __str__(self):
             cmd = ''
-            cmd += f'Command {self.cid:03} {self.name}\n'
+            cmd += f'Command {self.cid:03} {self.name} data_type={self.data_type}\n'
             cmd += f'   rw={self.rw} cbyte={self.cbyte} read_only={self.read_only}\n'
-            cmd += f'   no_rbytes={self.no_rbytes} rbytes={self.rbytes}\n'
+            cmd += f'   no_rbytes={self.no_rbytes} rbytes={self.rbytes} ({self.get_read_data()})\n'
             if (not self.read_only):
-                cmd += f'   no_wbytes={self.no_wbytes} wbytes={self.wbytes}\n'
+                cmd += f'   no_wbytes={self.no_wbytes} wbytes={self.wbytes} ({self.get_write_data()})\n'
             return cmd
         # methods ##############################################################
         def setWriteBytes(self, write_bytes:bytes):
@@ -146,20 +149,34 @@ class MonitorFPGA(Monitor):
             :return: byte representation of aint.
             """
             return int.to_bytes(aint, no_bytes, self.BYTE_ENDIAN)
-
-        def get_read_data(self):
+        def convert_data(self, rw:str):
             """
-            TODO
+            Convert rbytes or wbytes to proper data type.
             """
-            if not self.rbytes == None:
-                data = int.from_bytes(self.rbytes, self.BYTE_ENDIAN, signed=True)
-            else:
+            i_data = self.wbytes if (rw == self.WRITE) else self.rbytes
+            if i_data is not None:
+                if (self.data_type == self.SIGNED_INT):
+                    data = int.from_bytes(i_data, self.BYTE_ENDIAN, signed=True)
+                elif (self.data_type == self.UNSIGNED_INT):
+                    data = int.from_bytes(i_data, self.BYTE_ENDIAN, signed=False)
+                else: raise NotImplementedError()
+            else: 
                 data = 0
             return data
+        def get_read_data(self):
+            """
+            Converts rbytes to int.
+            """
+            return self.convert_data(self.READ)
+        def get_write_data(self):
+            """
+            Converts wbytes to int.
+            """
+            return self.convert_data(self.WRITE)
 
     # constants ################################################################
     # command names (reg<i>_<reg_name>)
-    CMD_0   = 'reg0_'
+    CMD_0   = 'reg0_n_reset'
     CMD_1   = 'reg1_'
     CMD_2   = 'reg2_'
     CMD_3   = 'reg3_'
@@ -168,17 +185,20 @@ class MonitorFPGA(Monitor):
     CMD_125 = 'reg125_dac_out'
     CMD_126 = 'reg126_pid_out'
     CMD_127 = 'reg127_phase_error'
+    # special command values
+    CMD_0_RESET_HIGH = b'\x00'
+    CMD_0_RESET_LOW  = b'\x01'
     # dictionary of commands
     commands = {
-        CMD_0    : Command(cid=0, no_rwbytes=1, name=CMD_0),
+        CMD_0    : Command(cid=0, no_rwbytes=1, name=CMD_0, data_type=Command.UNSIGNED_INT),
         CMD_1    : Command(cid=1, no_rwbytes=1, name=CMD_1),
         CMD_2    : Command(cid=2, no_rwbytes=2, name=CMD_2),
         CMD_3    : Command(cid=3, no_rwbytes=3, name=CMD_3),
         CMD_4    : Command(cid=4, no_rwbytes=4, name=CMD_4),
-        CMD_124  : Command(cid=124, no_rwbytes=2, name=CMD_124, read_only=True, data_type=int),
-        CMD_125  : Command(cid=125, no_rwbytes=2, name=CMD_125, read_only=True, data_type=int),
-        CMD_126  : Command(cid=126, no_rwbytes=2, name=CMD_126, read_only=True, data_type=int),
-        CMD_127  : Command(cid=127, no_rwbytes=2, name=CMD_127, read_only=True, data_type=int),
+        CMD_124  : Command(cid=124, no_rwbytes=2, name=CMD_124, read_only=True, data_type=Command.SIGNED_INT),
+        CMD_125  : Command(cid=125, no_rwbytes=2, name=CMD_125, read_only=True, data_type=Command.UNSIGNED_INT),
+        CMD_126  : Command(cid=126, no_rwbytes=2, name=CMD_126, read_only=True, data_type=Command.SIGNED_INT),
+        CMD_127  : Command(cid=127, no_rwbytes=2, name=CMD_127, read_only=True, data_type=Command.SIGNED_INT),
         # CMD_x  : Command(cid=x, no_rwbytes=2, name=CMD_x, read_only=True),
     }
     commands_by_id = {cmd.cid:cmd for cmd in commands.values()}

@@ -95,6 +95,11 @@ class MonitorGPSReceiver(Monitor):
         Monitor.__init__(self, ConfigGPSReceiver)
 
     # methods ##################################################################
+    def sentenceToStr(self, sentence:NMEASentence)->str:
+        """
+        """
+        strSentence = f'{sentence}'
+        return strSentence
     def readNMEAFramesSelect(self, talkers:List[str], sentence_types:List[str], 
                                    timeout:float=None)->NMEASentence:
         """
