@@ -136,6 +136,15 @@ class Ui_MainWindow(object):
         self.CommandButton.setGeometry(QtCore.QRect(380, 30, 75, 31))
         self.CommandButton.setObjectName("CommandButton")
 
+        self.ResetFrame = QtWidgets.QFrame(self.centralwidget)
+        self.ResetFrame.setGeometry(QtCore.QRect(800, 30, 100, 91))
+        self.ResetFrame.setFrameShape(QtWidgets.QFrame.StyledPanel)
+        self.ResetFrame.setFrameShadow(QtWidgets.QFrame.Raised)
+        self.ResetFrame.setObjectName("CommandFrame")
+        self.ResetButton = QtWidgets.QPushButton(self.ResetFrame)
+        self.ResetButton.setGeometry(QtCore.QRect(10, 30, 75, 31))
+        self.ResetButton.setObjectName("ResetButton")
+
         MainWindow.setCentralWidget(self.centralwidget)
         self.menubar = QtWidgets.QMenuBar(MainWindow)
         self.menubar.setGeometry(QtCore.QRect(0, 0, 640, 21))
@@ -163,3 +172,4 @@ class Ui_MainWindow(object):
         self.CommandLabel.setText(_translate("MainWindow", "Write Value"))
         self.CommandComboLabel.setText(_translate("MainWindow", "Command List"))
         self.CommandButton.setText(_translate("MainWindow", "Enter CMD"))
+        self.ResetButton.setText(_translate("MainWindow", "Reset"))

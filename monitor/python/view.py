@@ -87,6 +87,7 @@ class View(QMainWindow, Ui_MainWindow):
         self.ConnectButton.clicked.connect(self.pressConnectButton)
         self.DisconnectButton.clicked.connect(self.pressDisconnectButton)
         self.CommandButton.clicked.connect(self.sendCommand)
+        self.ResetButton.clicked.connect(self.resetCommand)
 
         self.CommandComboBox.addItems(self.commandList)
 
@@ -106,6 +107,12 @@ class View(QMainWindow, Ui_MainWindow):
         self.graph4XVals = []
         self.graph4YVals = []
         self.setupGraph4()
+
+    def resetCommand(self):
+        """
+        Reset
+        """
+        print("Reset!")
 
     def setupUI(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
