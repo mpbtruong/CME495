@@ -141,59 +141,59 @@ FL_DQ[6],  Location,PIN_AF21
 FL_DQ[7],  Location,PIN_AE21
 FL_RST_N,  Location,PIN_AA18
 FL_WE_N,  Location,PIN_AA17
-HEX0[0],  Location,PIN_AF10
-HEX0[1],  Location,PIN_AB12
-HEX0[2],  Location,PIN_AC12
-HEX0[3],  Location,PIN_AD11
-HEX0[4],  Location,PIN_AE11
-HEX0[5],  Location,PIN_V14
-HEX0[6],  Location,PIN_V13
-HEX1[0],  Location,PIN_V20
-HEX1[1],  Location,PIN_V21
-HEX1[2],  Location,PIN_W21
-HEX1[3],  Location,PIN_Y22
-HEX1[4],  Location,PIN_AA24
-HEX1[5],  Location,PIN_AA23
-HEX1[6],  Location,PIN_AB24
-HEX2[0],  Location,PIN_AB23
-HEX2[1],  Location,PIN_V22
-HEX2[2],  Location,PIN_AC25
-HEX2[3],  Location,PIN_AC26
-HEX2[4],  Location,PIN_AB26
-HEX2[5],  Location,PIN_AB25
-HEX2[6],  Location,PIN_Y24
-HEX3[0],  Location,PIN_Y23
-HEX3[1],  Location,PIN_AA25
-HEX3[2],  Location,PIN_AA26
-HEX3[3],  Location,PIN_Y26
-HEX3[4],  Location,PIN_Y25
-HEX3[5],  Location,PIN_U22
-HEX3[6],  Location,PIN_W24
-HEX4[0],  Location,PIN_U9
-HEX4[1],  Location,PIN_U1
-HEX4[2],  Location,PIN_U2
-HEX4[3],  Location,PIN_T4
-HEX4[4],  Location,PIN_R7
-HEX4[5],  Location,PIN_R6
-HEX4[6],  Location,PIN_T3
-HEX5[0],  Location,PIN_T2
-HEX5[1],  Location,PIN_P6
-HEX5[2],  Location,PIN_P7
-HEX5[3],  Location,PIN_T9
-HEX5[4],  Location,PIN_R5
-HEX5[5],  Location,PIN_R4
-HEX5[6],  Location,PIN_R3
-HEX6[0],  Location,PIN_R2
-HEX6[1],  Location,PIN_P4
-HEX6[2],  Location,PIN_P3
-HEX6[3],  Location,PIN_M2
-HEX6[4],  Location,PIN_M3
-HEX6[5],  Location,PIN_M5
-HEX6[6],  Location,PIN_M4
-HEX7[0],  Location,PIN_L3
-HEX7[1],  Location,PIN_L2
-HEX7[2],  Location,PIN_L9
-HEX7[3],  Location,PIN_L6
-HEX7[4],  Location,PIN_L7
-HEX7[5],  Location,PIN_P9
-HEX7[6],  Location,PIN_N9
+HEX0[0],  Location,   PIN_G18
+HEX0[1],  Location,   PIN_F22
+HEX0[2],  Location,   PIN_E17
+HEX0[3],  Location,   PIN_L26
+HEX0[4],  Location,   PIN_L25
+HEX0[5],  Location,   PIN_J22
+HEX0[6],  Location,   PIN_H22
+HEX1[0],  Location,   PIN_M24
+HEX1[1],  Location,   PIN_Y22
+HEX1[2],  Location,   PIN_W21
+HEX1[3],  Location,   PIN_W22
+HEX1[4],  Location,   PIN_W25
+HEX1[5],  Location,   PIN_U23
+HEX1[6],  Location,   PIN_U24
+HEX2[0],  Location,   PIN_AA25
+HEX2[1],  Location,   PIN_AA26
+HEX2[2],  Location,   PIN_Y25
+HEX2[3],  Location,   PIN_W26
+HEX2[4],  Location,   PIN_Y26
+HEX2[5],  Location,   PIN_W27
+HEX2[6],  Location,   PIN_W28
+HEX3[0],  Location,   PIN_V21
+HEX3[1],  Location,   PIN_U21
+HEX3[2],  Location,   PIN_AB20
+HEX3[3],  Location,   PIN_AA21
+HEX3[4],  Location,   PIN_AD24
+HEX3[5],  Location,   PIN_AF23
+HEX3[6],  Location,   PIN_Y19
+HEX4[0],  Location,   PIN_AB19
+HEX4[1],  Location,   PIN_AA19
+HEX4[2],  Location,   PIN_AG21
+HEX4[3],  Location,   PIN_AH21
+HEX4[4],  Location,   PIN_AE19
+HEX4[5],  Location,   PIN_AF19
+HEX4[6],  Location,   PIN_AE18
+HEX5[0],  Location,   PIN_AD18
+HEX5[1],  Location,   PIN_AC18
+HEX5[2],  Location,   PIN_AB18
+HEX5[3],  Location,   PIN_AH19
+HEX5[4],  Location,   PIN_AG19
+HEX5[5],  Location,   PIN_AF18
+HEX5[6],  Location,   PIN_AH18
+HEX6[0],  Location,   PIN_AA17
+HEX6[1],  Location,   PIN_AB16
+HEX6[2],  Location,   PIN_AA16
+HEX6[3],  Location,   PIN_AB17
+HEX6[4],  Location,   PIN_AB15
+HEX6[5],  Location,   PIN_AA15
+HEX6[6],  Location,   PIN_AC17
+HEX7[0],  Location,   PIN_AD17
+HEX7[1],  Location,   PIN_AE17
+HEX7[2],  Location,   PIN_AG17
+HEX7[3],  Location,   PIN_AH17
+HEX7[4],  Location,   PIN_AF17
+HEX7[5],  Location,   PIN_AG18
+HEX7[6],  Location,   PIN_AA14
