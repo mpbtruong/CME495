@@ -114,6 +114,18 @@ class View(QMainWindow, Ui_MainWindow):
         cmd = self.FPGAMonitor.get_command(self.FPGAMonitor.CMD_0)
         self.executeCommand(cmd, self.FPGAMonitor.Command.WRITE, self.FPGAMonitor.CMD_0_RESET_HIGH)
         self.executeCommand(cmd, self.FPGAMonitor.Command.WRITE, self.FPGAMonitor.CMD_0_RESET_LOW)
+        self.graph1XVals = []
+        self.graph1YVals = []
+        self.graph2XVals = []
+        self.graph2YVals = []
+        self.graph3XVals = []
+        self.graph3YVals = []
+        self.graph4XVals = []
+        self.graph4YVals = []
+        self.Graph1Widget.plot(self.graph1XVals,  self.graph1YVals, pen=pg.mkPen('b', width=3))
+        self.Graph2Widget.plot(self.graph2XVals,  self.graph2YVals, pen=pg.mkPen('b', width=3))
+        self.Graph3Widget.plot(self.graph3XVals,  self.graph3YVals, pen=pg.mkPen('b', width=3))
+        self.Graph4Widget.plot(self.graph4XVals,  self.graph4YVals, pen=pg.mkPen('b', width=3))
 
     def setupUI(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
