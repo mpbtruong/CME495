@@ -246,7 +246,6 @@ class View(QMainWindow, Ui_MainWindow):
 
     def executeCommand(self, cmd, cmdType, data=None):
         if self.FPGAMonitor.is_connected():
-            self.FPGATextLog.appendPlainText("Sent: " + str(cmd))
             self.cmdLock.acquire()
             self.FPGAMonitor.execute_command(cmd, cmdType, data)
             self.cmdLock.release()
@@ -304,7 +303,7 @@ class View(QMainWindow, Ui_MainWindow):
             # self.FPGAMonitor.execute_command(cmd, self.FPGAMonitor.Command.WRITE, 
             #     commandVal.encode('utf-8'))
             self.execute_command(cmd, self.FPGAMonitor.Command.WRITE, commandVal.encode('utf-8'))
-
+        self.FPGATextLog.appendPlainText("Sent: " + str(cmd))
         # # Read REG1
         # elif (command == "Read Reg1"):
         #     self.FPGATextLog.appendPlainText("Sent: " + command)
