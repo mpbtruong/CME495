@@ -63,6 +63,9 @@
  `define REG4_BITS   32
  `define REG4_RESET  32'hAA_BB_CC_DD
 
+// register 124 - integral
+ `define REG124      124
+ `define REG124_BITS 16
  // register 125 - DAC out
  `define REG125      125
  `define REG125_BITS 16

@@ -28,6 +28,7 @@ module monitor_top(
     output reg[`REG3_BITS-1:0]   reg3, //
     output reg[`REG4_BITS-1:0]   reg4, //
     // read only registers
+    input  wire[`REG124_BITS-1:0]   reg124,
     input  wire[`REG125_BITS-1:0]   reg125,
     input  wire[`REG126_BITS-1:0]   reg126,
     input  wire[`REG127_BITS-1:0]   reg127
@@ -208,6 +209,7 @@ task MONITOR_STATE_DATA_BYTES();
                 `REG2   : cmd_data <= reg2;
                 `REG3   : cmd_data <= reg3;
                 `REG4   : cmd_data <= reg4;
+                `REG124 : cmd_data <= reg124;
                 `REG125 : cmd_data <= reg125;
                 `REG126 : cmd_data <= reg126;
                 `REG127 : cmd_data <= reg127;
