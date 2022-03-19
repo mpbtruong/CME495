@@ -32,18 +32,25 @@ module top(
 	output reg [15:0] count,
 	output reg [7:0] SPI_byte,
 	output reg valid,
+	output reg tx_start,
 	
 	output reg [19:0] ref_clk_shft,
 	output reg [1:0] pps_shft,
 	output wire [18:0] ref_posedge,
 	output reg [18:0] ref_posedge_hold,
 	output wire pps_posedge,
-	output reg [31:0] clk_count,
+	output reg signed [31:0] clk_count,
+	output reg signed [31:0] clk_err,
 	output reg signed [15:0] phase_err,
-	
+	output reg [3:0] dac_rdy,
+	output wire locked,
+
+		
+	output reg recov_pps,
 	output reg signed [15:0] pid_out,
 	output reg signed [31:0] phase_accum,
 	output reg signed [15:0] int,
+	output reg signed [31:0] cycle_error,
 	
 	output reg debug_clk
 );
@@ -63,7 +70,7 @@ always @ *
 		RECV_int = 1'b0;
 		RECV_rst_n = 1'b1;
 		LEDR[0] = RECV_pps;
-		LEDR[5:1] = 4'b1001;
+		LEDR[1] = recov_pps;
 		reset = SW[17];
 		ref_clk = SMA_CLKIN;
 		clk_200 = wclk_200;
@@ -72,9 +79,15 @@ always @ *
 	end
 	
 // ************************************* DAC SPI Control ************************************* //
-always @ (posedge CLOCK_50)
-	count = count + 1'b1;
 
+always @ (posedge CLOCK_50)
+	if(dac_rdy) tx_start = 1'b1;
+	else if(count == 16'd600) tx_start = 1'b0;
+
+always @ (posedge CLOCK_50)
+	if(dac_rdy) count = 32'b0;
+	else if(tx_start) count = count + 1'b1;
+	
 always @ (posedge CLOCK_50)
 	if(count == 16'd0 || count == 16'd550) valid = 1;
 	else valid = 0;
@@ -116,6 +129,38 @@ assign ref_posedge[16] = ref_clk_shft[16] && ~ref_clk_shft[17];
 assign ref_posedge[17] = ref_clk_shft[17] && ~ref_clk_shft[18];
 assign ref_posedge[18] = ref_clk_shft[18] && ~ref_clk_shft[19];
 
+reg flag,flag_last,clk_reset,count_reset;
+reg sw_reset;
+
+always @ *
+	if(SW[16]) sw_reset = count_reset;
+	else sw_reset = clk_reset;
+	
+always @ (posedge ref_clk)
+	if(clk_count == 32'd10_000_000) begin
+		count_reset = 1'b1;
+		end
+	else 
+		begin
+		count_reset = 1'b0;
+		end
+	
+	
+always @ (posedge ref_clk)
+	if(sw_reset) clk_count = 32'b1;
+	else clk_count = clk_count + 32'b1;
+
+//always @ (posedge ref_clk)
+//	if(clk_count == 10_000_000) recov_pps = 1'b1;
+//	else recov_pps = 1'b0;
+// Asynchronus to Synchronus Reset Logic
+always @ (posedge ref_clk)
+	begin
+		flag_last = flag;
+		flag = RECV_pps;
+		if(flag && !flag_last && !SW[6]) clk_reset = 1'b1;
+		else clk_reset = 1'b0;
+	end
 
 always@*
 	debug_clk <= clk_200;
@@ -157,6 +202,14 @@ parameter pid_p = 32'd1;
 parameter pid_i = 32'd1;
 reg signed [31:0] pd_shift[7:0];
 
+assign locked = ref_posedge[0] && pps_posedge;
+
+always @ (posedge clk_200)
+	if(data_rdy) begin
+	if(!locked) clk_err = 10_000_000 - clk_count;
+	else clk_err = clk_err;
+	end
+		
 always @ (posedge clk_200)
 	if(data_rdy)
 		begin
@@ -173,19 +226,34 @@ always @ (posedge clk_200)
 			int_rdy <= 1'b1;
 		end
 	else int_rdy = 1'b0;
-	
+
 reg pid_rdy;
 always @ (posedge clk_200)
-	if(int_rdy) 
-	begin
-		pid_out <= pid_p * phase_err + {int[15],int[15],int[15],int[15],int[15:4]};
-		pid_rdy <=1'b1;
-	end
+	if(int_rdy) pid_out = phase_err + {int[15],int[15],int[15],int[15],int[15:4]};
+	
+always @ (posedge clk_200)
+	if(int_rdy) pid_rdy <= 1'b1;
 	else pid_rdy <= 1'b0;
+	
+always @ (posedge clk_200)
+	if(!reset) DAC_val = 16'h9E23;
+	else if(pid_rdy) DAC_val = DAC_val + pid_out;
 
 always @ (posedge clk_200)
-	if(pid_rdy) DAC_val = DAC_val + pid_out;
-	
+	if(pid_rdy) begin
+		dac_rdy[3] <= dac_rdy[2];
+		dac_rdy[2] <= dac_rdy[1];
+		dac_rdy[1] <= dac_rdy[0];
+		dac_rdy[0] <= 1'b1;
+		end
+	else
+		begin
+		dac_rdy[3] <= dac_rdy[2];
+		dac_rdy[2] <= dac_rdy[1];
+		dac_rdy[1] <= dac_rdy[0];
+		dac_rdy[0] <= 1'b0;
+		end
+		
 PLL_200MHz p1(
 	.inclk0(CLOCK_50),
 	.c0(wclk_200)

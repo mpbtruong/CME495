@@ -1,0 +1,199 @@
+# Pin assignments for the DE3-115 board,,
+# Note: The column header names i.e. ``To, Assignment Name, Value ''
+# must be the first line of an assignment,,
+To,    Assignment Name, Value
+CLOCK_50,  Location,   PIN_Y2
+SMA_CLKIN,  Location,   PIN_AH14
+SMA_CLKOUT,  Location,   PIN_AE23
+LEDR[0],  Location,   PIN_G19
+LEDR[1],  Location,   PIN_F19
+LEDR[2],  Location,   PIN_E19
+LEDR[3],  Location,   PIN_F22
+LEDR[4],  Location,   PIN_F18
+LEDR[5],  Location,   PIN_E18
+LEDR[6],  Location,   PIN_J19
+LEDR[7],  Location,   PIN_H19
+LEDR[8],  Location,   PIN_J17
+LEDR[9],  Location,   PIN_G17
+LEDR[10],  Location,   PIN_J15
+LEDR[11],  Location,   PIN_H16
+LEDR[12],  Location,   PIN_J16
+LEDR[13],  Location,   PIN_H17
+LEDR[14],  Location,   PIN_F15
+LEDR[15],  Location,   PIN_G15
+LEDR[16],  Location,   PIN_G16
+LEDR[17],  Location,   PIN_H15
+LEDG[0],  Location,   PIN_E21
+LEDG[1],  Location,   PIN_E22
+LEDG[2],  Location,   PIN_E25
+LEDG[3],  Location,   PIN_E24
+LEDG[4],  Location,   PIN_H21
+LEDG[5],  Location,   PIN_G20
+LEDG[6],  Location,   PIN_G22
+LEDG[7],  Location,   PIN_G21
+LEDG[8],  Location,   PIN_F17
+KEY[0],  Location,   PIN_M23
+KEY[1],  Location,   PIN_M21
+KEY[2],  Location,   PIN_N21
+KEY[3],  Location,   PIN_R24
+SW[0],  Location,   PIN_AB28
+SW[1],  Location,   PIN_AC28
+SW[2],  Location,   PIN_AC27
+SW[3],  Location,   PIN_AD27
+SW[4],  Location,   PIN_AB27
+SW[5],  Location,   PIN_AC26
+SW[6],  Location,   PIN_AD26
+SW[7],  Location,   PIN_AB26
+SW[8],  Location,   PIN_AC25
+SW[9],  Location,   PIN_AB25
+SW[10],  Location,   PIN_AC24
+SW[11],  Location,   PIN_AB24
+SW[12],  Location,   PIN_AB23
+SW[13],  Location,   PIN_AA24
+SW[14],  Location,   PIN_AA23
+SW[15],  Location,   PIN_AA22
+SW[16],  Location,   PIN_Y24
+SW[17],  Location,   PIN_Y23
+DAC_CS_n,  Location,   PIN_AC15
+DAC_clk,  Location,   PIN_Y17
+DAC_data,  Location,   PIN_Y16
+RECV_rx_sdi,  Location,   PIN_AE16
+RECV_tx_sdo,  Location,   PIN_AE15
+RECV_sck,  Location,   PIN_AF16
+RECV_scl,  Location,   PIN_AF15
+RECV_sda,  Location,   PIN_AE21
+RECV_int,  Location,   PIN_AC22
+RECV_rst_n,  Location,   PIN_AF21
+RECV_pps,  Location,   PIN_AD22
+UART_RXD,  Location,   PIN_G12
+UART_TXD,  Location,   PIN_G9
+UART_CTS,  Location,   PIN_G14
+UART_RTS,  Location,   PIN_J13
+DRAM_ADDR[0],  Location,PIN_T6
+DRAM_ADDR[1],  Location,PIN_V4
+DRAM_ADDR[2],  Location,PIN_V3
+DRAM_ADDR[3],  Location,PIN_W2
+DRAM_ADDR[4],  Location,PIN_W1
+DRAM_ADDR[5],  Location,PIN_U6
+DRAM_ADDR[6],  Location,PIN_U7
+DRAM_ADDR[7],  Location,PIN_U5
+DRAM_ADDR[8],  Location,PIN_W4
+DRAM_ADDR[9],  Location,PIN_W3
+DRAM_ADDR[10],  Location,PIN_Y1
+DRAM_ADDR[11],  Location,PIN_V5
+DRAM_BA_0,  Location,PIN_AE2
+DRAM_BA_1,  Location,PIN_AE3
+DRAM_CAS_N,  Location,PIN_AB3
+DRAM_CKE,  Location,PIN_AA6
+DRAM_CLK,  Location,PIN_AA7
+DRAM_CS_N,  Location,PIN_AC3
+DRAM_DQ[0],  Location,PIN_V6
+DRAM_DQ[1],  Location,PIN_AA2
+DRAM_DQ[2],  Location,PIN_AA1
+DRAM_DQ[3],  Location,PIN_Y3
+DRAM_DQ[4],  Location,PIN_Y4
+DRAM_DQ[5],  Location,PIN_R8
+DRAM_DQ[6],  Location,PIN_T8
+DRAM_DQ[7],  Location,PIN_V7
+DRAM_DQ[8],  Location,PIN_W6
+DRAM_DQ[9],  Location,PIN_AB2
+DRAM_DQ[10],  Location,PIN_AB1
+DRAM_DQ[11],  Location,PIN_AA4
+DRAM_DQ[12],  Location,PIN_AA3
+DRAM_DQ[13],  Location,PIN_AC2
+DRAM_DQ[14],  Location,PIN_AC1
+DRAM_DQ[15],  Location,PIN_AA5
+DRAM_LDQM,  Location,PIN_AD2
+DRAM_UDQM,  Location,PIN_Y5
+DRAM_RAS_N,  Location,PIN_AB4
+DRAM_WE_N,  Location,PIN_AD3
+FL_ADDR[0],  Location,PIN_AC18
+FL_ADDR[1],  Location,PIN_AB18
+FL_ADDR[2],  Location,PIN_AE19
+FL_ADDR[3],  Location,PIN_AF19
+FL_ADDR[4],  Location,PIN_AE18
+FL_ADDR[5],  Location,PIN_AF18
+FL_ADDR[6],  Location,PIN_Y16
+FL_ADDR[7],  Location,PIN_AA16
+FL_ADDR[8],  Location,PIN_AD17
+FL_ADDR[9],  Location,PIN_AC17
+FL_ADDR[10],  Location,PIN_AE17
+FL_ADDR[11],  Location,PIN_AF17
+FL_ADDR[12],  Location,PIN_W16
+FL_ADDR[13],  Location,PIN_W15
+FL_ADDR[14],  Location,PIN_AC16
+FL_ADDR[15],  Location,PIN_AD16
+FL_ADDR[16],  Location,PIN_AE16
+FL_ADDR[17],  Location,PIN_AC15
+FL_ADDR[18],  Location,PIN_AB15
+FL_ADDR[19],  Location,PIN_AA15
+FL_ADDR[20],  Location,PIN_Y15
+FL_ADDR[21],  Location,PIN_Y14
+FL_CE_N,  Location,PIN_V17
+FL_OE_N,  Location,PIN_W17
+FL_DQ[0],  Location,PIN_AD19
+FL_DQ[1],  Location,PIN_AC19
+FL_DQ[2],  Location,PIN_AF20
+FL_DQ[3],  Location,PIN_AE20
+FL_DQ[4],  Location,PIN_AB20
+FL_DQ[5],  Location,PIN_AC20
+FL_DQ[6],  Location,PIN_AF21
+FL_DQ[7],  Location,PIN_AE21
+FL_RST_N,  Location,PIN_AA18
+FL_WE_N,  Location,PIN_AA17
+HEX0[0],  Location,PIN_AF10
+HEX0[1],  Location,PIN_AB12
+HEX0[2],  Location,PIN_AC12
+HEX0[3],  Location,PIN_AD11
+HEX0[4],  Location,PIN_AE11
+HEX0[5],  Location,PIN_V14
+HEX0[6],  Location,PIN_V13
+HEX1[0],  Location,PIN_V20
+HEX1[1],  Location,PIN_V21
+HEX1[2],  Location,PIN_W21
+HEX1[3],  Location,PIN_Y22
+HEX1[4],  Location,PIN_AA24
+HEX1[5],  Location,PIN_AA23
+HEX1[6],  Location,PIN_AB24
+HEX2[0],  Location,PIN_AB23
+HEX2[1],  Location,PIN_V22
+HEX2[2],  Location,PIN_AC25
+HEX2[3],  Location,PIN_AC26
+HEX2[4],  Location,PIN_AB26
+HEX2[5],  Location,PIN_AB25
+HEX2[6],  Location,PIN_Y24
+HEX3[0],  Location,PIN_Y23
+HEX3[1],  Location,PIN_AA25
+HEX3[2],  Location,PIN_AA26
+HEX3[3],  Location,PIN_Y26
+HEX3[4],  Location,PIN_Y25
+HEX3[5],  Location,PIN_U22
+HEX3[6],  Location,PIN_W24
+HEX4[0],  Location,PIN_U9
+HEX4[1],  Location,PIN_U1
+HEX4[2],  Location,PIN_U2
+HEX4[3],  Location,PIN_T4
+HEX4[4],  Location,PIN_R7
+HEX4[5],  Location,PIN_R6
+HEX4[6],  Location,PIN_T3
+HEX5[0],  Location,PIN_T2
+HEX5[1],  Location,PIN_P6
+HEX5[2],  Location,PIN_P7
+HEX5[3],  Location,PIN_T9
+HEX5[4],  Location,PIN_R5
+HEX5[5],  Location,PIN_R4
+HEX5[6],  Location,PIN_R3
+HEX6[0],  Location,PIN_R2
+HEX6[1],  Location,PIN_P4
+HEX6[2],  Location,PIN_P3
+HEX6[3],  Location,PIN_M2
+HEX6[4],  Location,PIN_M3
+HEX6[5],  Location,PIN_M5
+HEX6[6],  Location,PIN_M4
+HEX7[0],  Location,PIN_L3
+HEX7[1],  Location,PIN_L2
+HEX7[2],  Location,PIN_L9
+HEX7[3],  Location,PIN_L6
+HEX7[4],  Location,PIN_L7
+HEX7[5],  Location,PIN_P9
+HEX7[6],  Location,PIN_N9

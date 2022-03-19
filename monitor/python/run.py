@@ -47,7 +47,7 @@ def main():
         # sys.exit(app.exec_())
     # kill the subscriber
     except KeyboardInterrupt:
-        print(f'Stopped!')
+        print('Stopped!')
 
 if __name__ == '__main__':
     main()
