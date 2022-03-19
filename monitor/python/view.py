@@ -59,7 +59,7 @@ class GPSThread(QThread):
             
             sentence = self.GPSMonitor.readNMEAFrame()
             # print(sentence)
-            self.log.emit(f'{sentence.talker} {sentence.sentence_type}: {sentence.data}')
+            self.log.emit(self.GPSMonitor.sentenceToStr(sentence))
 
             # Read GSA sentence
 
