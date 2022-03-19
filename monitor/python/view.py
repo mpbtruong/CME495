@@ -25,7 +25,7 @@ class GraphThread(QThread):
             # self.signal.emit([self.xval, self.yval])
             self.signal.emit(self.xval, self.yval)
             self.xval = self.xval + 1
-            self.yval = self.yval + 1
+            # self.yval = self.yval + 1
 
 class GPSThread(QThread):
     log = pyqtSignal(str)
@@ -156,8 +156,8 @@ class View(QMainWindow, Ui_MainWindow):
             self.executeCommand(cmd, self.FPGAMonitor.Command.READ)
             print(cmd)
             if len(self.graph1XVals) > 100:
-                self.graph1XVals = self.graph1XVals[:100]
-                self.graph1YVals = self.graph1YVals[:100]
+                self.graph1XVals = self.graph1XVals[-100:]
+                self.graph1YVals = self.graph1YVals[-100:]
             self.graph1YVals.append(cmd.get_read_data())
             self.graph1XVals.append(xval)
             self.Graph1Widget.plot(self.graph1XVals,  self.graph1YVals, pen=pg.mkPen('b', width=3))
@@ -169,8 +169,8 @@ class View(QMainWindow, Ui_MainWindow):
             self.executeCommand(cmd, self.FPGAMonitor.Command.READ)
             print(cmd)
             if len(self.graph2XVals) > 100:
-                self.graph2XVals = self.graph2XVals[:100]
-                self.graph2YVals = self.graph2YVals[:100]
+                self.graph2XVals = self.graph2XVals[-100:]
+                self.graph2YVals = self.graph2YVals[-100:]
             self.graph2YVals.append(cmd.get_read_data())
             self.graph2XVals.append(xval)
             self.Graph2Widget.plot(self.graph2XVals,  self.graph2YVals, pen=pg.mkPen('b', width=3))
@@ -183,8 +183,8 @@ class View(QMainWindow, Ui_MainWindow):
             print(cmd)
             if len(self.graph3XVals) > 100:
                 print("shifting!")
-                self.graph3XVals = self.graph3XVals[:100]
-                self.graph3YVals = self.graph3YVals[:100]
+                self.graph3XVals = self.graph3XVals[-100:]
+                self.graph3YVals = self.graph3YVals[-100:]
             self.graph3YVals.append(cmd.get_read_data())
             self.graph3XVals.append(xval)
             self.Graph3Widget.plot(self.graph3XVals,  self.graph3YVals, pen=pg.mkPen('b', width=3))
@@ -196,8 +196,8 @@ class View(QMainWindow, Ui_MainWindow):
             self.executeCommand(cmd, self.FPGAMonitor.Command.READ)
             print(cmd)
             if len(self.graph3XVals) > 100:
-                self.graph4XVals = self.graph4XVals[:100]
-                self.graph4YVals = self.graph4YVals[:100]
+                self.graph4XVals = self.graph4XVals[-100:]
+                self.graph4YVals = self.graph4YVals[-100:]
             self.graph4YVals.append(cmd.get_read_data())
             self.graph4XVals.append(xval)
             self.Graph4Widget.plot(self.graph4XVals,  self.graph4YVals, pen=pg.mkPen('b', width=3))
@@ -213,8 +213,8 @@ class View(QMainWindow, Ui_MainWindow):
         #     graphWidget.yVals.append(cmd.get_read_data())
         #     graphWidget.xVals.append(xval)
         #     if len(self.graph3XVals) > 100:
-        #         self.graph3XVals = self.graph3XVals[:100]
-        #         self.graph3YVals = self.graph3YVals[:100]
+        #         self.graph3XVals = self.graph3XVals[-100:]
+        #         self.graph3YVals = self.graph3YVals[-100:]
         #     self.Graph3Widget.plot(self.graph3XVals,  self.graph3YVals)
         pass
 
