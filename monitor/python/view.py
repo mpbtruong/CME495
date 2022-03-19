@@ -111,9 +111,17 @@ class View(QMainWindow, Ui_MainWindow):
         """
         Reset
         """
-        cmd = self.FPGAMonitor.get_command(self.FPGAMonitor.REG0)
+        cmd = self.FPGAMonitor.get_command(self.FPGAMonitor.CMD_0)
         self.executeCommand(cmd, self.FPGAMonitor.Command.WRITE, self.FPGAMonitor.CMD_0_RESET_HIGH)
         self.executeCommand(cmd, self.FPGAMonitor.Command.WRITE, self.FPGAMonitor.CMD_0_RESET_LOW)
+        self.graph1XVals = []
+        self.graph1YVals = []
+        self.graph2XVals = []
+        self.graph2YVals = []
+        self.graph3XVals = []
+        self.graph3YVals = []
+        self.graph4XVals = []
+        self.graph4YVals = []
 
     def setupUI(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
