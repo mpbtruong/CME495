@@ -84,9 +84,9 @@ class MonitorFPGA(Monitor):
             cmd = ''
             cmd += f'Command {self.cid:03} {self.name}\n'
             cmd += f'   rw={self.rw} cbyte={self.cbyte} read_only={self.read_only}\n'
-            cmd += f'   no_rbytes={self.no_rbytes} rbytes={self.rbytes}\n'
+            cmd += f'   no_rbytes={self.no_rbytes} rbytes={self.rbytes} ({self.get_read_data()})\n'
             if (not self.read_only):
-                cmd += f'   no_wbytes={self.no_wbytes} wbytes={self.wbytes}\n'
+                cmd += f'   no_wbytes={self.no_wbytes} wbytes={self.wbytes} ({self.get_write_data()})\n'
             return cmd
         # methods ##############################################################
         def setWriteBytes(self, write_bytes:bytes):
@@ -146,14 +146,22 @@ class MonitorFPGA(Monitor):
             :return: byte representation of aint.
             """
             return int.to_bytes(aint, no_bytes, self.BYTE_ENDIAN)
-
         def get_read_data(self):
             """
-            TODO
+            Converts rbytes to int.
             """
             if not self.rbytes == None:
                 data = int.from_bytes(self.rbytes, self.BYTE_ENDIAN, signed=True)
-            else:
+            else: 
+                data = 0
+            return data
+        def get_write_data(self):
+            """
+            Converts wbytes to int.
+            """
+            if not self.rbytes == None:
+                data = int.from_bytes(self.wbytes, self.BYTE_ENDIAN, signed=True)
+            else: 
                 data = 0
             return data
 
