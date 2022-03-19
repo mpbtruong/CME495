@@ -160,7 +160,7 @@ class View(QMainWindow, Ui_MainWindow):
             if len(self.graph1XVals) > 100:
                 self.graph1XVals = self.graph1XVals[:100]
                 self.graph1YVals = self.graph1YVals[:100]
-            self.Graph1Widget.plot(self.graph1XVals,  self.graph1YVals, pen=pg.mkPen('b', width=5))
+            self.Graph1Widget.plot(self.graph1XVals,  self.graph1YVals, pen=pg.mkPen('b', width=3))
 
     def plotGraph2(self, xval, yval):
         # TODO replace with plotGraph wrapper 
@@ -173,7 +173,7 @@ class View(QMainWindow, Ui_MainWindow):
             if len(self.graph2XVals) > 100:
                 self.graph2XVals = self.graph2XVals[:100]
                 self.graph2YVals = self.graph2YVals[:100]
-            self.Graph2Widget.plot(self.graph2XVals,  self.graph2YVals, pen=pg.mkPen('b', width=5))
+            self.Graph2Widget.plot(self.graph2XVals,  self.graph2YVals, pen=pg.mkPen('b', width=3))
 
     def plotGraph3(self, xval, yval):
         # TODO replace with plotGraph wrapper 
@@ -186,7 +186,7 @@ class View(QMainWindow, Ui_MainWindow):
             if len(self.graph3XVals) > 100:
                 self.graph3XVals = self.graph3XVals[:100]
                 self.graph3YVals = self.graph3YVals[:100]
-            self.Graph3Widget.plot(self.graph3XVals,  self.graph3YVals, pen=pg.mkPen('b', width=5))
+            self.Graph3Widget.plot(self.graph3XVals,  self.graph3YVals, pen=pg.mkPen('b', width=3))
 
     def plotGraph4(self, xval, yval):
         # TODO replace with plotGraph wrapper 
@@ -199,7 +199,7 @@ class View(QMainWindow, Ui_MainWindow):
             if len(self.graph3XVals) > 100:
                 self.graph4XVals = self.graph4XVals[:100]
                 self.graph4YVals = self.graph4YVals[:100]
-            self.Graph4Widget.plot(self.graph4XVals,  self.graph4YVals, pen=pg.mkPen('b', width=5))
+            self.Graph4Widget.plot(self.graph4XVals,  self.graph4YVals, pen=pg.mkPen('b', width=3))
 
     def plotGraph(self, cmd, graphWidget, xval, yval):
         """
