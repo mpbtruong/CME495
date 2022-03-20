@@ -49,6 +49,8 @@ class GPSThread(QThread):
                 timeout += 5
 
 
+        talkers = self.GPSMonitor.TALKER_IDS
+        sentence_types = self.GPSMonitor.SENTENCE_TYPES
         while(1):
             time.sleep(1)
             # self.log.emit('HelloWorld!')
@@ -57,11 +59,11 @@ class GPSThread(QThread):
             # sentence = self.GPSMonitor.readNMEAFrameSelect(self.GPSMonitor.TALKER_ID_GPS,
             #     self.GPSMonitor.GGA)
             
-            sentence = self.GPSMonitor.readNMEAFrame()
-            # print(sentence)
-            self.log.emit(self.GPSMonitor.sentenceToStr(sentence))
-
-            # Read GSA sentence
+            try:
+                sentence = self.GPSMonitor.readNMEAFramesSelect(talkers, sentence_types, timeout=5.0)
+                self.log.emit(self.GPSMonitor.sentenceToStr(sentence))
+            except self.GPSMonitor.ReadNMEAFrameError:
+                print(f'Failed to get NMEA sentence before timeout')
 
 class View(QMainWindow, Ui_MainWindow):
     def __init__(self, FPGAMonitor, GPSMonitor):
@@ -111,9 +113,14 @@ class View(QMainWindow, Ui_MainWindow):
         """
         Reset
         """
+        self.FPGATextLog.appendPlainText('RESET FPGA')
         cmd = self.FPGAMonitor.get_command(self.FPGAMonitor.CMD_0)
         self.executeCommand(cmd, self.FPGAMonitor.Command.WRITE, self.FPGAMonitor.CMD_0_RESET_HIGH)
         self.executeCommand(cmd, self.FPGAMonitor.Command.WRITE, self.FPGAMonitor.CMD_0_RESET_LOW)
+        self.Graph1Widget.clear()
+        self.Graph2Widget.clear()
+        self.Graph3Widget.clear()
+        self.Graph4Widget.clear()
         self.graph1XVals = []
         self.graph1YVals = []
         self.graph2XVals = []
@@ -122,10 +129,7 @@ class View(QMainWindow, Ui_MainWindow):
         self.graph3YVals = []
         self.graph4XVals = []
         self.graph4YVals = []
-        self.Graph1Widget.clear()
-        self.Graph2Widget.clear()
-        self.Graph3Widget.clear()
-        self.Graph4Widget.clear()
+
 
     def setupUI(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
