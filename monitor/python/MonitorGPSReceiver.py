@@ -98,16 +98,18 @@ class MonitorGPSReceiver(Monitor):
     def sentenceToStr(self, sen:NMEASentence)->str:
         """
         """
-        strSentence = ""
-        if sen.sentence_type == GGA:
-            strSentence += f'GGA: '
+        strSentence = f'{sen.talker}{sen.sentence_type}'
+        if sen.sentence_type == self.GGA:
             strSentence += f'TIME: {sen.timestamp}, LAT: {sen.lat}'
             strSentence += f', NUM SATS: {sen.num_sats}, ALT: {sen.altitude}'
-        # elif sen.sentence_type == GSV:
-        #     strSentence += f'GSV: '
-        #     strSentence += f''
+        elif sen.sentence_type == self.GSV:
+            strSentence += f'NUM SATS: {sen.num_sats}'
+        elif sen.sentence_type == self.GSA:
+            strSentence += f'PDOP: {sen.pdop}, HDOP: {sen.hdop}, VDOP: {sen.vdop}'
+        elif sen.sentence_type == self.GLL:
+            strSentence += f'TIME: {sen.time}, LAT: {sen.lat}, LON: {sen.lon}, STATUS: {sen.status}'
         else:
-            strSentence = f'{sentence}'
+            strSentence = f'{sen}'
 
         # strSentence = f'{sentence}'
         return strSentence
