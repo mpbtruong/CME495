@@ -174,6 +174,6 @@ class Ui_MainWindow(object):
         self.DisconnectButton.setText(_translate("MainWindow", "Disconnect"))
         self.CommandLabel.setText(_translate("MainWindow", "Write Value"))
         self.CommandComboLabel.setText(_translate("MainWindow", "Command List"))
-        self.CommandButton.setText(_translate("MainWindow", "Enter CMD"))
+        self.CommandButton.setText(_translate("MainWindow", "Send CMD"))
         self.ResetButton.setText(_translate("MainWindow", "Reset"))
         self.ClearPlotsButton.setText(_translate("MainWindow", "Clear Plots"))
