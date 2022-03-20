@@ -75,7 +75,9 @@ class View(QMainWindow, Ui_MainWindow):
         # self.FPGAConnected = self.FPGAMonitor.is_connected()
         # self.GPSConnected = self.GPSMonitor.is_connected()
 
-        self.commandList = ["Read Reg0", "Write Reg0"]
+        self.commandList = [
+            f'Read {self.FPGAMonitor.CMD_0}', 
+        ]
 
         # self._ui = Ui_MainWindow()
         # self._ui.setupUi(self)
@@ -301,22 +303,21 @@ class View(QMainWindow, Ui_MainWindow):
         """
         commandVal = self.CommandTextInput.toPlainText()
         command = self.CommandComboBox.currentText()
-        
         # TODO replace read/write REG to abstracted (user-friendly) commands
         # so that user cannot directly read/write the registers
         # Read REG0
-        if (command == "Read Reg0"):
+        if (command == f'Read {self.FPGAMonitor.CMD_0}'):
             cmd = self.FPGAMonitor.get_command_by_id(0)
             # self.FPGAMonitor.execute_command(cmd, self.FPGAMonitor.Command.READ)
             self.executeCommand(cmd, self.FPGAMonitor.Command.READ)
 
         # Write REG0
-        elif (command == "Write Reg0"):
-            cmd = self.FPGAMonitor.get_command_by_id(0)
-            # self.FPGAMonitor.execute_command(cmd, self.FPGAMonitor.Command.WRITE, 
-            #     commandVal.encode('utf-8'))
-            self.execute_command(cmd, self.FPGAMonitor.Command.WRITE, commandVal.encode('utf-8'))
-            self.FPGATextLog.appendPlainText("Sent: " + str(cmd))
+        # elif (command == "Write Reg0"):
+        #     cmd = self.FPGAMonitor.get_command_by_id(0)
+        #     # self.FPGAMonitor.execute_command(cmd, self.FPGAMonitor.Command.WRITE, 
+        #     #     commandVal.encode('utf-8'))
+        #     self.execute_command(cmd, self.FPGAMonitor.Command.WRITE, commandVal.encode('utf-8'))
+        #     # self.FPGATextLog.appendPlainText("Sent: " + str(cmd))
         # # Read REG1
         # elif (command == "Read Reg1"):
         #     self.FPGATextLog.appendPlainText("Sent: " + command)
@@ -331,6 +332,6 @@ class View(QMainWindow, Ui_MainWindow):
         #     self.FPGAMonitor.execute_command(cmd, self.FPGAMonitor.Command.WRITE,
         #         commandVal.encode('utf-8'))
         #     self.FPGATextLog.appendPlainText(str(cmd))
-            
-        print("Sent: " + commandVal + command)
+        self.FPGATextLog.appendPlainText(str(cmd))
+        # print("Sent: " + commandVal + command)
         # self.FPGATextLog.appendPlainText("Sent: " + commandVal + command)
