@@ -167,7 +167,8 @@ class View(QMainWindow, Ui_MainWindow):
         if self.FPGAMonitor.is_connected():
             cmd = self.FPGAMonitor.get_command(self.FPGAMonitor.CMD_127)
             self.executeCommand(cmd, self.FPGAMonitor.Command.READ)
-            print(cmd)
+            self.FPGATextLog.appendPlainText(str(cmd))
+            # print(cmd)
             if len(self.graph1XVals) > 100:
                 self.graph1XVals = self.graph1XVals[-100:]
                 self.graph1YVals = self.graph1YVals[-100:]
@@ -180,7 +181,8 @@ class View(QMainWindow, Ui_MainWindow):
         if self.FPGAMonitor.is_connected():
             cmd = self.FPGAMonitor.get_command(self.FPGAMonitor.CMD_125)
             self.executeCommand(cmd, self.FPGAMonitor.Command.READ)
-            print(cmd)
+            self.FPGATextLog.appendPlainText(str(cmd))
+            # print(cmd)
             if len(self.graph2XVals) > 100:
                 self.graph2XVals = self.graph2XVals[-100:]
                 self.graph2YVals = self.graph2YVals[-100:]
@@ -193,9 +195,10 @@ class View(QMainWindow, Ui_MainWindow):
         if self.FPGAMonitor.is_connected():
             cmd = self.FPGAMonitor.get_command(self.FPGAMonitor.CMD_126)
             self.executeCommand(cmd, self.FPGAMonitor.Command.READ)
-            print(cmd)
+            self.FPGATextLog.appendPlainText(str(cmd))
+            # print(cmd)
             if len(self.graph3XVals) > 100:
-                print("shifting!")
+                # print("shifting!")
                 self.graph3XVals = self.graph3XVals[-100:]
                 self.graph3YVals = self.graph3YVals[-100:]
             self.graph3YVals.append(cmd.get_read_data())
@@ -207,7 +210,8 @@ class View(QMainWindow, Ui_MainWindow):
         if self.FPGAMonitor.is_connected():
             cmd = self.FPGAMonitor.get_command(self.FPGAMonitor.CMD_124)
             self.executeCommand(cmd, self.FPGAMonitor.Command.READ)
-            print(cmd)
+            self.FPGATextLog.appendPlainText(str(cmd))
+            # print(cmd)
             if len(self.graph3XVals) > 100:
                 self.graph4XVals = self.graph4XVals[-100:]
                 self.graph4YVals = self.graph4YVals[-100:]

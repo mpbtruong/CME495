@@ -85,7 +85,7 @@ class MonitorFPGA(Monitor):
             self.data_type  = data_type
         def __str__(self):
             cmd = ''
-            cmd += f'Command {self.name} '
+            cmd += f'{self.name} '
             if (self.read_only):
                 cmd += f'read={self.get_read_data()}'
             else:
