@@ -19,9 +19,7 @@ hardware/spi_master/*.qws
 
 hardware/final/db/**
 hardware/final/incremental_db/**
-hardware/final/output_files/**
 hardware/final/simulation/**
-hardware/final/*.qpf
 hardware/final/*.qsf
 hardware/final/*.qsf.bak
 hardware/final/*.qws

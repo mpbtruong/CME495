@@ -42,10 +42,10 @@
 /**
  * Register info.
  */
- // register 0
+ // register 0 - n_reset
  `define REG0        0
- `define REG0_BITS   4
- `define REG0_RESET  8'h0F
+ `define REG0_BITS   1
+ `define REG0_RESET  1'b1
  // register 1
  `define REG1        1
  `define REG1_BITS   8
