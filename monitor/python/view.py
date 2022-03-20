@@ -49,6 +49,8 @@ class GPSThread(QThread):
                 timeout += 5
 
 
+        talkers = self.GPSMonitor.TALKER_IDS
+        sentence_types = self.GPSMonitor.SENTENCE_TYPES
         while(1):
             time.sleep(1)
             # self.log.emit('HelloWorld!')
@@ -57,11 +59,11 @@ class GPSThread(QThread):
             # sentence = self.GPSMonitor.readNMEAFrameSelect(self.GPSMonitor.TALKER_ID_GPS,
             #     self.GPSMonitor.GGA)
             
-            sentence = self.GPSMonitor.readNMEAFrame()
-            # print(sentence)
-            self.log.emit(self.GPSMonitor.sentenceToStr(sentence))
-
-            # Read GSA sentence
+            try:
+                sentence = self.GPSMonitor.readNMEAFramesSelect(talkers, sentence_types, timeout=5.0)
+                self.log.emit(self.GPSMonitor.sentenceToStr(sentence))
+            except self.GPSMonitor.ReadNMEAFrameError:
+                print(f'Failed to get NMEA sentence before timeout')
 
 class View(QMainWindow, Ui_MainWindow):
     def __init__(self, FPGAMonitor, GPSMonitor):
@@ -73,7 +75,9 @@ class View(QMainWindow, Ui_MainWindow):
         # self.FPGAConnected = self.FPGAMonitor.is_connected()
         # self.GPSConnected = self.GPSMonitor.is_connected()
 
-        self.commandList = ["Read Reg0", "Write Reg0"]
+        self.commandList = [
+            f'Read {self.FPGAMonitor.CMD_0}', 
+        ]
 
         # self._ui = Ui_MainWindow()
         # self._ui.setupUi(self)
@@ -87,6 +91,7 @@ class View(QMainWindow, Ui_MainWindow):
         self.DisconnectButton.clicked.connect(self.pressDisconnectButton)
         self.CommandButton.clicked.connect(self.sendCommand)
         self.ResetButton.clicked.connect(self.resetCommand)
+        self.ClearPlotsButton.clicked.connect(self.clearPlots)
 
         self.CommandComboBox.addItems(self.commandList)
 
@@ -111,21 +116,11 @@ class View(QMainWindow, Ui_MainWindow):
         """
         Reset
         """
+        self.FPGATextLog.appendPlainText('RESET FPGA')
         cmd = self.FPGAMonitor.get_command(self.FPGAMonitor.CMD_0)
         self.executeCommand(cmd, self.FPGAMonitor.Command.WRITE, self.FPGAMonitor.CMD_0_RESET_HIGH)
         self.executeCommand(cmd, self.FPGAMonitor.Command.WRITE, self.FPGAMonitor.CMD_0_RESET_LOW)
-        self.graph1XVals = []
-        self.graph1YVals = []
-        self.graph2XVals = []
-        self.graph2YVals = []
-        self.graph3XVals = []
-        self.graph3YVals = []
-        self.graph4XVals = []
-        self.graph4YVals = []
-        self.Graph1Widget.plot(self.graph1XVals,  self.graph1YVals, pen=pg.mkPen('b', width=3))
-        self.Graph2Widget.plot(self.graph2XVals,  self.graph2YVals, pen=pg.mkPen('b', width=3))
-        self.Graph3Widget.plot(self.graph3XVals,  self.graph3YVals, pen=pg.mkPen('b', width=3))
-        self.Graph4Widget.plot(self.graph4XVals,  self.graph4YVals, pen=pg.mkPen('b', width=3))
+        self.clearPlots()
 
     def setupUI(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
@@ -174,7 +169,8 @@ class View(QMainWindow, Ui_MainWindow):
         if self.FPGAMonitor.is_connected():
             cmd = self.FPGAMonitor.get_command(self.FPGAMonitor.CMD_127)
             self.executeCommand(cmd, self.FPGAMonitor.Command.READ)
-            print(cmd)
+            self.FPGATextLog.appendPlainText(str(cmd))
+            # print(cmd)
             if len(self.graph1XVals) > 100:
                 self.graph1XVals = self.graph1XVals[-100:]
                 self.graph1YVals = self.graph1YVals[-100:]
@@ -187,7 +183,8 @@ class View(QMainWindow, Ui_MainWindow):
         if self.FPGAMonitor.is_connected():
             cmd = self.FPGAMonitor.get_command(self.FPGAMonitor.CMD_125)
             self.executeCommand(cmd, self.FPGAMonitor.Command.READ)
-            print(cmd)
+            self.FPGATextLog.appendPlainText(str(cmd))
+            # print(cmd)
             if len(self.graph2XVals) > 100:
                 self.graph2XVals = self.graph2XVals[-100:]
                 self.graph2YVals = self.graph2YVals[-100:]
@@ -200,9 +197,10 @@ class View(QMainWindow, Ui_MainWindow):
         if self.FPGAMonitor.is_connected():
             cmd = self.FPGAMonitor.get_command(self.FPGAMonitor.CMD_126)
             self.executeCommand(cmd, self.FPGAMonitor.Command.READ)
-            print(cmd)
+            self.FPGATextLog.appendPlainText(str(cmd))
+            # print(cmd)
             if len(self.graph3XVals) > 100:
-                print("shifting!")
+                # print("shifting!")
                 self.graph3XVals = self.graph3XVals[-100:]
                 self.graph3YVals = self.graph3YVals[-100:]
             self.graph3YVals.append(cmd.get_read_data())
@@ -214,7 +212,8 @@ class View(QMainWindow, Ui_MainWindow):
         if self.FPGAMonitor.is_connected():
             cmd = self.FPGAMonitor.get_command(self.FPGAMonitor.CMD_124)
             self.executeCommand(cmd, self.FPGAMonitor.Command.READ)
-            print(cmd)
+            self.FPGATextLog.appendPlainText(str(cmd))
+            # print(cmd)
             if len(self.graph3XVals) > 100:
                 self.graph4XVals = self.graph4XVals[-100:]
                 self.graph4YVals = self.graph4YVals[-100:]
@@ -237,6 +236,23 @@ class View(QMainWindow, Ui_MainWindow):
         #         self.graph3YVals = self.graph3YVals[-100:]
         #     self.Graph3Widget.plot(self.graph3XVals,  self.graph3YVals)
         pass
+
+    def clearPlots(self):
+        """
+        Clear the Plots on the GUI
+        """
+        self.Graph1Widget.clear()
+        self.Graph2Widget.clear()
+        self.Graph3Widget.clear()
+        self.Graph4Widget.clear()
+        self.graph1XVals = []
+        self.graph1YVals = []
+        self.graph2XVals = []
+        self.graph2YVals = []
+        self.graph3XVals = []
+        self.graph3YVals = []
+        self.graph4XVals = []
+        self.graph4YVals = []
 
     def toGPSLog(self, txt):
         """
@@ -287,22 +303,21 @@ class View(QMainWindow, Ui_MainWindow):
         """
         commandVal = self.CommandTextInput.toPlainText()
         command = self.CommandComboBox.currentText()
-        
         # TODO replace read/write REG to abstracted (user-friendly) commands
         # so that user cannot directly read/write the registers
         # Read REG0
-        if (command == "Read Reg0"):
+        if (command == f'Read {self.FPGAMonitor.CMD_0}'):
             cmd = self.FPGAMonitor.get_command_by_id(0)
             # self.FPGAMonitor.execute_command(cmd, self.FPGAMonitor.Command.READ)
             self.executeCommand(cmd, self.FPGAMonitor.Command.READ)
 
         # Write REG0
-        elif (command == "Write Reg0"):
-            cmd = self.FPGAMonitor.get_command_by_id(0)
-            # self.FPGAMonitor.execute_command(cmd, self.FPGAMonitor.Command.WRITE, 
-            #     commandVal.encode('utf-8'))
-            self.execute_command(cmd, self.FPGAMonitor.Command.WRITE, commandVal.encode('utf-8'))
-            self.FPGATextLog.appendPlainText("Sent: " + str(cmd))
+        # elif (command == "Write Reg0"):
+        #     cmd = self.FPGAMonitor.get_command_by_id(0)
+        #     # self.FPGAMonitor.execute_command(cmd, self.FPGAMonitor.Command.WRITE, 
+        #     #     commandVal.encode('utf-8'))
+        #     self.execute_command(cmd, self.FPGAMonitor.Command.WRITE, commandVal.encode('utf-8'))
+        #     # self.FPGATextLog.appendPlainText("Sent: " + str(cmd))
         # # Read REG1
         # elif (command == "Read Reg1"):
         #     self.FPGATextLog.appendPlainText("Sent: " + command)
@@ -317,6 +332,6 @@ class View(QMainWindow, Ui_MainWindow):
         #     self.FPGAMonitor.execute_command(cmd, self.FPGAMonitor.Command.WRITE,
         #         commandVal.encode('utf-8'))
         #     self.FPGATextLog.appendPlainText(str(cmd))
-            
-        print("Sent: " + commandVal + command)
+        self.FPGATextLog.appendPlainText(str(cmd))
+        # print("Sent: " + commandVal + command)
         # self.FPGATextLog.appendPlainText("Sent: " + commandVal + command)
