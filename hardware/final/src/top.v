@@ -42,9 +42,11 @@ module top(
 	output reg signed [31:0] clk_count,
 	output reg signed [31:0] clk_count_neg,
 	output reg signed [31:0] clk_err,
+	output reg signed [31:0] clk_err_lst,
 	output reg signed [15:0] phase_err,
 	output reg [3:0] dac_rdy,
 	output wire locked,
+	output reg pps_reset,
 
 		
 	output reg recov_pps,
@@ -62,8 +64,9 @@ wire w_reset;
 
 reg ref_clk;
 reg key_reset;
-initial DAC_val = 16'h9E23;
 
+initial DAC_val = 16'h9E23;
+//initial DAC_val = 16'h0;
 reg flag,flag_last,clk_reset,count_reset;
 reg sw_reset;
 reg data_rdy;
@@ -109,6 +112,10 @@ always @ (posedge CLOCK_50)
 
 always @ (posedge clk_200) ref_clk_shft = {ref_clk_shft[18:0],ref_clk};
 
+always @ (posedge clk_200)
+	if(!reset || !key_reset) pps_reset = 1'b1;
+	else if(pps_posedge) pps_reset = 1'b0;
+
 always @ (posedge clk_200) 
 	begin
 	pps_shft[1] <= pps_shft[0];
@@ -153,7 +160,7 @@ always @ (posedge ref_clk)
 
 always @ (posedge ref_clk)
 //	if(!reset || !key_reset) clk_count = 32'b0;
-	if(sw_reset) begin
+	if(sw_reset || pps_reset) begin
 		if(SW[16]) clk_count = 32'b0;
 		else clk_count = 32'b1; 
 		end	
@@ -161,7 +168,7 @@ always @ (posedge ref_clk)
 
 always @ (negedge ref_clk)
 //	if(!reset || !key_reset) clk_count_neg = 32'b0;
-	if(sw_reset) begin
+	if(sw_reset || pps_reset) begin
 		if(SW[16]) clk_count_neg = 32'b0;
 		else clk_count_neg = 32'b1; 
 		end	
@@ -187,28 +194,30 @@ always @ (posedge clk_200)
 	else data_rdy = 1'b0;
 
 always @ (posedge clk_200)
-		case(ref_posedge_hold)
-		19'b000_0000_0000_0000_0000: phase_err = -9;
-		19'b000_0000_0000_0000_0001: phase_err = 10;
-		19'b000_0000_0000_0000_0010: phase_err = 9;
-		19'b000_0000_0000_0000_0100: phase_err = 8;
-		19'b000_0000_0000_0000_1000: phase_err = 7;
-		19'b000_0000_0000_0001_0000: phase_err = 6;
-		19'b000_0000_0000_0010_0000: phase_err = 5;
-		19'b000_0000_0000_0100_0000: phase_err = 4;
-		19'b000_0000_0000_1000_0000: phase_err = 3;
-		19'b000_0000_0001_0000_0000: phase_err = 2;
-		19'b000_0000_0010_0000_0000: phase_err = 1;
-		19'b000_0000_0100_0000_0000: phase_err = 0;
-		19'b000_0000_1000_0000_0000: phase_err = -1;
-		19'b000_0001_0000_0000_0000: phase_err = -2;
-		19'b000_0010_0000_0000_0000: phase_err = -3;
-		19'b000_0100_0000_0000_0000: phase_err = -4;
-		19'b000_1000_0000_0000_0000: phase_err = -5;
-		19'b001_0000_0000_0000_0000: phase_err = -6;
-		19'b010_0000_0000_0000_0000: phase_err = -7;
-		19'b100_0000_0000_0000_0000: phase_err = -8;
-		endcase
+		if(!reset || !key_reset) phase_err = 0;
+		else 
+			case(ref_posedge_hold)
+			19'b000_0000_0000_0000_0000: phase_err = -9;
+			19'b000_0000_0000_0000_0001: phase_err = 10;
+			19'b000_0000_0000_0000_0010: phase_err = 9;
+			19'b000_0000_0000_0000_0100: phase_err = 8;
+			19'b000_0000_0000_0000_1000: phase_err = 7;
+			19'b000_0000_0000_0001_0000: phase_err = 6;
+			19'b000_0000_0000_0010_0000: phase_err = 5;
+			19'b000_0000_0000_0100_0000: phase_err = 4;
+			19'b000_0000_0000_1000_0000: phase_err = 3;
+			19'b000_0000_0001_0000_0000: phase_err = 2;
+			19'b000_0000_0010_0000_0000: phase_err = 1;
+			19'b000_0000_0100_0000_0000: phase_err = 0;
+			19'b000_0000_1000_0000_0000: phase_err = -1;
+			19'b000_0001_0000_0000_0000: phase_err = -2;
+			19'b000_0010_0000_0000_0000: phase_err = -3;
+			19'b000_0100_0000_0000_0000: phase_err = -4;
+			19'b000_1000_0000_0000_0000: phase_err = -5;
+			19'b001_0000_0000_0000_0000: phase_err = -6;
+			19'b010_0000_0000_0000_0000: phase_err = -7;
+			19'b100_0000_0000_0000_0000: phase_err = -8;
+			endcase
 
 reg int_rdy;
 parameter pid_p = 32'd1;
@@ -217,19 +226,26 @@ reg signed [31:0] pd_shift[7:0];
 
 assign locked = ref_posedge[0] && pps_posedge;
 
+// ************************************* DPPL PID Controller ************************************* //
+always @ (posedge clk_200)
+	if(!reset || !key_reset) clk_err_lst = 32'b0;
+	else if(pps_posedge) begin
+		if(clk_err > 500 || clk_err < -500) clk_err_lst = clk_err_lst;
+		else clk_err_lst = clk_err;
+	end
+
 always @ (posedge clk_200)
 	if(!reset || !key_reset) clk_err = 32'b0;
 	else if(data_rdy) 
 	begin
 		if(!locked) 
 			begin
-				if(clk_count < 10_000_000 && clk_count_neg > 100_000) clk_err = (10_000_000 - clk_count_neg);
+				if(clk_count_neg < 10_000_000 && clk_count_neg > 100_000) clk_err = (10_000_000 - clk_count_neg);
 				else if(clk_count_neg == 10_000_000) clk_err = 0;
 				else clk_err = -1*clk_count_neg - 1'b1;
 			end
-		else clk_err = 0;
+		else clk_err = clk_err;
 	end
-	
 
 always @ (posedge clk_200)
 	if(!reset || !key_reset) begin
@@ -252,22 +268,30 @@ always @ (posedge clk_200)
 			pd_shift[3] <= pd_shift[2];
 			pd_shift[2] <= pd_shift[1];
 			pd_shift[1] <= pd_shift[0];
-			if(phase_err > 100 || phase_err < -100) pd_shift[0] <= 0;
+			if(phase_err > 10 || phase_err < -10) pd_shift[0] <= pd_shift[0];
 			else pd_shift[0] <= phase_err;
+//			if(phase_err > 10 || phase_err < -9) begin
+//				if(clk_err > 50 || clk_err < -50) pd_shift[0] <= pd_shift[0];
+//				else pd_shift[0] <= (clk_err*32'sd20) + phase_err;
+//				end
+//			else begin
+//				if(clk_err > 50 || clk_err < -50) pd_shift[0] <= phase_err + (clk_err_lst*32'sd20);
+//				else pd_shift[0] <= (clk_err*32'sd20) + phase_err;
+//			end
 			int <= pd_shift[7] + pd_shift[6] + pd_shift[5] + pd_shift[4] + pd_shift[3] + pd_shift[2] + pd_shift[1] + pd_shift[0];
 			int_rdy <= 1'b1;
 		end
 	else int_rdy = 1'b0;
-
+	
 always @ (posedge clk_200)
 	if(!reset || !key_reset)	prop_err = 0;
 	else if(data_rdy) begin
-		if(phase_err > 100 || phase_err < -100) begin
-				if(clk_err > 10 || clk_err < -10) prop_err = 0;
-				else prop_err = (clk_err*32'sd20);
+		if(phase_err > 10 || phase_err < -10) begin
+				if(clk_err > 500 || clk_err < -500) prop_err = prop_err;
+				else prop_err = (clk_err*32'sd20) + pd_shift[0];
 				end
 			else begin
-				if(clk_err > 10 || clk_err < -10) prop_err = phase_err;
+				if(clk_err > 500 || clk_err < -500) prop_err = phase_err + (clk_err_lst*32'sd20);
 				else prop_err = (clk_err*32'sd20) + phase_err;
 			end
 		end
@@ -283,8 +307,18 @@ always @ (posedge clk_200)
 	
 always @ (posedge clk_200)
 	if(!reset || !key_reset) DAC_val = 16'h9E23;
-	else if(pid_rdy) DAC_val = DAC_val + pid_out;
+	else if(pid_rdy) begin
+		if(pid_out > 1000 || pid_out < -1000)begin
+			if(clk_err > 100) DAC_val = DAC_val+ pid_out;
+			else DAC_val = DAC_val;
+		end
+		else DAC_val = DAC_val + pid_out;
+	end
 
+//always @ (posedge clk_200)
+//	if(!reset || !key_reset) DAC_val = 16'h9E23;
+//	else if(pid_rdy) DAC_val = DAC_val + pid_out;
+	
 always @ (posedge clk_200)
 	if(pid_rdy) begin
 		dac_rdy[3] <= dac_rdy[2];
