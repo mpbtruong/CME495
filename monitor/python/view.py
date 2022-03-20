@@ -87,6 +87,7 @@ class View(QMainWindow, Ui_MainWindow):
         self.DisconnectButton.clicked.connect(self.pressDisconnectButton)
         self.CommandButton.clicked.connect(self.sendCommand)
         self.ResetButton.clicked.connect(self.resetCommand)
+        self.ClearPlotsButton.clicked.connect(self.clearPlots)
 
         self.CommandComboBox.addItems(self.commandList)
 
@@ -114,18 +115,7 @@ class View(QMainWindow, Ui_MainWindow):
         cmd = self.FPGAMonitor.get_command(self.FPGAMonitor.CMD_0)
         self.executeCommand(cmd, self.FPGAMonitor.Command.WRITE, self.FPGAMonitor.CMD_0_RESET_HIGH)
         self.executeCommand(cmd, self.FPGAMonitor.Command.WRITE, self.FPGAMonitor.CMD_0_RESET_LOW)
-        self.graph1XVals = []
-        self.graph1YVals = []
-        self.graph2XVals = []
-        self.graph2YVals = []
-        self.graph3XVals = []
-        self.graph3YVals = []
-        self.graph4XVals = []
-        self.graph4YVals = []
-        self.Graph1Widget.clear()
-        self.Graph2Widget.clear()
-        self.Graph3Widget.clear()
-        self.Graph4Widget.clear()
+        self.clearPlots()
 
     def setupUI(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
@@ -237,6 +227,23 @@ class View(QMainWindow, Ui_MainWindow):
         #         self.graph3YVals = self.graph3YVals[-100:]
         #     self.Graph3Widget.plot(self.graph3XVals,  self.graph3YVals)
         pass
+
+    def clearPlots(self):
+        """
+        Clear the Plots on the GUI
+        """
+        self.Graph1Widget.clear()
+        self.Graph2Widget.clear()
+        self.Graph3Widget.clear()
+        self.Graph4Widget.clear()
+        self.graph1XVals = []
+        self.graph1YVals = []
+        self.graph2XVals = []
+        self.graph2YVals = []
+        self.graph3XVals = []
+        self.graph3YVals = []
+        self.graph4XVals = []
+        self.graph4YVals = []
 
     def toGPSLog(self, txt):
         """
