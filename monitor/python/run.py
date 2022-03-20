@@ -43,7 +43,7 @@ def main():
         # setup the client GUI
         view.show()
         rc = app.exec_()
-        print('Exiting')
+        print(f'Exiting rc={rc}')
         sys.exit(rc)
         # sys.exit(app.exec_())
     # kill the subscriber
