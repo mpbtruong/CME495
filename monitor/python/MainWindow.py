@@ -15,7 +15,7 @@ from pyqtgraph import PlotWidget, plot, graphicsItems
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
-        MainWindow.resize(1260, 990)
+        MainWindow.resize(1260, 1020)
         self.centralwidget = QtWidgets.QWidget(MainWindow)
         self.centralwidget.setObjectName("centralwidget")
 
@@ -36,7 +36,7 @@ class Ui_MainWindow(object):
         # self.Graph1Widget.plot(time, voltage)
 
         self.Graph2Frame = QtWidgets.QFrame(self.centralwidget)
-        self.Graph2Frame.setGeometry(QtCore.QRect(0, 690, 620, 291))
+        self.Graph2Frame.setGeometry(QtCore.QRect(0, 690, 620, 300))
         self.Graph2Frame.setFrameShape(QtWidgets.QFrame.StyledPanel)
         self.Graph2Frame.setFrameShadow(QtWidgets.QFrame.Raised)
         self.Graph2Frame.setObjectName("Graph2Frame")
@@ -45,7 +45,7 @@ class Ui_MainWindow(object):
         self.Graph2Label.setObjectName("Graph2Label")
         self.Graph2Widget = PlotWidget(self.Graph2Frame)
         self.Graph2Widget.setObjectName('Graph2')
-        self.Graph2Widget.setGeometry(QtCore.QRect(10, 30, 620, 251))
+        self.Graph2Widget.setGeometry(QtCore.QRect(10, 40, 620, 251))
         self.Graph2Widget.setBackground('w')
 
         self.Graph3Frame = QtWidgets.QFrame(self.centralwidget)
@@ -62,16 +62,16 @@ class Ui_MainWindow(object):
         self.Graph3Widget.setBackground('w')
 
         self.Graph4Frame = QtWidgets.QFrame(self.centralwidget)
-        self.Graph4Frame.setGeometry(QtCore.QRect(630, 690, 620, 291))
+        self.Graph4Frame.setGeometry(QtCore.QRect(630, 690, 620, 300))
         self.Graph4Frame.setFrameShape(QtWidgets.QFrame.StyledPanel)
         self.Graph4Frame.setFrameShadow(QtWidgets.QFrame.Raised)
         self.Graph4Frame.setObjectName("Graph4Frame")
         self.Graph4Label = QtWidgets.QLabel(self.Graph4Frame)
-        self.Graph4Label.setGeometry(QtCore.QRect(10, 10, 200, 13))
+        self.Graph4Label.setGeometry(QtCore.QRect(10, 10, 200, 20))
         self.Graph4Label.setObjectName("Graph4Label")
         self.Graph4Widget = PlotWidget(self.Graph4Frame)
         self.Graph4Widget.setObjectName('Graph4')
-        self.Graph4Widget.setGeometry(QtCore.QRect(10, 30, 620, 251))
+        self.Graph4Widget.setGeometry(QtCore.QRect(10, 40, 620, 251))
         self.Graph4Widget.setBackground('w')
         
         self.GPSFrame = QtWidgets.QFrame(self.centralwidget)
@@ -101,18 +101,18 @@ class Ui_MainWindow(object):
         self.FPGALabel.setObjectName("FPGALabel")
 
         self.ConnectFrame = QtWidgets.QFrame(self.centralwidget)
-        self.ConnectFrame.setGeometry(QtCore.QRect(500, 20, 120, 91))
+        self.ConnectFrame.setGeometry(QtCore.QRect(500, 20, 140, 91))
         self.ConnectFrame.setFrameShape(QtWidgets.QFrame.StyledPanel)
         self.ConnectFrame.setFrameShadow(QtWidgets.QFrame.Raised)
         self.ConnectFrame.setObjectName("ConnectFrame")
         self.ConnectionLabel = QtWidgets.QLabel(self.ConnectFrame)
-        self.ConnectionLabel.setGeometry(QtCore.QRect(10, 10, 120, 16))
+        self.ConnectionLabel.setGeometry(QtCore.QRect(10, 10, 140, 16))
         self.ConnectionLabel.setObjectName("ConnectionLabel")
         self.ConnectButton = QtWidgets.QPushButton(self.ConnectFrame)
-        self.ConnectButton.setGeometry(QtCore.QRect(10, 30, 80, 23))
+        self.ConnectButton.setGeometry(QtCore.QRect(10, 30, 90, 23))
         self.ConnectButton.setObjectName("ConnectButton")
         self.DisconnectButton = QtWidgets.QPushButton(self.ConnectFrame)
-        self.DisconnectButton.setGeometry(QtCore.QRect(10, 60, 80, 23))
+        self.DisconnectButton.setGeometry(QtCore.QRect(10, 60, 90, 23))
         self.DisconnectButton.setObjectName("DisconnectButton")
 
         self.CommandFrame = QtWidgets.QFrame(self.centralwidget)
@@ -133,7 +133,7 @@ class Ui_MainWindow(object):
         self.CommandComboLabel.setGeometry(QtCore.QRect(210, 10, 81, 16))
         self.CommandComboLabel.setObjectName("CommandComboLabel")
         self.CommandButton = QtWidgets.QPushButton(self.CommandFrame)
-        self.CommandButton.setGeometry(QtCore.QRect(380, 30, 75, 31))
+        self.CommandButton.setGeometry(QtCore.QRect(380, 30, 90, 31))
         self.CommandButton.setObjectName("CommandButton")
 
         self.ResetFrame = QtWidgets.QFrame(self.centralwidget)
@@ -142,10 +142,10 @@ class Ui_MainWindow(object):
         self.ResetFrame.setFrameShadow(QtWidgets.QFrame.Raised)
         self.ResetFrame.setObjectName("CommandFrame")
         self.ResetButton = QtWidgets.QPushButton(self.ResetFrame)
-        self.ResetButton.setGeometry(QtCore.QRect(100, 30, 75, 31))
+        self.ResetButton.setGeometry(QtCore.QRect(100, 30, 90, 31))
         self.ResetButton.setObjectName("ResetButton")
         self.ClearPlotsButton = QtWidgets.QPushButton(self.ResetFrame)
-        self.ClearPlotsButton.setGeometry(QtCore.QRect(10, 30, 75, 31))
+        self.ClearPlotsButton.setGeometry(QtCore.QRect(10, 30, 90, 31))
         self.ClearPlotsButton.setObjectName("ClearPlotsButton")
 
         MainWindow.setCentralWidget(self.centralwidget)
