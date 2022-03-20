@@ -122,10 +122,10 @@ class View(QMainWindow, Ui_MainWindow):
         self.graph3YVals = []
         self.graph4XVals = []
         self.graph4YVals = []
-        self.Graph1Widget.plot(self.graph1XVals,  self.graph1YVals, pen=pg.mkPen('b', width=3))
-        self.Graph2Widget.plot(self.graph2XVals,  self.graph2YVals, pen=pg.mkPen('b', width=3))
-        self.Graph3Widget.plot(self.graph3XVals,  self.graph3YVals, pen=pg.mkPen('b', width=3))
-        self.Graph4Widget.plot(self.graph4XVals,  self.graph4YVals, pen=pg.mkPen('b', width=3))
+        self.Graph1Widget.clear()
+        self.Graph2Widget.clear()
+        self.Graph3Widget.clear()
+        self.Graph4Widget.clear()
 
     def setupUI(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
