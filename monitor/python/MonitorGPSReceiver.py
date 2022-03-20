@@ -99,7 +99,7 @@ class MonitorGPSReceiver(Monitor):
         """
         """
         strSentence = ""
-        if sen.sentence_type == GGA:
+        if sen.sentence_type == self.GGA:
             strSentence += f'GGA: '
             strSentence += f'TIME: {sen.timestamp}, LAT: {sen.lat}'
             strSentence += f', NUM SATS: {sen.num_sats}, ALT: {sen.altitude}'
@@ -107,7 +107,7 @@ class MonitorGPSReceiver(Monitor):
         #     strSentence += f'GSV: '
         #     strSentence += f''
         else:
-            strSentence = f'{sentence}'
+            strSentence = f'{sen}'
 
         # strSentence = f'{sentence}'
         return strSentence
