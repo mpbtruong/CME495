@@ -98,7 +98,7 @@ class MonitorGPSReceiver(Monitor):
     def sentenceToStr(self, sen:NMEASentence)->str:
         """
         """
-        strSentence = f'{sen.talker}{sen.sentence_type}'
+        strSentence = f'{sen.talker}{sen.sentence_type}: '
         if sen.sentence_type == self.GGA:
             strSentence += f'TIME: {sen.timestamp}, LAT: {sen.lat}'
             strSentence += f', NUM SATS: {sen.num_sats}, ALT: {sen.altitude}'
