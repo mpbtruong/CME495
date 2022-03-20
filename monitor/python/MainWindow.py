@@ -137,13 +137,16 @@ class Ui_MainWindow(object):
         self.CommandButton.setObjectName("CommandButton")
 
         self.ResetFrame = QtWidgets.QFrame(self.centralwidget)
-        self.ResetFrame.setGeometry(QtCore.QRect(800, 30, 100, 91))
+        self.ResetFrame.setGeometry(QtCore.QRect(700, 30, 200, 91))
         self.ResetFrame.setFrameShape(QtWidgets.QFrame.StyledPanel)
         self.ResetFrame.setFrameShadow(QtWidgets.QFrame.Raised)
         self.ResetFrame.setObjectName("CommandFrame")
         self.ResetButton = QtWidgets.QPushButton(self.ResetFrame)
-        self.ResetButton.setGeometry(QtCore.QRect(10, 30, 75, 31))
+        self.ResetButton.setGeometry(QtCore.QRect(100, 30, 75, 31))
         self.ResetButton.setObjectName("ResetButton")
+        self.ClearPlotsButton = QtWidgets.QPushButton(self.ResetFrame)
+        self.ClearPlotsButton.setGeometry(QtCore.QRect(10, 30, 75, 31))
+        self.ClearPlotsButton.setObjectName("ClearPlotsButton")
 
         MainWindow.setCentralWidget(self.centralwidget)
         self.menubar = QtWidgets.QMenuBar(MainWindow)
@@ -173,3 +176,4 @@ class Ui_MainWindow(object):
         self.CommandComboLabel.setText(_translate("MainWindow", "Command List"))
         self.CommandButton.setText(_translate("MainWindow", "Enter CMD"))
         self.ResetButton.setText(_translate("MainWindow", "Reset"))
+        self.ClearPlotsButton.setText(_translate("MainWindow", "Clear Plots"))
