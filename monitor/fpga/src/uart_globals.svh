@@ -65,7 +65,7 @@
 
 // register 124 - integral
  `define REG124      124
- `define REG124_BITS 16
+ `define REG124_BITS 32
  // register 125 - DAC out
  `define REG125      125
  `define REG125_BITS 16
