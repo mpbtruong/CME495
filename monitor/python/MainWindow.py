@@ -100,20 +100,25 @@ class Ui_MainWindow(object):
         self.FPGALabel.setGeometry(QtCore.QRect(10, 10, 47, 13))
         self.FPGALabel.setObjectName("FPGALabel")
 
-        self.ConnectFrame = QtWidgets.QFrame(self.centralwidget)
-        self.ConnectFrame.setGeometry(QtCore.QRect(500, 20, 140, 91))
-        self.ConnectFrame.setFrameShape(QtWidgets.QFrame.StyledPanel)
-        self.ConnectFrame.setFrameShadow(QtWidgets.QFrame.Raised)
-        self.ConnectFrame.setObjectName("ConnectFrame")
-        self.ConnectionLabel = QtWidgets.QLabel(self.ConnectFrame)
-        self.ConnectionLabel.setGeometry(QtCore.QRect(10, 10, 140, 16))
-        self.ConnectionLabel.setObjectName("ConnectionLabel")
-        self.ConnectButton = QtWidgets.QPushButton(self.ConnectFrame)
-        self.ConnectButton.setGeometry(QtCore.QRect(10, 30, 90, 23))
-        self.ConnectButton.setObjectName("ConnectButton")
-        self.DisconnectButton = QtWidgets.QPushButton(self.ConnectFrame)
-        self.DisconnectButton.setGeometry(QtCore.QRect(10, 60, 90, 23))
-        self.DisconnectButton.setObjectName("DisconnectButton")
+        # TODO Connection/Disconnection of FPGA while GUI is running does not
+        # work. There is the issue that the uart communication is open
+        # when the USB is plugged in, so to check if is "connected" or not,
+        # we need to implement something like an ACK or handshaking between the
+        # FPGA and GUI/monitor & control
+        # self.ConnectFrame = QtWidgets.QFrame(self.centralwidget)
+        # self.ConnectFrame.setGeometry(QtCore.QRect(500, 20, 140, 91))
+        # self.ConnectFrame.setFrameShape(QtWidgets.QFrame.StyledPanel)
+        # self.ConnectFrame.setFrameShadow(QtWidgets.QFrame.Raised)
+        # self.ConnectFrame.setObjectName("ConnectFrame")
+        # self.ConnectionLabel = QtWidgets.QLabel(self.ConnectFrame)
+        # self.ConnectionLabel.setGeometry(QtCore.QRect(10, 10, 140, 16))
+        # self.ConnectionLabel.setObjectName("ConnectionLabel")
+        # self.ConnectButton = QtWidgets.QPushButton(self.ConnectFrame)
+        # self.ConnectButton.setGeometry(QtCore.QRect(10, 30, 90, 23))
+        # self.ConnectButton.setObjectName("ConnectButton")
+        # self.DisconnectButton = QtWidgets.QPushButton(self.ConnectFrame)
+        # self.DisconnectButton.setGeometry(QtCore.QRect(10, 60, 90, 23))
+        # self.DisconnectButton.setObjectName("DisconnectButton")
 
         self.CommandFrame = QtWidgets.QFrame(self.centralwidget)
         self.CommandFrame.setGeometry(QtCore.QRect(10, 30, 500, 91))
