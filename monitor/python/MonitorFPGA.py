@@ -203,7 +203,7 @@ class MonitorFPGA(Monitor):
         CMD_2    : Command(cid=2, no_rwbytes=2, name=CMD_2),
         CMD_3    : Command(cid=3, no_rwbytes=3, name=CMD_3),
         CMD_4    : Command(cid=4, no_rwbytes=4, name=CMD_4),
-        CMD_124  : Command(cid=124, no_rwbytes=2, name=CMD_124, read_only=True, data_type=Command.SIGNED_INT),
+        CMD_124  : Command(cid=124, no_rwbytes=4, name=CMD_124, read_only=True, data_type=Command.SIGNED_INT),
         CMD_125  : Command(cid=125, no_rwbytes=2, name=CMD_125, read_only=True, data_type=Command.UNSIGNED_INT),
         CMD_126  : Command(cid=126, no_rwbytes=2, name=CMD_126, read_only=True, data_type=Command.SIGNED_INT),
         CMD_127  : Command(cid=127, no_rwbytes=2, name=CMD_127, read_only=True, data_type=Command.SIGNED_INT),
