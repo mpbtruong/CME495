@@ -177,7 +177,7 @@ class View(QMainWindow, Ui_MainWindow):
                 self.graph1XVals = self.graph1XVals[-100:]
                 self.graph1YVals = self.graph1YVals[-100:]
             self.graph1YVals.append(cmd.get_read_data())
-            self.graph1XVals.append(plotTime)
+            self.graph1XVals.append(self.plotTime)
             self.Graph1Widget.plot(self.graph1XVals,  self.graph1YVals, pen=pg.mkPen('b', width=3))
             self.plotTime = self.plotTime + 1
 
@@ -192,7 +192,7 @@ class View(QMainWindow, Ui_MainWindow):
                 self.graph2XVals = self.graph2XVals[-100:]
                 self.graph2YVals = self.graph2YVals[-100:]
             self.graph2YVals.append(cmd.get_read_data())
-            self.graph2XVals.append(plotTime)
+            self.graph2XVals.append(self.plotTime)
             self.Graph2Widget.plot(self.graph2XVals,  self.graph2YVals, pen=pg.mkPen('b', width=3))
 
     def plotGraph3(self, xval, yval):
@@ -207,7 +207,7 @@ class View(QMainWindow, Ui_MainWindow):
                 self.graph3XVals = self.graph3XVals[-100:]
                 self.graph3YVals = self.graph3YVals[-100:]
             self.graph3YVals.append(cmd.get_read_data())
-            self.graph3XVals.append(plotTime)
+            self.graph3XVals.append(self.plotTime)
             self.Graph3Widget.plot(self.graph3XVals,  self.graph3YVals, pen=pg.mkPen('b', width=3))
 
     def plotGraph4(self, xval, yval):
@@ -221,7 +221,7 @@ class View(QMainWindow, Ui_MainWindow):
                 self.graph4XVals = self.graph4XVals[-100:]
                 self.graph4YVals = self.graph4YVals[-100:]
             self.graph4YVals.append(cmd.get_read_data())
-            self.graph4XVals.append(plotTime)
+            self.graph4XVals.append(self.plotTime)
             self.Graph4Widget.plot(self.graph4XVals,  self.graph4YVals, pen=pg.mkPen('b', width=3))
 
     def plotGraph(self, cmd, graphWidget, xval, yval):
@@ -233,7 +233,7 @@ class View(QMainWindow, Ui_MainWindow):
         #     self.executeCommand(cmd, self.FPGAMonitor.Command.READ)
         #     print(cmd)
         #     graphWidget.yVals.append(cmd.get_read_data())
-        #     graphWidget.xVals.append(plotTime)
+        #     graphWidget.xVals.append(self.plotTime)
         #     if len(self.graph3XVals) > 100:
         #         self.graph3XVals = self.graph3XVals[-100:]
         #         self.graph3YVals = self.graph3YVals[-100:]
