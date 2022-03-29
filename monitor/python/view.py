@@ -84,11 +84,10 @@ class View(QMainWindow, Ui_MainWindow):
         self.setupUi(self)
         self.setupGPSLogging()
 
-        # connect widgets to controller
-        # self.ConnectButton.clicked.connect(self._controller.pressConnectButton)
-        # self.DisconnectButton.clicked.connect(self._controller.pressDisconnectButton)
-        self.ConnectButton.clicked.connect(self.pressConnectButton)
-        self.DisconnectButton.clicked.connect(self.pressDisconnectButton)
+        # TODO. See connection Frame TODO in MainWindow.py
+        # self.ConnectButton.clicked.connect(self.pressConnectButton)
+        # self.DisconnectButton.clicked.connect(self.pressDisconnectButton)
+
         self.CommandButton.clicked.connect(self.sendCommand)
         self.ResetButton.clicked.connect(self.resetCommand)
         self.ClearPlotsButton.clicked.connect(self.clearPlots)

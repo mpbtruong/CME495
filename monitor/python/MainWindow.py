@@ -174,9 +174,12 @@ class Ui_MainWindow(object):
         self.Graph4Label.setText(_translate("MainWindow", "Integral vs Time"))
         self.GPSLabel.setText(_translate("MainWindow", "GPS"))
         self.FPGALabel.setText(_translate("MainWindow", "FPGA"))
-        self.ConnectionLabel.setText(_translate("MainWindow", "FPGA Connection"))
-        self.ConnectButton.setText(_translate("MainWindow", "Connect"))
-        self.DisconnectButton.setText(_translate("MainWindow", "Disconnect"))
+
+        # TODO. See above in Connection Frame
+        # self.ConnectionLabel.setText(_translate("MainWindow", "FPGA Connection"))
+        # self.ConnectButton.setText(_translate("MainWindow", "Connect"))
+        # self.DisconnectButton.setText(_translate("MainWindow", "Disconnect"))
+
         self.CommandLabel.setText(_translate("MainWindow", "Write Value"))
         self.CommandComboLabel.setText(_translate("MainWindow", "Command List"))
         self.CommandButton.setText(_translate("MainWindow", "Send CMD"))
