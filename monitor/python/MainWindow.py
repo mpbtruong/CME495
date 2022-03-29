@@ -31,6 +31,7 @@ class Ui_MainWindow(object):
         self.Graph1Widget.setObjectName('Graph1')
         self.Graph1Widget.setGeometry(QtCore.QRect(10, 30, 620, 251))
         self.Graph1Widget.setBackground('w')
+        self.Graph1Widget.showGrid(x = True, y = True, alpha = 0.3) 
         # time = [1,2,3,4,5,6,7,8,9,10]
         # voltage = [30,32,34,32,33,31,29,32,35,45]
         # self.Graph1Widget.plot(time, voltage)
@@ -47,6 +48,7 @@ class Ui_MainWindow(object):
         self.Graph2Widget.setObjectName('Graph2')
         self.Graph2Widget.setGeometry(QtCore.QRect(10, 40, 620, 251))
         self.Graph2Widget.setBackground('w')
+        self.Graph2Widget.showGrid(x = True, y = True, alpha = 0.3) 
 
         self.Graph3Frame = QtWidgets.QFrame(self.centralwidget)
         self.Graph3Frame.setGeometry(QtCore.QRect(630, 410, 620, 291))
@@ -60,6 +62,7 @@ class Ui_MainWindow(object):
         self.Graph3Widget.setObjectName('Graph3')
         self.Graph3Widget.setGeometry(QtCore.QRect(10, 30, 620, 251))
         self.Graph3Widget.setBackground('w')
+        self.Graph3Widget.showGrid(x = True, y = True, alpha = 0.3) 
 
         self.Graph4Frame = QtWidgets.QFrame(self.centralwidget)
         self.Graph4Frame.setGeometry(QtCore.QRect(630, 690, 620, 300))
@@ -73,6 +76,7 @@ class Ui_MainWindow(object):
         self.Graph4Widget.setObjectName('Graph4')
         self.Graph4Widget.setGeometry(QtCore.QRect(10, 40, 620, 251))
         self.Graph4Widget.setBackground('w')
+        self.Graph4Widget.showGrid(x = True, y = True, alpha = 0.3) 
         
         self.GPSFrame = QtWidgets.QFrame(self.centralwidget)
         self.GPSFrame.setGeometry(QtCore.QRect(0, 130, 600, 291))
