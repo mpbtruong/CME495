@@ -23,7 +23,7 @@ class GraphThread(QThread):
             time.sleep(1)
             # self.GraphWidget.plot(xval, yval)
             # self.signal.emit([self.xval, self.yval])
-            self.signal.emit(self.xval, self.yval)
+            # self.signal.emit(self.xval, self.yval)
             self.xval = self.xval + 1
             # self.yval = self.yval + 1
 
@@ -116,11 +116,12 @@ class View(QMainWindow, Ui_MainWindow):
         """
         Reset
         """
-        self.FPGATextLog.appendPlainText('RESET FPGA')
-        cmd = self.FPGAMonitor.get_command(self.FPGAMonitor.CMD_0)
-        self.executeCommand(cmd, self.FPGAMonitor.Command.WRITE, self.FPGAMonitor.CMD_0_RESET_HIGH)
-        self.executeCommand(cmd, self.FPGAMonitor.Command.WRITE, self.FPGAMonitor.CMD_0_RESET_LOW)
-        self.clearPlots()
+        if self.FPGAMonitor.is_connected():
+            self.FPGATextLog.appendPlainText('RESET FPGA')
+            cmd = self.FPGAMonitor.get_command(self.FPGAMonitor.CMD_0)
+            self.executeCommand(cmd, self.FPGAMonitor.Command.WRITE, self.FPGAMonitor.CMD_0_RESET_HIGH)
+            self.executeCommand(cmd, self.FPGAMonitor.Command.WRITE, self.FPGAMonitor.CMD_0_RESET_LOW)
+            self.clearPlots()
 
     def setupUI(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
@@ -241,18 +242,19 @@ class View(QMainWindow, Ui_MainWindow):
         """
         Clear the Plots on the GUI
         """
-        self.Graph1Widget.clear()
-        self.Graph2Widget.clear()
-        self.Graph3Widget.clear()
-        self.Graph4Widget.clear()
-        self.graph1XVals = []
-        self.graph1YVals = []
-        self.graph2XVals = []
-        self.graph2YVals = []
-        self.graph3XVals = []
-        self.graph3YVals = []
-        self.graph4XVals = []
-        self.graph4YVals = []
+        if self.FPGAMonitor.is_connected():
+            self.Graph1Widget.clear()
+            self.Graph2Widget.clear()
+            self.Graph3Widget.clear()
+            self.Graph4Widget.clear()
+            self.graph1XVals = []
+            self.graph1YVals = []
+            self.graph2XVals = []
+            self.graph2YVals = []
+            self.graph3XVals = []
+            self.graph3YVals = []
+            self.graph4XVals = []
+            self.graph4YVals = []
 
     def toGPSLog(self, txt):
         """
