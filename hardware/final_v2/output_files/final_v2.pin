@@ -70,48 +70,48 @@ CHIP  "final_v2"  ASSIGNED TO AN: EP4CE115F29C7
 Pin Name/Usage               : Location  : Dir.   : I/O Standard      : Voltage : I/O Bank  : User Assignment
 -------------------------------------------------------------------------------------------------------------
 VCCIO8                       : A2        : power  :                   : 2.5V    : 8         :                
-ref_posedge[3]               : A3        : output : 2.5 V             :         : 8         : N              
-ref_clk_shft[19]             : A4        : output : 2.5 V             :         : 8         : N              
+ref_posedge_hold[8]          : A3        : output : 2.5 V             :         : 8         : N              
+ref_posedge[1]               : A4        : output : 2.5 V             :         : 8         : N              
 VCCIO8                       : A5        : power  :                   : 2.5V    : 8         :                
-ref_posedge_hold[17]         : A6        : output : 2.5 V             :         : 8         : N              
-ref_posedge_hold[3]          : A7        : output : 2.5 V             :         : 8         : N              
-int_sum[25]                  : A8        : output : 2.5 V             :         : 8         : N              
+ref_posedge[2]               : A6        : output : 2.5 V             :         : 8         : N              
+ref_posedge_hold[6]          : A7        : output : 2.5 V             :         : 8         : N              
+clk_count[3]                 : A8        : output : 2.5 V             :         : 8         : N              
 VCCIO8                       : A9        : power  :                   : 2.5V    : 8         :                
-ref_clk_shft[11]             : A10       : output : 2.5 V             :         : 8         : N              
-ref_posedge_hold[10]         : A11       : output : 2.5 V             :         : 8         : N              
-ref_posedge[8]               : A12       : output : 2.5 V             :         : 8         : N              
+clk_count[20]                : A10       : output : 2.5 V             :         : 8         : N              
+clk_count[22]                : A11       : output : 2.5 V             :         : 8         : N              
+ref_posedge_hold[0]          : A12       : output : 2.5 V             :         : 8         : N              
 VCCIO8                       : A13       : power  :                   : 2.5V    : 8         :                
 GND+                         : A14       :        :                   :         : 8         :                
 GND+                         : A15       :        :                   :         : 7         :                
 VCCIO7                       : A16       : power  :                   : 2.5V    : 7         :                
-clk_err[9]                   : A17       : output : 2.5 V             :         : 7         : N              
+clk_count_neg[14]            : A17       : output : 2.5 V             :         : 7         : N              
 clk_count_neg[7]             : A18       : output : 2.5 V             :         : 7         : N              
-clk_count_neg[3]             : A19       : output : 2.5 V             :         : 7         : N              
+clk_err[10]                  : A19       : output : 2.5 V             :         : 7         : N              
 VCCIO7                       : A20       : power  :                   : 2.5V    : 7         :                
-err_change[11]               : A21       : output : 2.5 V             :         : 7         : N              
-clk_err[13]                  : A22       : output : 2.5 V             :         : 7         : N              
-RESERVED_INPUT_WITH_WEAK_PULLUP : A23       :        :                   :         : 7         :                
+clk_err[3]                   : A21       : output : 2.5 V             :         : 7         : N              
+clk_err[11]                  : A22       : output : 2.5 V             :         : 7         : N              
+clk_err[9]                   : A23       : output : 2.5 V             :         : 7         : N              
 VCCIO7                       : A24       : power  :                   : 2.5V    : 7         :                
-dummy_3                      : A25       : output : 2.5 V             :         : 7         : N              
-clk_err_lst[6]               : A26       : output : 2.5 V             :         : 7         : N              
+err_change[9]                : A25       : output : 2.5 V             :         : 7         : N              
+pps_posedge[1]               : A26       : output : 2.5 V             :         : 7         : N              
 VCCIO7                       : A27       : power  :                   : 2.5V    : 7         :                
 VCCIO2                       : AA1       : power  :                   : 2.5V    : 2         :                
 GND                          : AA2       : gnd    :                   :         :           :                
-RESERVED_INPUT_WITH_WEAK_PULLUP : AA3       :        :                   :         : 2         :                
-clk_err[1]                   : AA4       : output : 2.5 V             :         : 2         : N              
-SPI_byte[2]                  : AA5       : output : 2.5 V             :         : 2         : N              
-DAC_val[5]                   : AA6       : output : 2.5 V             :         : 2         : N              
-RESERVED_INPUT_WITH_WEAK_PULLUP : AA7       :        :                   :         : 2         :                
-SPI_byte[7]                  : AA8       : output : 2.5 V             :         : 3         : N              
+count[3]                     : AA3       : output : 2.5 V             :         : 2         : N              
+count[14]                    : AA4       : output : 2.5 V             :         : 2         : N              
+dac_rdy[2]                   : AA5       : output : 2.5 V             :         : 2         : N              
+dac_rdy[1]                   : AA6       : output : 2.5 V             :         : 2         : N              
+dac_rdy[3]                   : AA7       : output : 2.5 V             :         : 2         : N              
+pps_shft[11]                 : AA8       : output : 2.5 V             :         : 3         : N              
 GNDA1                        : AA9       : gnd    :                   :         :           :                
-int[2]                       : AA10      : output : 2.5 V             :         : 3         : N              
+pps_reset                    : AA10      : output : 2.5 V             :         : 3         : N              
 VCCIO3                       : AA11      : power  :                   : 2.5V    : 3         :                
-smpl_count[3]                : AA12      : output : 2.5 V             :         : 3         : N              
-count[1]                     : AA13      : output : 2.5 V             :         : 3         : N              
-dac_rdy[2]                   : AA14      : output : 2.5 V             :         : 3         : N              
-clk_count[23]                : AA15      : output : 2.5 V             :         : 4         : N              
-clk_count[19]                : AA16      : output : 2.5 V             :         : 4         : N              
-clk_count[13]                : AA17      : output : 2.5 V             :         : 4         : N              
+total_error[8]               : AA12      : output : 2.5 V             :         : 3         : N              
+total_error[14]              : AA13      : output : 2.5 V             :         : 3         : N              
+ref_clk_shft[10]             : AA14      : output : 2.5 V             :         : 3         : N              
+total_error[0]               : AA15      : output : 2.5 V             :         : 4         : N              
+clk_err[4]                   : AA16      : output : 2.5 V             :         : 4         : N              
+phase_err[14]                : AA17      : output : 2.5 V             :         : 4         : N              
 VCCIO4                       : AA18      : power  :                   : 2.5V    : 4         :                
 RESERVED_INPUT_WITH_WEAK_PULLUP : AA19      :        :                   :         : 4         :                
 GNDA4                        : AA20      : gnd    :                   :         :           :                
@@ -120,58 +120,58 @@ SW[15]                       : AA22      : input  : 2.5 V             :         
 SW[14]                       : AA23      : input  : 2.5 V             :         : 5         : Y              
 SW[13]                       : AA24      : input  : 2.5 V             :         : 5         : Y              
 RESERVED_INPUT_WITH_WEAK_PULLUP : AA25      :        :                   :         : 5         :                
-RESERVED_INPUT_WITH_WEAK_PULLUP : AA26      :        :                   :         : 5         :                
+clk_err_lst[13]              : AA26      : output : 2.5 V             :         : 5         : N              
 GND                          : AA27      : gnd    :                   :         :           :                
 VCCIO5                       : AA28      : power  :                   : 2.5V    : 5         :                
-pid_out[13]                  : AB1       : output : 2.5 V             :         : 2         : N              
-pid_out[7]                   : AB2       : output : 2.5 V             :         : 2         : N              
-smpl_count[7]                : AB3       : output : 2.5 V             :         : 2         : N              
+SPI_byte[2]                  : AB1       : output : 2.5 V             :         : 2         : N              
+SPI_byte[6]                  : AB2       : output : 2.5 V             :         : 2         : N              
+DAC_val[1]                   : AB3       : output : 2.5 V             :         : 2         : N              
 RESERVED_INPUT_WITH_WEAK_PULLUP : AB4       :        :                   :         : 2         :                
 RESERVED_INPUT_WITH_WEAK_PULLUP : AB5       :        :                   :         : 2         :                
-phase_err[14]                : AB6       : output : 2.5 V             :         : 2         : N              
-int[4]                       : AB7       : output : 2.5 V             :         : 3         : N              
+KEY[5]                       : AB6       : input  : 2.5 V             :         : 2         : N              
+pps_shft[13]                 : AB7       : output : 2.5 V             :         : 3         : N              
 RESERVED_INPUT_WITH_WEAK_PULLUP : AB8       :        :                   :         : 3         :                
-SPI_byte[4]                  : AB9       : output : 2.5 V             :         : 3         : N              
-int[15]                      : AB10      : output : 2.5 V             :         : 3         : N              
-DAC_val[6]                   : AB11      : output : 2.5 V             :         : 3         : N              
-SPI_byte[1]                  : AB12      : output : 2.5 V             :         : 3         : N              
-smpl_count[5]                : AB13      : output : 2.5 V             :         : 3         : N              
-count[9]                     : AB14      : output : 2.5 V             :         : 3         : N              
-clk_count[17]                : AB15      : output : 2.5 V             :         : 4         : N              
-clk_count[11]                : AB16      : output : 2.5 V             :         : 4         : N              
-RESERVED_INPUT_WITH_WEAK_PULLUP : AB17      :        :                   :         : 4         :                
-pps_posedge[14]              : AB18      : output : 2.5 V             :         : 4         : N              
-clk_err_lst[10]              : AB19      : output : 2.5 V             :         : 4         : N              
-pps_shft[12]                 : AB20      : output : 2.5 V             :         : 4         : N              
-RESERVED_INPUT_WITH_WEAK_PULLUP : AB21      :        :                   :         : 4         :                
-clk_err_lst[4]               : AB22      : output : 2.5 V             :         : 4         : N              
+pps_shft[15]                 : AB9       : output : 2.5 V             :         : 3         : N              
+reset                        : AB10      : output : 2.5 V             :         : 3         : N              
+int_sum[17]                  : AB11      : output : 2.5 V             :         : 3         : N              
+int_sum[15]                  : AB12      : output : 2.5 V             :         : 3         : N              
+int_sum[20]                  : AB13      : output : 2.5 V             :         : 3         : N              
+total_error[2]               : AB14      : output : 2.5 V             :         : 3         : N              
+smpl_count[13]               : AB15      : output : 2.5 V             :         : 4         : N              
+smpl_count[14]               : AB16      : output : 2.5 V             :         : 4         : N              
+phase_err[6]                 : AB17      : output : 2.5 V             :         : 4         : N              
+RESERVED_INPUT_WITH_WEAK_PULLUP : AB18      :        :                   :         : 4         :                
+RESERVED_INPUT_WITH_WEAK_PULLUP : AB19      :        :                   :         : 4         :                
+phase_err[13]                : AB20      : output : 2.5 V             :         : 4         : N              
+int[4]                       : AB21      : output : 2.5 V             :         : 4         : N              
+RESERVED_INPUT_WITH_WEAK_PULLUP : AB22      :        :                   :         : 4         :                
 SW[12]                       : AB23      : input  : 2.5 V             :         : 5         : Y              
 SW[11]                       : AB24      : input  : 2.5 V             :         : 5         : Y              
 SW[9]                        : AB25      : input  : 2.5 V             :         : 5         : Y              
 SW[7]                        : AB26      : input  : 2.5 V             :         : 5         : Y              
 SW[4]                        : AB27      : input  : 2.5 V             :         : 5         : Y              
 SW[0]                        : AB28      : input  : 2.5 V             :         : 5         : Y              
-smpl_count[13]               : AC1       : output : 2.5 V             :         : 2         : N              
-int_sum[9]                   : AC2       : output : 2.5 V             :         : 2         : N              
-smpl_count[12]               : AC3       : output : 2.5 V             :         : 2         : N              
-phase_err[11]                : AC4       : output : 2.5 V             :         : 2         : N              
-KEY[4]                       : AC5       : input  : 2.5 V             :         : 2         : N              
+DAC_val[12]                  : AC1       : output : 2.5 V             :         : 2         : N              
+SPI_byte[4]                  : AC2       : output : 2.5 V             :         : 2         : N              
+DAC_val[4]                   : AC3       : output : 2.5 V             :         : 2         : N              
+RESERVED_INPUT_WITH_WEAK_PULLUP : AC4       :        :                   :         : 2         :                
+clk_err_lst[7]               : AC5       : output : 2.5 V             :         : 2         : N              
 GND                          : AC6       : gnd    :                   :         :           :                
-phase_err[9]                 : AC7       : output : 2.5 V             :         : 3         : N              
-SPI_byte[6]                  : AC8       : output : 2.5 V             :         : 3         : N              
+int[9]                       : AC7       : output : 2.5 V             :         : 3         : N              
+pps_posedge[10]              : AC8       : output : 2.5 V             :         : 3         : N              
 GND                          : AC9       : gnd    :                   :         :           :                
-int[8]                       : AC10      : output : 2.5 V             :         : 3         : N              
-valid                        : AC11      : output : 2.5 V             :         : 3         : N              
-SPI_byte[3]                  : AC12      : output : 2.5 V             :         : 3         : N              
+int_sum[16]                  : AC10      : output : 2.5 V             :         : 3         : N              
+int_sum[2]                   : AC11      : output : 2.5 V             :         : 3         : N              
+int_sum[30]                  : AC12      : output : 2.5 V             :         : 3         : N              
 GND                          : AC13      : gnd    :                   :         :           :                
-count[8]                     : AC14      : output : 2.5 V             :         : 3         : N              
+err_change[11]               : AC14      : output : 2.5 V             :         : 3         : N              
 DAC_CS_n                     : AC15      : output : 2.5 V             :         : 4         : Y              
 GND                          : AC16      : gnd    :                   :         :           :                
-clk_count[2]                 : AC17      : output : 2.5 V             :         : 4         : N              
-clk_count[4]                 : AC18      : output : 2.5 V             :         : 4         : N              
-clk_err_lst[7]               : AC19      : output : 2.5 V             :         : 4         : N              
+ref_posedge_hold[1]          : AC17      : output : 2.5 V             :         : 4         : N              
+RESERVED_INPUT_WITH_WEAK_PULLUP : AC18      :        :                   :         : 4         :                
+phase_err[15]                : AC19      : output : 2.5 V             :         : 4         : N              
 GND                          : AC20      : gnd    :                   :         :           :                
-RESERVED_INPUT_WITH_WEAK_PULLUP : AC21      :        :                   :         : 4         :                
+clk_err_lst[10]              : AC21      : output : 2.5 V             :         : 4         : N              
 RECV_int                     : AC22      : output : 2.5 V             :         : 4         : Y              
 GND                          : AC23      : gnd    :                   :         :           :                
 SW[10]                       : AC24      : input  : 2.5 V             :         : 5         : Y              
@@ -179,245 +179,245 @@ SW[8]                        : AC25      : input  : 2.5 V             :         
 SW[5]                        : AC26      : input  : 2.5 V             :         : 5         : Y              
 SW[2]                        : AC27      : input  : 2.5 V             :         : 5         : Y              
 SW[1]                        : AC28      : input  : 2.5 V             :         : 5         : Y              
-pid_out[9]                   : AD1       : output : 2.5 V             :         : 2         : N              
-smpl_count[9]                : AD2       : output : 2.5 V             :         : 2         : N              
-smpl_count[10]               : AD3       : output : 2.5 V             :         : 2         : N              
-clk_err_lst[8]               : AD4       : output : 2.5 V             :         : 3         : N              
-pps_posedge[10]              : AD5       : output : 2.5 V             :         : 3         : N              
+tx_start                     : AD1       : output : 2.5 V             :         : 2         : N              
+SPI_byte[0]                  : AD2       : output : 2.5 V             :         : 2         : N              
+count[1]                     : AD3       : output : 2.5 V             :         : 2         : N              
+RESERVED_INPUT_WITH_WEAK_PULLUP : AD4       :        :                   :         : 3         :                
+RESERVED_INPUT_WITH_WEAK_PULLUP : AD5       :        :                   :         : 3         :                
 VCCIO3                       : AD6       : power  :                   : 2.5V    : 3         :                
-phase_err[8]                 : AD7       : output : 2.5 V             :         : 3         : N              
-clk_err_dir                  : AD8       : output : 2.5 V             :         : 3         : N              
+RESERVED_INPUT_WITH_WEAK_PULLUP : AD7       :        :                   :         : 3         :                
+dac_rdy[0]                   : AD8       : output : 2.5 V             :         : 3         : N              
 VCCIO3                       : AD9       : power  :                   : 2.5V    : 3         :                
-DAC_val[2]                   : AD10      : output : 2.5 V             :         : 3         : N              
-smpl_count[6]                : AD11      : output : 2.5 V             :         : 3         : N              
-smpl_count[0]                : AD12      : output : 2.5 V             :         : 3         : N              
+RESERVED_INPUT_WITH_WEAK_PULLUP : AD10      :        :                   :         : 3         :                
+int_sum[26]                  : AD11      : output : 2.5 V             :         : 3         : N              
+int_sum[0]                   : AD12      : output : 2.5 V             :         : 3         : N              
 VCCIO3                       : AD13      : power  :                   : 2.5V    : 3         :                
-count[10]                    : AD14      : output : 2.5 V             :         : 3         : N              
-count[7]                     : AD15      : output : 2.5 V             :         : 4         : N              
+total_error[12]              : AD14      : output : 2.5 V             :         : 3         : N              
+total_error[7]               : AD15      : output : 2.5 V             :         : 4         : N              
 VCCIO4                       : AD16      : power  :                   : 2.5V    : 4         :                
-clk_count[24]                : AD17      : output : 2.5 V             :         : 4         : N              
-clk_count[3]                 : AD18      : output : 2.5 V             :         : 4         : N              
-pps_posedge[6]               : AD19      : output : 2.5 V             :         : 4         : N              
+smpl_count[0]                : AD17      : output : 2.5 V             :         : 4         : N              
+RESERVED_INPUT_WITH_WEAK_PULLUP : AD18      :        :                   :         : 4         :                
+phase_err[7]                 : AD19      : output : 2.5 V             :         : 4         : N              
 VCCIO4                       : AD20      : power  :                   : 2.5V    : 4         :                
-clk_err_lst[2]               : AD21      : output : 2.5 V             :         : 4         : N              
+phase_err[4]                 : AD21      : output : 2.5 V             :         : 4         : N              
 RECV_pps                     : AD22      : input  : 2.5 V             :         : 4         : Y              
 VCCIO4                       : AD23      : power  :                   : 2.5V    : 4         :                
-pps_posedge[11]              : AD24      : output : 2.5 V             :         : 4         : N              
+RESERVED_INPUT_WITH_WEAK_PULLUP : AD24      :        :                   :         : 4         :                
 RESERVED_INPUT_WITH_WEAK_PULLUP : AD25      :        :                   :         : 4         :                
 SW[6]                        : AD26      : input  : 2.5 V             :         : 5         : Y              
 SW[3]                        : AD27      : input  : 2.5 V             :         : 5         : Y              
-RESERVED_INPUT_WITH_WEAK_PULLUP : AD28      :        :                   :         : 5         :                
-smpl_count[4]                : AE1       : output : 2.5 V             :         : 2         : N              
-RESERVED_INPUT_WITH_WEAK_PULLUP : AE2       :        :                   :         : 2         :                
-clk_err_lst[0]               : AE3       : output : 2.5 V             :         : 2         : N              
-phase_err[15]                : AE4       : output : 2.5 V             :         : 3         : N              
+phase_err[8]                 : AD28      : output : 2.5 V             :         : 5         : N              
+count[12]                    : AE1       : output : 2.5 V             :         : 2         : N              
+count[15]                    : AE2       : output : 2.5 V             :         : 2         : N              
+RESERVED_INPUT_WITH_WEAK_PULLUP : AE3       :        :                   :         : 2         :                
+RESERVED_INPUT_WITH_WEAK_PULLUP : AE4       :        :                   :         : 3         :                
 clk_200                      : AE5       : output : 2.5 V             :         : 3         : N              
-phase_err[5]                 : AE6       : output : 2.5 V             :         : 3         : N              
-smpl_count[8]                : AE7       : output : 2.5 V             :         : 3         : N              
-smpl_count[2]                : AE8       : output : 2.5 V             :         : 3         : N              
-pid_out[15]                  : AE9       : output : 2.5 V             :         : 3         : N              
-DAC_val[9]                   : AE10      : output : 2.5 V             :         : 3         : N              
-DAC_val[8]                   : AE11      : output : 2.5 V             :         : 3         : N              
-DAC_val[13]                  : AE12      : output : 2.5 V             :         : 3         : N              
-total_error[0]               : AE13      : output : 2.5 V             :         : 3         : N              
-SPI_byte[0]                  : AE14      : output : 2.5 V             :         : 3         : N              
+clk_err_lst[0]               : AE6       : output : 2.5 V             :         : 3         : N              
+pps_posedge[11]              : AE7       : output : 2.5 V             :         : 3         : N              
+int_sum[28]                  : AE8       : output : 2.5 V             :         : 3         : N              
+pps_shft[9]                  : AE9       : output : 2.5 V             :         : 3         : N              
+pps_shft[8]                  : AE10      : output : 2.5 V             :         : 3         : N              
+pid_out[6]                   : AE11      : output : 2.5 V             :         : 3         : N              
+pid_out[1]                   : AE12      : output : 2.5 V             :         : 3         : N              
+int_sum[1]                   : AE13      : output : 2.5 V             :         : 3         : N              
+total_error[11]              : AE14      : output : 2.5 V             :         : 3         : N              
 RECV_tx_sdo                  : AE15      : input  : 2.5 V             :         : 4         : Y              
 RECV_rx_sdi                  : AE16      : output : 2.5 V             :         : 4         : Y              
-clk_count[5]                 : AE17      : output : 2.5 V             :         : 4         : N              
-count[2]                     : AE18      : output : 2.5 V             :         : 4         : N              
-count[4]                     : AE19      : output : 2.5 V             :         : 4         : N              
-clk_count[0]                 : AE20      : output : 2.5 V             :         : 4         : N              
+smpl_count[4]                : AE17      : output : 2.5 V             :         : 4         : N              
+ref_posedge_hold[2]          : AE18      : output : 2.5 V             :         : 4         : N              
+RESERVED_INPUT_WITH_WEAK_PULLUP : AE19      :        :                   :         : 4         :                
+int[3]                       : AE20      : output : 2.5 V             :         : 4         : N              
 RECV_sda                     : AE21      : output : 2.5 V             :         : 4         : Y              
-pps_posedge[13]              : AE22      : output : 2.5 V             :         : 4         : N              
+int[7]                       : AE22      : output : 2.5 V             :         : 4         : N              
 RESERVED_INPUT_WITH_WEAK_PULLUP : AE23      :        :                   :         : 4         :                
-clk_err_lst[11]              : AE24      : output : 2.5 V             :         : 4         : N              
-clk_count[12]                : AE25      : output : 2.5 V             :         : 4         : N              
-RESERVED_INPUT_WITH_WEAK_PULLUP : AE26      :        :                   :         : 5         :                
-RESERVED_INPUT_WITH_WEAK_PULLUP : AE27      :        :                   :         : 5         :                
-pps_shft[6]                  : AE28      : output : 2.5 V             :         : 5         : N              
+RESERVED_INPUT_WITH_WEAK_PULLUP : AE24      :        :                   :         : 4         :                
+clk_err_lst[3]               : AE25      : output : 2.5 V             :         : 4         : N              
+phase_err[9]                 : AE26      : output : 2.5 V             :         : 5         : N              
+phase_err[10]                : AE27      : output : 2.5 V             :         : 5         : N              
+RESERVED_INPUT_WITH_WEAK_PULLUP : AE28      :        :                   :         : 5         :                
 GND                          : AF1       : gnd    :                   :         :           :                
-phase_err[10]                : AF2       : output : 2.5 V             :         : 2         : N              
-phase_err[13]                : AF3       : output : 2.5 V             :         : 3         : N              
-pps_shft[14]                 : AF4       : output : 2.5 V             :         : 3         : N              
-RESERVED_INPUT_WITH_WEAK_PULLUP : AF5       :        :                   :         : 3         :                
+RESERVED_INPUT_WITH_WEAK_PULLUP : AF2       :        :                   :         : 2         :                
+RESERVED_INPUT_WITH_WEAK_PULLUP : AF3       :        :                   :         : 3         :                
+RESERVED_INPUT_WITH_WEAK_PULLUP : AF4       :        :                   :         : 3         :                
+DAC_val[10]                  : AF5       : output : 2.5 V             :         : 3         : N              
 RESERVED_INPUT_WITH_WEAK_PULLUP : AF6       :        :                   :         : 3         :                
-int[6]                       : AF7       : output : 2.5 V             :         : 3         : N              
-smpl_count[14]               : AF8       : output : 2.5 V             :         : 3         : N              
-pid_out[8]                   : AF9       : output : 2.5 V             :         : 3         : N              
-pid_out[11]                  : AF10      : output : 2.5 V             :         : 3         : N              
-DAC_val[14]                  : AF11      : output : 2.5 V             :         : 3         : N              
-DAC_val[12]                  : AF12      : output : 2.5 V             :         : 3         : N              
-SPI_byte[5]                  : AF13      : output : 2.5 V             :         : 3         : N              
-smpl_count[15]               : AF14      : output : 2.5 V             :         : 3         : N              
+pps_shft[14]                 : AF7       : output : 2.5 V             :         : 3         : N              
+pps_posedge[9]               : AF8       : output : 2.5 V             :         : 3         : N              
+pps_posedge[12]              : AF9       : output : 2.5 V             :         : 3         : N              
+int_sum[24]                  : AF10      : output : 2.5 V             :         : 3         : N              
+pid_out[11]                  : AF11      : output : 2.5 V             :         : 3         : N              
+pps_posedge[6]               : AF12      : output : 2.5 V             :         : 3         : N              
+total_error[5]               : AF13      : output : 2.5 V             :         : 3         : N              
+int_sum[23]                  : AF14      : output : 2.5 V             :         : 3         : N              
 RECV_scl                     : AF15      : output : 2.5 V             :         : 4         : Y              
 RECV_sck                     : AF16      : output : 2.5 V             :         : 4         : Y              
-clk_count[18]                : AF17      : output : 2.5 V             :         : 4         : N              
-dac_rdy[0]                   : AF18      : output : 2.5 V             :         : 4         : N              
-dac_rdy[1]                   : AF19      : output : 2.5 V             :         : 4         : N              
-clk_count[1]                 : AF20      : output : 2.5 V             :         : 4         : N              
+total_error[1]               : AF17      : output : 2.5 V             :         : 4         : N              
+int[0]                       : AF18      : output : 2.5 V             :         : 4         : N              
+RESERVED_INPUT_WITH_WEAK_PULLUP : AF19      :        :                   :         : 4         :                
+clk_err_lst[1]               : AF20      : output : 2.5 V             :         : 4         : N              
 RECV_rst_n                   : AF21      : output : 2.5 V             :         : 4         : Y              
-pps_shft[7]                  : AF22      : output : 2.5 V             :         : 4         : N              
-RESERVED_INPUT_WITH_WEAK_PULLUP : AF23      :        :                   :         : 4         :                
-count[11]                    : AF24      : output : 2.5 V             :         : 4         : N              
-count[15]                    : AF25      : output : 2.5 V             :         : 4         : N              
-recov_pps                    : AF26      : output : 2.5 V             :         : 4         : N              
+RESERVED_INPUT_WITH_WEAK_PULLUP : AF22      :        :                   :         : 4         :                
+phase_err[5]                 : AF23      : output : 2.5 V             :         : 4         : N              
+clk_err_lst[2]               : AF24      : output : 2.5 V             :         : 4         : N              
+RESERVED_INPUT_WITH_WEAK_PULLUP : AF25      :        :                   :         : 4         :                
+RESERVED_INPUT_WITH_WEAK_PULLUP : AF26      :        :                   :         : 4         :                
 RESERVED_INPUT_WITH_WEAK_PULLUP : AF27      :        :                   :         : 5         :                
 GND                          : AF28      : gnd    :                   :         :           :                
 VCCIO2                       : AG1       : power  :                   : 2.5V    : 2         :                
 GND                          : AG2       : gnd    :                   :         :           :                
 RESERVED_INPUT_WITH_WEAK_PULLUP : AG3       :        :                   :         : 3         :                
-DAC_val[0]                   : AG4       : output : 2.5 V             :         : 3         : N              
+dummy_3                      : AG4       : output : 2.5 V             :         : 3         : N              
 GND                          : AG5       : gnd    :                   :         :           :                
-ref_posedge[0]               : AG6       : output : 2.5 V             :         : 3         : N              
-DAC_val[11]                  : AG7       : output : 2.5 V             :         : 3         : N              
-int[10]                      : AG8       : output : 2.5 V             :         : 3         : N              
+pps_posedge[15]              : AG6       : output : 2.5 V             :         : 3         : N              
+pps_shft[12]                 : AG7       : output : 2.5 V             :         : 3         : N              
+pps_shft[10]                 : AG8       : output : 2.5 V             :         : 3         : N              
 GND                          : AG9       : gnd    :                   :         :           :                
-DAC_val[4]                   : AG10      : output : 2.5 V             :         : 3         : N              
-int[3]                       : AG11      : output : 2.5 V             :         : 3         : N              
-count[6]                     : AG12      : output : 2.5 V             :         : 3         : N              
+int_sum[13]                  : AG10      : output : 2.5 V             :         : 3         : N              
+int_sum[25]                  : AG11      : output : 2.5 V             :         : 3         : N              
+total_error[13]              : AG12      : output : 2.5 V             :         : 3         : N              
 GND                          : AG13      : gnd    :                   :         :           :                
 GND+                         : AG14      :        :                   :         : 3         :                
 GND+                         : AG15      :        :                   :         : 4         :                
 GND                          : AG16      : gnd    :                   :         :           :                
-count[14]                    : AG17      : output : 2.5 V             :         : 4         : N              
-reset                        : AG18      : output : 2.5 V             :         : 4         : N              
-clk_count[20]                : AG19      : output : 2.5 V             :         : 4         : N              
+ref_posedge_hold[19]         : AG17      : output : 2.5 V             :         : 4         : N              
+smpl_count[15]               : AG18      : output : 2.5 V             :         : 4         : N              
+smpl_count[10]               : AG19      : output : 2.5 V             :         : 4         : N              
 GND                          : AG20      : gnd    :                   :         :           :                
-smpl_count[11]               : AG21      : output : 2.5 V             :         : 4         : N              
-clk_count[21]                : AG22      : output : 2.5 V             :         : 4         : N              
-count[12]                    : AG23      : output : 2.5 V             :         : 4         : N              
+smpl_count[5]                : AG21      : output : 2.5 V             :         : 4         : N              
+smpl_count[7]                : AG22      : output : 2.5 V             :         : 4         : N              
+RESERVED_INPUT_WITH_WEAK_PULLUP : AG23      :        :                   :         : 4         :                
 GND                          : AG24      : gnd    :                   :         :           :                
-tx_start                     : AG25      : output : 2.5 V             :         : 4         : N              
-clk_err_lst[3]               : AG26      : output : 2.5 V             :         : 4         : N              
+int[15]                      : AG25      : output : 2.5 V             :         : 4         : N              
+RESERVED_INPUT_WITH_WEAK_PULLUP : AG26      :        :                   :         : 4         :                
 GND                          : AG27      : gnd    :                   :         :           :                
 VCCIO5                       : AG28      : power  :                   : 2.5V    : 5         :                
 VCCIO3                       : AH2       : power  :                   : 2.5V    : 3         :                
-RESERVED_INPUT_WITH_WEAK_PULLUP : AH3       :        :                   :         : 3         :                
+int[12]                      : AH3       : output : 2.5 V             :         : 3         : N              
 RESERVED_INPUT_WITH_WEAK_PULLUP : AH4       :        :                   :         : 3         :                
 VCCIO3                       : AH5       : power  :                   : 2.5V    : 3         :                
-pps_posedge[8]               : AH6       : output : 2.5 V             :         : 3         : N              
-int_sum[8]                   : AH7       : output : 2.5 V             :         : 3         : N              
-DAC_val[1]                   : AH8       : output : 2.5 V             :         : 3         : N              
+pps_shft[16]                 : AH6       : output : 2.5 V             :         : 3         : N              
+pps_posedge[13]              : AH7       : output : 2.5 V             :         : 3         : N              
+pps_posedge[14]              : AH8       : output : 2.5 V             :         : 3         : N              
 VCCIO3                       : AH9       : power  :                   : 2.5V    : 3         :                
-int_sum[5]                   : AH10      : output : 2.5 V             :         : 3         : N              
-int[5]                       : AH11      : output : 2.5 V             :         : 3         : N              
-pps_shft[8]                  : AH12      : output : 2.5 V             :         : 3         : N              
+int_sum[29]                  : AH10      : output : 2.5 V             :         : 3         : N              
+int_sum[31]                  : AH11      : output : 2.5 V             :         : 3         : N              
+total_error[3]               : AH12      : output : 2.5 V             :         : 3         : N              
 VCCIO3                       : AH13      : power  :                   : 2.5V    : 3         :                
 SMA_CLKIN                    : AH14      : input  : 2.5 V             :         : 3         : Y              
 GND+                         : AH15      :        :                   :         : 4         :                
 VCCIO4                       : AH16      : power  :                   : 2.5V    : 4         :                
-pps_posedge[7]               : AH17      : output : 2.5 V             :         : 4         : N              
-clk_count[6]                 : AH18      : output : 2.5 V             :         : 4         : N              
-clk_count[22]                : AH19      : output : 2.5 V             :         : 4         : N              
+pps_shft[4]                  : AH17      : output : 2.5 V             :         : 4         : N              
+err_change[0]                : AH18      : output : 2.5 V             :         : 4         : N              
+smpl_count[12]               : AH19      : output : 2.5 V             :         : 4         : N              
 VCCIO4                       : AH20      : power  :                   : 2.5V    : 4         :                
-count[13]                    : AH21      : output : 2.5 V             :         : 4         : N              
-clk_err[4]                   : AH22      : output : 2.5 V             :         : 4         : N              
-clk_count[16]                : AH23      : output : 2.5 V             :         : 4         : N              
+err_change[6]                : AH21      : output : 2.5 V             :         : 4         : N              
+RESERVED_INPUT_WITH_WEAK_PULLUP : AH22      :        :                   :         : 4         :                
+smpl_count[1]                : AH23      : output : 2.5 V             :         : 4         : N              
 VCCIO4                       : AH24      : power  :                   : 2.5V    : 4         :                
-clk_count[15]                : AH25      : output : 2.5 V             :         : 4         : N              
-pps_posedge[15]              : AH26      : output : 2.5 V             :         : 4         : N              
+RESERVED_INPUT_WITH_WEAK_PULLUP : AH25      :        :                   :         : 4         :                
+phase_err[11]                : AH26      : output : 2.5 V             :         : 4         : N              
 VCCIO4                       : AH27      : power  :                   : 2.5V    : 4         :                
 VCCIO1                       : B1        : power  :                   : 2.5V    : 1         :                
 GND                          : B2        : gnd    :                   :         :           :                
-ref_clk_shft[4]              : B3        : output : 2.5 V             :         : 8         : N              
-ref_clk_shft[0]              : B4        : output : 2.5 V             :         : 8         : N              
+ref_posedge[18]              : B3        : output : 2.5 V             :         : 8         : N              
+int_sum[10]                  : B4        : output : 2.5 V             :         : 8         : N              
 GND                          : B5        : gnd    :                   :         :           :                
-ref_posedge_hold[2]          : B6        : output : 2.5 V             :         : 8         : N              
-ref_posedge_hold[16]         : B7        : output : 2.5 V             :         : 8         : N              
-ref_posedge_hold[7]          : B8        : output : 2.5 V             :         : 8         : N              
+ref_posedge[8]               : B6        : output : 2.5 V             :         : 8         : N              
+ref_posedge_hold[7]          : B7        : output : 2.5 V             :         : 8         : N              
+clk_count[6]                 : B8        : output : 2.5 V             :         : 8         : N              
 GND                          : B9        : gnd    :                   :         :           :                
-ref_posedge_hold[13]         : B10       : output : 2.5 V             :         : 8         : N              
-ref_clk_shft[1]              : B11       : output : 2.5 V             :         : 8         : N              
+clk_count[15]                : B10       : output : 2.5 V             :         : 8         : N              
+ref_posedge_hold[12]         : B11       : output : 2.5 V             :         : 8         : N              
 GND                          : B12       : gnd    :                   :         :           :                
 GND                          : B13       : gnd    :                   :         :           :                
 GND+                         : B14       :        :                   :         : 8         :                
 GND+                         : B15       :        :                   :         : 7         :                
 GND                          : B16       : gnd    :                   :         :           :                
-clk_err[6]                   : B17       : output : 2.5 V             :         : 7         : N              
-clk_err[10]                  : B18       : output : 2.5 V             :         : 7         : N              
-clk_count_neg[8]             : B19       : output : 2.5 V             :         : 7         : N              
+clk_count_neg[13]            : B17       : output : 2.5 V             :         : 7         : N              
+clk_count_neg[8]             : B18       : output : 2.5 V             :         : 7         : N              
+ref_clk_shft[6]              : B19       : output : 2.5 V             :         : 7         : N              
 GND                          : B20       : gnd    :                   :         :           :                
-clk_err[14]                  : B21       : output : 2.5 V             :         : 7         : N              
-clk_err[12]                  : B22       : output : 2.5 V             :         : 7         : N              
-pps_posedge[4]               : B23       : output : 2.5 V             :         : 7         : N              
+clk_err[2]                   : B21       : output : 2.5 V             :         : 7         : N              
+err_change[10]               : B22       : output : 2.5 V             :         : 7         : N              
+ref_posedge[10]              : B23       : output : 2.5 V             :         : 7         : N              
 GND                          : B24       : gnd    :                   :         :           :                
-RESERVED_INPUT_WITH_WEAK_PULLUP : B25       :        :                   :         : 7         :                
-dummy_2                      : B26       : output : 2.5 V             :         : 7         : N              
+pps_posedge[5]               : B25       : output : 2.5 V             :         : 7         : N              
+clk_err_lst[11]              : B26       : output : 2.5 V             :         : 7         : N              
 GND                          : B27       : gnd    :                   :         :           :                
 VCCIO6                       : B28       : power  :                   : 2.5V    : 6         :                
 GND                          : C1        : gnd    :                   :         :           :                
-RESERVED_INPUT_WITH_WEAK_PULLUP : C2        :        :                   :         : 1         :                
-clk_err_lst[5]               : C3        : output : 2.5 V             :         : 8         : N              
+int[2]                       : C2        : output : 2.5 V             :         : 1         : N              
+RESERVED_INPUT_WITH_WEAK_PULLUP : C3        :        :                   :         : 8         :                
 RESERVED_INPUT_WITH_WEAK_PULLUP : C4        :        :                   :         : 8         :                
-clk_err_lst[12]              : C5        : output : 2.5 V             :         : 8         : N              
-ref_posedge[10]              : C6        : output : 2.5 V             :         : 8         : N              
-ref_posedge[18]              : C7        : output : 2.5 V             :         : 8         : N              
-locked                       : C8        : output : 2.5 V             :         : 8         : N              
-ref_posedge[4]               : C9        : output : 2.5 V             :         : 8         : N              
-ref_posedge[1]               : C10       : output : 2.5 V             :         : 8         : N              
-ref_clk_shft[3]              : C11       : output : 2.5 V             :         : 8         : N              
-err_change[10]               : C12       : output : 2.5 V             :         : 8         : N              
-err_change[12]               : C13       : output : 2.5 V             :         : 8         : N              
-err_change[13]               : C14       : output : 2.5 V             :         : 8         : N              
-err_change[5]                : C15       : output : 2.5 V             :         : 7         : N              
-clk_err[3]                   : C16       : output : 2.5 V             :         : 7         : N              
+RESERVED_INPUT_WITH_WEAK_PULLUP : C5        :        :                   :         : 8         :                
+pps_shft[1]                  : C6        : output : 2.5 V             :         : 8         : N              
+int_sum[12]                  : C7        : output : 2.5 V             :         : 8         : N              
+clk_count[17]                : C8        : output : 2.5 V             :         : 8         : N              
+ref_posedge_hold[17]         : C9        : output : 2.5 V             :         : 8         : N              
+clk_count[1]                 : C10       : output : 2.5 V             :         : 8         : N              
+ref_clk_shft[17]             : C11       : output : 2.5 V             :         : 8         : N              
+clk_count_neg[10]            : C12       : output : 2.5 V             :         : 8         : N              
+ref_posedge[4]               : C13       : output : 2.5 V             :         : 8         : N              
+ref_clk_shft[4]              : C14       : output : 2.5 V             :         : 8         : N              
+clk_count_neg[12]            : C15       : output : 2.5 V             :         : 7         : N              
+clk_count_neg[18]            : C16       : output : 2.5 V             :         : 7         : N              
 clk_err[0]                   : C17       : output : 2.5 V             :         : 7         : N              
-clk_count_neg[6]             : C18       : output : 2.5 V             :         : 7         : N              
-err_change[8]                : C19       : output : 2.5 V             :         : 7         : N              
-clk_count_neg[23]            : C20       : output : 2.5 V             :         : 7         : N              
-phase_err[1]                 : C21       : output : 2.5 V             :         : 7         : N              
-phase_err[3]                 : C22       : output : 2.5 V             :         : 7         : N              
-clk_err[2]                   : C23       : output : 2.5 V             :         : 7         : N              
-pps_posedge[2]               : C24       : output : 2.5 V             :         : 7         : N              
-pps_shft[1]                  : C25       : output : 2.5 V             :         : 7         : N              
-clk_err_lst[15]              : C26       : output : 2.5 V             :         : 7         : N              
-RESERVED_INPUT_WITH_WEAK_PULLUP : C27       :        :                   :         : 6         :                
+ref_clk_shft[5]              : C18       : output : 2.5 V             :         : 7         : N              
+ref_posedge_hold[10]         : C19       : output : 2.5 V             :         : 7         : N              
+clk_count_neg[11]            : C20       : output : 2.5 V             :         : 7         : N              
+pps_posedge[3]               : C21       : output : 2.5 V             :         : 7         : N              
+ref_posedge[16]              : C22       : output : 2.5 V             :         : 7         : N              
+clk_err[8]                   : C23       : output : 2.5 V             :         : 7         : N              
+clk_err[1]                   : C24       : output : 2.5 V             :         : 7         : N              
+ref_posedge[7]               : C25       : output : 2.5 V             :         : 7         : N              
+clk_err_lst[8]               : C26       : output : 2.5 V             :         : 7         : N              
+ref_posedge[17]              : C27       : output : 2.5 V             :         : 6         : N              
 GND                          : C28       : gnd    :                   :         :           :                
-ref_clk_shft[13]             : D1        : output : 2.5 V             :         : 1         : N              
-ref_posedge_hold[12]         : D2        : output : 2.5 V             :         : 1         : N              
+int[10]                      : D1        : output : 2.5 V             :         : 1         : N              
+RESERVED_INPUT_WITH_WEAK_PULLUP : D2        :        :                   :         : 1         :                
 GND                          : D3        : gnd    :                   :         :           :                
-RESERVED_INPUT_WITH_WEAK_PULLUP : D4        :        :                   :         : 8         :                
+clk_err_lst[15]              : D4        : output : 2.5 V             :         : 8         : N              
 RESERVED_INPUT_WITH_WEAK_PULLUP : D5        :        :                   :         : 8         :                
-ref_posedge[12]              : D6        : output : 2.5 V             :         : 8         : N              
-ref_clk_shft[6]              : D7        : output : 2.5 V             :         : 8         : N              
-ref_posedge_hold[4]          : D8        : output : 2.5 V             :         : 8         : N              
-ref_posedge_hold[18]         : D9        : output : 2.5 V             :         : 8         : N              
-ref_clk_shft[16]             : D10       : output : 2.5 V             :         : 8         : N              
-ref_posedge[2]               : D11       : output : 2.5 V             :         : 8         : N              
-phase_err[0]                 : D12       : output : 2.5 V             :         : 8         : N              
-err_change[0]                : D13       : output : 2.5 V             :         : 8         : N              
-pps_shft[2]                  : D14       : output : 2.5 V             :         : 8         : N              
-err_change[2]                : D15       : output : 2.5 V             :         : 7         : N              
-clk_err[5]                   : D16       : output : 2.5 V             :         : 7         : N              
-clk_err[7]                   : D17       : output : 2.5 V             :         : 7         : N              
-err_change[14]               : D18       : output : 2.5 V             :         : 7         : N              
-err_change[15]               : D19       : output : 2.5 V             :         : 7         : N              
-clk_count_neg[24]            : D20       : output : 2.5 V             :         : 7         : N              
-pps_posedge[3]               : D21       : output : 2.5 V             :         : 7         : N              
-RESERVED_INPUT_WITH_WEAK_PULLUP : D22       :        :                   :         : 7         :                
-RESERVED_INPUT_WITH_WEAK_PULLUP : D23       :        :                   :         : 7         :                
-RESERVED_INPUT_WITH_WEAK_PULLUP : D24       :        :                   :         : 7         :                
-pps_shft[11]                 : D25       : output : 2.5 V             :         : 7         : N              
-RESERVED_INPUT_WITH_WEAK_PULLUP : D26       :        :                   :         : 6         :                
+err_dir                      : D6        : output : 2.5 V             :         : 8         : N              
+int_sum[7]                   : D7        : output : 2.5 V             :         : 8         : N              
+clk_count[23]                : D8        : output : 2.5 V             :         : 8         : N              
+ref_posedge_hold[15]         : D9        : output : 2.5 V             :         : 8         : N              
+ref_posedge[15]              : D10       : output : 2.5 V             :         : 8         : N              
+ref_clk_shft[20]             : D11       : output : 2.5 V             :         : 8         : N              
+clk_count_neg[17]            : D12       : output : 2.5 V             :         : 8         : N              
+ref_posedge_hold[9]          : D13       : output : 2.5 V             :         : 8         : N              
+ref_clk_shft[13]             : D14       : output : 2.5 V             :         : 8         : N              
+clk_count_neg[19]            : D15       : output : 2.5 V             :         : 7         : N              
+clk_count_neg[9]             : D16       : output : 2.5 V             :         : 7         : N              
+clk_count_neg[4]             : D17       : output : 2.5 V             :         : 7         : N              
+ref_posedge_hold[3]          : D18       : output : 2.5 V             :         : 7         : N              
+clk_err[12]                  : D19       : output : 2.5 V             :         : 7         : N              
+clk_count_neg[22]            : D20       : output : 2.5 V             :         : 7         : N              
+ref_posedge[0]               : D21       : output : 2.5 V             :         : 7         : N              
+int[8]                       : D22       : output : 2.5 V             :         : 7         : N              
+recov_pps                    : D23       : output : 2.5 V             :         : 7         : N              
+clk_count_neg[16]            : D24       : output : 2.5 V             :         : 7         : N              
+ref_posedge[6]               : D25       : output : 2.5 V             :         : 7         : N              
+int[11]                      : D26       : output : 2.5 V             :         : 6         : N              
 RESERVED_INPUT_WITH_WEAK_PULLUP : D27       :        :                   :         : 6         :                
 RESERVED_INPUT_WITH_WEAK_PULLUP : D28       :        :                   :         : 6         :                
-RESERVED_INPUT_WITH_WEAK_PULLUP : E1        :        :                   :         : 1         :                
+pps_posedge[2]               : E1        : output : 2.5 V             :         : 1         : N              
 ~ALTERA_FLASH_nCE_nCSO~ / RESERVED_INPUT_WITH_WEAK_PULLUP : E2        : input  : 2.5 V             :         : 1         : N              
-clk_err_lst[9]               : E3        : output : 2.5 V             :         : 1         : N              
-clk_err_lst[1]               : E4        : output : 2.5 V             :         : 8         : N              
-ref_clk_shft[2]              : E5        : output : 2.5 V             :         : 8         : N              
+RESERVED_INPUT_WITH_WEAK_PULLUP : E3        :        :                   :         : 1         :                
+RESERVED_INPUT_WITH_WEAK_PULLUP : E4        :        :                   :         : 8         :                
+int[6]                       : E5        : output : 2.5 V             :         : 8         : N              
 VCCIO8                       : E6        : power  :                   : 2.5V    : 8         :                
-ref_clk_shft[5]              : E7        : output : 2.5 V             :         : 8         : N              
-ref_posedge_hold[15]         : E8        : output : 2.5 V             :         : 8         : N              
+ref_posedge_hold[18]         : E7        : output : 2.5 V             :         : 8         : N              
+ref_clk_shft[12]             : E8        : output : 2.5 V             :         : 8         : N              
 VCCIO8                       : E9        : power  :                   : 2.5V    : 8         :                
-ref_posedge[13]              : E10       : output : 2.5 V             :         : 8         : N              
-pps_posedge[0]               : E11       : output : 2.5 V             :         : 8         : N              
-ref_posedge[14]              : E12       : output : 2.5 V             :         : 8         : N              
+clk_count[14]                : E10       : output : 2.5 V             :         : 8         : N              
+ref_posedge[13]              : E11       : output : 2.5 V             :         : 8         : N              
+ref_clk_shft[14]             : E12       : output : 2.5 V             :         : 8         : N              
 VCCIO8                       : E13       : power  :                   : 2.5V    : 8         :                
-ref_posedge[7]               : E14       : output : 2.5 V             :         : 8         : N              
-total_error[13]              : E15       : output : 2.5 V             :         : 7         : N              
+ref_clk_shft[1]              : E14       : output : 2.5 V             :         : 8         : N              
+clk_count_neg[15]            : E15       : output : 2.5 V             :         : 7         : N              
 VCCIO7                       : E16       : power  :                   : 2.5V    : 7         :                
-clk_count_neg[9]             : E17       : output : 2.5 V             :         : 7         : N              
+clk_count_neg[1]             : E17       : output : 2.5 V             :         : 7         : N              
 LEDR[5]                      : E18       : output : 2.5 V             :         : 7         : Y              
 LEDR[2]                      : E19       : output : 2.5 V             :         : 7         : Y              
 VCCIO7                       : E20       : power  :                   : 2.5V    : 7         :                
@@ -427,78 +427,78 @@ VCCIO7                       : E23       : power  :                   : 2.5V    
 LEDG[3]                      : E24       : output : 2.5 V             :         : 7         : Y              
 LEDG[2]                      : E25       : output : 2.5 V             :         : 7         : Y              
 RESERVED_INPUT_WITH_WEAK_PULLUP : E26       :        :                   :         : 6         :                
-RESERVED_INPUT_WITH_WEAK_PULLUP : E27       :        :                   :         : 6         :                
-RESERVED_INPUT_WITH_WEAK_PULLUP : E28       :        :                   :         : 6         :                
-RESERVED_INPUT_WITH_WEAK_PULLUP : F1        :        :                   :         : 1         :                
-phase_err[4]                 : F2        : output : 2.5 V             :         : 1         : N              
-ref_posedge_hold[6]          : F3        : output : 2.5 V             :         : 1         : N              
+clk_count_neg[21]            : E27       : output : 2.5 V             :         : 6         : N              
+clk_count_neg[24]            : E28       : output : 2.5 V             :         : 6         : N              
+clk_count[4]                 : F1        : output : 2.5 V             :         : 1         : N              
+ref_clk_shft[0]              : F2        : output : 2.5 V             :         : 1         : N              
+ref_posedge_hold[11]         : F3        : output : 2.5 V             :         : 1         : N              
 ~ALTERA_ASDO_DATA1~ / RESERVED_INPUT_WITH_WEAK_PULLUP : F4        : input  : 2.5 V             :         : 1         : N              
-ref_posedge_hold[5]          : F5        : output : 2.5 V             :         : 1         : N              
+RESERVED_INPUT_WITH_WEAK_PULLUP : F5        :        :                   :         : 1         :                
 GND                          : F6        : gnd    :                   :         :           :                
-ref_posedge[16]              : F7        : output : 2.5 V             :         : 8         : N              
-ref_clk_shft[17]             : F8        : output : 2.5 V             :         : 8         : N              
+clk_count[18]                : F7        : output : 2.5 V             :         : 8         : N              
+ref_clk_shft[19]             : F8        : output : 2.5 V             :         : 8         : N              
 GND                          : F9        : gnd    :                   :         :           :                
-ref_posedge_hold[8]          : F10       : output : 2.5 V             :         : 8         : N              
-pps_shft[4]                  : F11       : output : 2.5 V             :         : 8         : N              
-ref_clk_shft[15]             : F12       : output : 2.5 V             :         : 8         : N              
+clk_count[0]                 : F10       : output : 2.5 V             :         : 8         : N              
+pid_out[12]                  : F11       : output : 2.5 V             :         : 8         : N              
+clk_count[19]                : F12       : output : 2.5 V             :         : 8         : N              
 GND                          : F13       : gnd    :                   :         :           :                
-pid_out[1]                   : F14       : output : 2.5 V             :         : 8         : N              
+ref_posedge[12]              : F14       : output : 2.5 V             :         : 8         : N              
 LEDR[14]                     : F15       : output : 2.5 V             :         : 7         : Y              
 GND                          : F16       : gnd    :                   :         :           :                
-phase_err[2]                 : F17       : output : 2.5 V             :         : 7         : N              
+clk_count_neg[0]             : F17       : output : 2.5 V             :         : 7         : N              
 LEDR[4]                      : F18       : output : 2.5 V             :         : 7         : Y              
 LEDR[1]                      : F19       : output : 2.5 V             :         : 7         : Y              
 GND                          : F20       : gnd    :                   :         :           :                
-RESERVED_INPUT_WITH_WEAK_PULLUP : F21       :        :                   :         : 7         :                
+ref_clk_shft[3]              : F21       : output : 2.5 V             :         : 7         : N              
 LEDR[3]                      : F22       : output : 2.5 V             :         : 7         : Y              
 GND                          : F23       : gnd    :                   :         :           :                
 RESERVED_INPUT_WITH_WEAK_PULLUP : F24       :        :                   :         : 6         :                
-ref_clk_shft[14]             : F25       : output : 2.5 V             :         : 6         : N              
-RESERVED_INPUT_WITH_WEAK_PULLUP : F26       :        :                   :         : 6         :                
-RESERVED_INPUT_WITH_WEAK_PULLUP : F27       :        :                   :         : 6         :                
-RESERVED_INPUT_WITH_WEAK_PULLUP : F28       :        :                   :         : 6         :                
-phase_err[7]                 : G1        : output : 2.5 V             :         : 1         : N              
-total_error[2]               : G2        : output : 2.5 V             :         : 1         : N              
-ref_clk_shft[7]              : G3        : output : 2.5 V             :         : 1         : N              
-ref_posedge[6]               : G4        : output : 2.5 V             :         : 1         : N              
-ref_posedge[5]               : G5        : output : 2.5 V             :         : 1         : N              
+RESERVED_INPUT_WITH_WEAK_PULLUP : F25       :        :                   :         : 6         :                
+clk_count_neg[23]            : F26       : output : 2.5 V             :         : 6         : N              
+clk_count_neg[20]            : F27       : output : 2.5 V             :         : 6         : N              
+ref_posedge[5]               : F28       : output : 2.5 V             :         : 6         : N              
+pps_posedge[7]               : G1        : output : 2.5 V             :         : 1         : N              
+clk_count[5]                 : G2        : output : 2.5 V             :         : 1         : N              
+RESERVED_INPUT_WITH_WEAK_PULLUP : G3        :        :                   :         : 1         :                
+dummy_2                      : G4        : output : 2.5 V             :         : 1         : N              
+RESERVED_INPUT_WITH_WEAK_PULLUP : G5        :        :                   :         : 1         :                
 RESERVED_INPUT_WITH_WEAK_PULLUP : G6        :        :                   :         : 1         :                
-ref_posedge_hold[14]         : G7        : output : 2.5 V             :         : 8         : N              
-ref_posedge[11]              : G8        : output : 2.5 V             :         : 8         : N              
+clk_count[24]                : G7        : output : 2.5 V             :         : 8         : N              
+ref_posedge[19]              : G8        : output : 2.5 V             :         : 8         : N              
 UART_TXD                     : G9        : output : 2.5 V             :         : 8         : Y              
-ref_posedge_hold[0]          : G10       : output : 2.5 V             :         : 8         : N              
-ref_posedge[17]              : G11       : output : 2.5 V             :         : 8         : N              
+clk_count[2]                 : G10       : output : 2.5 V             :         : 8         : N              
+clk_count[9]                 : G11       : output : 2.5 V             :         : 8         : N              
 UART_RXD                     : G12       : input  : 2.5 V             :         : 8         : Y              
-ref_posedge_hold[1]          : G13       : output : 2.5 V             :         : 8         : N              
+phase_err[3]                 : G13       : output : 2.5 V             :         : 8         : N              
 UART_CTS                     : G14       : output : 2.5 V             :         : 8         : Y              
 LEDR[15]                     : G15       : output : 2.5 V             :         : 7         : Y              
 LEDR[16]                     : G16       : output : 2.5 V             :         : 7         : Y              
 LEDR[9]                      : G17       : output : 2.5 V             :         : 7         : Y              
-total_error[1]               : G18       : output : 2.5 V             :         : 7         : N              
+clk_count_neg[2]             : G18       : output : 2.5 V             :         : 7         : N              
 LEDR[0]                      : G19       : output : 2.5 V             :         : 7         : Y              
 LEDG[5]                      : G20       : output : 2.5 V             :         : 7         : Y              
 LEDG[7]                      : G21       : output : 2.5 V             :         : 7         : Y              
 LEDG[6]                      : G22       : output : 2.5 V             :         : 7         : Y              
-RESERVED_INPUT_WITH_WEAK_PULLUP : G23       :        :                   :         : 6         :                
+KEY[4]                       : G23       : input  : 2.5 V             :         : 6         : N              
 RESERVED_INPUT_WITH_WEAK_PULLUP : G24       :        :                   :         : 6         :                
-RESERVED_INPUT_WITH_WEAK_PULLUP : G25       :        :                   :         : 6         :                
-dummy_1                      : G26       : output : 2.5 V             :         : 6         : N              
-RESERVED_INPUT_WITH_WEAK_PULLUP : G27       :        :                   :         : 6         :                
-RESERVED_INPUT_WITH_WEAK_PULLUP : G28       :        :                   :         : 6         :                
+clk_err_lst[9]               : G25       : output : 2.5 V             :         : 6         : N              
+RESERVED_INPUT_WITH_WEAK_PULLUP : G26       :        :                   :         : 6         :                
+clk_err[5]                   : G27       : output : 2.5 V             :         : 6         : N              
+clk_err[6]                   : G28       : output : 2.5 V             :         : 6         : N              
 VCCIO1                       : H1        : power  :                   : 2.5V    : 1         :                
 GND                          : H2        : gnd    :                   :         :           :                
-pps_posedge[1]               : H3        : output : 2.5 V             :         : 1         : N              
-RESERVED_INPUT_WITH_WEAK_PULLUP : H4        :        :                   :         : 1         :                
-RESERVED_INPUT_WITH_WEAK_PULLUP : H5        :        :                   :         : 1         :                
-ref_clk_shft[9]              : H6        : output : 2.5 V             :         : 1         : N              
-ref_posedge_hold[11]         : H7        : output : 2.5 V             :         : 1         : N              
-ref_posedge[15]              : H8        : output : 2.5 V             :         : 8         : N              
+ref_posedge[3]               : H3        : output : 2.5 V             :         : 1         : N              
+ref_posedge[9]               : H4        : output : 2.5 V             :         : 1         : N              
+ref_clk_shft[11]             : H5        : output : 2.5 V             :         : 1         : N              
+clk_err_lst[12]              : H6        : output : 2.5 V             :         : 1         : N              
+RESERVED_INPUT_WITH_WEAK_PULLUP : H7        :        :                   :         : 1         :                
+pps_shft[6]                  : H8        : output : 2.5 V             :         : 8         : N              
 GNDA3                        : H9        : gnd    :                   :         :           :                
-ref_clk_shft[10]             : H10       : output : 2.5 V             :         : 8         : N              
+phase_err[0]                 : H10       : output : 2.5 V             :         : 8         : N              
 VCCIO8                       : H11       : power  :                   : 2.5V    : 8         :                
-ref_clk_shft[18]             : H12       : output : 2.5 V             :         : 8         : N              
-ref_clk_shft[12]             : H13       : output : 2.5 V             :         : 8         : N              
-ref_posedge[9]               : H14       : output : 2.5 V             :         : 8         : N              
+ref_posedge_hold[16]         : H12       : output : 2.5 V             :         : 8         : N              
+clk_count[12]                : H13       : output : 2.5 V             :         : 8         : N              
+ref_posedge_hold[14]         : H14       : output : 2.5 V             :         : 8         : N              
 LEDR[17]                     : H15       : output : 2.5 V             :         : 7         : Y              
 LEDR[11]                     : H16       : output : 2.5 V             :         : 7         : Y              
 LEDR[13]                     : H17       : output : 2.5 V             :         : 7         : Y              
@@ -509,24 +509,24 @@ LEDG[4]                      : H21       : output : 2.5 V             :         
 RESERVED_INPUT_WITH_WEAK_PULLUP : H22       :        :                   :         : 6         :                
 RESERVED_INPUT_WITH_WEAK_PULLUP : H23       :        :                   :         : 6         :                
 RESERVED_INPUT_WITH_WEAK_PULLUP : H24       :        :                   :         : 6         :                
-RESERVED_INPUT_WITH_WEAK_PULLUP : H25       :        :                   :         : 6         :                
-pps_posedge[5]               : H26       : output : 2.5 V             :         : 6         : N              
+ref_clk_shft[16]             : H25       : output : 2.5 V             :         : 6         : N              
+RESERVED_INPUT_WITH_WEAK_PULLUP : H26       :        :                   :         : 6         :                
 GND                          : H27       : gnd    :                   :         :           :                
 VCCIO6                       : H28       : power  :                   : 2.5V    : 6         :                
 GND+                         : J1        :        :                   :         : 1         :                
 GND                          : J2        : gnd    :                   :         :           :                
-RESERVED_INPUT_WITH_WEAK_PULLUP : J3        :        :                   :         : 1         :                
-pps_shft[3]                  : J4        : output : 2.5 V             :         : 1         : N              
-int_sum[4]                   : J5        : output : 2.5 V             :         : 1         : N              
-int_sum[20]                  : J6        : output : 2.5 V             :         : 1         : N              
-int_sum[30]                  : J7        : output : 2.5 V             :         : 1         : N              
+clk_count[8]                 : J3        : output : 2.5 V             :         : 1         : N              
+clk_count[11]                : J4        : output : 2.5 V             :         : 1         : N              
+int_sum[9]                   : J5        : output : 2.5 V             :         : 1         : N              
+int_sum[14]                  : J6        : output : 2.5 V             :         : 1         : N              
+int_sum[19]                  : J7        : output : 2.5 V             :         : 1         : N              
 VCCA3                        : J8        : power  :                   : 2.5V    :           :                
 VCCD_PLL3                    : J9        : power  :                   : 1.2V    :           :                
-pid_out[12]                  : J10       : output : 2.5 V             :         : 8         : N              
+clk_count[16]                : J10       : output : 2.5 V             :         : 8         : N              
 GND                          : J11       : gnd    :                   :         :           :                
-ref_posedge_hold[9]          : J12       : output : 2.5 V             :         : 8         : N              
+clk_count[21]                : J12       : output : 2.5 V             :         : 8         : N              
 UART_RTS                     : J13       : input  : 2.5 V             :         : 8         : Y              
-ref_clk_shft[8]              : J14       : output : 2.5 V             :         : 8         : N              
+ref_posedge[14]              : J14       : output : 2.5 V             :         : 8         : N              
 LEDR[10]                     : J15       : output : 2.5 V             :         : 7         : Y              
 LEDR[12]                     : J16       : output : 2.5 V             :         : 7         : Y              
 LEDR[8]                      : J17       : output : 2.5 V             :         : 7         : Y              
@@ -535,20 +535,20 @@ LEDR[6]                      : J19       : output : 2.5 V             :         
 VCCD_PLL2                    : J20       : power  :                   : 1.2V    :           :                
 VCCA2                        : J21       : power  :                   : 2.5V    :           :                
 RESERVED_INPUT_WITH_WEAK_PULLUP : J22       :        :                   :         : 6         :                
-RESERVED_INPUT_WITH_WEAK_PULLUP : J23       :        :                   :         : 6         :                
-RESERVED_INPUT_WITH_WEAK_PULLUP : J24       :        :                   :         : 6         :                
-clk_count_neg[2]             : J25       : output : 2.5 V             :         : 6         : N              
-clk_err[11]                  : J26       : output : 2.5 V             :         : 6         : N              
+clk_err_lst[6]               : J23       : output : 2.5 V             :         : 6         : N              
+clk_err_lst[4]               : J24       : output : 2.5 V             :         : 6         : N              
+clk_err[14]                  : J25       : output : 2.5 V             :         : 6         : N              
+ref_posedge[11]              : J26       : output : 2.5 V             :         : 6         : N              
 GND+                         : J27       :        :                   :         : 6         :                
 GND+                         : J28       :        :                   :         : 6         :                
-err_dir                      : K1        : output : 2.5 V             :         : 1         : N              
-RESERVED_INPUT_WITH_WEAK_PULLUP : K2        :        :                   :         : 1         :                
-err_change[7]                : K3        : output : 2.5 V             :         : 1         : N              
-total_error[3]               : K4        : output : 2.5 V             :         : 1         : N              
+clk_count[10]                : K1        : output : 2.5 V             :         : 1         : N              
+clk_count[13]                : K2        : output : 2.5 V             :         : 1         : N              
+clk_count[7]                 : K3        : output : 2.5 V             :         : 1         : N              
+ref_posedge_hold[13]         : K4        : output : 2.5 V             :         : 1         : N              
 VCCIO1                       : K5        : power  :                   : 2.5V    : 1         :                
 GND                          : K6        : gnd    :                   :         :           :                
-int_sum[3]                   : K7        : output : 2.5 V             :         : 1         : N              
-int_sum[24]                  : K8        : output : 2.5 V             :         : 1         : N              
+int_sum[21]                  : K7        : output : 2.5 V             :         : 1         : N              
+DAC_val[3]                   : K8        : output : 2.5 V             :         : 1         : N              
 VCCINT                       : K9        : power  :                   : 1.2V    :           :                
 GND                          : K10       : gnd    :                   :         :           :                
 VCCINT                       : K11       : power  :                   : 1.2V    :           :                
@@ -561,22 +561,22 @@ VCCINT                       : K17       : power  :                   : 1.2V    
 GND                          : K18       : gnd    :                   :         :           :                
 VCCINT                       : K19       : power  :                   : 1.2V    :           :                
 GND                          : K20       : gnd    :                   :         :           :                
-RESERVED_INPUT_WITH_WEAK_PULLUP : K21       :        :                   :         : 6         :                
-pps_shft[0]                  : K22       : output : 2.5 V             :         : 6         : N              
+int[1]                       : K21       : output : 2.5 V             :         : 6         : N              
+RESERVED_INPUT_WITH_WEAK_PULLUP : K22       :        :                   :         : 6         :                
 GND                          : K23       : gnd    :                   :         :           :                
 VCCIO6                       : K24       : power  :                   : 2.5V    : 6         :                
 clk_count_neg[5]             : K25       : output : 2.5 V             :         : 6         : N              
-int_sum[2]                   : K26       : output : 2.5 V             :         : 6         : N              
-clk_count_neg[22]            : K27       : output : 2.5 V             :         : 6         : N              
-RESERVED_INPUT_WITH_WEAK_PULLUP : K28       :        :                   :         : 6         :                
-int_sum[13]                  : L1        : output : 2.5 V             :         : 1         : N              
-int_sum[10]                  : L2        : output : 2.5 V             :         : 1         : N              
-int_sum[31]                  : L3        : output : 2.5 V             :         : 1         : N              
-int_sum[22]                  : L4        : output : 2.5 V             :         : 1         : N              
-phase_err[6]                 : L5        : output : 2.5 V             :         : 1         : N              
-pid_out[2]                   : L6        : output : 2.5 V             :         : 1         : N              
-int_sum[26]                  : L7        : output : 2.5 V             :         : 1         : N              
-int_sum[23]                  : L8        : output : 2.5 V             :         : 1         : N              
+clk_count_neg[3]             : K26       : output : 2.5 V             :         : 6         : N              
+clk_err[15]                  : K27       : output : 2.5 V             :         : 6         : N              
+ref_clk_shft[15]             : K28       : output : 2.5 V             :         : 6         : N              
+pid_out[13]                  : L1        : output : 2.5 V             :         : 1         : N              
+err_change[1]                : L2        : output : 2.5 V             :         : 1         : N              
+int_sum[3]                   : L3        : output : 2.5 V             :         : 1         : N              
+int_sum[8]                   : L4        : output : 2.5 V             :         : 1         : N              
+ref_clk_shft[18]             : L5        : output : 2.5 V             :         : 1         : N              
+DAC_val[13]                  : L6        : output : 2.5 V             :         : 1         : N              
+DAC_val[8]                   : L7        : output : 2.5 V             :         : 1         : N              
+DAC_val[2]                   : L8        : output : 2.5 V             :         : 1         : N              
 GND                          : L9        : gnd    :                   :         :           :                
 VCCINT                       : L10       : power  :                   : 1.2V    :           :                
 GND                          : L11       : gnd    :                   :         :           :                
@@ -589,22 +589,22 @@ GND                          : L17       : gnd    :                   :         
 VCCINT                       : L18       : power  :                   : 1.2V    :           :                
 GND                          : L19       : gnd    :                   :         :           :                
 VCCINT                       : L20       : power  :                   : 1.2V    :           :                
-RESERVED_INPUT_WITH_WEAK_PULLUP : L21       :        :                   :         : 6         :                
-RESERVED_INPUT_WITH_WEAK_PULLUP : L22       :        :                   :         : 6         :                
-clk_count_neg[20]            : L23       : output : 2.5 V             :         : 6         : N              
-clk_count_neg[21]            : L24       : output : 2.5 V             :         : 6         : N              
-RESERVED_INPUT_WITH_WEAK_PULLUP : L25       :        :                   :         : 6         :                
-err_change[1]                : L26       : output : 2.5 V             :         : 6         : N              
-clk_count_neg[1]             : L27       : output : 2.5 V             :         : 6         : N              
-err_change[9]                : L28       : output : 2.5 V             :         : 6         : N              
+dummy_1                      : L21       : output : 2.5 V             :         : 6         : N              
+ref_clk_shft[8]              : L22       : output : 2.5 V             :         : 6         : N              
+ref_clk_shft[7]              : L23       : output : 2.5 V             :         : 6         : N              
+err_change[7]                : L24       : output : 2.5 V             :         : 6         : N              
+clk_count_neg[6]             : L25       : output : 2.5 V             :         : 6         : N              
+clk_err[13]                  : L26       : output : 2.5 V             :         : 6         : N              
+clk_err[7]                   : L27       : output : 2.5 V             :         : 6         : N              
+ref_clk_shft[9]              : L28       : output : 2.5 V             :         : 6         : N              
 pid_out[0]                   : M1        : output : 2.5 V             :         : 1         : N              
-int_sum[21]                  : M2        : output : 2.5 V             :         : 1         : N              
-int_sum[28]                  : M3        : output : 2.5 V             :         : 1         : N              
-int_sum[14]                  : M4        : output : 2.5 V             :         : 1         : N              
-int_sum[29]                  : M5        : output : 2.5 V             :         : 1         : N              
+pid_out[10]                  : M2        : output : 2.5 V             :         : 1         : N              
+int_sum[27]                  : M3        : output : 2.5 V             :         : 1         : N              
+int_sum[5]                   : M4        : output : 2.5 V             :         : 1         : N              
+DAC_val[9]                   : M5        : output : 2.5 V             :         : 1         : N              
 nSTATUS                      : M6        :        :                   :         : 1         :                
-int_sum[0]                   : M7        : output : 2.5 V             :         : 1         : N              
-int_sum[18]                  : M8        : output : 2.5 V             :         : 1         : N              
+pid_out[9]                   : M7        : output : 2.5 V             :         : 1         : N              
+pid_out[8]                   : M8        : output : 2.5 V             :         : 1         : N              
 VCCINT                       : M9        : power  :                   : 1.2V    :           :                
 GND                          : M10       : gnd    :                   :         :           :                
 VCCINT                       : M11       : power  :                   : 1.2V    :           :                
@@ -620,19 +620,19 @@ GND                          : M20       : gnd    :                   :         
 KEY[1]                       : M21       : input  : 2.5 V             :         : 6         : Y              
 MSEL2                        : M22       :        :                   :         : 6         :                
 KEY[0]                       : M23       : input  : 2.5 V             :         : 6         : Y              
-pps_shft[5]                  : M24       : output : 2.5 V             :         : 6         : N              
-clk_count_neg[4]             : M25       : output : 2.5 V             :         : 6         : N              
-clk_err[15]                  : M26       : output : 2.5 V             :         : 6         : N              
-clk_count_neg[0]             : M27       : output : 2.5 V             :         : 6         : N              
-clk_count_neg[19]            : M28       : output : 2.5 V             :         : 6         : N              
+locked                       : M24       : output : 2.5 V             :         : 6         : N              
+err_change[5]                : M25       : output : 2.5 V             :         : 6         : N              
+ref_posedge_hold[5]          : M26       : output : 2.5 V             :         : 6         : N              
+err_change[12]               : M27       : output : 2.5 V             :         : 6         : N              
+pps_shft[5]                  : M28       : output : 2.5 V             :         : 6         : N              
 VCCIO1                       : N1        : power  :                   : 2.5V    : 1         :                
 GND                          : N2        : gnd    :                   :         :           :                
-int_sum[19]                  : N3        : output : 2.5 V             :         : 1         : N              
-int_sum[16]                  : N4        : output : 2.5 V             :         : 1         : N              
+phase_err[1]                 : N3        : output : 2.5 V             :         : 1         : N              
+phase_err[2]                 : N4        : output : 2.5 V             :         : 1         : N              
 VCCIO1                       : N5        : power  :                   : 2.5V    : 1         :                
 GND                          : N6        : gnd    :                   :         :           :                
 ~ALTERA_DATA0~ / RESERVED_INPUT_WITH_WEAK_PULLUP : N7        : input  : 2.5 V             :         : 1         : N              
-int_sum[7]                   : N8        : output : 2.5 V             :         : 1         : N              
+pid_out[5]                   : N8        : output : 2.5 V             :         : 1         : N              
 GND                          : N9        : gnd    :                   :         :           :                
 VCCINT                       : N10       : power  :                   : 1.2V    :           :                
 GND                          : N11       : gnd    :                   :         :           :                
@@ -649,12 +649,12 @@ KEY[2]                       : N21       : input  : 2.5 V             :         
 MSEL0                        : N22       :        :                   :         : 6         :                
 GND                          : N23       : gnd    :                   :         :           :                
 VCCIO6                       : N24       : power  :                   : 2.5V    : 6         :                
-clk_count_neg[12]            : N25       : output : 2.5 V             :         : 6         : N              
-err_change[3]                : N26       : output : 2.5 V             :         : 6         : N              
+pps_shft[3]                  : N25       : output : 2.5 V             :         : 6         : N              
+err_change[4]                : N26       : output : 2.5 V             :         : 6         : N              
 GND                          : N27       : gnd    :                   :         :           :                
 VCCIO6                       : N28       : power  :                   : 2.5V    : 6         :                
-int_sum[15]                  : P1        : output : 2.5 V             :         : 1         : N              
-int_sum[17]                  : P2        : output : 2.5 V             :         : 1         : N              
+pid_out[3]                   : P1        : output : 2.5 V             :         : 1         : N              
+pid_out[7]                   : P2        : output : 2.5 V             :         : 1         : N              
 ~ALTERA_DCLK~                : P3        : output : 2.5 V             :         : 1         : N              
 nCONFIG                      : P4        :        :                   :         : 1         :                
 altera_reserved_tck          : P5        : input  : 2.5 V             :         : 1         : N              
@@ -673,21 +673,21 @@ VCCINT                       : P17       : power  :                   : 1.2V    
 GND                          : P18       : gnd    :                   :         :           :                
 VCCINT                       : P19       : power  :                   : 1.2V    :           :                
 GND                          : P20       : gnd    :                   :         :           :                
-RESERVED_INPUT_WITH_WEAK_PULLUP : P21       :        :                   :         : 5         :                
+err_change[2]                : P21       : output : 2.5 V             :         : 5         : N              
 MSEL3                        : P22       :        :                   :         : 6         :                
 MSEL1                        : P23       :        :                   :         : 6         :                
 CONF_DONE                    : P24       :        :                   :         : 6         :                
-err_change[6]                : P25       : output : 2.5 V             :         : 6         : N              
-err_change[4]                : P26       : output : 2.5 V             :         : 6         : N              
-clk_err[8]                   : P27       : output : 2.5 V             :         : 6         : N              
+pps_shft[0]                  : P25       : output : 2.5 V             :         : 6         : N              
+err_change[13]               : P26       : output : 2.5 V             :         : 6         : N              
+err_change[3]                : P27       : output : 2.5 V             :         : 6         : N              
 ~ALTERA_nCEO~ / RESERVED_OUTPUT_OPEN_DRAIN : P28       : output : 2.5 V             :         : 6         : N              
-total_error[8]               : R1        : output : 2.5 V             :         : 2         : N              
-int[0]                       : R2        : output : 2.5 V             :         : 2         : N              
+pps_posedge[8]               : R1        : output : 2.5 V             :         : 2         : N              
+pid_out[4]                   : R2        : output : 2.5 V             :         : 2         : N              
 pid_out[14]                  : R3        : output : 2.5 V             :         : 2         : N              
-int_sum[27]                  : R4        : output : 2.5 V             :         : 2         : N              
-total_error[9]               : R5        : output : 2.5 V             :         : 2         : N              
-int[7]                       : R6        : output : 2.5 V             :         : 2         : N              
-int[11]                      : R7        : output : 2.5 V             :         : 2         : N              
+pid_out[2]                   : R4        : output : 2.5 V             :         : 2         : N              
+DAC_val[14]                  : R5        : output : 2.5 V             :         : 2         : N              
+pid_out[15]                  : R6        : output : 2.5 V             :         : 2         : N              
+pps_shft[7]                  : R7        : output : 2.5 V             :         : 2         : N              
 nCE                          : R8        :        :                   :         : 1         :                
 GND                          : R9        : gnd    :                   :         :           :                
 VCCINT                       : R10       : power  :                   : 1.2V    :           :                
@@ -701,22 +701,22 @@ GND                          : R17       : gnd    :                   :         
 VCCINT                       : R18       : power  :                   : 1.2V    :           :                
 GND                          : R19       : gnd    :                   :         :           :                
 VCCINT                       : R20       : power  :                   : 1.2V    :           :                
-int_sum[1]                   : R21       : output : 2.5 V             :         : 5         : N              
-RESERVED_INPUT_WITH_WEAK_PULLUP : R22       :        :                   :         : 5         :                
-RESERVED_INPUT_WITH_WEAK_PULLUP : R23       :        :                   :         : 5         :                
+smpl_count[9]                : R21       : output : 2.5 V             :         : 5         : N              
+smpl_count[8]                : R22       : output : 2.5 V             :         : 5         : N              
+smpl_count[2]                : R23       : output : 2.5 V             :         : 5         : N              
 KEY[3]                       : R24       : input  : 2.5 V             :         : 5         : Y              
-RESERVED_INPUT_WITH_WEAK_PULLUP : R25       :        :                   :         : 5         :                
-total_error[15]              : R26       : output : 2.5 V             :         : 5         : N              
-total_error[6]               : R27       : output : 2.5 V             :         : 5         : N              
-RESERVED_INPUT_WITH_WEAK_PULLUP : R28       :        :                   :         : 5         :                
+pps_posedge[0]               : R25       : output : 2.5 V             :         : 5         : N              
+smpl_count[6]                : R26       : output : 2.5 V             :         : 5         : N              
+smpl_count[11]               : R27       : output : 2.5 V             :         : 5         : N              
+smpl_count[3]                : R28       : output : 2.5 V             :         : 5         : N              
 VCCIO2                       : T1        : power  :                   : 2.5V    : 2         :                
 GND                          : T2        : gnd    :                   :         :           :                
-pid_out[3]                   : T3        : output : 2.5 V             :         : 2         : N              
-int_sum[11]                  : T4        : output : 2.5 V             :         : 2         : N              
+total_error[15]              : T3        : output : 2.5 V             :         : 2         : N              
+int_sum[6]                   : T4        : output : 2.5 V             :         : 2         : N              
 VCCIO2                       : T5        : power  :                   : 2.5V    : 2         :                
 GND                          : T6        : gnd    :                   :         :           :                
-int[13]                      : T7        : output : 2.5 V             :         : 2         : N              
-smpl_count[1]                : T8        : output : 2.5 V             :         : 2         : N              
+int_sum[18]                  : T7        : output : 2.5 V             :         : 2         : N              
+count[11]                    : T8        : output : 2.5 V             :         : 2         : N              
 VCCINT                       : T9        : power  :                   : 1.2V    :           :                
 GND                          : T10       : gnd    :                   :         :           :                
 VCCINT                       : T11       : power  :                   : 1.2V    :           :                
@@ -729,22 +729,22 @@ VCCINT                       : T17       : power  :                   : 1.2V    
 GND                          : T18       : gnd    :                   :         :           :                
 VCCINT                       : T19       : power  :                   : 1.2V    :           :                
 GND                          : T20       : gnd    :                   :         :           :                
-total_error[5]               : T21       : output : 2.5 V             :         : 5         : N              
-clk_count_neg[18]            : T22       : output : 2.5 V             :         : 5         : N              
+ref_posedge_hold[4]          : T21       : output : 2.5 V             :         : 5         : N              
+err_change[14]               : T22       : output : 2.5 V             :         : 5         : N              
 GND                          : T23       : gnd    :                   :         :           :                
 VCCIO5                       : T24       : power  :                   : 2.5V    : 5         :                
-total_error[4]               : T25       : output : 2.5 V             :         : 5         : N              
-clk_count_neg[15]            : T26       : output : 2.5 V             :         : 5         : N              
+pps_shft[2]                  : T25       : output : 2.5 V             :         : 5         : N              
+err_change[8]                : T26       : output : 2.5 V             :         : 5         : N              
 GND                          : T27       : gnd    :                   :         :           :                
 VCCIO5                       : T28       : power  :                   : 2.5V    : 5         :                
-total_error[12]              : U1        : output : 2.5 V             :         : 2         : N              
-total_error[11]              : U2        : output : 2.5 V             :         : 2         : N              
-int_sum[6]                   : U3        : output : 2.5 V             :         : 2         : N              
-int_sum[12]                  : U4        : output : 2.5 V             :         : 2         : N              
-int[1]                       : U5        : output : 2.5 V             :         : 2         : N              
-int[9]                       : U6        : output : 2.5 V             :         : 2         : N              
-pps_posedge[12]              : U7        : output : 2.5 V             :         : 2         : N              
-RESERVED_INPUT_WITH_WEAK_PULLUP : U8        :        :                   :         : 2         :                
+DAC_val[6]                   : U1        : output : 2.5 V             :         : 2         : N              
+int_sum[11]                  : U2        : output : 2.5 V             :         : 2         : N              
+int_sum[4]                   : U3        : output : 2.5 V             :         : 2         : N              
+int_sum[22]                  : U4        : output : 2.5 V             :         : 2         : N              
+SPI_byte[7]                  : U5        : output : 2.5 V             :         : 2         : N              
+DAC_val[7]                   : U6        : output : 2.5 V             :         : 2         : N              
+count[0]                     : U7        : output : 2.5 V             :         : 2         : N              
+count[4]                     : U8        : output : 2.5 V             :         : 2         : N              
 GND                          : U9        : gnd    :                   :         :           :                
 VCCINT                       : U10       : power  :                   : 1.2V    :           :                
 GND                          : U11       : gnd    :                   :         :           :                
@@ -757,22 +757,22 @@ GND                          : U17       : gnd    :                   :         
 VCCINT                       : U18       : power  :                   : 1.2V    :           :                
 GND                          : U19       : gnd    :                   :         :           :                
 VCCINT                       : U20       : power  :                   : 1.2V    :           :                
-pid_out[5]                   : U21       : output : 2.5 V             :         : 5         : N              
-pps_shft[9]                  : U22       : output : 2.5 V             :         : 5         : N              
-clk_count[14]                : U23       : output : 2.5 V             :         : 5         : N              
-clk_count_neg[13]            : U24       : output : 2.5 V             :         : 5         : N              
-clk_count_neg[17]            : U25       : output : 2.5 V             :         : 5         : N              
-pps_shft[16]                 : U26       : output : 2.5 V             :         : 5         : N              
-clk_count_neg[11]            : U27       : output : 2.5 V             :         : 5         : N              
-clk_count_neg[16]            : U28       : output : 2.5 V             :         : 5         : N              
-total_error[14]              : V1        : output : 2.5 V             :         : 2         : N              
-pid_out[6]                   : V2        : output : 2.5 V             :         : 2         : N              
-total_error[7]               : V3        : output : 2.5 V             :         : 2         : N              
-pid_out[10]                  : V4        : output : 2.5 V             :         : 2         : N              
-RESERVED_INPUT_WITH_WEAK_PULLUP : V5        :        :                   :         : 2         :                
-DAC_val[3]                   : V6        : output : 2.5 V             :         : 2         : N              
-RESERVED_INPUT_WITH_WEAK_PULLUP : V7        :        :                   :         : 2         :                
-RESERVED_INPUT_WITH_WEAK_PULLUP : V8        :        :                   :         : 2         :                
+total_error[10]              : U21       : output : 2.5 V             :         : 5         : N              
+RESERVED_INPUT_WITH_WEAK_PULLUP : U22       :        :                   :         : 5         :                
+int[13]                      : U23       : output : 2.5 V             :         : 5         : N              
+RESERVED_INPUT_WITH_WEAK_PULLUP : U24       :        :                   :         : 5         :                
+RESERVED_INPUT_WITH_WEAK_PULLUP : U25       :        :                   :         : 5         :                
+RESERVED_INPUT_WITH_WEAK_PULLUP : U26       :        :                   :         : 5         :                
+int[14]                      : U27       : output : 2.5 V             :         : 5         : N              
+RESERVED_INPUT_WITH_WEAK_PULLUP : U28       :        :                   :         : 5         :                
+DAC_val[0]                   : V1        : output : 2.5 V             :         : 2         : N              
+SPI_byte[3]                  : V2        : output : 2.5 V             :         : 2         : N              
+DAC_val[11]                  : V3        : output : 2.5 V             :         : 2         : N              
+DAC_val[5]                   : V4        : output : 2.5 V             :         : 2         : N              
+count[10]                    : V5        : output : 2.5 V             :         : 2         : N              
+count[6]                     : V6        : output : 2.5 V             :         : 2         : N              
+count[2]                     : V7        : output : 2.5 V             :         : 2         : N              
+count[7]                     : V8        : output : 2.5 V             :         : 2         : N              
 VCCINT                       : V9        : power  :                   : 1.2V    :           :                
 GND                          : V10       : gnd    :                   :         :           :                
 VCCINT                       : V11       : power  :                   : 1.2V    :           :                
@@ -785,21 +785,21 @@ VCCINT                       : V17       : power  :                   : 1.2V    
 GND                          : V18       : gnd    :                   :         :           :                
 VCCINT                       : V19       : power  :                   : 1.2V    :           :                
 GND                          : V20       : gnd    :                   :         :           :                
-clk_count_neg[14]            : V21       : output : 2.5 V             :         : 5         : N              
+RESERVED_INPUT_WITH_WEAK_PULLUP : V21       :        :                   :         : 5         :                
 RESERVED_INPUT_WITH_WEAK_PULLUP : V22       :        :                   :         : 5         :                
 RESERVED_INPUT_WITH_WEAK_PULLUP : V23       :        :                   :         : 5         :                
-pps_reset                    : V24       : output : 2.5 V             :         : 5         : N              
-clk_count[10]                : V25       : output : 2.5 V             :         : 5         : N              
-pps_posedge[9]               : V26       : output : 2.5 V             :         : 5         : N              
-clk_count[9]                 : V27       : output : 2.5 V             :         : 5         : N              
-pps_shft[10]                 : V28       : output : 2.5 V             :         : 5         : N              
-pid_out[4]                   : W1        : output : 2.5 V             :         : 2         : N              
-total_error[10]              : W2        : output : 2.5 V             :         : 2         : N              
-RESERVED_INPUT_WITH_WEAK_PULLUP : W3        :        :                   :         : 2         :                
-DAC_val[15]                  : W4        : output : 2.5 V             :         : 2         : N              
+RESERVED_INPUT_WITH_WEAK_PULLUP : V24       :        :                   :         : 5         :                
+phase_err[12]                : V25       : output : 2.5 V             :         : 5         : N              
+RESERVED_INPUT_WITH_WEAK_PULLUP : V26       :        :                   :         : 5         :                
+RESERVED_INPUT_WITH_WEAK_PULLUP : V27       :        :                   :         : 5         :                
+int[5]                       : V28       : output : 2.5 V             :         : 5         : N              
+SPI_byte[5]                  : W1        : output : 2.5 V             :         : 2         : N              
+valid                        : W2        : output : 2.5 V             :         : 2         : N              
+count[13]                    : W3        : output : 2.5 V             :         : 2         : N              
+count[5]                     : W4        : output : 2.5 V             :         : 2         : N              
 VCCIO2                       : W5        : power  :                   : 2.5V    : 2         :                
 GND                          : W6        : gnd    :                   :         :           :                
-phase_err[12]                : W7        : output : 2.5 V             :         : 2         : N              
+RESERVED_INPUT_WITH_WEAK_PULLUP : W7        :        :                   :         : 2         :                
 RESERVED_INPUT_WITH_WEAK_PULLUP : W8        :        :                   :         : 2         :                
 GND                          : W9        : gnd    :                   :         :           :                
 VCCINT                       : W10       : power  :                   : 1.2V    :           :                
@@ -813,39 +813,39 @@ GND                          : W17       : gnd    :                   :         
 VCCINT                       : W18       : power  :                   : 1.2V    :           :                
 GND                          : W19       : gnd    :                   :         :           :                
 VCCINT                       : W20       : power  :                   : 1.2V    :           :                
-clk_count[7]                 : W21       : output : 2.5 V             :         : 5         : N              
-clk_count_neg[10]            : W22       : output : 2.5 V             :         : 5         : N              
+RESERVED_INPUT_WITH_WEAK_PULLUP : W21       :        :                   :         : 5         :                
+pps_posedge[4]               : W22       : output : 2.5 V             :         : 5         : N              
 GND                          : W23       : gnd    :                   :         :           :                
 VCCIO5                       : W24       : power  :                   : 2.5V    : 5         :                
 RESERVED_INPUT_WITH_WEAK_PULLUP : W25       :        :                   :         : 5         :                
 RESERVED_INPUT_WITH_WEAK_PULLUP : W26       :        :                   :         : 5         :                
 RESERVED_INPUT_WITH_WEAK_PULLUP : W27       :        :                   :         : 5         :                
-clk_count[8]                 : W28       : output : 2.5 V             :         : 5         : N              
+RESERVED_INPUT_WITH_WEAK_PULLUP : W28       :        :                   :         : 5         :                
 GND+                         : Y1        :        :                   :         : 2         :                
 CLOCK_50                     : Y2        : input  : 2.5 V             :         : 2         : Y              
-int[12]                      : Y3        : output : 2.5 V             :         : 2         : N              
-int[14]                      : Y4        : output : 2.5 V             :         : 2         : N              
-KEY[5]                       : Y5        : input  : 2.5 V             :         : 2         : N              
-DAC_val[10]                  : Y6        : output : 2.5 V             :         : 2         : N              
-DAC_val[7]                   : Y7        : output : 2.5 V             :         : 2         : N              
+SPI_byte[1]                  : Y3        : output : 2.5 V             :         : 2         : N              
+DAC_val[15]                  : Y4        : output : 2.5 V             :         : 2         : N              
+count[8]                     : Y5        : output : 2.5 V             :         : 2         : N              
+count[9]                     : Y6        : output : 2.5 V             :         : 2         : N              
+clk_err_dir                  : Y7        : output : 2.5 V             :         : 2         : N              
 VCCA1                        : Y8        : power  :                   : 2.5V    :           :                
 VCCD_PLL1                    : Y9        : power  :                   : 1.2V    :           :                
-pps_shft[13]                 : Y10       : output : 2.5 V             :         : 3         : N              
+clk_err_lst[5]               : Y10       : output : 2.5 V             :         : 3         : N              
 GND                          : Y11       : gnd    :                   :         :           :                
-count[5]                     : Y12       : output : 2.5 V             :         : 3         : N              
-dac_rdy[3]                   : Y13       : output : 2.5 V             :         : 3         : N              
-count[3]                     : Y14       : output : 2.5 V             :         : 3         : N              
-count[0]                     : Y15       : output : 2.5 V             :         : 3         : N              
+total_error[6]               : Y12       : output : 2.5 V             :         : 3         : N              
+total_error[4]               : Y13       : output : 2.5 V             :         : 3         : N              
+total_error[9]               : Y14       : output : 2.5 V             :         : 3         : N              
+err_change[15]               : Y15       : output : 2.5 V             :         : 3         : N              
 DAC_data                     : Y16       : output : 2.5 V             :         : 4         : Y              
 DAC_clk                      : Y17       : output : 2.5 V             :         : 4         : Y              
 GND                          : Y18       : gnd    :                   :         :           :                
-clk_err_lst[13]              : Y19       : output : 2.5 V             :         : 4         : N              
+clk_err_lst[14]              : Y19       : output : 2.5 V             :         : 4         : N              
 VCCD_PLL4                    : Y20       : power  :                   : 1.2V    :           :                
 VCCA4                        : Y21       : power  :                   : 2.5V    :           :                
-clk_err_lst[14]              : Y22       : output : 2.5 V             :         : 5         : N              
+ref_clk_shft[2]              : Y22       : output : 2.5 V             :         : 5         : N              
 SW[17]                       : Y23       : input  : 2.5 V             :         : 5         : Y              
 SW[16]                       : Y24       : input  : 2.5 V             :         : 5         : Y              
 RESERVED_INPUT_WITH_WEAK_PULLUP : Y25       :        :                   :         : 5         :                
-pps_shft[15]                 : Y26       : output : 2.5 V             :         : 5         : N              
+RESERVED_INPUT_WITH_WEAK_PULLUP : Y26       :        :                   :         : 5         :                
 GND+                         : Y27       :        :                   :         : 5         :                
 GND+                         : Y28       :        :                   :         : 5         :                
