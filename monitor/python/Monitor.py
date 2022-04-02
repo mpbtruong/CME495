@@ -155,7 +155,7 @@ class Monitor():
         """
         Returns True if the uart port is open for communication.
         """
-        return self.uart.is_open() if (self.uart is not None) else False
+        return self.uart.is_open if (self.uart is not None) else False
 
     # communication ############################################################
     # flow control I/O #########################################################

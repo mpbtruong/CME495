@@ -31,6 +31,7 @@ class Ui_MainWindow(object):
         self.Graph1Widget.setObjectName('Graph1')
         self.Graph1Widget.setGeometry(QtCore.QRect(10, 30, 620, 251))
         self.Graph1Widget.setBackground('w')
+        self.Graph1Widget.showGrid(x = True, y = True, alpha = 0.3) 
         # time = [1,2,3,4,5,6,7,8,9,10]
         # voltage = [30,32,34,32,33,31,29,32,35,45]
         # self.Graph1Widget.plot(time, voltage)
@@ -47,6 +48,7 @@ class Ui_MainWindow(object):
         self.Graph2Widget.setObjectName('Graph2')
         self.Graph2Widget.setGeometry(QtCore.QRect(10, 40, 620, 251))
         self.Graph2Widget.setBackground('w')
+        self.Graph2Widget.showGrid(x = True, y = True, alpha = 0.3) 
 
         self.Graph3Frame = QtWidgets.QFrame(self.centralwidget)
         self.Graph3Frame.setGeometry(QtCore.QRect(630, 410, 620, 291))
@@ -60,6 +62,7 @@ class Ui_MainWindow(object):
         self.Graph3Widget.setObjectName('Graph3')
         self.Graph3Widget.setGeometry(QtCore.QRect(10, 30, 620, 251))
         self.Graph3Widget.setBackground('w')
+        self.Graph3Widget.showGrid(x = True, y = True, alpha = 0.3) 
 
         self.Graph4Frame = QtWidgets.QFrame(self.centralwidget)
         self.Graph4Frame.setGeometry(QtCore.QRect(630, 690, 620, 300))
@@ -73,6 +76,7 @@ class Ui_MainWindow(object):
         self.Graph4Widget.setObjectName('Graph4')
         self.Graph4Widget.setGeometry(QtCore.QRect(10, 40, 620, 251))
         self.Graph4Widget.setBackground('w')
+        self.Graph4Widget.showGrid(x = True, y = True, alpha = 0.3) 
         
         self.GPSFrame = QtWidgets.QFrame(self.centralwidget)
         self.GPSFrame.setGeometry(QtCore.QRect(0, 130, 600, 291))
@@ -100,20 +104,25 @@ class Ui_MainWindow(object):
         self.FPGALabel.setGeometry(QtCore.QRect(10, 10, 47, 13))
         self.FPGALabel.setObjectName("FPGALabel")
 
-        self.ConnectFrame = QtWidgets.QFrame(self.centralwidget)
-        self.ConnectFrame.setGeometry(QtCore.QRect(500, 20, 140, 91))
-        self.ConnectFrame.setFrameShape(QtWidgets.QFrame.StyledPanel)
-        self.ConnectFrame.setFrameShadow(QtWidgets.QFrame.Raised)
-        self.ConnectFrame.setObjectName("ConnectFrame")
-        self.ConnectionLabel = QtWidgets.QLabel(self.ConnectFrame)
-        self.ConnectionLabel.setGeometry(QtCore.QRect(10, 10, 140, 16))
-        self.ConnectionLabel.setObjectName("ConnectionLabel")
-        self.ConnectButton = QtWidgets.QPushButton(self.ConnectFrame)
-        self.ConnectButton.setGeometry(QtCore.QRect(10, 30, 90, 23))
-        self.ConnectButton.setObjectName("ConnectButton")
-        self.DisconnectButton = QtWidgets.QPushButton(self.ConnectFrame)
-        self.DisconnectButton.setGeometry(QtCore.QRect(10, 60, 90, 23))
-        self.DisconnectButton.setObjectName("DisconnectButton")
+        # TODO Connection/Disconnection of FPGA while GUI is running does not
+        # work. There is the issue that the uart communication is open
+        # when the USB is plugged in, so to check if is "connected" or not,
+        # we need to implement something like an ACK or handshaking between the
+        # FPGA and GUI/monitor & control
+        # self.ConnectFrame = QtWidgets.QFrame(self.centralwidget)
+        # self.ConnectFrame.setGeometry(QtCore.QRect(500, 20, 140, 91))
+        # self.ConnectFrame.setFrameShape(QtWidgets.QFrame.StyledPanel)
+        # self.ConnectFrame.setFrameShadow(QtWidgets.QFrame.Raised)
+        # self.ConnectFrame.setObjectName("ConnectFrame")
+        # self.ConnectionLabel = QtWidgets.QLabel(self.ConnectFrame)
+        # self.ConnectionLabel.setGeometry(QtCore.QRect(10, 10, 140, 16))
+        # self.ConnectionLabel.setObjectName("ConnectionLabel")
+        # self.ConnectButton = QtWidgets.QPushButton(self.ConnectFrame)
+        # self.ConnectButton.setGeometry(QtCore.QRect(10, 30, 90, 23))
+        # self.ConnectButton.setObjectName("ConnectButton")
+        # self.DisconnectButton = QtWidgets.QPushButton(self.ConnectFrame)
+        # self.DisconnectButton.setGeometry(QtCore.QRect(10, 60, 90, 23))
+        # self.DisconnectButton.setObjectName("DisconnectButton")
 
         self.CommandFrame = QtWidgets.QFrame(self.centralwidget)
         self.CommandFrame.setGeometry(QtCore.QRect(10, 30, 500, 91))
@@ -169,9 +178,12 @@ class Ui_MainWindow(object):
         self.Graph4Label.setText(_translate("MainWindow", "Integral vs Time"))
         self.GPSLabel.setText(_translate("MainWindow", "GPS"))
         self.FPGALabel.setText(_translate("MainWindow", "FPGA"))
-        self.ConnectionLabel.setText(_translate("MainWindow", "FPGA Connection"))
-        self.ConnectButton.setText(_translate("MainWindow", "Connect"))
-        self.DisconnectButton.setText(_translate("MainWindow", "Disconnect"))
+
+        # TODO. See above in Connection Frame
+        # self.ConnectionLabel.setText(_translate("MainWindow", "FPGA Connection"))
+        # self.ConnectButton.setText(_translate("MainWindow", "Connect"))
+        # self.DisconnectButton.setText(_translate("MainWindow", "Disconnect"))
+
         self.CommandLabel.setText(_translate("MainWindow", "Write Value"))
         self.CommandComboLabel.setText(_translate("MainWindow", "Command List"))
         self.CommandButton.setText(_translate("MainWindow", "Send CMD"))
