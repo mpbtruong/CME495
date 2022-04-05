@@ -204,8 +204,8 @@ always @ (negedge ref_clk)
 	else clk_count_neg = clk_count_neg + 25'b1;
 
 always @ (posedge ref_clk)
-	if(clk_count == 25'd9_999_999) recov_pps = 1'b1;
-	else if(clk_count == 25'd1_000_000) recov_pps = 1'b0;
+	if(clk_count == 25'd10_000_000) recov_pps = 1'b1;
+	else recov_pps = 1'b0;
 
 // ************************************* DPPL Error Detection ************************************* //
 always @ (posedge clk_200)
@@ -236,15 +236,30 @@ always @ (posedge clk_200)
 				endcase
 			end
 
+//always @ (posedge clk_200)
+//	if(!reset || !key_reset) clk_err = 16'b0;
+//	else if(pps_posedge[1]) 
+//	begin
+//		if(!locked) 
+//			begin
+//				if(clk_count_neg < 10_000_000 && clk_count_neg > 5_000_000) clk_err <= (10_000_000 - clk_count_neg);
+//				else if(clk_count_neg == 10_000_000) clk_err <= 0;
+//				else clk_err <= -1*clk_count_neg;
+//			end
+//		else clk_err <= clk_err;
+//		if(clk_err >= 0) err_dir <= 1'b1;
+//		else err_dir <= 1'b0;
+//	end
 always @ (posedge clk_200)
 	if(!reset || !key_reset) clk_err = 16'b0;
 	else if(pps_posedge[1]) 
 	begin
 		if(!locked) 
 			begin
-				if(clk_count_neg < 10_000_000 && clk_count_neg > 5_000_000) clk_err <= (10_000_000 - clk_count_neg);
-				else if(clk_count_neg == 10_000_000) clk_err <= 0;
-				else clk_err <= -1*clk_count_neg - 1'b1;
+				if(clk_count_neg == 0) clk_err <= 0;
+				else if(clk_count_neg == 10_000_000) clk_err <= 1;
+				else if(clk_count_neg < 10_000_000 && clk_count_neg > 5_000_000) clk_err <= (10_000_000 - clk_count_neg) + 1'b1;
+				else clk_err <= -1*clk_count_neg;
 			end
 		else clk_err <= clk_err;
 		if(clk_err >= 0) err_dir <= 1'b1;
@@ -304,20 +319,16 @@ always @ (posedge clk_200)
 		int_sum <= 32'b0;
 		smpl_count <= 16'b0;
 	end
-	else if(pps_posedge[5]) begin
+	else if(pps_posedge[6]) begin
 		int_sum <= int_sum + total_error;
 		smpl_count <= smpl_count +1'b1;
 	end
 	
 always @ (posedge clk_200)
-	if(!reset || !key_reset) begin
-		pid_out <= 16'b0;
-//		int <= 16'd0;
-	end
+	if(!reset || !key_reset)pid_out <= 16'b0;
 	else if(pps_posedge[7]) begin 
-//		int <= int + total_error - out;
 //	   pid_out <= {total_error[15],total_error[15:1]} + {total_error[15],total_error[15],total_error[15:2]} + {int[15],int[15],int[15],int[15],int[15],int[15],int[15],int[15],int[15:8]};// + {int[15],int[15],int[15],int[15],int[15],int[15],int[15],int[15],int[15],int[15],int[15],int[15:11]};
-		pid_out <= total_error + {total_error[15],total_error[15],total_error[15],total_error[15:3]} + {int[15],int[15],int[15],int[15],int[15],int[15],int[15],int[15],int[15:8]} + {int[15],int[15],int[15],int[15],int[15],int[15],int[15],int[15],int[15],int[15],int[15:10]};
+		pid_out <= total_error + {total_error[15],total_error[15],total_error[15:2]} + {int[15],int[15],int[15],int[15],int[15],int[15],int[15],int[15],int[15:8]} + {int[15],int[15],int[15],int[15],int[15],int[15],int[15],int[15],int[15],int[15],int[15:10]};
 	end   
 
 always @ (posedge clk_200)

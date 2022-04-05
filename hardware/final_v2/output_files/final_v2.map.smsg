@@ -1,4 +1,4 @@
 Warning (10268): Verilog HDL information at top.v(192): always construct contains both blocking and non-blocking assignments File: /home/tim/Documents/CME495/CME495/hardware/final_v2/top.v Line: 192
 Warning (10268): Verilog HDL information at top.v(199): always construct contains both blocking and non-blocking assignments File: /home/tim/Documents/CME495/CME495/hardware/final_v2/top.v Line: 199
-Warning (10268): Verilog HDL information at top.v(239): always construct contains both blocking and non-blocking assignments File: /home/tim/Documents/CME495/CME495/hardware/final_v2/top.v Line: 239
-Warning (10268): Verilog HDL information at top.v(286): always construct contains both blocking and non-blocking assignments File: /home/tim/Documents/CME495/CME495/hardware/final_v2/top.v Line: 286
+Warning (10268): Verilog HDL information at top.v(253): always construct contains both blocking and non-blocking assignments File: /home/tim/Documents/CME495/CME495/hardware/final_v2/top.v Line: 253
+Warning (10268): Verilog HDL information at top.v(301): always construct contains both blocking and non-blocking assignments File: /home/tim/Documents/CME495/CME495/hardware/final_v2/top.v Line: 301
