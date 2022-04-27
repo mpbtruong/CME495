@@ -1,0 +1,1 @@
+Warning (10268): Verilog HDL information at top.v(154): always construct contains both blocking and non-blocking assignments File: /home/tim/Documents/CME495/CME495/hardware/final_v3/top.v Line: 154
