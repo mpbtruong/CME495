@@ -1,5 +1,5 @@
 Analysis & Synthesis report for final_v3
-Wed Apr 27 18:01:17 2022
+Wed Apr 27 19:47:39 2022
 Quartus Prime Version 21.1.0 Build 842 10/21/2021 SJ Lite Edition
 
 
@@ -80,7 +80,7 @@ https://fpgasoftware.intel.com/eula.
 +----------------------------------------------------------------------------------+
 ; Analysis & Synthesis Summary                                                     ;
 +------------------------------------+---------------------------------------------+
-; Analysis & Synthesis Status        ; Successful - Wed Apr 27 18:01:17 2022       ;
+; Analysis & Synthesis Status        ; Successful - Wed Apr 27 19:47:39 2022       ;
 ; Quartus Prime Version              ; 21.1.0 Build 842 10/21/2021 SJ Lite Edition ;
 ; Revision Name                      ; final_v3                                    ;
 ; Top-level Entity Name              ; top                                         ;
@@ -1713,7 +1713,7 @@ Note: In order to hide this table in the UI and the text report file, please set
 +----------------+--------------+
 ; Partition Name ; Elapsed Time ;
 +----------------+--------------+
-; Top            ; 00:00:03     ;
+; Top            ; 00:00:02     ;
 +----------------+--------------+
 
 
@@ -2564,7 +2564,7 @@ Note: In order to hide this table in the UI and the text report file, please set
 Info: *******************************************************************
 Info: Running Quartus Prime Analysis & Synthesis
     Info: Version 21.1.0 Build 842 10/21/2021 SJ Lite Edition
-    Info: Processing started: Wed Apr 27 18:00:43 2022
+    Info: Processing started: Wed Apr 27 19:47:15 2022
 Info: Command: quartus_map --read_settings_files=on --write_settings_files=off final_v3 -c final_v3
 Warning (18236): Number of processors has not been specified which may cause overloading on shared machines.  Set the global assignment NUM_PARALLEL_PROCESSORS in your QSF to an appropriate value for best performance.
 Info (20030): Parallel compilation is enabled and will use 16 of the 16 processors detected
@@ -2715,7 +2715,7 @@ Info (12021): Found 1 design units, including 1 entities, in source file db/cmpr
     Info (12023): Found entity 1: cmpr_ngc File: /home/tim/Documents/CME495/CME495/hardware/final_v3/db/cmpr_ngc.tdf Line: 23
 Info (12033): Analysis and Synthesis generated Signal Tap or debug node instance "auto_signaltap_0"
 Info (11170): Starting IP generation for the debug fabric: alt_sld_fab.
-Info (11172): 2022.04.27.18:01:02 Progress: Loading sld2ca21af5/alt_sld_fab_wrapper_hw.tcl
+Info (11172): 2022.04.27.19:47:28 Progress: Loading sld2ca21af5/alt_sld_fab_wrapper_hw.tcl
 Info (11172): Alt_sld_fab.alt_sld_fab: SLD fabric agents which did not specify prefer_host were connected to JTAG
 Info (11172): Alt_sld_fab: Generating alt_sld_fab "alt_sld_fab" for QUARTUS_SYNTH
 Info (11172): Alt_sld_fab: "alt_sld_fab" instantiated alt_sld_fab "alt_sld_fab"
@@ -2793,10 +2793,10 @@ Info (21057): Implemented 8784 device resources after synthesis - the final reso
     Info (21064): Implemented 400 RAM segments
     Info (21065): Implemented 1 PLLs
 Info: Quartus Prime Analysis & Synthesis was successful. 0 errors, 73 warnings
-    Info: Peak virtual memory: 615 megabytes
-    Info: Processing ended: Wed Apr 27 18:01:17 2022
-    Info: Elapsed time: 00:00:34
-    Info: Total CPU time (on all processors): 00:01:15
+    Info: Peak virtual memory: 611 megabytes
+    Info: Processing ended: Wed Apr 27 19:47:39 2022
+    Info: Elapsed time: 00:00:24
+    Info: Total CPU time (on all processors): 00:00:53
 
 
 +------------------------------------------+
