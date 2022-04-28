@@ -36,11 +36,11 @@ module top(
 	
 	output reg [1:0] pps_shft,
 	output reg [1:0] ref_pps_shft,
-	output reg [6:0] pps_negedge_shft,
+	output reg [9:0] pps_negedge_shft,
 	
 	output wire ref_pps_posedge,
 	output wire pps_posedge,
-	output wire [5:0] pps_negedge,
+	output wire [8:0] pps_negedge,
 	
 	output reg signed [24:0] clk_count,
 	output reg [31:0] count_200,
@@ -50,6 +50,7 @@ module top(
 	output reg signed [31:0] total_error,
 	output reg signed [31:0] prop_error,
 	output reg signed [31:0] int,
+	output reg signed [31:0] deriv,
 	output reg signed [15:0] pid_out,
 	output reg error_dir,
 	output reg [3:0] dac_rdy,
@@ -116,7 +117,7 @@ always @ (posedge clk_200) pps_shft = {pps_shft[0],RECV_pps};
 
 always @ (posedge clk_200) ref_pps_shft = {ref_pps_shft[0],recov_pps};
  
-always @ (posedge clk_200) pps_negedge_shft = {pps_negedge_shft[5:0],RECV_pps};
+always @ (posedge clk_200) pps_negedge_shft = {pps_negedge_shft[8:0],RECV_pps};
 
 // Asynchronus to Synchronus Reset Logic
 always @ (posedge clk_200)
@@ -148,7 +149,9 @@ assign pps_negedge[2] = ~pps_negedge_shft[2] && pps_negedge_shft[3];
 assign pps_negedge[3] = ~pps_negedge_shft[3] && pps_negedge_shft[4]; 
 assign pps_negedge[4] = ~pps_negedge_shft[4] && pps_negedge_shft[5]; 
 assign pps_negedge[5] = ~pps_negedge_shft[5] && pps_negedge_shft[6]; 
-
+assign pps_negedge[6] = ~pps_negedge_shft[6] && pps_negedge_shft[7]; 
+assign pps_negedge[7] = ~pps_negedge_shft[7] && pps_negedge_shft[8]; 
+assign pps_negedge[8] = ~pps_negedge_shft[8] && pps_negedge_shft[9]; 
 // ************************************* DPLL Ref Clock Counters ************************************* //
 
 always @ (posedge ref_clk)
@@ -187,6 +190,12 @@ always @ (posedge clk_200)
 	end
 
 // ************************************* DPLL PID Controller ************************************* //
+reg signed [31:0] prop_error_lst;
+
+always @ (posedge clk_200)
+	if(!reset || !key_reset) prop_error_lst = 32'b0;
+	else if(pps_negedge[0]) prop_error_lst = prop_error;
+	
 always @ (posedge clk_200)
 	if(!reset || !key_reset) prop_error = 32'b0;
 	else if(pps_negedge[1]) begin
@@ -201,90 +210,240 @@ always @ (posedge clk_200)
 	if(!reset || !key_reset) int = 32'b0;
 	else if(pps_negedge[2]) int = int + prop_error;
 
-reg signed [15:0] prop_1;
-reg signed [15:0] prop_2;
-reg signed [15:0] prop_4;
-reg signed [15:0] prop_8;
-reg signed [15:0] prop_16;
+always @ (posedge clk_200)
+	if(!reset || !key_reset) deriv = 32'b0;
+   else if(pps_negedge[2]) deriv = prop_error - prop_error_lst;
+	
+reg signed [31:0] prop_1;
+reg signed [31:0] prop_2;
+reg signed [31:0] prop_4;
+reg signed [31:0] prop_8;
+reg signed [31:0] prop_16;
 
-reg signed [15:0] int_1;
-reg signed [15:0] int_2;
-reg signed [15:0] int_3;
-reg signed [15:0] int_4;
-reg signed [15:0] int_5;
-reg signed [15:0] int_6;
-reg signed [15:0] int_7;
-reg signed [15:0] int_8;
-reg signed [15:0] int_9;
-reg signed [15:0] int_10;
-reg signed [15:0] int_11;
-reg signed [15:0] int_12;
-reg signed [15:0] int_13;
+reg signed [31:0] int_1;
+reg signed [31:0] int_2;
+reg signed [31:0] int_3;
+reg signed [31:0] int_4;
+reg signed [31:0] int_5;
+reg signed [31:0] int_6;
+reg signed [31:0] int_7;
+reg signed [31:0] int_8;
+reg signed [31:0] int_9;
+reg signed [31:0] int_10;
+reg signed [31:0] int_11;
+reg signed [31:0] int_12;
+reg signed [31:0] int_13;
+
+reg signed [31:0] deriv_1;
+reg signed [31:0] deriv_2;
+reg signed [31:0] deriv_3;
+reg signed [31:0] deriv_4;
 
 always @ *
 	begin
 		if(SW[0]) prop_1 = prop_error;
 		else prop_1 = 16'b0;
-		if(SW[1]) prop_2 = {prop_error[15],prop_error[15:1]};
+		if(SW[1]) prop_2 = {prop_error[31],prop_error[31:1]};
 		else prop_2 = 16'b0;
-		if(SW[2]) prop_4 = {prop_error[15],prop_error[15],prop_error[15:2]};
+		if(SW[2]) prop_4 = {prop_error[31],prop_error[31],prop_error[31:2]};
 		else prop_4 = 16'b0;
-		if(SW[3]) prop_8 = {prop_error[15],prop_error[15],prop_error[15],prop_error[15:3]};
+		if(SW[3]) prop_8 = {prop_error[31],prop_error[31],prop_error[31],prop_error[31:3]};
 		else prop_8 = 16'b0;
-		if(SW[4]) prop_16 = {prop_error[15],prop_error[15],prop_error[15],prop_error[15],prop_error[15:4]};
+		if(SW[4]) prop_16 = {prop_error[31],prop_error[31],prop_error[31],prop_error[31],prop_error[31:4]};
 		else prop_16 = 16'b0;
 	end
-	
+
+//always @ (posedge clk_200)
+//	if(!reset || !key_reset) prop_1 = 32'b0;
+//	else if(pps_negedge[3]) begin
+//		if(SW[0]) prop_1 = prop_error;
+//		else prop_1 = 16'b0;
+//	end
+//	
+//always @ (posedge clk_200)
+//	if(!reset || !key_reset) prop_2 = 32'b0;
+//	else if(pps_negedge[3]) begin
+//		if(SW[1]) prop_2 = prop_error;
+//		else prop_2 = {prop_error[31],prop_error[31:1]};
+//	end
+//
+//always @ (posedge clk_200)
+//	if(!reset || !key_reset) prop_4 = 32'b0;
+//	else if(pps_negedge[3]) begin
+//		if(SW[2]) prop_4 = prop_error;
+//		else prop_4 = {prop_error[31],prop_error[31],prop_error[31:2]};
+//	end
+//
+//always @ (posedge clk_200)
+//	if(!reset || !key_reset) prop_8 = 32'b0;
+//	else if(pps_negedge[3]) begin
+//		if(SW[3]) prop_8 = prop_error;
+//		else prop_8 = {prop_error[31],prop_error[31],prop_error[31],prop_error[31:3]};
+//	end
+//
+//always @ (posedge clk_200)
+//	if(!reset || !key_reset) prop_16 = 32'b0;
+//	else if(pps_negedge[3]) begin
+//		if(SW[4]) prop_16 = {prop_error[31],prop_error[31],prop_error[31],prop_error[31],prop_error[31:4]};
+//		else prop_16 = 16'b0;
+//	end
+//
+//always @ (posedge clk_200)
+//	if(!reset || !key_reset) deriv_1 = 32'b0;
+//	else if(pps_negedge[3]) begin
+//		if(SW[5]) deriv_1 = deriv;
+//		else deriv_1 = 16'b0;
+//	end
+//
+//always @ (posedge clk_200)
+//	if(!reset || !key_reset) deriv_2 = 32'b0;
+//	else if(pps_negedge[3]) begin
+//		if(SW[6]) deriv_2 = {deriv[31],deriv[31:1]};
+//		else deriv_2 = 16'b0;
+//	end
+//
+//always @ (posedge clk_200)
+//	if(!reset || !key_reset) deriv_3 = 32'b0;
+//	else if(pps_negedge[3]) begin
+//		if(SW[7]) deriv_3 = {deriv[31],deriv[31],deriv[31:2]};
+//		else deriv_3 = 16'b0;
+//	end
+//	
+//always @ (posedge clk_200)
+//	if(!reset || !key_reset) deriv_4 = 32'b0;
+//	else if(pps_negedge[3]) begin
+//		if(SW[8]) deriv_4 = {deriv[31],deriv[31],deriv[31],deriv[31:3]};
+//		else deriv_4 = 16'b0;
+//	end
+//
+//always @ (posedge clk_200)
+//	if(!reset || !key_reset) int_1 = 32'b0;
+//	else if(pps_negedge[3]) begin
+//		if(SW[9]) int_1 = {int[31],int[31],int[31],int[31],int[31:4]};
+//		else int_1 = 16'b0;
+//	end
+//
+//always @ (posedge clk_200)
+//	if(!reset || !key_reset) int_2 = 32'b0;
+//	else if(pps_negedge[3]) begin
+//		if(SW[9]) int_2 = {int[31],int[31],int[31],int[31],int[31],int[31:5]};
+//		else int_2 = 16'b0;
+//	end
+//
+//always @ (posedge clk_200)
+//	if(!reset || !key_reset) int_3 = 32'b0;
+//	else if(pps_negedge[3]) begin
+//		if(SW[9]) int_3 = {int[31],int[31],int[31],int[31],int[31],int[31],int[31:6]};
+//		else int_3 = 16'b0;
+//	end
+//
+//always @ (posedge clk_200)
+//	if(!reset || !key_reset) int_4 = 32'b0;
+//	else if(pps_negedge[3]) begin
+//		if(SW[9]) int_4 = {int[31],int[31],int[31],int[31],int[31],int[31],int[31],int[31:7]};
+//		else int_4 = 16'b0;
+//	end
+//
+//always @ (posedge clk_200)
+//	if(!reset || !key_reset) int_5 = 32'b0;
+//	else if(pps_negedge[3]) begin
+//		if(SW[9]) int_5 = {int[31],int[31],int[31],int[31],int[31],int[31],int[31],int[31],int[31:8]};
+//		else int_5 = 16'b0;
+//	end
+//
+//always @ (posedge clk_200)
+//	if(!reset || !key_reset) int_6 = 32'b0;
+//	else if(pps_negedge[3]) begin
+//		if(SW[9]) int_6 = {int[31],int[31],int[31],int[31],int[31],int[31],int[31],int[31],int[31],int[31:9]};
+//		else int_6 = 16'b0;
+//	end
+//
+//always @ (posedge clk_200)
+//	if(!reset || !key_reset) int_7 = 32'b0;
+//	else if(pps_negedge[3]) begin
+//		if(SW[9]) int_7 = {int[31],int[31],int[31],int[31],int[31],int[31],int[31],int[31],int[31],int[31],int[31:10]};
+//		else int_7 = 16'b0;
+//	end
+//
+//always @ (posedge clk_200)
+//	if(!reset || !key_reset) int_8 = 32'b0;
+//	else if(pps_negedge[3]) begin
+//		if(SW[9]) int_8 = {int[31],int[31],int[31],int[31],int[31],int[31],int[31],int[31],int[31],int[31],int[31],int[31:11]};
+//		else int_8 = 16'b0;
+//	end
+//
+//always @ (posedge clk_200)
+//	if(!reset || !key_reset) int_9 = 32'b0;
+//	else if(pps_negedge[3]) begin
+//		if(SW[9]) int_9 = {int[31],int[31],int[31],int[31],int[31],int[31],int[31],int[31],int[31],int[31],int[31],int[31],int[31:12]};
+//		else int_9 = 16'b0;
+//	end
+
 always @ *
 	begin
-		if(SW[5]) int_1 = int;
+		if(SW[5]) deriv_1 = deriv;
+		else deriv_1 = 16'b0;
+		if(SW[6]) deriv_2 = {deriv[31],deriv[31:1]};
+		else deriv_2 = 16'b0;
+		if(SW[7]) deriv_3 = {deriv[31],deriv[31],deriv[31:2]};
+		else deriv_3 = 16'b0;
+		if(SW[8]) deriv_4 = {deriv[31],deriv[31],deriv[31],deriv[31:3]};
+		else deriv_4 = 16'b0;
+		if(SW[9]) int_1 = {int[31],int[31],int[31],int[31],int[31],int[31],int[31:6]};
 		else int_1 = 16'b0;
-		if(SW[6]) int_2 = {int[15],int[15:1]};
+		if(SW[10]) int_2 = {int[31],int[31],int[31],int[31],int[31],int[31],int[31],int[31:7]};
 		else int_2 = 16'b0;
-		if(SW[7]) int_3 = {int[15],int[15],int[15:2]};
+		if(SW[11]) int_3 = {int[31],int[31],int[31],int[31],int[31],int[31],int[31],int[31],int[31:8]};
 		else int_3 = 16'b0;
-		if(SW[8]) int_4 = {int[15],int[15],int[15],int[15:3]};
+		if(SW[12]) int_4 = {int[31],int[31],int[31],int[31],int[31],int[31],int[31],int[31],int[31],int[31:9]};
 		else int_4 = 16'b0;
-		if(SW[9]) int_5 = {int[15],int[15],int[15],int[15],int[15:4]};
+		if(SW[13]) int_5 = {int[31],int[31],int[31],int[31],int[31],int[31],int[31],int[31],int[31],int[31],int[31:10]};
 		else int_5 = 16'b0;
-		if(SW[10]) int_6 = {int[15],int[15],int[15],int[15],int[15],int[15:5]};
+		if(SW[14]) int_6 = {int[31],int[31],int[31],int[31],int[31],int[31],int[31],int[31],int[31],int[31],int[31],int[31:11]};
 		else int_6 = 16'b0;
-		if(SW[11]) int_7 = {int[15],int[15],int[15],int[15],int[15],int[15],int[15:6]};
+		if(SW[15]) int_7 = {int[31],int[31],int[31],int[31],int[31],int[31],int[31],int[31],int[31],int[31],int[31],int[31],int[31:12]};
 		else int_7 = 16'b0;
-		if(SW[12]) int_8 = {int[15],int[15],int[15],int[15],int[15],int[15],int[15],int[15:7]};
+		if(SW[16]) int_8 = {int[31],int[31],int[31],int[31],int[31],int[31],int[31],int[31],int[31],int[31],int[31],int[31],int[31],int[31:13]};
 		else int_8 = 16'b0;
-		if(SW[13]) int_9 = {int[15],int[15],int[15],int[15],int[15],int[15],int[15],int[15],int[15:8]};
+		if(SW[17]) int_9 = {int[31],int[31],int[31],int[31],int[31],int[31],int[31],int[31],int[31],int[31],int[31],int[31],int[31],int[31],int[31:14]};
 		else int_9 = 16'b0;
-		if(SW[14]) int_10 = {int[15],int[15],int[15],int[15],int[15],int[15],int[15],int[15],int[15],int[15:9]};
-		else int_10 = 16'b0;
-		if(SW[15]) int_11 = {int[15],int[15],int[15],int[15],int[15],int[15],int[15],int[15],int[15],int[15],int[15:10]};
-		else int_11 = 16'b0;
-		if(SW[16]) int_12 = {int[15],int[15],int[15],int[15],int[15],int[15],int[15],int[15],int[15],int[15],int[15],int[15:11]};
-		else int_12 = 16'b0;
-		if(SW[17]) int_13 = {int[15],int[15],int[15],int[15],int[15],int[15],int[15],int[15],int[15],int[15],int[15],int[15],int[15:12]};
-		else int_13 = 16'b0;
 	end
+
+reg signed [31:0] prop_out,int_out,deriv_out;
+reg signed [15:0] pid_out_mon;
+
+always @ (posedge clk_200)
+	if(!reset || !key_reset) prop_out <= 16'b0;
+	else if(pps_negedge[4]) prop_out = prop_1 + prop_2 + prop_4 + prop_8 + prop_16;
+	
+always @ (posedge clk_200)
+	if(!reset || !key_reset) int_out <= 16'b0;
+	else if(pps_negedge[4]) int_out = int_1 + int_2 + int_3 + int_4 + int_5 + int_6 + int_7 + int_8 + int_9;
+
+always @ (posedge clk_200)
+	if(!reset || !key_reset) deriv_out <= 16'b0;
+	else if(pps_negedge[4]) deriv_out = deriv_1 + deriv_2 + deriv_3 + deriv_4;
 	
 always @ (posedge clk_200)
 	if(!reset || !key_reset) pid_out <= 16'b0;
-	else if(pps_negedge[3]) pid_out <= prop_1 + prop_2 + prop_4 + prop_8 + prop_16 + int_1 + int_2 + int_3 + int_4 + int_5 + int_6 + int_7 + int_8 + int_9 + int_10 + int_11 + int_12 + int_13;
+	else if(pps_negedge[5]) pid_out <= prop_out + int_out + deriv_out; 
 	
 always @ (posedge clk_200)
 	if(!reset || !key_reset) DAC_val = DAC_reset;
-	else if(pps_negedge[4]) begin
+	else if(pps_negedge[6]) begin
 		if(pid_out < 1000 && pid_out > -1000) DAC_val = DAC_val + pid_out;
 		else DAC_val = DAC_val;
 	end
-reg signed [15:0] pid_out_mon;
-always @ (posedge clk_200) 
-	if(!reset || !key_reset) pid_out_mon = 16'b0;
-	else if(pps_negedge[4]) begin
-	if(pid_out < 1000 && pid_out > -1000) pid_out_mon = pid_out;
-	else pid_out_mon = pid_out;
-	end
-	
+
 always @ (posedge clk_200)
-	if(pps_negedge[5]) begin
+	if(!reset || !key_reset) pid_out_mon = 16'b0;
+	else if(pps_negedge[7]) begin
+		if(pid_out < 1000 && pid_out > -1000) pid_out_mon = pid_out;
+		else pid_out_mon = pid_out_mon;
+	end
+
+always @ (posedge clk_200)
+	if(pps_negedge[8]) begin
 		dac_rdy[3] <= dac_rdy[2];
 		dac_rdy[2] <= dac_rdy[1];
 		dac_rdy[1] <= dac_rdy[0];
@@ -322,8 +481,8 @@ monitor_top t1(
 	.uart_txd(w_UART_TXD),
 	.uart_rts(UART_RTS),
 	.uart_cts(w_UART_CTS),
-	.reg127(prop_error[15:0]),
-	.reg126(pid_out_mon),
+	.reg127(prop_error[31:0]),
+	.reg126(pid_out),
 	.reg125(DAC_val),
 	.reg124(int),
 	.reg0(w_reset)
